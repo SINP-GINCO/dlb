@@ -1,6 +1,6 @@
 <?php
 $currentDir = dirname(__FILE__);
-require_once "$currentDir/../lib/share.php";
+require_once "$currentDir/../../ginco/lib/share.php";
 
 // ----------------------------------------------------
 // Synopsis: migrate DB GINCO from v2.0.001 to v2.0.002
@@ -31,7 +31,7 @@ try {
 	echo "exception: " . $e->getMessage() . "\n";
 	exit(1);
 } finally {
-	echo "Finished applying patches on Dlb database";
+	echo "Finished applying patches on dlb database.\n";
 }
 
 $CLIParams = implode(' ', array_slice($argv, 1));

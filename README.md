@@ -55,6 +55,8 @@ vi ginco/database/init/populate_mode_taxref_table.sql
 php dlb/build_dlb.php -f dlb/configs/localhost.properties --mode=dev
 ```
 
+* Before uploading data and using the application, unpublish the standard model, publish it again and publish its import model.
+
 ## Troubleshooting
 
 #### Geoportail layers are not displayed.
@@ -64,3 +66,6 @@ php dlb/build_dlb.php -f dlb/configs/localhost.properties --mode=dev
 * Check that your *mapping.layer_service* mapProxy values are correct.
 * Check that the value for *mapserver_private_url* in *website.application_parameters* is working (it should be the same as in Apache configuration file) and should result
 in a textual MapServer output.
+
+#### Downloading the metadata file wghen creating a jdd fails
+* Check that the http_proxy value in *website.application_parameters* is correct. If not put it in the properties file.
