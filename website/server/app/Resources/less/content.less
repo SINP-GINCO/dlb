@@ -1,0 +1,351 @@
+//
+// Styling of the Ginco application, on top of bootstrap
+//
+
+
+//------------------------------
+// Global styling
+//------------------------------
+
+// Define Semantic Elements as Block Elements
+// for old browsers
+
+header, section, footer, aside, nav, main, article, figure {
+  display: block;
+}
+
+h1, .h1 {
+  margin-bottom: @line-height-computed;
+}
+
+// Text Color
+.color-danger {
+  color: @brand-danger;
+}
+.color-warning {
+  color: @brand-warning;
+}
+.color-success {
+  color: @brand-success;
+}
+
+// Forms required labels
+form label.required:after {
+  content:"*";
+  color: @brand-danger;
+  display: block;
+  position: absolute;
+  right: 5px;
+  top: 7px;
+}
+
+// Forms help-blocks in .haserror form groups
+.has-error .no-error .help-block {
+  color: lighten(@text-color, 25%); // lighten the text some for contrast
+}
+
+// Alerts of non-conventionnal type
+// alert-notice = alert-success
+.alert-notice {
+  .alert-variant(@alert-success-bg; @alert-success-border; @alert-success-text);
+}
+// alert error = alert-danger
+.alert-error {
+  .alert-variant(@alert-danger-bg; @alert-danger-border; @alert-danger-text);
+}
+
+/* Tables */
+.table-nonfluid {
+  width: auto !important;
+}
+
+/* Cut too-long texts and add ellipsis (...) */
+.longtext {
+  overflow: hidden;
+  hyphens: none;
+  word-break: keep-all;
+  text-overflow: ellipsis;
+}
+
+// Progress bars: reduce margin-bottom
+// Bar itself
+// -------------------------
+
+// Outer container
+.progress {
+  margin-bottom: @line-height-computed/2;
+}
+
+//------------------------------
+// Header
+//------------------------------
+
+#page-header {
+  #gradient > .horizontal(white; @sinp-green; 50%; 50%);
+  height: @header-height; /* height of banner-sinp.jpg */
+  #banner {
+    height: @header-height;
+    background-image: url("/img/bandeau-sinp.jpg");
+    #header-logo {
+      margin-top: 5px;
+      img {
+        margin-right: 25px;
+      }
+    }
+    .header-title {
+      color: white;
+      // text-transform: uppercase;
+    }
+  }
+}
+
+
+//------------------------------
+// Main menu
+//------------------------------
+
+#main-menu {
+  background-color: @sinp-green-light;
+  color: white;
+
+  .nav > li > a {
+    padding: 10px 15px;
+    color: white;
+    &:hover,
+    &:focus {
+      background-color: @sinp-green-lighter;
+    }
+  }
+  .nav .open > a {
+    &,
+    &:hover,
+    &:focus {
+      background-color: @sinp-green-lighter;
+      border-color: @link-color;
+    }
+  }
+
+  .navbar-right {
+    margin-right: 0;
+  }
+}
+
+//------------------------------
+// Breadcrumb and help link
+//------------------------------
+
+.help-link {
+  padding: @breadcrumb-padding-vertical 0;
+}
+
+.breadcrumb {
+  padding-left: 0;
+  margin-bottom: @line-height-computed/2;
+}
+
+//------------------------------
+// (Sticky) footer
+//------------------------------
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: @footer-height+@footer-margin;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: @footer-height;
+  border-top: 1px solid @sinp-green-light;
+  padding-top: 10px;
+  margin-top: 30px;
+  p {
+    margin-bottom: 5px;
+  }
+  .nav > li > a {
+    padding: 2px 0;
+    &:hover,
+    &:focus {
+      background-color:white;
+      text-decoration: underline;
+    }
+  }
+
+  @logo-height-base:70px;
+  .logo {
+    margin-top: 25px;
+    height: @logo-height-base;
+    width: auto;
+    vertical-align: bottom;
+    &.ign, &.mnhn {
+      height: @logo-height-base * 0.75;
+      margin-right: 30px;
+    }
+  }
+
+  .footer-version {
+    margin-bottom: 10px;
+    color: @gray-light;
+  }
+}
+
+//------------------------------
+// Footer modals
+//------------------------------
+
+#legalModal, #copyrightsIGNModal, #copyrightsMNHNModal {
+  .modal-dialog {
+    width: 800px;
+  }
+  .logo.inpn {
+    height: 50px;
+    width: auto;
+  }
+}
+
+
+//------------------------------
+// User management
+//------------------------------
+
+.password-change-user-name {
+  margin-bottom: @line-height-computed;
+  margin-top: @line-height-computed;
+}
+
+
+//------------------------------
+// Jdd list page
+//------------------------------
+
+.jdd-table, .submissions-table {
+
+  thead {
+    background-color: @sinp-green;
+    color: white;
+  }
+  th.color2 {
+    background-color: @sinp-green-dark;
+  }
+}
+
+.jdd-table {
+  table-layout: fixed;
+}
+
+.submissions {
+  // position: relative;
+  width: 100%;
+}
+.submission-line {
+  padding: 3px 0;
+  width: 100%;
+  .clearfix();
+}
+.submission-line {
+  .file, .lines, .status, .reports, .actions {
+    display: block;
+    float: left;
+    padding-bottom: 1px;
+  }
+
+  .file { width: 35%; }
+  .lines { width: 10%; }
+  .status { width: 20%; }
+  .reports { width: 25%; padding-right: 5px; }
+  .actions { width: 10%; text-align: center }
+}
+
+
+.dee-state, .dee-actions {
+  display: block;
+  float: left;
+}
+.dee-state { width: 60%; }
+.dee-actions {
+  width: 40%;
+  a {
+    margin-left: 4px;
+  }
+}
+
+
+
+//------------------------------
+// Configurator
+//------------------------------
+
+/* fileFormat or tableFormat edit.html.twig */
+#data-transfer-button {
+  margin-top: 15%;
+}
+
+.sortable-table-body {
+  cursor: move;
+}
+
+#mask {
+  width:120px;
+}
+
+#new-dictionnary-data-button {
+  margin-top: 10px;
+}
+/* data_table.html.twig */
+#dictionnary-data-table-head {
+  background-color: @sinp-green-light;
+  color: #ffffff;
+}
+
+#action-button {
+  margin-right:5px;
+}
+
+.mask-example {
+  text-indent:15px;
+}
+/********************************************************************/
+/*** PANELS WITH NAV TABS ****/
+/* -- See : http://bootsnipp.com/snippets/KGORX */
+
+.panel.with-nav-tabs .panel-heading{
+  padding: 5px 5px 0 5px;
+}
+.panel.with-nav-tabs .panel-heading .panel-title{
+  padding: 10px;
+}
+.panel.with-nav-tabs .nav-tabs{
+  border-bottom: none;
+}
+.panel.with-nav-tabs .nav-justified{
+  margin-bottom: -1px;
+}
+/********************************************************************/
+/*** PANEL PRIMARY ***/
+.with-nav-tabs.panel-primary .nav-tabs > li > a,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:focus {
+  color: #fff;
+}
+.with-nav-tabs.panel-primary .nav-tabs > .open > a,
+.with-nav-tabs.panel-primary .nav-tabs > .open > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > .open > a:focus,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li > a:focus {
+  color: #fff;
+  background-color: @sinp-green-light;
+  border-color: transparent;
+}
+.with-nav-tabs.panel-primary .nav-tabs > li.active > a,
+.with-nav-tabs.panel-primary .nav-tabs > li.active > a:hover,
+.with-nav-tabs.panel-primary .nav-tabs > li.active > a:focus {
+  color: @sinp-green;
+  background-color: #fff;
+  border-color: @sinp-green;
+  border-bottom-color: transparent;
+}

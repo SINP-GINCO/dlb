@@ -1,0 +1,286 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services_dlb.yml }
+    - { resource: services_configurator.yml }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: fr
+
+framework:
+    #esi:             ~
+    translator:      { fallbacks: ["%locale%", 'en'] }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    #serializer:      { enable_annotations: true }
+    templating:
+        engines: ['twig','php']
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id:  session.handler.native_file
+        save_path:   "%kernel.root_dir%/sessions"
+    fragments:       ~
+    http_method_override: true
+    assets: ~
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    exception_controller: app.exception_controller:showAction
+    globals: 
+      configurationManager : '@ogam.configuration_manager'
+
+    # Use Boostrap forms - horizontal and overriden 4 + 4 columns
+    form_themes:
+        - form.html.twig
+
+# Assetic configuration
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    bundles: ['IgnOGAMConfigurateurBundle', 'OGAMBundle', 'IgnGincoBundle', 'IgnGincoConfigurateurBundle']
+    filters:
+        cssrewrite: ~
+        yui_css:
+                jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.8.jar"
+        yui_js:
+              jar: "%kernel.root_dir%/Resources/java/yuicompressor-2.4.8.jar"
+    assets:
+        jquery_and_bootstrap:
+            inputs:
+                - "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js"
+                - "%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js"
+                - "%kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.min.js"
+                - "%kernel.root_dir%/../vendor/wenzhixin/bootstrap-table/dist/bootstrap-table.min.js"
+                - "%kernel.root_dir%/../web/bundles/ignogamconfigurateur/js/bootstrap-table-fr-FR.min.js"
+                - "%kernel.root_dir%/Resources/js/hover-dropdown.js"
+                - "%kernel.root_dir%/../web/bundles/fosjsrouting/js/router.js"
+                - "%kernel.root_dir%/../web/bundles/ignogamconfigurateur/js/data-toggle-tooltip.js"
+        bootstrap_css:
+            inputs:
+                - "%kernel.root_dir%/Resources/css/style.css"
+                - "%kernel.root_dir%/../vendor/wenzhixin/bootstrap-table/dist/bootstrap-table.min.css"
+# - "%kernel.root_dir%/../web/bundles/ignogamconfigurateur/css/style.css"
+            filters: [cssrewrite]
+            output: "css/bootstrap.css"
+        bootstrap_glyphicons_ttf:
+            inputs:
+                - "%kernel.root_dir%/../vendor/twbs/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf"
+            output: "fonts/glyphicons-halflings-regular.ttf"
+        bootstrap_glyphicons_eot:
+            inputs:
+                - "%kernel.root_dir%/../vendor/twbs/bootstrap/dist/fonts/glyphicons-halflings-regular.eot"
+            output: "fonts/glyphicons-halflings-regular.eot"
+        bootstrap_glyphicons_svg:
+            inputs:
+                - "%kernel.root_dir%/../vendor/twbs/bootstrap/dist/fonts/glyphicons-halflings-regular.svg"
+            output: "fonts/glyphicons-halflings-regular.svg"
+        bootstrap_glyphicons_woff:
+            inputs:
+                - "%kernel.root_dir%/../vendor/twbs/bootstrap/dist/fonts/glyphicons-halflings-regular.woff"
+            output: "fonts/glyphicons-halflings-regular.woff"
+        bootstrap_glyphicons_woff2:
+            inputs:
+                - "%kernel.root_dir%/../vendor/twbs/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2"
+            output: "fonts/glyphicons-halflings-regular.woff2"
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        default_connection: website
+        connections:
+            website:
+                driver:   "%database_driver%"
+                host:     "%database_host%"
+                port:     "%database_port%"
+                dbname:   "%database_name%"
+                user:     "%database_user%"
+                password: "%database_password%"
+                server_version: "%database_version%"
+                charset:  UTF8
+                mapping_types:
+                    geometry: string
+                    _text: string
+                schema_filter: /website\./i
+                logging: false
+                profiling: false
+            mapping:
+                driver:   "%database_driver%"
+                host:     "%database_host%"
+                port:     "%database_port%"
+                dbname:   "%database_name%"
+                user:     "%database_user%"
+                password: "%database_password%"
+                server_version: "%database_version%"
+                charset:  UTF8
+                mapping_types:
+                    geometry: string
+                    _text: string
+                schema_filter: /mapping\./i
+                logging: false
+                profiling: false
+            metadata:
+                driver:   "%database_driver%"
+                host:     "%database_host%"
+                port:     "%database_port%"
+                dbname:   "%database_name%"
+                user:     "%database_user%"
+                password: "%database_password%"
+                server_version: "%database_version%"
+                charset:  UTF8
+                mapping_types:
+                    geometry: string
+                    _text: string
+                schema_filter: /metadata\./i
+                logging: false
+                profiling: false
+            raw_data:
+                driver:   "%database_driver%"
+                host:     "%database_host%"
+                port:     "%database_port%"
+                dbname:   "%database_name%"
+                user:     "%database_user%"
+                password: "%database_password%"
+                server_version: "%database_version%"
+                charset:  UTF8
+                mapping_types:
+                    geometry: string
+                    _text: string
+                schema_filter: /raw_data\./i
+                logging: false
+                profiling: false
+            harmonized_data:
+                driver:   "%database_driver%"
+                host:     "%database_host%"
+                port:     "%database_port%"
+                dbname:   "%database_name%"
+                user:     "%database_user%"
+                password: "%database_password%"
+                server_version: "%database_version%"
+                charset:  UTF8
+                mapping_types:
+                    geometry: string
+                    _text: string
+                schema_filter: /harmonized_data\./i
+                logging: false
+                profiling: false
+            result_location:
+                driver:   "%database_driver%"
+                host:     "%database_host%"
+                port:     "%database_port%"
+                dbname:   "%database_name%"
+                user:     "%database_user%"
+                password: "%database_password%"
+                server_version: "%database_version%"
+                charset:  UTF8
+                mapping_types:
+                    geometry: string
+                    _text: string
+                schema_filter: /mapping\./i
+                options:
+                    "PDO::ATTR_TIMEOUT": 480
+                logging: false
+                profiling: false
+
+    orm:
+        auto_generate_proxy_classes: "FILE_NOT_EXISTS"
+        default_entity_manager: website
+        entity_managers:
+            metadata_work:
+                mappings:
+                    IgnOGAMConfigurateurBundle: ~
+            website:
+                 connection: website
+                 mappings:
+                     OGAMBundle: 
+                        dir: Entity/Website
+                     IgnGincoBundle:
+                        dir: Entity/Website
+            mapping:
+                 connection: mapping
+                 mappings:
+                    OGAMBundle:
+                        dir: Entity/Mapping
+                    IgnGincoBundle:
+                        dir: Entity/Mapping
+            metadata:
+                 connection: metadata
+                 mappings:
+                    OGAMBundle:
+                     dir: Entity/Metadata
+            raw_data:
+                 connection: raw_data
+                 mappings:
+                     OGAMBundle:
+                        dir: Entity/RawData
+                     IgnGincoBundle:
+                        dir: Entity/RawData
+            harmonized_data:
+                 connection: harmonized_data
+                 mappings:
+                     OGAMBundle:
+                        dir: Entity/HarmonizedData
+            result_location:
+                 connection: result_location
+                 mappings:
+                    OGAMBundle:
+                        dir: Entity/Mapping
+
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:     { type: memory }
+
+# breadcrumb configuration
+white_october_breadcrumbs:
+    separator: ''
+
+fos_js_routing:
+    routes_to_expose: [configurateur_table_add_fields, configurateur_file_add_fields, configurateur_table_update_fields, configurateur_file_update_fields, configurateur_table_edit_save, configurateur_file_field_mask_save, configurateur_table_change_mandatory_state, configurateur_file_change_mandatory_state, configurateur_dataset_import_update_file_order]
+
+ign_ogam_configurateur:
+    database_name: "%database_name%"
+    
+# Rabbit_mq configuration
+old_sound_rabbit_mq:
+    connections:
+        default:
+            host:     'localhost'
+            port:     5672
+            user:     'guest'
+            password: 'guest'
+            vhost:    '/'
+            lazy:     true
+            connection_timeout: 3
+            read_write_timeout: 3
+
+            # requires php-amqplib v2.4.1+ and PHP5.4+
+            keepalive: false
+            # requires php-amqplib v2.4.1+
+            heartbeat: 0
+
+    producers:
+        ginco_generic:
+            connection:       default
+            exchange_options: {name: 'ginco_%instance_name%_generic', type: direct}
+    consumers:
+        ginco_generic:
+            connection:       default
+            exchange_options: {name: 'ginco_%instance_name%_generic', type: direct}
+            queue_options: {name: 'ginco_%instance_name%_generic'}
+            callback: generic_consumer_service

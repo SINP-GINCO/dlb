@@ -1,0 +1,48 @@
+# On ne veut pas commiter les conf de build locale. 
+# Sinon on ne cesse de se les écraser mutuellement!
+# build.ppts
+
+# Les fichiers compilés par le compilateur Java ne sont pas à commiter
+*.class
+# conf eclipse
+/.project
+/.buildpath
+/.settings
+.project
+.classpath
+.metadata/
+
+# Conf PHPStorm
+.idea/
+
+# Conf Python
+.pydevproject
+# Conf SVN
+*.svn
+
+# Fichiers temporaire des éditeurs (vi, kate, libreoffice...)
+.*swp
+.~*
+/bin/
+
+# on ne commit pas les dépendances et les builds
+/ginco
+/ogam
+/configurator
+/build
+/notes
+/services/build/
+
+# Mapserver n'est pas nécessaire car présent dans Ginco
+mapserver/
+/nbproject/private/
+
+# Fichiers générés (GML DEE)
+/website/htdocs/custom/public/dee/*.zip
+
+# Fichier de properties propre à chaque configuration locale
+localhost.properties
+
+# Logs Apache
+/website/logs/*
+!website/logs/.gitkeep

@@ -1,0 +1,1 @@
+UPDATE event_listener SET listener_id = 'JddDlbService', classname = 'fr.ifn.ogam.integration.business.JddDlbService' WHERE listener_id = 'JddService';

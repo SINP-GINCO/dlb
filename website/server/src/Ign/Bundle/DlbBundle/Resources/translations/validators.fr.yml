@@ -1,0 +1,4 @@
+# In this file we just need to:
+# - write validators not defined in Ginco and Ogam Bundles
+# - overwrite validators from Ginco and Ogam Bundles
+# --> No need to rewrite correct validators from Ginco and Ogam Bundles

@@ -1,0 +1,4 @@
+# In this file we just need to:
+# - write translations not defined in Ginco and Ogam Bundles
+# - overwrite translations from Ginco and Ogam Bundles
+# --> No need to rewrite correct translations from Ginco and Ogam Bundles
