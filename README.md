@@ -26,26 +26,20 @@ vi ginco/database/init/populate_mode_taxref_table.sql
 ```
 
 * Check that the following values are correct in *website.application_parameters* table:
- * contactEmail
- * contactEmailPrefix
- * contactEmailSufix
- * toMail
- * deeNotificationMail
+    * contactEmail
+    * contactEmailPrefix
+    * contactEmailSufix
+    * toMail
+    * deeNotificationMail
+    * https_proxy (url and port of your local proxy if needed)
 
-
-* Add the following lines to your hosts file:
-
- 127.0.0.1 local-dlb  
- 127.0.0.1 local-dlb.ign.fr  
- 127.0.0.1 local-dlb-1.ign.fr  
- 127.0.0.1 local-dlb-2.ign.fr  
- 127.0.0.1 local-dlb-3.ign.fr  
- 127.0.0.1 local-dlb-4.ign.fr  
- 127.0.0.1 local-dlb-5.ign.fr  
- 127.0.0.1 local-dlb-6.ign.fr  
- 127.0.0.1 local-dlb-7.ign.fr  
- 127.0.0.1 local-dlb-8.ign.fr  
- 127.0.0.1 local-dlb-9.ign.fr  
+* Add the following line to your hosts file:
+ ```bash
+ 127.0.0.1 local-dlb.ign.fr
+ ```
+  (replace with the requested url for you local website).  
+    
+    
  ```bash
  sudo vi /etc/hosts
  ```
@@ -54,6 +48,9 @@ vi ginco/database/init/populate_mode_taxref_table.sql
 ```bash
 php dlb/build_dlb.php -f dlb/configs/localhost.properties --mode=dev
 ```
+
+* You should now access to the application by visiting  `http://local-dlb.ign.fr` (or 
+  `http://local-dlb.ign.fr/app_dev.php` in dev environment) .
 
 * Before uploading data and using the application, unpublish the standard model, publish it again and publish its import model.
 

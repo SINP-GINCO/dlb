@@ -33,9 +33,10 @@
 /notes
 /services/build/
 
-# Mapserver n'est pas nécessaire car présent dans Ginco
-mapserver/
-/nbproject/private/
+# Mapserver, ConfApache et ConfSupervisor ne sont nécessaires car présent dans Ginco
+/mapserver/
+/confapache/
+/confsupervisor/
 
 # Fichiers générés (GML DEE)
 /website/htdocs/custom/public/dee/*.zip
@@ -43,6 +44,3 @@ mapserver/
 # Fichier de properties propre à chaque configuration locale
 localhost.properties
 
-# Logs Apache
-/website/logs/*
-!website/logs/.gitkeep

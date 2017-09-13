@@ -19,9 +19,6 @@ db.adminuser=admin
 db.adminuser.pw=#####
 db.version=9.6.0
 
-
-
-
 # Deployment  / parameters unused on localhost
 #==================================
 # La machine sur laquelle déployer cette instance
@@ -55,6 +52,8 @@ url.domain=ginco.localhost.fr
 # Basepath of the site with slash (leave blank if no basepath)
 # Current configuration results in the application is located at: http://ginco.localhost.fr/localhost
 url.basepath=/localhost
+# Proxy URL if needed. If not necessary, leave empty as it is but do not remove it
+https.proxy=
 
 # Site Name
 site.name="Plateforme de test GINCO Localhost"
@@ -78,6 +77,9 @@ metadata.jdd.url=https://preprod-inpn.mnhn.fr/mtd/cadre/jdd/export/xml/GetRecord
 # Email to send a notification to when generating DEE
 dee.notification.mail=YOURMAIL@ign.fr
 
+# Url of the documentation website
+documentation.url=http://ginco.ign.fr/doc
+
 # Bounding box pour l'initialisation de la visualisation en WebMercator
 bb.xmin=-899390
 bb.ymin=6742320
@@ -88,9 +90,10 @@ bb.zoom=3
 # INSEE/ISO Code of region
 region.code=LOCAL
 
+# The value to display when a value should not be displayed in the results
+hidden.value=Masqué
+
 # Tracking id Piwik
 # 0 to disable piwik tracking for this site
 piwik.id=0
 
-# Proxy URL if needed. If not necessary, leave empty as it is but do not remove it
-https.proxy=

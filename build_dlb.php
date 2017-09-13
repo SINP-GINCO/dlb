@@ -3,7 +3,7 @@ $projectDir = dirname(__FILE__);
 require_once "$projectDir/../ginco/lib/share.php";
 
 // ------------------------------------------------------------------------------
-// Synopsis: build ogam services for GINCO instance defined in config file.
+// Synopsis: build ogam services for GINCO DLB instance defined in config file.
 // ------------------------------------------------------------------------------
 function usage($mess = NULL) {
 	echo "------------------------------------------------------------------------\n";
@@ -145,7 +145,7 @@ function buildWebsite($config, $buildMode) {
 
 	// Copy website files if in prod mode
 	if ($buildMode == 'prod') {
-		echo ("Copying ginco server directory project to $buildServerDir...\n");
+		echo ("Copying dlb server directory project to $buildServerDir...\n");
 		system("cp -r $projectDir/website/server/* $buildServerDir/");
 	}
 
@@ -206,7 +206,9 @@ function buildWebsite($config, $buildMode) {
 		'db_version' => $config['db.version'],
 		'mailer_transport' => $config['mailer.transport'],
 		'mailer_host' => $config['mailer.host'],
-		'instance_name' => $config['instance.name']
+		'instance_name' => $config['instance.name'],
+		'url_basepath' => $config['url.basepath'],
+		'basepath' => (empty($config['url.basepath'])) ? '/' : $config['url.basepath'],
 	], '__');
 
 	chdir("$buildServerDir");
@@ -227,6 +229,7 @@ function buildWebsite($config, $buildMode) {
 	if ($buildMode == 'dev') {
 		echo ("Installing assets...\n");
 		system("php app/console assets:install --symlink");
+		system("php app/console assetic:dump --env=dev");
 	}
 
 	// Directories used in application:
@@ -351,6 +354,7 @@ function buildApacheConf($config, $buildMode) {
 	echo ("building apache config...\n");
 	echo ("-------------------------\n");
 
+	$confApacheGincoDir = realpath($config['ginco.path'] . "/confapache");
 	$confapacheBuildDir = "$buildDir/confapache";
 	// Same effect as if ($buildMode=='prod')
 	if (!is_dir($confapacheBuildDir)) {
@@ -358,17 +362,51 @@ function buildApacheConf($config, $buildMode) {
 		mkdir($confapacheBuildDir, 0755, true);
 	}
 
-	$buildConfFile = "$confapacheBuildDir/ginco_{$config['instance.name']}.conf";
-	echo ("Creating apache configuration file: $buildConfFile...\n");
+	// No basepath: the Ginco application is alone on the domain and the virtual host
+	if (empty($config['url.basepath'])) {
+		$buildConfFile = "$confapacheBuildDir/ginco_{$config['instance.name']}.conf";
+		echo("Creating apache configuration file: $buildConfFile...\n");
 
-	substituteInFile("$projectDir/confapache/ginco_apache2_tpl_$buildMode.conf", $buildConfFile, $config);
+		substituteInFile("$confApacheGincoDir/ginco_own_domain_tpl_$buildMode.conf", $buildConfFile, $config);
 
-	if ($buildMode == 'dev') {
-		$postBuildInstructions[] = "Apache configuration file has been built: $buildConfFile\n";
-		$postBuildInstructions[] = "To install, do:\n\n";
-		$postBuildInstructions[] = "sudo cp $buildConfFile /etc/apache2/sites-available/\n";
-		$postBuildInstructions[] = "sudo a2ensite " . pathinfo($buildConfFile, PATHINFO_BASENAME) . "\n";
-		$postBuildInstructions[] = "sudo service apache2 reload\n\n";
+		if ($buildMode == 'dev') {
+			$postBuildInstructions[] = "Apache configuration file has been built: $buildConfFile\n";
+			$postBuildInstructions[] = "To install, do:\n\n";
+			$postBuildInstructions[] = "sudo cp $buildConfFile /etc/apache2/sites-available/\n";
+			$postBuildInstructions[] = "sudo a2ensite " . pathinfo($buildConfFile, PATHINFO_BASENAME) . "\n";
+			$postBuildInstructions[] = "sudo service apache2 reload\n\n";
+		}
+	}
+	// Basepath: the Ginco application can share the virtual host with other apps
+	else {
+		echo("Creating apache configuration files: \n");
+
+		$buildConfFileVHost = "$confapacheBuildDir/ginco_{$config['url.domain']}.conf";
+		substituteInFile("$confApacheGincoDir/ginco_vhost_tpl.conf", $buildConfFileVHost, $config);
+		echo("* $buildConfFileVHost\n");
+
+		$buildConfFileMapserver = "$confapacheBuildDir/include_mapserver_{$config['instance.name']}.conf";
+		substituteInFile("$confApacheGincoDir/include_mapserver_tpl.conf", $buildConfFileMapserver, $config);
+		echo("* $buildConfFileMapserver\n");
+
+		$buildConfFileLogs = "$confapacheBuildDir/include_customlog_{$config['instance.name']}.conf";
+		substituteInFile("$confApacheGincoDir/include_customlog_tpl.conf", $buildConfFileLogs, $config);
+		echo("* $buildConfFileLogs\n");
+
+		$buildConfFileGinco = "$confapacheBuildDir/include_ginco_{$config['instance.name']}.conf";
+		substituteInFile("$confApacheGincoDir/include_ginco_tpl.conf", $buildConfFileGinco, $config);
+		echo("* $buildConfFileGinco\n");
+
+		if ($buildMode == 'dev') {
+			$postBuildInstructions[] = "Apache configuration files has been built: $buildConfFileVHost, $buildConfFileGinco, $buildConfFileLogs, $buildConfFileMapserver\n";
+			$postBuildInstructions[] = "To install, do:\n\n";
+			$postBuildInstructions[] = "sudo cp -f $buildConfFileVHost /etc/apache2/sites-available/\n";
+			$postBuildInstructions[] = "sudo ln -fs $buildConfFileGinco /etc/apache2/sites-available/\n";
+			$postBuildInstructions[] = "sudo ln -fs $buildConfFileLogs /etc/apache2/sites-available/\n";
+			$postBuildInstructions[] = "sudo ln -fs $buildConfFileMapserver /etc/apache2/sites-available/\n";
+			$postBuildInstructions[] = "sudo a2ensite " . pathinfo($buildConfFileVHost, PATHINFO_BASENAME) . "\n";
+			$postBuildInstructions[] = "sudo service apache2 reload\n\n";
+		}
 	}
 
 	echo ("Done building apache config.\n\n");
@@ -383,6 +421,7 @@ function buildSupervisorConf($config, $buildMode) {
 	echo ("-----------------------------\n");
 
 	$confsupervisorBuildDir = "$buildDir/confsupervisor";
+	$confsupervisorGincoDir = realpath($config['ginco.path'] . "/confsupervisor");
 	// Same effect as if ($buildMode=='prod')
 	if (!is_dir($confsupervisorBuildDir)) {
 		echo ("Creating $confsupervisorBuildDir directory...\n");
@@ -392,7 +431,7 @@ function buildSupervisorConf($config, $buildMode) {
 	$buildConfFile = "$confsupervisorBuildDir/ginco_{$config['instance.name']}.conf";
 	echo ("Creating supervisor configuration file: $buildConfFile...\n");
 
-	substituteInFile("$projectDir/confsupervisor/ginco_supervisor_tpl.conf", $buildConfFile, $config);
+	substituteInFile("$confsupervisorGincoDir/ginco_supervisor_tpl.conf", $buildConfFile, $config);
 
 	if ($buildMode == 'dev') {
 		$postBuildInstructions[] = "Supervisor configuration file has been built: $buildConfFile\n";
