@@ -90,7 +90,6 @@
         {#== Breadcrumb ==#}
         {# if the breadcrumb block is given by the template, use it. If not, use calculated breadcrumb #}
         {% if block('breadcrumb') is defined and block('breadcrumb') is not empty %}
-        <h1>True</h1>
             {{ block('breadcrumb')|raw }}
         {% else %}
         <h1>False</h1>
