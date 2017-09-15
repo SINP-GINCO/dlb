@@ -464,9 +464,9 @@ $tasksOptions = array(
 ) // Build supervisor configuration file
 ;
 $otherOptions = array(
-	"mode::"
-) // Development mode: symlinks instead of copy files
-;
+	"mode::",     	// Development mode: symlinks instead of copy files
+	"builddir::",   // Directory where build output will be put (only in prod mode)
+);
 $longOpts = array_merge($tasksOptions, $otherOptions);
 
 $params = getopt($shortOpts, $longOpts);
@@ -498,7 +498,8 @@ $buildMode = (isset($params['mode']) && $params['mode'] == 'dev') ? 'dev' : 'pro
 // build dir: where to put resulting builded files
 // In prod mod, always erase build directory to have a coherent set of builded services
 if ($buildMode == 'prod') {
-	$buildDir = "$projectDir/build";
+	$buildDir = (isset($params['builddir']) && !empty($params['builddir'])) ? $params['builddir'] : "$projectDir/build";
+	$buildDir = realpath($buildDir);
 	if (is_dir($buildDir) && $buildDir != $projectDir) {
 		system("rm -rf $buildDir");
 	}
