@@ -181,6 +181,7 @@ function buildWebsite($config, $buildMode) {
 
 	// ajout de la version du build dans le template du site
 	if ($buildMode == 'prod') {
+		chdir($projectDir);
 		$currentBranch = system("git rev-parse --abbrev-ref HEAD");
 		$versionInfo = $currentBranch . ' ' . date('d/m/o G:i:s');
 		echo ("Adding version ($versionInfo) in site template...\n");
