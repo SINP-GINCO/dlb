@@ -340,7 +340,7 @@ function buildMapfile($config, $buildMode) {
 	if (!is_dir($buildMapserverDir)) {
 		echo ("Creating $buildMapserverDir directory...\n");
 		mkdir($buildMapserverDir, 0755, true);
-		system("cp -r $gincoMapserverDir/mapserver/data $buildMapserverDir");
+		system("cp -r $gincoMapserverDir/data $buildMapserverDir");
 	}
 	echo ("Creating mapfile: $buildMapserverDir/ginco_{$config['instance.name']}.map...\n");
 	substituteInFile("$gincoMapserverDir/ginco_tpl.map", "$buildMapserverDir/ginco_{$config['instance.name']}.map", $config);
@@ -500,7 +500,6 @@ $buildMode = (isset($params['mode']) && $params['mode'] == 'dev') ? 'dev' : 'pro
 // In prod mod, always erase build directory to have a coherent set of builded services
 if ($buildMode == 'prod') {
 	$buildDir = (isset($params['builddir']) && !empty($params['builddir'])) ? $params['builddir'] : "$projectDir/build";
-	$buildDir = realpath($buildDir);
 	if (is_dir($buildDir) && $buildDir != $projectDir) {
 		system("rm -rf $buildDir");
 	}
