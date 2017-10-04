@@ -6963,18 +6963,22 @@ body {
   text-align: center;
 }
 .dee-state,
-.dee-actions {
+.dee-actions,
+.dbb-actions {
   display: block;
   float: left;
 }
 .dee-state {
   width: 60%;
 }
-.dee-actions {
+.dee-actions,
+.dbb-actions {
   width: 40%;
 }
-.dee-actions a {
+.dee-actions a,
+.dbb-actions a {
   margin-left: 4px;
+  margin-bottom: 1px;
 }
 /* fileFormat or tableFormat edit.html.twig */
 #data-transfer-button {

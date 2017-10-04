@@ -1,0 +1,211 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+<h1>{{ 'Data integration module'|trans }}</h1>
+
+{% set user = app.user %}
+
+<!-- Show the currently active jdd -->
+{% if jddList is not empty %}
+    <p>
+        <a href="{{ path("jdd_new") }}">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> {% trans %}Create data submission{% endtrans %}
+        </a>
+    </p>
+
+    <!-- Show the currently active location submissions -->
+    <table class="table table-hover table-bordered jdd-table">
+        <col style="width: 7%;"/>
+        <col style="width: 20%;"/>
+        <col />
+        {% if user is not null and user.isAllowed('MANAGE_DATASETS') %}
+            <col style="width: 22%;"/>
+        {% endif %}
+        <thead>
+            <tr>
+                <th colspan="2" class="text-center color1">{{ 'Jdd.list.jdd'|trans }}</th>
+                <th class="text-center color2">{{ 'Jdd.list.submissions'|trans }}</th>
+                {% if user is not null and user.isAllowed('MANAGE_DATASETS') %}
+                    <th class="text-center color1">{{ 'DEE.table.title'|trans }}</th>
+                {% endif %}
+            </tr>
+            <tr>
+                <th class="color1">{{ 'Actions'|trans }}</th>
+                <th class="color1">{{ 'Jdd.list.nameAndId'|trans }}</th>
+                <th class="color2">{%  include "IgnGincoBundle:Integration:submission_line_light.html.twig" %}</th>
+                {% if user is not null and user.isAllowed('MANAGE_DATASETS') %}
+                    <th class="color1">
+                        <div class="dee-state">{{ 'DEE.table.state'|trans }}</div>
+                        <div class="dee-actions">{{ 'DEE.table.actions'|trans }}</div>
+                    </th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+        {% for jdd in jddList %}
+            <tr>
+
+                {# Actions JDD #}
+                <td>
+                    {# View #}
+                    <a class="btn btn-xs btn-primary" title="{{ 'Jdd.list.view'|trans }}" href="{{ path('jdd_show', { 'id': jdd.id }) }}">
+                        <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                    </a>
+
+                    {# Delete #}
+                    {% if jdd.trueDeletable %}
+                        <button class="btn btn-xs btn-danger" title="{{ 'Delete'|trans }}" data-toggle="modal" data-target="#modal-delete-jdd-{{ jdd.id }}">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
+
+                        <!-- Modal - Delete jdd -->
+                        <div class="modal fade" id="modal-delete-jdd-{{ jdd.id }}"
+                             tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        {% trans with {'%jddId%': jdd.field('title')} %} Jdd.delete.prompt {% endtrans %}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default"
+                                                data-dismiss="modal">{% trans %}Cancel{% endtrans %}</button>
+                                        <a type="button" class="btn btn-primary"
+                                           href="{{ path('jdd_delete', {'id' : jdd.id}) }}">
+                                            {% trans %}Continue{% endtrans %} </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <button class="btn btn-xs btn-default btn-disabled" title="{{ 'Delete'|trans }}" data-toggle="modal" data-target="#modal-impossible-delete-jdd-{{ jdd.id }}">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
+
+                        <!-- Modal - Delete Jdd -->
+                        <div class="modal fade" id="modal-impossible-delete-jdd-{{ jdd.id }}"
+                             tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        {% trans with {'%jddId%': jdd.field('title')} %} Jdd.delete.impossible {% endtrans %}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default"
+                                                data-dismiss="modal">{% trans %}Cancel{% endtrans %}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </td>
+
+                {# Title and metadata id of the jdd #}
+                <td>
+                    <p>{{ jdd.field('title') }}</p>
+                    <span class="text-muted longtext">{{ jdd.field('metadataId') }}</span>
+                </td>
+
+                {# Submissions #}
+                <td class="submissions">
+                    {# List of submissions #}
+                    {% for submission in jdd.activeSubmissions %}
+                        {%  include "IgnGincoBundle:Integration:submission_line_light.html.twig" %}
+                    {% endfor %}
+                    {# Add a new submission to dataset #}
+                    <div class="submission-line">
+                        <a href="{{ path("integration_creation", { 'jddid': jdd.id }) }}">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>  {{ 'Jdd.submission.add'|trans }}
+                        </a>
+                    </div>
+                </td>
+
+                {# DEE Column - Empty / filled by Ajax #}
+                {% if user is not null and user.isAllowed('MANAGE_DATASETS') %}
+                    <td>
+                        <div class="dee" data-jdd-id="{{ jdd.id }}">
+                            <div class="dee-state">
+                                <div class="progress-label hidden"></div>
+                                <div class="progress hidden">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                            0%
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="progress-cancel"></div>
+                                <div class="dee-content"></div>
+                            </div>
+                            <div class="dee-actions text-center"></div>
+                            <div class="dbb-actions text-center">
+                            <a role='button' class='btn btn-xs btn-default btn-success' title='"{{ 'Jdd.dbb.create'|trans }}"' href="{{ path("generate_dbb", { 'jddId': jdd.id }) }}">
+                           		<span class="glyphicon glyphicon-leaf" aria-hidden="true"></span>  
+               				</a></div>
+                        </div>
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if user is not null and user.isAllowed('MANAGE_DATASETS') %}
+        <!-- DEE dialog popup -->
+        <div class="modal fade" id="DEEModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="{{ 'Close'|trans }}"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="modal-notice"></p>
+                        <form>
+                            <div class="form-group">
+                                <label class="control-label">{{ 'Comment'|trans }}</label>
+                                <textarea class="form-control" id="DEE-comment"></textarea>
+                                <div class="help-block"></div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'Cancel'|trans }}</button>
+                        <button type="button" class="btn btn-primary" id="modal-submit"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Can't generate DEE modal -->
+        <div class="modal fade" id="DEECantGenerateModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        {{ 'DEE.impossibleModal.body'|trans }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default"
+                                data-dismiss="modal">{% trans %}Cancel{% endtrans %}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% else %}
+    <p>{% trans %}No submission found{% endtrans %}</p>
+{% endif %}
+<p><a href="{{ path("jdd_new") }}">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> {% trans %}Create data submission{% endtrans %}
+</a></p>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        {% include '@IgnGinco/Integration/integration-progress-bars.js.twig' %}
+        {% include '@IgnGinco/Integration/integration-cancel.js.twig' %}
+        {% include '@IgnGinco/Jdd/dee-generation.js.twig' %}
+    </script>
+{% endblock %}

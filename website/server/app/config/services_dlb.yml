@@ -174,3 +174,8 @@ services:
     ginco.dee_process:
         class: Ign\Bundle\GincoBundle\Services\DEEGeneration\DEEProcess
         arguments: ["@doctrine.orm.entity_manager","@ogam.configuration_manager", "@ginco.dee_generator", "@app.mail_manager","@logger"]
+
+    # Service generating DBB
+    dlb.dbb_generator:
+        class: Ign\Bundle\DlbBundle\Services\DBBGenerator
+        arguments: ["@doctrine.orm.entity_manager","@ogam.configuration_manager", "@ogam.generic_service", "@ogam.query_service","@logger"]
