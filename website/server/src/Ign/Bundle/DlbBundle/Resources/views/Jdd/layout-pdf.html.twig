@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="index, follow" />
+
+    <title>{% block title %}
+        {{ configurationManager.getConfig('site_name', 'GINCO') }}
+    {% endblock %}</title>
+    <meta name="description" content="{% block description %}{% endblock %}" />
+    <link rel="icon" type="image/x-icon" href="{{ absolute_url(asset('favicon.ico')) }}" />
+
+    {% block stylesheets %}
+        {% stylesheets
+        '@bootstrap_css'
+        filter='cssrewrite, yui_css' %}
+        <link rel="stylesheet" href="{{ absolute_url(asset_url) }}" />
+        {% endstylesheets %}
+    {% endblock %}
+</head>
+
+<body>
+<div>
+    <header id="report-header">
+        {#== Logo and banner ==#}
+        <div id="report-banner" class="container">
+            <div class="row">
+                <div class="col-xs-7">
+                    <div id="header-logo">
+
+                        <img src="{{ absolute_url(asset('img/logo-mtes.jpg')) }}" alt="logo mtes">
+       					<img src="{{ absolute_url(asset('img/logo-sinp.png')) }}" alt="logo sinp">
+
+                    </div>
+                </div>
+                <div class="col-xs-4 text-right h1 header-title">
+                    Dépôt Légal de données de Biodiversité
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    {#== Page content ==#}
+    <main>
+        {#== Main content ==#}
+        {% block body %}{% endblock %}
+    </main>
+</div>
+</body>
+</html>

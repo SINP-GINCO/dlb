@@ -139,9 +139,15 @@
                             </div>
                             <div class="dee-actions text-center"></div>
                             <div class="dbb-actions text-center">
-                            <a role='button' class='btn btn-xs btn-default btn-success' title='"{{ 'Jdd.dbb.create'|trans }}"' href="{{ path("generate_dbb", { 'jddId': jdd.id }) }}">
-                           		<span class="glyphicon glyphicon-leaf" aria-hidden="true"></span>  
-               				</a></div>
+                            	<a role='button' class='btn btn-xs btn-default btn-success' title='"{{ 'Jdd.dbb.create'|trans }}"' href="{{ path("generate_dbb", { 'jddId': jdd.id }) }}">
+                           			<span class="glyphicon glyphicon-leaf" aria-hidden="true"></span>  
+               					</a>
+               					{% if not jdd.field('certificateFilePath') %}
+               						<a role='button' class='btn btn-xs btn-default btn-success' title='"{{ 'Jdd.dbb.create'|trans }}"' href="{{ path("dlb_certificate_pdf", { 'jddId': jdd.id }) }}">
+                           				<span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span>  
+               						</a>
+               					{% endif%}
+               				</div>
                         </div>
                     </td>
                 {% endif %}

@@ -50,7 +50,7 @@ twig:
 assetic:
     debug:          '%kernel.debug%'
     use_controller: '%kernel.debug%'
-    bundles: ['IgnOGAMConfigurateurBundle', 'OGAMBundle', 'IgnGincoBundle', 'IgnGincoConfigurateurBundle']
+    bundles: ['IgnOGAMConfigurateurBundle', 'OGAMBundle', 'IgnGincoBundle', 'IgnGincoConfigurateurBundle', 'IgnDlbBundle']
     filters:
         cssrewrite: ~
         yui_css:
@@ -285,3 +285,12 @@ old_sound_rabbit_mq:
             exchange_options: {name: 'ginco_%instance_name%_generic', type: direct}
             queue_options: {name: 'ginco_%instance_name%_generic'}
             callback: generic_consumer_service
+            
+# KnpSnappyBundle configuration            
+knp_snappy:  
+  pdf:
+    enabled:    true
+    binary:     "%kernel.root_dir%/../vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64"
+    options:
+            - { name: 'viewport-size', value: ‘1024x768’ }
+            - { name: 'page-size', value: 'A4' }

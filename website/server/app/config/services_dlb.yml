@@ -179,3 +179,9 @@ services:
     dlb.dbb_generator:
         class: Ign\Bundle\DlbBundle\Services\DBBGenerator
         arguments: ["@doctrine.orm.entity_manager","@ogam.configuration_manager", "@ogam.generic_service", "@ogam.query_service","@logger"]
+
+    # Service generating Certificate
+    dlb.certificate_generator:
+        class: Ign\Bundle\DlbBundle\Services\CertificateGenerator
+        arguments: ["@doctrine.orm.entity_manager","@ogam.configuration_manager", "@templating", "@knp_snappy.pdf", "@logger"]
+        

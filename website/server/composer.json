@@ -33,7 +33,9 @@
 		"components/jquery" : "^1.12",
 		"components/jqueryui" : "^1.12",
 		"php-amqplib/rabbitmq-bundle" : "^1.12",
-		"phpunit/phpunit" : "5.1.*"
+		"phpunit/phpunit" : "5.1.*",
+		"knplabs/knp-snappy-bundle": "^1.5",
+		"h4cc/wkhtmltopdf-amd64": "^0.12.3"
 	},
 	"require-dev" : {
 		"sensio/generator-bundle" : "~3.0",

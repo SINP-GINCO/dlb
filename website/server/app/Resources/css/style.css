@@ -6814,6 +6814,21 @@ form label.required:after {
 #page-header #banner .header-title {
   color: white;
 }
+#report-header #report-banner {
+  height: 150px;
+  background-image: url("img/bandeau-dlb-report.jpg");
+  background-size: 3000px 150px;
+  background-repeat: no-repeat;
+}
+#report-header #report-banner #header-logo {
+  margin-top: 5px;
+}
+#report-header #report-banner #header-logo img {
+  margin-right: 25px;
+}
+#report-header #report-banner .header-title {
+  color: white;
+}
 #main-menu {
   background-color: #b3c951;
   color: white;

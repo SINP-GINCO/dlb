@@ -1,0 +1,133 @@
+{% extends 'IgnDlbBundle:Jdd:layout-pdf.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+		<h1>Certificat de dépôt d'un jeu de données de biodiversité</h1>
+		</div>
+	</div>
+		
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <p>Jeu de données :</p>
+            </div>
+            <div class="col-md-8">
+                <p>{{ jdd.field('title') }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p>Identifiant INPN :</p>
+            </div>
+            <div class="col-md-8">
+                <p>{{ jdd.field('metadataId') }}</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+		<h2>Procédure de dépôt</h2>
+		</div>
+	</div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <p>Procédure de télé­versement :</p>
+            </div>
+            <div class="col-md-8">
+                <p>Lien vers la procédure dans TPS (quand on récupèrera les infos via la fiche MTD du CA ­ plus tard)</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p>Cadre d'acquisition INPN :</p>
+            </div>
+            <div class="col-md-8">
+                 <a href="{{ jddCAMetadataFileDownloadServiceURL }}{{ jdd.field('metadataCAId') }}"
+                    target="_blank" title="{{ 'Jdd.page.metadataLinkTitle'|trans }}">
+                 	<span class="glyphicon glyphicon-file" aria-hidden="true"></span> {{ jdd.field('metadataCAId') }}
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p>Titre du projet :</p>
+            </div>
+            <div class="col-md-8">
+                <p>Titre du projet dans TPS (plus tard)</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p>Descriptif du projet :</p>
+            </div>
+            <div class="col-md-8">
+                <p>Descriptif du projet dans TPS (plus tard)</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p>Commanditaire :</p>
+            </div>
+            <div class="col-md-8">
+                <p>Commanditaire dans procédure TPS (plus tard)</p>
+            </div>
+        </div>
+    </div>
+    
+        <div class="container">
+        <div class="row">
+		<h2>Détail du Jeu de données</h2>
+		</div>
+	</div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <p>Jeu de données INPN :</p>
+            </div>
+            <div class="col-md-8">
+                <a href="{{ configurationManager.getConfig('jddMetadataFileDownloadServiceURL') }}{{ jdd.field('metadataId') }}"
+                    target="_blank" title="{{ 'Jdd.page.metadataLinkTitle'|trans }}">
+                 	<span class="glyphicon glyphicon-file" aria-hidden="true"></span> {{ jdd.field('metadataId') }}
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p>Modèle de données :</p>
+            </div>
+            <div class="col-md-8">
+                <p>Standard d'Occurences de Taxons v1.2.1</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p>Organisme dépositaire :</p>
+            </div>
+            <div class="col-md-8">
+                <p>{{ app.user.username }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p>Date de dépôt :</p>
+            </div>
+            <div class="col-md-8">
+                <p>{{ "now"|date("m/d/Y H") }}h{{ "now"|date("i") }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <p>Url publique jeu de données :</p>
+            </div>
+            <div class="col-md-8">
+                <p>https://depot­legal­biodiversite.naturefrance.fr/jdd/{{jdd.field('metadataId')}}/show</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

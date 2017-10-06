@@ -18,35 +18,12 @@ use Symfony\Component\HttpFoundation\Response;
  * Class DBBGenerator
  * Responsible of the export of the DBB
  *
- * @package Ign\Bundle\DBBBundle\Services
+ * @package Ign\Bundle\DlbBundle\Services
  */
 class DBBGenerator {
 
 	/**
-	 *
-	 * @var Logger
-	 */
-	protected $logger;
-
-	/**
-	 *
-	 * @var ConfigurationManager
-	 */
-	protected $configuration;
-
-	/**
-	 * The models.
-	 *
-	 * @var EntityManager
-	 */
-	protected $em;
-
-	protected $genericService;
-
-	protected $queryService;
-
-	/**
-	 * DEEGenerator constructor.
+	 * DBBGenerator constructor.
 	 *
 	 * @param
 	 *        	$em

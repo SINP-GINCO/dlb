@@ -17,6 +17,7 @@ class AppKernel extends Kernel {
 			new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
 			new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 			new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
+			new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
 			new Ign\Bundle\OGAMBundle\OGAMBundle(),	// Order is important for translations !
 			new Ign\Bundle\GincoBundle\IgnGincoBundle(),
 			new Ign\Bundle\DlbBundle\IgnDlbBundle(),
