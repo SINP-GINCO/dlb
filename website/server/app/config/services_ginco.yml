@@ -109,7 +109,7 @@ services:
     ginco.decorating_ginco_generic_producer:
       class: Ign\Bundle\GincoBundle\Services\RabbitMQ\GenericProducer
       decorates: old_sound_rabbit_mq.ginco_generic_producer
-      arguments: ['@ginco.decorating_ginco_generic_producer.inner', '@doctrine.orm.entity_manager', "@logger"]
+      arguments: ['@ginco.decorating_ginco_generic_producer.inner', '@doctrine.orm.entity_manager']
       public: false
 
 
