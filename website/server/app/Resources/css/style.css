@@ -6986,13 +6986,20 @@ body {
 .dee-state {
   width: 60%;
 }
-.dee-actions,
-.dbb-actions {
+.dee-actions {
   width: 40%;
 }
-.dee-actions a,
-.dbb-actions a {
+.dbb-actions {
+  text-align: left;
+  width: 100%;
+}
+.dee-actions a {
   margin-left: 4px;
+  margin-bottom: 1px;
+}
+.dbb-actions a {
+  margin-left: 0px;
+  margin-right: 2px;
   margin-bottom: 1px;
 }
 /* fileFormat or tableFormat edit.html.twig */

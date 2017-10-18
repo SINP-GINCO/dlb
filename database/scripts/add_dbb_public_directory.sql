@@ -1,0 +1,1 @@
+INSERT INTO website.application_parameters(name, value, description) VALUES ('dbbPublicDirectory', '/var/data/ginco/@instance.name@/dbb/public', 'Directory where DBB CSV and PDF files are generated and stored');

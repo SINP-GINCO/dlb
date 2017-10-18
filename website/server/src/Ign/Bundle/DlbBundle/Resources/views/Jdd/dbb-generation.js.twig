@@ -1,0 +1,303 @@
+/**
+ * Scripts for DBB Export management
+ * Actions are sent via Ajax, and get back status of the export job.
+ *
+ * Status for DBB are:
+ *  - empty status (unpublished)
+ *  - generating
+ *  - published
+ * Status for messages are:
+ * - 'NOT FOUND'; No message with this id
+ * - 'PENDING'; Queued, waiting to be consumed
+ * - 'RUNNING'; Is being consumed
+ * - 'COMPLETED'; Has been consumed and terminated normally
+ */
+
+
+/**
+ * Show dialog modal to get comment from user
+ * (mandatory for UPDATE and DELETE actions)
+ *
+ * @param jddId
+ * @param deeAction
+ */
+function showDialogModal(jddId) {
+    var modal = $('#DBBModal');
+    var submitButton = modal.find('button#modal-submit');
+
+    // Reset modal
+    modal.find('textarea').val('');
+    modal.find('div.form-group').removeClass('has-error');
+    modal.find('div.form-group').find('div.help-block').html("");
+    submitButton.off();
+
+    // Set title, notice, submit button text, depending on action
+    var title = "{{ 'DBB.dialogModal.title'|trans }}";
+    modal.find('h4.modal-title').html(title);
+
+    var notice = "{{ 'DBB.dialogModal.notice'|trans }}";
+    modal.find('p#modal-notice').html(notice);
+
+    var buttonText = "{{ 'DBB.dialogModal.submit'|trans }}";
+
+    submitButton.html(buttonText);
+
+    submitButton.click( function(e) {
+        e.preventDefault();
+        generateDBB(jddId);
+        modal.modal('hide');
+        
+    });
+
+    modal.modal('show');
+}
+
+/**
+ * Update data attributes and content divs for given jdd
+ * If data is not given, launch a ajax request to get it.
+ *
+ * @param jddId
+ * @param data
+ */
+function updateDBBDataAndContent(jddId, data) {
+    if (data) {
+        updateDBBData(jddId, data);
+        updateDBBContent(jddId);
+    }
+    else {
+        $.getJSON("{{ path('dbb_status') }}", {
+            jddId: jddId
+        }, function (data) {
+            updateDBBData(jddId, data);
+            updateDBBContent(jddId);
+        });
+    }
+}
+
+/**
+ * Search all GENERATING DBBs (by the data attribute of the .dbb divs)
+ * And launch a ajax request to retrieve their status and progress
+ * Then update data and content divs.
+ */
+function updateAllDBBGeneratingTasks() {
+    var jddIds = [];
+    $('div.dbb').each(function() {
+        if ( $(this).data('dbb-status') == 'generating') {
+            var jddId = $(this).attr('data-jdd-id');
+            jddIds.push(jddId);
+        }
+    });
+
+    if (jddIds.length) {
+        $.getJSON("{{ path('dbb_status_all') }}", {
+            jddIds: jddIds
+        }, function (data) {
+            $.each(data, function (index, value) {
+                updateDBBData(value.jddId, value);
+                updateDBBContent(value.jddId);
+            });
+        });
+    }
+}
+
+/**
+ * Update data stored in a div.dbb
+ * And describing the state of the dbb generation process
+ *
+ * @param jddId
+ * @param data
+ */
+function updateDBBData(jddId, data) {
+    var dbbDiv = $("div.dbb[data-jdd-id='" + jddId + "']");
+
+    // Can generate DBB for this jdd ?
+    if ("canGenerateDBB" in data) {
+        dbbDiv.data('can-generate-DBB', data.canGenerateDBB);
+    } else {
+        dbbDiv.data('can-generate-DBB', false);
+    }
+
+    // DBB status
+    if ("dbb" in data && "status" in data.dbb ) {
+
+        dbbDiv.data('dbb-status', data.dbb.status);
+        if (data.dbb.status == 'published') {
+            dbbDiv.data('dbb-id', data.dbb.id );
+            dbbDiv.data('dbb-created', data.dbb.created );
+            dbbDiv.data('dbb-action', data.dbb.action );
+        }
+    } else {
+        dbbDiv.data('dbb-status', 'unpublished');
+    }
+
+    // RabbitMQ message status and progress
+     if ("message" in data && "status" in data.message ) {
+        dbbDiv.data('message-status', data.message.status);
+        dbbDiv.data('message-progress', data.message.progress);
+    } else {
+        dbbDiv.data('message-status', 'NOT FOUND');
+        dbbDiv.data('message-progress', 0);
+    }
+}
+
+/**
+ * Update content and show:
+ *  - the DBB state
+ *  - the progress bar when the generation job is running
+ *  - action links: create, or download links
+ *
+ * @param jddId
+ */
+function updateDBBContent(jddId) {
+
+    var dbbDiv = $("div.dbb[data-jdd-id='" + jddId + "']");
+    var contentDiv = dbbDiv.find("div.dbb-content");
+    var actionsDiv = dbbDiv.find("div.dbb-actions");
+    var newSubLineDiv = $("div.new-submission[data-jdd-id='" + jddId + "']");
+    var subLineDiv = newSubLineDiv.find("div.submission-line");
+    var deleteSubJddDiv = $(".delete-submission-jdd[data-jdd-id='" + jddId + "']");
+    var deleteSubDiv = deleteSubJddDiv.find("div.delete-submission");
+
+    var canGenerateDBB = dbbDiv.data('can-generate-DBB');
+    var dbbStatus = dbbDiv.data('dbb-status');
+    var messageStatus = dbbDiv.data('message-status');
+    var messageProgress = Math.round(dbbDiv.data('message-progress'));
+
+    //-- Content OR progress
+
+    // Update progress bar if DBB is GENERATING
+    var progressBar = dbbDiv.find('div.progress-bar');
+    var labelDiv = dbbDiv.find('div.progress-label');
+    
+
+    if (dbbStatus == 'generating') {
+        if (progressBar.parent().parent().hasClass('hidden')) {
+            progressBar.parent().parent().removeClass('hidden');
+            labelDiv.removeClass('hidden');
+        }
+        
+        progressBar.css('width', messageProgress +'%').attr('aria-valuenow', messageProgress).html( messageProgress + '%');
+
+        var label = ((messageStatus == 'RUNNING') ? "{{ 'DBB.progress.running'|trans }}" :
+                        ((messageStatus == 'PENDING') ?  "{{ 'DBB.progress.pending'|trans }}" : "{{ 'DBB.progress.finishing'|trans }}"));
+        labelDiv.html(label);
+    }
+    // If not GENERATING remove progress bar
+    else {
+        progressBar.parent().parent().addClass('hidden');
+        labelDiv.addClass('hidden');
+    }
+
+    // Content if DBB is not GENERATING
+    if (dbbStatus == 'generating') {
+        contentDiv.html('');
+        // Hide import and delete submission in the jdd
+        subLineDiv.addClass('hidden');
+        deleteSubDiv.addClass('hidden');
+    }
+    else {
+        contentDiv.html('');
+        var content = $('<p></p>');
+        contentDiv.append(content);
+
+        if (dbbStatus == 'unpublished') {
+            content.html("{{ 'DBB.status.noDBB'|trans }}");
+        }
+        else {
+            var action = "{{ 'DBB.status.transmitted'|trans }}";
+            content.html(action + ' le : ' + dbbDiv.data('dbb-created'));
+            
+        }
+    }
+
+
+    //-- Display actions depending on DBBStatus
+
+    actionsDiv.html('');
+    var titleRunning = "{{ 'DBB.status.generating'|trans }}";
+
+   // GenerateDBB
+    if (dbbStatus == 'unpublished') {
+        var icon = 'glyphicon-play';
+        var title = "{{ 'DBB.create.title'|trans }}";
+        var color = (canGenerateDBB) ? 'btn-success' : 'btn-default';
+
+        var launchLink = $("<a role='button' class='btn btn-xs " + color + " ' title='" + title + "' href='#'> " +
+                "<span class='glyphicon " + icon + "' aria-hidden='true'></span></a>");
+        actionsDiv.append(launchLink);
+
+        if (canGenerateDBB) {
+            launchLink.click(function (e) {
+                e.preventDefault();
+                showDialogModal(jddId);
+            });
+        }
+        else {
+            launchLink.click(function (e) {
+                e.preventDefault();
+                $('#DBBCantGenerateModal').modal('show');
+            });
+        }
+    }
+    
+    // Download link if DBB is published is available
+    if (dbbStatus == 'published') {
+    // Link to download DBB CSV zipped
+        var href = "{{ path('download_dbb', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
+        var downloadLink = $("<div><a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.CSV'|trans }}' href='" + href + "'> " +
+                "<span class='glyphicon glyphicon-leaf' aria-hidden='true'></span></a>Données brutes de biodiversité</div>");
+        actionsDiv.append(downloadLink);
+        
+    // Link to download certificate
+        var href = "{{ path('download_certificate', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
+        var downloadLink = $("<div><a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.certificate'|trans }}' href='" + href + "'> " +
+                "<span class='glyphicon glyphicon-bookmark' aria-hidden='true'></span></a>Certificat de conformité</div>");
+        actionsDiv.append(downloadLink);
+          
+    // Link to download XML MTD CA 
+        var href = "{{ path('download_mtdca', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
+        var downloadLink = $("<div><a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.mtdca'|trans }}' href='" + href + "'> " +
+                "<span class='glyphicon glyphicon-unchecked' aria-hidden='true'></span></a>Métadonnée cadre d'acquisition</div>");
+        actionsDiv.append(downloadLink);
+        
+    // Link to download XML MTD JDD 
+        var href = "{{ path('download_mtdjdd', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
+        var downloadLink = $("<div><a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.mtd'|trans }}' href='" + href + "'> " +
+                "<span class='glyphicon glyphicon-align-justify' aria-hidden='true'></span></a>Métadonnée jeu de données</div>");
+        actionsDiv.append(downloadLink);
+        
+    // Link to download DEE zipped
+        var href = "{{ path('download_dee_dlb', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
+        var downloadLink = $("<div><a role='button' class='btn btn-xs btn-primary' title='{{ 'DEE.download'|trans }}' href='" + href + "'> " +
+                "<span class='glyphicon glyphicon-tree-deciduous' aria-hidden='true'></span></a>DEE</div>");
+        actionsDiv.append(downloadLink);
+    }
+}
+
+/**
+ * Ajax request to add a RabbitMQ message for generating DBB
+ *
+ * @param jddId
+ * @param comment
+ */
+function generateDBB(jddId, comment) {
+    $.getJSON( "{{ path('generate_dlb') }}", {
+        jddId: jddId
+    },function( data ) {
+        if (data.success) {
+            updateDBBDataAndContent(jddId, data);
+        }
+    });
+}
+
+var DBBtimerId;
+
+$(function(){
+    $('.dbb').each(function() {
+        var $jddId = $(this).attr('data-jdd-id');
+        updateDBBDataAndContent($jddId);
+    });
+
+    // Periodically update progress for running and pending jobs (every second)
+    DBBtimerId = setInterval(updateAllDBBGeneratingTasks , 1000);
+});

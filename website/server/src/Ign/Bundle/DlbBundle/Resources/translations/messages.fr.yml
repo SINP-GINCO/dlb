@@ -2,3 +2,28 @@
 # - write translations not defined in Ginco and Ogam Bundles
 # - overwrite translations from Ginco and Ogam Bundles
 # --> No need to rewrite correct translations from Ginco and Ogam Bundles
+
+DBB:
+  table:
+    title: Dépôt légal
+    state: Etat
+  create.title : Déposer les données
+  status:
+    noDBB: Les données n'ont pas été transmises.
+    generating: Génération en cours...
+    transmitted: Dépôt effectué
+  download:
+    CSV: Télécharger les données brutes de biodiversité
+    certificate: Télécharger le certificat de conformité
+    mtdca: Télécharger les métadonnées du cadre d acquisition
+    mtd: Télécharger les métadonnées du jeu de données
+  impossibleModal.body: Pour déposer ce jeu de données, il doit contenir au moins une soumission avec des données, et aucune ne doit contenir d'erreur.
+  dialogModal:
+    notice: L'action de dépôt légal est irréversible. Il ne sera plus possible d'ajouter des données dans le jeu de données par la suite. Vous ne pourrez pas supprmier votre dépôt.
+    title: Dépôt légal des données de biodiversité
+    submit: Confirmer
+  progress:
+    running: Génération en cours...
+    pending: Génération en attente...
+    finishing: Préparation des fichiers...
+Jdd.list.submissions: Import de Données Brutes de Biodiversité

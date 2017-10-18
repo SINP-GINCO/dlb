@@ -26,6 +26,7 @@ $config = loadPropertiesFromArgs();
 try {
 	/* patch code here */
 	execCustSQLFile("$currentDir/scripts/update_event_listener.sql", $config);
+	execCustSQLFile("$currentDir/scripts/add_dbb_public_directory.sql", $config);
 } catch (Exception $e) {
 	echo "$currentDir/scripts/apply_db_patch.php\n";
 	echo "exception: " . $e->getMessage() . "\n";

@@ -447,7 +447,9 @@ function buildSupervisorConf($config, $buildMode) {
 
 	$buildConfFile = "$confsupervisorBuildDir/ginco_{$config['instance.name']}.conf";
 	echo ("Creating supervisor configuration file: $buildConfFile...\n");
-
+	
+	// Override config
+	$config['consumer.name'] = 'dlb_generic';
 	substituteInFile("$confsupervisorGincoDir/ginco_supervisor_tpl.conf", $buildConfFile, $config);
 
 	if ($buildMode == 'dev') {

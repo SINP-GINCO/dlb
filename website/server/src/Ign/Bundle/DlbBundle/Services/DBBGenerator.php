@@ -19,6 +19,8 @@ use Symfony\Component\HttpFoundation\Response;
  * Responsible of the export of the DBB
  *
  * @package Ign\Bundle\DlbBundle\Services
+ *         
+ * @author AMouget
  */
 class DBBGenerator {
 
@@ -58,10 +60,20 @@ class DBBGenerator {
 		ini_set("max_execution_time", 0);
 		
 		// Get validated (published) submissions in the jdd, stored in the DEE line
-		$submissionsIds = $DEE->getSubmissions();
+		//$submissionsIds = $DEE->getSubmissions();
 		
 		// Get the jdd and the data model
 		$jdd = $DEE->getJdd();
+
+		$submissions = $jdd->getSuccessfulSubmissions();
+		$submissionsIds = array();
+		foreach ($submissions as $submission) {
+			$this->logger->debug('submission : ' . $submission->getId());
+			$submissionsIds[] = $submission->getId();
+		}
+		//$DEE->setSubmissions($submissionsIds);
+		//$this->em->flush();
+		
 		$model = $jdd->getModel();
 		
 		// -- Create a query object : the query must find all lines with given submission_ids
@@ -74,7 +86,7 @@ class DBBGenerator {
 		$formFields = $this->em->getRepository('OGAMBundle:Metadata\FormField')->getFormFieldsFromModel($model->getId());
 		
 		// -- Criteria fields for the query : we only add SUBMISSION_IDs
-		// -- Result fields for the query : all fields of the model
+		// -- Result fields for the query : all fields of the model, we will sort them later
 		foreach ($formFields as $formField) {
 			$data = $formField->getData()->getData();
 			$format = $formField->getFormat()->getFormat();
@@ -137,12 +149,75 @@ class DBBGenerator {
 			$batchLines = 1000;
 			$batches = ceil($total / $batchLines);
 			
+			$sortFields = array(
+				'jddmetadonneedeeid',
+				'identifiantpermanent',
+				'organismegestionnairedonnee',
+				'statutsource',
+				'statutobservation',
+				'nomcite',
+				'nomvalide',
+				'cdnom',
+				'cdref',
+				'jourdatedebut',
+				'jourdatefin',
+				'observateurnomorganisme',
+				'determinateurnomorganisme',
+				'datedetermination',
+				'occmethodedetermination',
+				'sensible',
+				'sensiniveau',
+				'sensidateattribution',
+				'sensireferentiel',
+				'sensiversionreferentiel',
+				'geometrie',
+				'precisiongeometrie',
+				'natureobjetgeo',
+				'nomcommune',
+				'nomcommunecalcule',
+				'codecommunecalcule',
+				'codemaillecalcule',
+				'codedepartementcalcule',
+				'obscontexte',
+				'obsdescription',
+				'obsmethode',
+				'occetatbiologique',
+				'occnaturalite',
+				'occsexe',
+				'occstadedevie',
+				'occstatutbiogeographique',
+				'occstatutbiologique',
+				'objetdenombrement',
+				'typedenombrement',
+				'denombrementmax',
+				'denombrementmin',
+				'commentaire',
+				'identifiantregroupementpermanent',
+				'methoderegroupement',
+				'typeregroupement',
+				'altitudemax',
+				'altitudemin',
+				'altitudemoyenne',
+				'profondeurmax',
+				'profondeurmin',
+				'profondeurmoyenne',
+				'preuveexistante',
+				'preuvenonnumerique',
+				'preuvenumerique',
+				'referencebiblio',
+				'identifiantorigine',
+				'jddcode',
+				'jddid',
+				'jddsourceid',
+				'versionrefmaille',
+				'versiontaxref'
+			);
+			
 			// Get the column names
 			$line = array();
-			foreach ($queryForm->getColumns() as $genericFormField) {
-				$genericTableField = $queryForm->getFieldMappingSet()->getDstField($genericFormField);
-				$tableField = $genericTableField->getMetadata();
-				$line[] = $tableField->getLabel();
+			foreach ($sortFields as $sortField) {
+				$data = $this->em->getRepository('OGAMBundle:Metadata\Data')->findOneByData($sortField);
+				$line[] = $data->getLabel();
 			}
 			
 			// Put the lines to write in an array
@@ -204,14 +279,20 @@ class DBBGenerator {
 						'codedepartement',
 						'codedepartementcalcule'
 					);
-					if ($resultLine['sensiniveau'] == '0') {
+					if ($resultLine['sensiniveau'] != '0') {
 						
 						foreach ($datasToMask as $dataToMask) {
 							$resultLine[$dataToMask] = 'Masqué';
 						}
 					}
 					
-					$resultsArray[] = $resultLine;
+					// Orders fields
+					$properOrderedLine = array();
+					foreach ($sortFields as $sortField) {
+						$properOrderedLine[$sortField] = $resultLine[$sortField];
+					}
+					
+					$resultsArray[] = $properOrderedLine;
 				}
 				
 				// Writes the file
@@ -251,7 +332,7 @@ class DBBGenerator {
 			throw new DEEException("Could not create archive $archiveName:" . $e->getMessage());
 		}
 		// Delete CSV file
-		unlink($fileNameDBB);
+		// unlink($fileNameDBB);
 		
 		// Put zip filePath in JddField
 		$this->logger->debug('fileDBB : ' . $archiveName);
@@ -259,7 +340,7 @@ class DBBGenerator {
 		$jdd->setField('dbbFilePath', $archiveName);
 		$this->em->flush();
 		
-		return true;
+		return $file;
 	}
 
 	/**
@@ -276,10 +357,10 @@ class DBBGenerator {
 		$uuid = $jdd->getField('metadataId', $jdd->getId());
 		
 		$fileNameWithoutExtension = $regionCode . '_' . $date . '_' . $uuid;
-		
-		$filePath = $this->configuration->getConfig('dbbPublicDirectory') . '/';
+		$filePath = $this->configuration->getConfig('dbbPublicDirectory') . '/' . $jdd->getId();
+		@mkdir($filePath); // create the jdd dir
 		$filename = $fileNameWithoutExtension . '.csv';
 		
-		return $filePath . $filename;
+		return $filePath . '/' . $filename;
 	}
 }

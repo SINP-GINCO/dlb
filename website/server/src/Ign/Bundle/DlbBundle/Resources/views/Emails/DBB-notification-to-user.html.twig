@@ -1,0 +1,65 @@
+{% extends "IgnGincoBundle:Emails:base-email.html.twig" %}
+
+{%- block subject %}
+	Expéditeur : Plateforme de Dépôt Légal Biodiversité
+	Objet : Procédure TPS [n°TPS] - Dépôt du jeu de données {{ jdd.field('metadataId') }}
+{% endblock -%}
+
+{%- block email_body_text %}
+    {% autoescape true %}
+		Bonjour,
+		
+		Nous vous confirmons le succès du dépôt des données brutes de biodiversité suivantes :
+		
+		Jeu de données : {{ jdd.field('title') }}
+		Identifiant INPN : {{ jdd.field('metadataId') }}
+		Fichiers : {{ filename }}
+		Organisme déposant : {{ jdd.provider.label }}
+		Nom du déposant : {{ jdd.user.username }}
+		
+		Ce dépôt a eu lieu dans le cadre de la procédure suivante : 
+		
+		Procédure : [Titre procédure issu de TPS]
+		N° TPS : [ID TPS]
+		Commanditaire de l'étude : [Organisme Petitionnaire]
+		Lien : [Lien vers la procédure dans TPS ]
+		
+		Le jeu de données a été publié sur la plateforme de Dépôt Légal des Données Brutes de Biodiversité et transmis à la plateforme nationale du SINP qui va procéder à son intégration dans l’INPN.
+		
+		Vous devez maintenant reporter dans la procédure TPS (lien) l'URL suivante, à laquelle vous trouverez le certificat de dépôt : [URL_A_PRECISER].
+		
+		Bien cordialement,
+		
+		_La plateforme Dépôt Légal de données brutes de biodiversité_
+
+    {% endautoescape %}
+{% endblock -%}
+
+{%- block email_body_html %}
+    {% autoescape false %}
+        <p>Bonjour,</p>
+
+        <p>Nous vous confirmons le succès du dépôt des données brutes de biodiversité suivantes :</p>
+        <p> Jeu de données : {{ jdd.field('title') }}<br>
+		Identifiant INPN : {{ jdd.field('metadataId') }}<br>
+		Fichiers : {{ filename }}<br>
+		Organisme déposant : {{ jdd.provider.label }}<br>
+		Nom du déposant : {{ jdd.user.username }} </p>
+
+        <p>Ce dépôt a eu lieu dans le cadre de la procédure suivante : </p>
+        
+		<p>Procédure : [Titre procédure issu de TPS]<br>
+		N° TPS : [ID TPS]<br>
+		Commanditaire de l'étude : [Organisme Petitionnaire]<br>
+		Lien : [Lien vers la procédure dans TPS ]</p>
+
+        <p>Le jeu de données a été publié sur la plateforme de Dépôt Légal des Données Brutes de Biodiversité et transmis à la plateforme nationale du SINP qui va procéder à son intégration dans l’INPN.</p>
+		
+		<p>Vous devez maintenant reporter dans la procédure TPS (lien) l'URL suivante, à laquelle vous trouverez le certificat de dépôt : [URL_A_PRECISER].</p>
+		</p>
+        <p>Bien cordialement,</p>
+        
+        <p>_La plateforme Dépôt Légal de données brutes de biodiversité_</p>
+
+    {% endautoescape %}
+{% endblock -%}
