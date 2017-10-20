@@ -10,13 +10,12 @@
         {{ configurationManager.getConfig('site_name', 'GINCO') }}
     {% endblock %}</title>
     <meta name="description" content="{% block description %}{% endblock %}" />
-    <link rel="icon" type="image/x-icon" href="{{ absolute_url(asset('favicon.ico')) }}" />
 
     {% block stylesheets %}
         {% stylesheets
         '@bootstrap_css'
         filter='cssrewrite, yui_css' %}
-        <link rel="stylesheet" href="{{ absolute_url(asset_url) }}" />
+        <link rel="stylesheet" href="{{ configurationManager.getConfig('site_url', '') ~ asset_url }}" />
         {% endstylesheets %}
     {% endblock %}
 </head>
@@ -29,10 +28,8 @@
             <div class="row">
                 <div class="col-xs-7">
                     <div id="header-logo">
-
-                        <img src="{{ absolute_url(asset('img/logo-mtes.jpg')) }}" alt="logo mtes">
-       					<img src="{{ absolute_url(asset('img/logo-sinp.png')) }}" alt="logo sinp">
-
+                        <img src="{{ configurationManager.getConfig('site_url', '') ~ asset('img/logo-mtes.jpg') }}" alt="logo mtes">
+       					<img src="{{ configurationManager.getConfig('site_url', '') ~ asset('img/logo-sinp.png') }}" alt="logo sinp">
                     </div>
                 </div>
                 <div class="col-xs-4 text-right h1 header-title">
@@ -49,27 +46,6 @@
         {% block body %}{% endblock %}
     </main>
 </div>
-
-{% block javascripts %}
-    {% javascripts
-    '@jquery_and_bootstrap'
-     %}
-    <script type="text/javascript" src="{{ absolute_url(asset_url) }}"></script>
-    
-    {% if app.environment == 'prod' %}
-		<script src="{{ absolute_url(asset('bundles/ignogamconfigurateur/js/fos_js_routes.js')) }}"></script>
-	{% else %}
-		<script src="{{ absolute_url(asset('bundles/ignogamconfigurateur/js/fos_js_routes_dev.js')) }}"></script>
-	{% endif %}
-		
-	<script>
-		$(document).ready(function(){
-			$('[data-toggle="tooltip"]').tooltip();
-		});
-	</script>
-	{% endjavascripts %}
-{% endblock %}
-
 	{% block specificjavascripts %}
 	{% endblock %}
 </body>

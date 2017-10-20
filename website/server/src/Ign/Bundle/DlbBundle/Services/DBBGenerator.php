@@ -156,7 +156,6 @@ class DBBGenerator {
 				'statutsource',
 				'statutobservation',
 				'nomcite',
-				'nomvalide',
 				'cdnom',
 				'cdref',
 				'jourdatedebut',
