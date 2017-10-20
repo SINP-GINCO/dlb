@@ -19,20 +19,20 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
  * @author AMouget
  */
 class DBBController extends Controller {
-	
+
 	/**
 	 * DLB generation action
 	 * Publish a RabbitMQ message to generate the DLB in background
 	 * Include generation of dbb, metadatas, certificate and dee
 	 *
-	 * @param Request $request
+	 * @param Request $request        	
 	 * @return JsonResponse GET parameter: jddId, the Jdd identifier
-	 *
+	 *        
 	 *         @Route("/generate_dlb", name = "generate_dlb")
 	 */
 	public function generateDLB(Request $request) {
 		$em = $this->get('doctrine.orm.entity_manager');
-	
+		
 		// Find jddId if given in GET parameters
 		$jddId = intval($request->query->get('jddId', 0));
 		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
@@ -42,32 +42,32 @@ class DBBController extends Controller {
 				'message' => 'No jdd found for this id: ' . $jddId
 			]);
 		}
-	
+		
 		$dbbProcess = $this->get('dlb.dbb_process');
 		$deeProcess = $this->get('ginco.dee_process');
-	
+		
 		// Create a line in the DEE table
 		$newDEE = $deeProcess->createDEELine($jdd, $this->getUser(), 'Dépôt Légal de données de Biodiversité');
-	
+		
 		// Add information in jddField table
 		$jdd->setField('status', 'generating');
 		$now = new \DateTime();
 		$jdd->setField('publishedAt', $now->format('Y-m-d_H-i-s'));
 		$em->flush();
-	
+		
 		// Publish the message to RabbitMQ
 		$messageId = $this->get('old_sound_rabbit_mq.ginco_generic_producer')->publish('dbbProcess', [
 			'DEEId' => $newDEE->getId()
 		]);
 		$message = $em->getRepository('IgnGincoBundle:Website\Message')->findOneById($messageId);
-	
+		
 		// Attach message id to the DEE (use it for the progress bar)
 		$newDEE->setMessage($message);
 		$em->flush();
-	
+		
 		return new JsonResponse($this->getStatus($jddId));
 	}
-	
+
 	/**
 	 * Direct generation of DLB (dbb, metadatas, certificate, dee) for testing
 	 *
@@ -117,6 +117,21 @@ class DBBController extends Controller {
 		$this->get('dlb.certificate_generator')->generateCertificate($jdd);
 		
 		return $this->redirect($this->generateUrl('integration_home'));
+	}
+
+	/**
+	 * Save PDF Certificate for testing
+	 *
+	 * @Route("/{jddId}/generate_certificate_twig", name="generate_certificate_twig", requirements={"jddId": "\d+"})
+	 */
+	public function pdftwigSaveAction($jddId) {
+		$em = $this->get('doctrine.orm.entity_manager');
+		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
+		
+		return $this->render('IgnDlbBundle:Jdd:certificate_pdf.html.twig', array(
+			'jdd' => $jdd,
+			'jddCAMetadataFileDownloadServiceURL' => 'dsf'
+		));
 	}
 
 	/**
@@ -218,12 +233,12 @@ class DBBController extends Controller {
 		$response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $fileName);
 		return $response;
 	}
-	
+
 	/**
 	 * Download a file
 	 * Note: direct downloading is prohibited by apache configuration, except for a list of IPs
 	 *
-	 * @param string $file
+	 * @param string $file        	
 	 * @return BinaryFileResponse
 	 * @throws Exception
 	 *
@@ -232,9 +247,9 @@ class DBBController extends Controller {
 		if (!is_file($filePath)) {
 			throw new \Exception("file does not exist: " . $filePath);
 		}
-	
+		
 		$fileName = pathinfo($filePath, PATHINFO_BASENAME);
-	
+		
 		// -- Get back the file
 		$response = new BinaryFileResponse($filePath);
 		$response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $fileName);
