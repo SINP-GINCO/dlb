@@ -49,12 +49,11 @@ class CertificateGenerator {
 		$fileName = 'certificat-de-depot-legal-' . $jdd->getField('publishedAt') . '-' . $jdd->getField('metadataId') . '.pdf';
 		
 		// The certificate is generated only once
-		if (file_exists($fileName)) {
-			throw new \Exception("Error: le fichier: $fileName existe déjà.");
-		} else {
+		if (!file_exists($fileName)) {
 			// Get frame of aquisition metadata URL from jdd metadata URL
 			$jddMetadataFileDownloadServiceURL = $this->configuration->getConfig('jddMetadataFileDownloadServiceURL');
 			$jddCAMetadataFileDownloadServiceURL = str_replace("cadre/jdd", "cadre", $jddMetadataFileDownloadServiceURL);
+
 			
 			$this->knp_snappy->generateFromHtml($this->templating->render('IgnDlbBundle:Jdd:certificate_pdf.html.twig', array(
 				'jdd' => $jdd,
