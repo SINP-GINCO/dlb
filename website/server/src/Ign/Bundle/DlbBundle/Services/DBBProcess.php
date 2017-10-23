@@ -129,9 +129,6 @@ class DBBProcess {
 			/* Generate DBB CSV */
 			$csvFile = $this->DBBGenerator->generateDBB($DEE);
 			
-			/* Generate Certificate */
-			$certificateFile = $this->CertificateGenerator->generateCertificate($jdd);
-			
 			/* Get metadatas */
 			$dbbPublicDirectory = $this->configuration->getConfig('dbbPublicDirectory');
 			$metadataId = $jdd->getField('metadataId');
@@ -145,6 +142,9 @@ class DBBProcess {
 			
 			$this->MetadataDownloader->saveXmlFile($jddMetadataFile, $dbbPublicDirectory . '/' . $jdd->getId() . '/' . $metadataId);
 			$this->MetadataDownloader->saveXmlFile($caMetadataFile, $dbbPublicDirectory . '/' . $jdd->getId() . '/' . $metadataCAId);
+			
+			/* Generate Certificate */
+			$certificateFile = $this->CertificateGenerator->generateCertificate($jdd);
 			
 			/* Zip files */
 			$fileNameDBB = $this->DBBGenerator->generateFilePathDBB($jdd);
@@ -169,6 +169,9 @@ class DBBProcess {
 			
 			/* Send mail to user */
 			$this->sendDBBNotificationMail($DEE, $submissions);
+			
+			/* Send mail to MNHN */
+			$this->DEEProcess->sendDEENotificationMail($DEE, false);
 		}
 	}
 
