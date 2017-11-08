@@ -10,6 +10,12 @@
     {% set isAllowedMDOP = false %}
 {% endif %}
 
+{% if user is not null and user.isAllowed('CANCEL_DATASET_PUBLICATION') %}
+    {% set isAllowedCancelDatasetPublication = true %}
+{% else %}
+    {% set isAllowedCancelDatasetPublication = false %}
+{% endif %}
+
 {% if allJdds %}
 	<h1>{{ 'Jdd.list.all.title'|trans }}</h1>
 {% else %}
@@ -119,6 +125,13 @@
                                 </div>
                             </div>
                         </div>
+                    {% endif %}
+
+                    {# Cancel JDD Publication #}
+                    {% if isAllowedCancelDatasetPublication and (jdd.field('publishedAt') is not empty) %}
+                        <a class="btn btn-xs btn-warning" title="{{ 'Dépublier (annuler le dépôt) le JDD'|trans }}" href="{{ path('unpublish_dlb', { 'id': jdd.id }) }}">
+                            <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+                        </a>
                     {% endif %}
                 </td>
 

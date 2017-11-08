@@ -205,4 +205,43 @@ class DBBProcess {
 		// Send mail notification to user
 		$this->mailManager->sendEmail('IgnDlbBundle:Emails:DBB-notification-to-user.html.twig', $parameters, $user->getEmail());
 	}
+
+
+	/**
+	 * Unpublish the JDD, ie reverse all steps done during generateAndSendDBB
+	 * This functionnality is normally reserved to developpers
+	 *
+	 * @param Jdd $jdd
+	 */
+	public function unpublishJdd(Jdd $jdd) {
+		if ($jdd->hasField('status') && $jdd->getField('status') == 'published') {
+
+			// Delete files created for DBB process
+			@unlink($jdd->getField('dbbZipFilePath'));
+			@unlink($jdd->getField('certificateFilePath'));
+			@unlink($jdd->getField('dbbFilePath'));
+
+			// Delete Jdd Fields created in the process of publication
+			$jdd->removeField('status');
+			$jdd->removeField('publishedAt');
+			$jdd->removeField('dbbZipFilePath');
+			$jdd->removeField('certificateFilePath');
+			$jdd->removeField('dbbFilePath');
+
+			$this->em->persist($jdd);
+			$this->em->flush();
+
+			// Delete DEE (in table, and file)
+			$deeRepo = $this->em->getRepository('IgnGincoBundle:RawData\DEE');
+			$lastDEE = $deeRepo->findLastVersionByJdd($jdd);
+			$this->DEEProcess->deleteDEELineAndFiles($lastDEE->getId());
+
+			// Unpublish all submissions for this jdd
+			$submissions = $jdd->getValidatedSubmissions();
+			foreach ($submissions as $submission) {
+				$this->integration->invalidateDataSubmission($submission->getId());
+			}
+
+		}
+	}
 }

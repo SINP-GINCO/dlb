@@ -86,6 +86,25 @@ class DBBController extends Controller {
 	}
 
 	/**
+	 * Undo generation of DLB and unpublish JDD
+	 * (for testing)
+	 *
+	 * @Route("/{id}/unpublish", name = "unpublish_dlb", requirements={"id": "\d+"})
+	 */
+	public function undoDLBAction(Jdd $jdd) {
+		if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+			throw $this->createAccessDeniedException();
+		}
+		if (!$this->getUser()->isAllowed('CANCEL_DATASET_PUBLICATION')) {
+			throw $this->createAccessDeniedException();
+		}
+
+		$dbbProcess = $this->get('dlb.dbb_process');
+		$dbbProcess->unpublishJdd($jdd);
+		return $this->redirect($this->generateUrl('integration_home'));
+	}
+
+	/**
 	 * Direct generation of DBB for testing
 	 *
 	 * @Route("/{jddId}/generate_dbb", name = "generate_dbb", requirements={"jddId": "\d+"})
