@@ -26,4 +26,16 @@ DBB:
     running: Génération en cours...
     pending: Génération en attente...
     finishing: Préparation des fichiers...
-Jdd.list.submissions: Import de Données Brutes de Biodiversité
+Jdd:
+  list.submissions: Import de Données Brutes de Biodiversité
+  new:
+    modelUnpublished: Publiez le modèle d'import pour pouvoir créer un jeu de données.
+    tpsId: Identifiant TPS
+    jddId: Jeu de données
+    noJddAvailable: Merci de rentrer un numéro TPS valide pour pouvoir choisir un jeu de données.
+    tpsIdError: <div><div class="col-sm-4"></div><div class="col-sm-4">Pas de fiche MTD pour ce n°TPS.</div></div>
+    tpsIdInit: |-
+     <p>Le numéro TPS est l'identifiant qui a été attribué à votre procédure par l'application TPS.</p>
+     <p>Vous devez avoir déjà créé une métadonnée de cadre dacquisition dans <a href="%metadataUrl%" target='_blank'>l'application de métadonnées de l'INPN</a>, pour ce numéro TPS.</p>
+    tpsIdInfo: <div><label class="col-sm-4 control-label">Procédure</label> <div class="col-sm-4"> %title% </div></div>
+        

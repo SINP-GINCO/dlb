@@ -36,6 +36,7 @@ $config = loadPropertiesFromArgs();
 try {
 	/* patch code here */
 	execCustSQLFile("$currentDir/add_cancel_jdd_publication_permission.sql", $config);
+	execCustSQLFile("$currentDir/add_tps_id_field.sql", $config);
 } catch (Exception $e) {
 	echo "$currentDir/update_dlb.php\n";
 	echo "exception: " . $e->getMessage() . "\n";

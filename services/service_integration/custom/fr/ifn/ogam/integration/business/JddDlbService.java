@@ -25,8 +25,26 @@ import static fr.ifn.ogam.common.business.UnitTypes.*;
  */
 public class JddDlbService extends JddService implements IntegrationEventListener {
 
+	/***
+	 * The logger used to log the errors or several information.**
+	 *
+	 * @see org.apache.log4j.Logger
+	 */
+	private final transient Logger logger = Logger.getLogger(this.getClass());
+	
 	/**
-	 * Event called before the integration of a submission of data. Get the metadataId from submissionId
+	 * The DAO
+	 */
+	private JddDAO jddDAO = new JddDAO();
+	
+	/**
+	 * The metadata Id
+	 */
+	private Integer tpsId;
+	
+	/**
+	 * Event called before the integration of a submission of data.
+	 * Get the tpsId from submissionId
 	 *
 	 * @param submissionId
 	 *            the submission identifier
@@ -35,7 +53,9 @@ public class JddDlbService extends JddService implements IntegrationEventListene
 	 */
 	public void beforeIntegration(Integer submissionId) throws Exception {
 		super.beforeIntegration(submissionId);
-		// DO NOTHING ELSE FOR NOW
+		// todo
+		logger.debug("JddService get tpsId");
+		tpsId = jddDAO.getTpsId(submissionId);
 
 	}
 
@@ -53,7 +73,7 @@ public class JddDlbService extends JddService implements IntegrationEventListene
 	}
 
 	/**
-	 * Event called before each insertion of a line of data. Add or Update the field 'jddmetadonneedeeid' for the data in the Java map given.
+	 * Event called before each insertion of a line of data. Add or Update the field 'tpsid' for the data in the Java map given.
 	 * 
 	 * @param submissionId
 	 *            the submission identifier
@@ -64,7 +84,21 @@ public class JddDlbService extends JddService implements IntegrationEventListene
 	 */
 	public void beforeLineInsertion(Integer submissionId, Map<String, GenericData> values) throws Exception, CheckException {
 		super.beforeLineInsertion(submissionId, values);
-		// DO NOTHING ELSE FOR NOW
+		logger.debug("JddDlbService insert tpsId in data");
+
+		GenericData tpsIdGD = new GenericData();
+		tpsIdGD.setColumnName(DSRConstants.TPS_ID);
+		tpsIdGD.setType("INTEGER");
+		// Set the format
+		for (GenericData gd : values.values()) {
+			if (gd.getFormat() != null) {
+				tpsIdGD.setFormat(gd.getFormat());
+				break;
+			}
+		}
+		tpsIdGD.setValue(tpsId);
+
+		values.put(DSRConstants.TPS_ID, tpsIdGD);
 	}
 
 	/**

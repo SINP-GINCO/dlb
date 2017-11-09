@@ -1,0 +1,76 @@
+/**============================================
+ * Scripts for tps form handling with Ajax.
+ * @author Anna Mouget
+ *=============================================*/
+ 
+var $tpsInputField = $('#dlb_jdd_tps_id');  
+var $submitField = $('#dlb_jdd_submit');
+
+// Disable submit button and jdd field
+$submitField.prop('disabled', true);
+
+var invalidTPS = "{{ 'Jdd.new.noJddAvailable'|trans }}";
+				
+// Update form at loading in case data has been passed by the URL
+// As not mapped form fields (tps_id) cannot be pre_set
+update_form();
+
+
+// Update form when tps_id is modified by the user
+$tpsInputField.change(function() {
+ update_form();
+});
+
+
+function update_form() {
+console.log('update form');
+	var data = {};
+	// Send user input data to the form
+	data[$tpsInputField.attr('name')] = $tpsInputField.val();
+	// Submit data via AJAX
+	var path = "{{ path('jdd_new') }}";
+	$.ajax({
+		url: path,
+		type: "post",
+		data : data,
+		success: function(html) {
+			// Replace current jdd_id field ...
+			$('#dlb_jdd_jdd_id').replaceWith(
+				// ... with the returned one (updated by the sf2 form) from the AJAX response.
+				$(html).find('#dlb_jdd_jdd_id')
+			);
+			
+			// Update manually checked jdd (problem doing it with the form)
+			var urlSelectedJddId = "{{ idjdd | raw }}";
+			$(document).find('input[value="'+urlSelectedJddId+'"]').each(function(){
+				$(this).attr('checked', 'checked');
+			});
+			
+			//Print radio button labels correctly
+			$('#dlb_jdd_jdd_id .radio label').removeClass("required");
+			$('#dlb_jdd_jdd_id .radio label').each(function(i, obj) {
+    			$(obj).html($(obj).html().replace("|","<br>"));
+			});
+
+			// If there is at least one jdd_id, print the submit button
+			if (typeof document.getElementById("dlb_jdd_jdd_id").getElementsByClassName("radio")[0] === 'undefined') {
+				$submitField.prop('disabled', true);
+				$('#dlb_jdd_jdd_id').replaceWith(
+					"<p id='dlb_jdd_jdd_id'>" + invalidTPS + "</p>"
+				);
+			} else {
+				$submitField.prop('disabled', false);
+			}
+			// Print input tpsId description
+			$('#tpsDescription').replaceWith(
+				$(html).find('#tpsDescription')
+			);
+
+		},
+		error : function(resultat, statut, erreur){
+			console.log(resultat);
+			console.log(statut);
+			console.log(erreur);
+		}
+	});
+}

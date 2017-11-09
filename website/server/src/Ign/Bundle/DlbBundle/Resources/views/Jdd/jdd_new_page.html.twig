@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+{% form_theme form 'form.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'Jdd.new.title'|trans }}</h1>
+
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    
+	<div style="display: none">
+ 	   {{ form_widget(form.model) }}
+	</div>
+ 	   {{ form_errors(form.model) }}
+	
+    <div class="form-group {% if form.tps_id.vars.errors|length %}has-error{% endif %} }}">
+        {{ form_label(form.tps_id) }}
+        <div class="col-sm-4">
+        	<div class="row">
+            	<div class="col-sm-9">
+            		{{ form_widget(form.tps_id) }}
+            	</div>
+           		<div class="col-sm-1">
+            		<button type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            	</div>
+            </div>
+            <div>
+                   {{ 'Jdd.new.tpsIdInit'|trans({
+                        '%metadataUrl%': metadataUrl,
+                    })|raw }}
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+            <div id="tpsDescription">
+            	{{ tpsDescription|raw }}
+            </div>
+    </div>
+	{{ form_row(form.jdd_id) }}
+    {{ form_end(form) }}
+{{ form(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        {% include '@IgnDlb/Jdd/tps_jdd.js.twig' %}
+    </script>
+{% endblock %}
