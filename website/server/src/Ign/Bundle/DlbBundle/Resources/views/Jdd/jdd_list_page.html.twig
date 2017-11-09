@@ -128,7 +128,7 @@
                     {% endif %}
 
                     {# Cancel JDD Publication #}
-                    {% if isAllowedCancelDatasetPublication and (jdd.field('publishedAt') is not empty) %}
+                    {% if isAllowedCancelDatasetPublication and (jdd.field('status') is not empty) and (jdd.field('status') == 'published') %}
                         <a class="btn btn-xs btn-warning" title="{{ 'Dépublier (annuler le dépôt) le JDD'|trans }}" href="{{ path('unpublish_dlb', { 'id': jdd.id }) }}">
                             <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
                         </a>

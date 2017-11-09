@@ -158,7 +158,7 @@ class DBBProcess {
 			}
 			
 			// Delete csv file
-			unlink($csvFile);
+			@unlink($csvFile);
 			
 			/* Add publication informations */
 			$now = new \DateTime();
