@@ -90,7 +90,7 @@ class JddController extends BaseController {
 		// Pre-fill form if parameters are passed in the query
 		$jddId = null;
 		if (null !== $request->query->get('idjdd')) {
-			$idjdd = $request->query->get('idjdd');
+			$jddId = $request->query->get('idjdd');
 			$this->get('logger')->debug('idjdd from URL : ' . $jddId);
 			try {
 				// Get ca_id from jdd metadata
