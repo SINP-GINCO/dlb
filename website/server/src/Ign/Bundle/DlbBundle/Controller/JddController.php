@@ -64,6 +64,8 @@ class JddController extends BaseController {
 					// Get info on tps from CA metadata
 					$metadataTpsFields = $this->get('dlb.metadata_tps_reader')->getTpsMetadata($tpsId);
 					$tpsLibelle = $metadataTpsFields['libelle'];
+					$projetOwner = $metadataTpsFields['projetOwner'];
+					$projetManager = $metadataTpsFields['projetManager'];
 					// Stock info to display
 					$tpsDescription = $this->get('translator')->trans('Jdd.new.tpsIdInfo', array(
 						'%title%' => $tpsLibelle
@@ -100,6 +102,8 @@ class JddController extends BaseController {
 				// Get tps_id from ca metadata
 				$metadataTpsFields = $this->get('dlb.metadata_tps_reader')->getTpsIdFromCaId($caId);
 				$tpsId = $metadataTpsFields['tpsId'];
+				$projetOwner = $metadataTpsFields['projetOwner'];
+				$projetManager = $metadataTpsFields['projetManager'];
 				
 				$form->get('tps_id')->setData($tpsId);
 				$form->get('jdd_id')->setData($jddId);
@@ -154,6 +158,8 @@ class JddController extends BaseController {
 				$attachedJdd->setField($key, $value);
 			}
 			$attachedJdd->setField('tpsId', $tpsId);
+			$attachedJdd->setField('projetOwner', $projetOwner);
+			$attachedJdd->setField('projetManager', $projetManager);
 			$attachedJdd->setField('caTitle', $tpsLibelle);
 			$em->flush();
 			
