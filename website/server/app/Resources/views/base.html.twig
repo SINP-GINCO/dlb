@@ -11,7 +11,6 @@
     {% endblock %}</title>
     <meta name="description" content="{% block description %}{% endblock %}" />
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    <link href="//fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
 
     {% block stylesheets %}
         {% stylesheets
@@ -86,11 +85,13 @@
 	} else if (/(Trident\/[7]{1,2})/i.test(navigator.userAgent)) {
 	    supported = true;
 	}
+
 	if (!supported) {
      	document.getElementById('browser-not-supported').style.display = 'block';
     }else {
      	document.getElementById('browser-not-supported').style.display = 'none';
     }
+
 	function masque_div () {
 		var el = document.getElementById("browser-not-supported");
 		el.parentNode.removeChild(el);
@@ -112,7 +113,7 @@
                                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ app.user.login }} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ path('user_changepassword') }}">{{ 'Change Password'|trans }}</a></li>
+                                <li><a href="{{ path('user_home') }}">{{ 'My account'|trans }}</a></li>
                                 <li><a href="{{ path('user_logout') }}">{{ 'Log out'|trans }}</a></li>
                             </ul>
                         </li>
@@ -140,10 +141,7 @@
         {% if block('breadcrumb') is defined and block('breadcrumb') is not empty %}
             {{ block('breadcrumb')|raw }}
         {% else %}
-        <h1>False</h1>
-        {% block breadcrumb %}
            {{ wo_render_breadcrumbs() }}
-        {% endblock %}
         {% endif %}
     </div>
 
@@ -177,7 +175,8 @@
                 <div class="col-xs-2">
                     <p><strong>A propos</strong></p>
                     <ul class="nav">
-                        <li><a href="https://ginco.ign.fr" target="_blank">{{ 'Ginco project'|trans }}</a></li>
+                        <li><a href="https://ginco.naturefrance.fr" target="_blank">{{ 'Ginco project'|trans }}</a></li>
+                        <li><a href="{{ path('presentation') }}">{{ 'Presentation.footer'|trans }}</a></li>
                     </ul>
                 </div>
                 <div class="col-xs-2">

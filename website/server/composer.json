@@ -18,7 +18,6 @@
 		"twig/extensions" : "~1.0",
 		"doctrine/orm" : "^2.4.8",
 		"doctrine/doctrine-bundle" : "~1.4",
-		"doctrine/inflector" : "1.1.*",
 		"symfony/assetic-bundle" : "^2.8",
 		"symfony/swiftmailer-bundle" : "~2.3",
 		"symfony/monolog-bundle" : "~2.11.3",
@@ -34,6 +33,8 @@
 		"components/jqueryui" : "^1.12",
 		"php-amqplib/rabbitmq-bundle" : "^1.12",
 		"phpunit/phpunit" : "5.1.*",
+		"egeloen/ckeditor-bundle": "^6.0",
+		"guzzlehttp/guzzle": "^6.3",
 		"knplabs/knp-snappy-bundle": "^1.5",
 		"h4cc/wkhtmltopdf-amd64": "^0.12.3"
 	},
@@ -58,7 +59,10 @@
 		]
 	},
 	"config" : {
-		"bin-dir" : "bin"
+		"bin-dir" : "bin",
+		"platform": {
+			"php" : "5.6"
+		}
 	},
 	"extra" : {
 		"symfony-app-dir" : "app",

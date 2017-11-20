@@ -21,6 +21,14 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 
+    # CAS authenticator
+    ginco.cas_authenticator:
+      class: Ign\Bundle\GincoBundle\Security\CasAuthenticator
+      arguments: ["@doctrine", "@ogam.configuration_manager", "@ginco.inpn_user_updater", "@logger"]
+
+    ginco.inpn_user_updater:
+      class: Ign\Bundle\GincoBundle\Services\INPNUserUpdater
+      arguments: ["@doctrine", "@ogam.configuration_manager", "@logger"]
 
     # Service used to encode a challenge for the user login
     ogam.challenge_response_encoder:
@@ -183,3 +191,16 @@ services:
     ginco.dee_process:
         class: Ign\Bundle\GincoBundle\Services\DEEGeneration\DEEProcess
         arguments: ["@doctrine.orm.entity_manager","@ogam.configuration_manager", "@ginco.dee_generator", "@app.mail_manager","@logger"]
+
+    # Forms
+    form.type.link_file:
+        class: Ign\Bundle\GincoBundle\Form\Components\LinkFileType
+        arguments: ['%kernel.root_dir%/../web/upload']
+        tags:
+            - { name: form.type }
+
+    form.type.image:
+        class: Ign\Bundle\GincoBundle\Form\Components\ImageType
+        arguments: ['%kernel.root_dir%/../web/upload']
+        tags:
+            - { name: form.type }
