@@ -14,11 +14,12 @@ git clone git@github.com:SINP-GINCO/dlb.git
 cp dlb/configs/localhost.properties.dist dlb/configs/localhost.properties
 vi dlb/configs/localhost.properties
 ```
-* Build the Ginco Postgres database and apply patches for dlb
+* Build the Ginco Postgres database
 ```bash
 php ginco/database/init/create_db.php -f dlb/configs/localhost.properties
-php dlb/database/apply_db_patch.php -f dlb/configs/localhost.properties
 ```
+* And apply patches for dlb
+`https://github.com/SINP-GINCO/dlb/tree/develop/database`
 
 * Manually populate *metadata.mode_taxref* table by executing the following script block by block in your Postgres client:
 ```bash
