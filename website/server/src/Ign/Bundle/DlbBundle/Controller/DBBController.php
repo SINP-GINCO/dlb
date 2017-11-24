@@ -339,30 +339,35 @@ class DBBController extends Controller {
 			// If yes, the DBB can be generated
 			$submissionCount = $jdd->getActiveSubmissions()->count();
 			$submissionSuccessfulCount = $jdd->getSuccessfulSubmissions()->count();
-			
+
 			$json['canGenerateDBB'] = ($submissionCount == $submissionSuccessfulCount && $submissionSuccessfulCount > 0);
-			
+
 			if (empty($jdd->getField('status'))) {
 				$json['dbb'] = array(
 					'status' => 'unpublished'
 				);
 			} else {
 				$createdDateTime = \DateTime::createFromFormat('Y-m-d_H-i-s', $jdd->getField('publishedAt'));
-				
+
 				$json['dbb'] = array(
 					'id' => $jdd->getId(),
 					'status' => $jdd->getField('status'),
-					'created' => $createdDateTime->format('d/m/Y H:i')
+					'createdDate' => $createdDateTime->format('d/m/Y'),
+					'createdTime' => $createdDateTime->format('H:i'),
+					'fullCreated' => $jdd->getField('publishedAt')
 				);
-				
+
 				if ($jdd->getField('status') == 'generating') {
 					$DEE = $em->getRepository('IgnGincoBundle:RawData\DEE')->findOneByJdd($jddId);
 					$message = $DEE->getMessage();
-					
+
 					if (!$message) {
 						$json['message'] = array(
 							'status' => Message::STATUS_NOTFOUND,
-							'error_message' => 'No message found for this dee'
+							'error_message' => 'No message found for this dee',
+							'createdDate' => '1970-01-01',
+							'createdTime' => '00:00',
+							'fullCreated' => date('c', mktime(0, 0, 0, 1, 1, 1970))
 						);
 					} else {
 						$json['message'] = array(

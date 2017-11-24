@@ -7,9 +7,11 @@ DBB:
   table:
     title: Dépôt légal
     state: Etat
+    depositDate: Déposé le
+    reports: Rapports
   create.title : Déposer les données
   status:
-    noDBB: Les données n'ont pas été transmises.
+    noDBB: Données non transmises.
     generating: Génération en cours...
     transmitted: Dépôt effectué
   download:
@@ -27,7 +29,10 @@ DBB:
     pending: Génération en attente...
     finishing: Préparation des fichiers...
 Jdd:
-  list.submissions: Import de Données Brutes de Biodiversité
+  list:
+    submissions: Import de Données Brutes de Biodiversité
+    procedure: Procédure
+    tpsNumber: n°TPS
   new:
     modelUnpublished: Publiez le modèle d'import pour pouvoir créer un jeu de données.
     tpsId: Identifiant TPS

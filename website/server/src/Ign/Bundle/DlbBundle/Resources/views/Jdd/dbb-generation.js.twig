@@ -123,7 +123,9 @@ function updateDBBData(jddId, data) {
         dbbDiv.data('dbb-status', data.dbb.status);
         if (data.dbb.status == 'published') {
             dbbDiv.data('dbb-id', data.dbb.id );
-            dbbDiv.data('dbb-created', data.dbb.created );
+            dbbDiv.data('dbb-created-date', data.dbb.createdDate );
+            dbbDiv.data('dbb-created-time', data.dbb.createdTime );
+            dbbDiv.data('dbb-created-datetime', data.dbb.fullCreated );
             dbbDiv.data('dbb-action', data.dbb.action );
         }
     } else {
@@ -199,14 +201,13 @@ function updateDBBContent(jddId) {
         contentDiv.html('');
         var content = $('<p></p>');
         contentDiv.append(content);
+        content.attr("data-full-date", dbbDiv.data('dbb-created-datetime'));
 
         if (dbbStatus == 'unpublished') {
             content.html("{{ 'DBB.status.noDBB'|trans }}");
         }
         else {
-            var action = "{{ 'DBB.status.transmitted'|trans }}";
-            content.html(action + ' le : ' + dbbDiv.data('dbb-created'));
-            
+            content.html(dbbDiv.data('dbb-created-date') + "<br/>" + dbbDiv.data('dbb-created-time'));
         }
     }
 
@@ -242,35 +243,33 @@ function updateDBBContent(jddId) {
     
     // Download link if DBB is published is available
     if (dbbStatus == 'published') {
-    // Link to download DBB CSV zipped
         var href = "{{ path('download_dbb', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
-        var downloadLink = $("<div><a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.CSV'|trans }}' href='" + href + "'> " +
-                "<span class='glyphicon glyphicon-leaf' aria-hidden='true'></span></a>Données brutes de biodiversité</div>");
-        actionsDiv.append(downloadLink);
-        
-    // Link to download certificate
+        // Link to download DBB CSV zipped
+        reports = "<a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.CSV'|trans }}' href='" + href + "'> " +
+                   "<span class='glyphicon glyphicon-leaf' aria-hidden='true'></span></a><br/>";
+
+        // Link to download certificate
         var href = "{{ path('download_certificate', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
-        var downloadLink = $("<div><a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.certificate'|trans }}' href='" + href + "'> " +
-                "<span class='glyphicon glyphicon-bookmark' aria-hidden='true'></span></a>Certificat de conformité</div>");
-        actionsDiv.append(downloadLink);
-          
-    // Link to download XML MTD CA 
+        reports += "<a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.certificate'|trans }}' href='" + href + "'> " +
+                "<span class='glyphicon glyphicon-bookmark' aria-hidden='true'></span></a><br/>";
+
+        // Link to download XML MTD CA
         var href = "{{ path('download_mtdca', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
-        var downloadLink = $("<div><a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.mtdca'|trans }}' href='" + href + "'> " +
-                "<span class='glyphicon glyphicon-unchecked' aria-hidden='true'></span></a>Métadonnée cadre d'acquisition</div>");
-        actionsDiv.append(downloadLink);
-        
-    // Link to download XML MTD JDD 
+        reports += "<a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.mtdca'|trans }}' href='" + href + "'> " +
+                "<span class='glyphicon glyphicon-unchecked' aria-hidden='true'></span></a><br/>";
+
+        // Link to download XML MTD JDD
         var href = "{{ path('download_mtdjdd', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
-        var downloadLink = $("<div><a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.mtd'|trans }}' href='" + href + "'> " +
-                "<span class='glyphicon glyphicon-align-justify' aria-hidden='true'></span></a>Métadonnée jeu de données</div>");
-        actionsDiv.append(downloadLink);
-        
-    // Link to download DEE zipped
+        reports += "<a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.mtd'|trans }}' href='" + href + "'> " +
+                "<span class='glyphicon glyphicon-align-justify' aria-hidden='true'></span></a><br/>";
+
+        // Link to download DEE zipped
         var href = "{{ path('download_dee_dlb', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
-        var downloadLink = $("<div><a role='button' class='btn btn-xs btn-primary' title='{{ 'DEE.download'|trans }}' href='" + href + "'> " +
-                "<span class='glyphicon glyphicon-tree-deciduous' aria-hidden='true'></span></a>DEE</div>");
-        actionsDiv.append(downloadLink);
+        reports += "<a role='button' class='btn btn-xs btn-primary' title='{{ 'DEE.download'|trans }}' href='" + href + "'> " +
+                "<span class='glyphicon glyphicon-tree-deciduous' aria-hidden='true'></span></a><br/>";
+
+        reports += "</ul></div>";
+        actionsDiv.append(reports);
     }
 }
 
@@ -292,12 +291,39 @@ function generateDBB(jddId, comment) {
 
 var DBBtimerId;
 
-$(function(){
+/**
+ * Main function to update table
+ */
+function update() {
     $('.dbb').each(function() {
         var $jddId = $(this).attr('data-jdd-id');
         updateDBBDataAndContent($jddId);
     });
 
-    // Periodically update progress for running and pending jobs (every second)
+    // Periodically update progress for running and pending jobs
+    if(DBBtimerId != null){
+        clearInterval(DBBtimerId);
+    }
     DBBtimerId = setInterval(updateAllDBBGeneratingTasks , 1000);
+}
+
+$(function() {
+    // Added to avoid disappearing of DBB transmission status and action buttons
+    $('#jddTable').on('reset-view.bs.table', function () {
+        update();
+    });
+    update();
 });
+
+
+{# var DBBtimerId;#}
+
+{# $(function(){#}
+{#     $('.dbb').each(function() {#}
+{#         var $jddId = $(this).attr('data-jdd-id');#}
+{#         updateDBBDataAndContent($jddId);#}
+{#     });#}
+
+{#     // Periodically update progress for running and pending jobs (every second)#}
+{#     DBBtimerId = setInterval(updateAllDBBGeneratingTasks , 1000);#}
+{# });#}
