@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 /**
- * @Route("/jdd")
+ * @Route("/")
  */
 class JddController extends BaseController {
 
@@ -24,7 +24,7 @@ class JddController extends BaseController {
 	 * Dlb customisation: hide model field, add tps_id field, add jdd_id field dynamicaly
 	 * Checks, via a service, the xml file on metadata platform, and fills jdd fields with metadata fields
 	 *
-	 * @Route("/new", name = "jdd_new")
+	 * @Route("/jdd/new", name = "jdd_new")
 	 */
 	public function newAction(Request $request) {
 		
@@ -174,6 +174,75 @@ class JddController extends BaseController {
 			'tpsDescription' => $tpsDescription,
 			'metadataUrl' => $metadataServiceUrl,
 			'idjdd' => $jddId
+		));
+	}
+	
+	/**
+	 * Show the published jdd list page
+	 *
+	 * @Route("/published-jdds/", name = "published_jdds")
+	 */
+	public function listPublishedAction() {
+		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
+		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS')) {
+			throw $this->createAccessDeniedException();
+		}
+		
+		$em = $this->get('doctrine.orm.raw_data_entity_manager');
+
+		$jddList = $em->getRepository('OGAMBundle:RawData\Jdd')->findByField(array(
+			'status' => 'published'
+		), array(
+			'id' => 'DESC'
+		));
+		
+		$deeRepo = $em->getRepository('IgnGincoBundle:RawData\DEE');
+		foreach ($jddList as $jdd) {
+			// Add DEE information
+			$jdd->dee = $deeRepo->findLastVersionByJdd($jdd);
+		}
+		
+		return $this->render('OGAMBundle:Jdd:jdd_published_list_page.html.twig', array(
+			'jddList' => $jddList,
+			'user' => $this->getUser()
+		));		
+	}
+	
+	/**
+	 * Show the published jdd list page for a tpsId
+	 *
+	 * @Route("/published-jdds/{tpsId}", name = "published_jdds_by_tps", requirements={"tpsId": "\d+"})
+	 */
+	public function listPublishedByTpsIdAction($tpsId) {
+		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
+		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS')) {
+			throw $this->createAccessDeniedException();
+		}
+		
+		$em = $this->get('doctrine.orm.raw_data_entity_manager');
+
+		$jddListPublished = $em->getRepository('OGAMBundle:RawData\Jdd')->findByField(array(
+			'status' => 'published'
+		), array(
+			'id' => 'DESC'
+		));
+		$jddListByTpsId = $em->getRepository('OGAMBundle:RawData\Jdd')->findByField(array(
+			'tpsId' => $tpsId
+		), array(
+			'id' => 'DESC'
+		));
+		$jddList = array_uintersect($jddListPublished, $jddListByTpsId, function ($jdd1, $jdd2) { return $jdd1 == $jdd2; });
+	
+		$deeRepo = $em->getRepository('IgnGincoBundle:RawData\DEE');
+		foreach ($jddList as $jdd) {
+			// Add DEE information
+			$jdd->dee = $deeRepo->findLastVersionByJdd($jdd);
+		}
+	
+		return $this->render('OGAMBundle:Jdd:jdd_published_by_tpsid_list_page.html.twig', array(
+			'jddList' => $jddList,
+			'user' => $this->getUser(),
+			'tpsId' => $tpsId
 		));
 	}
 }

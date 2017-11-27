@@ -1,0 +1,161 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+{% set user = app.user %}
+
+{# Set variables #}
+{% if user is not null and user.isAllowed('CANCEL_DATASET_PUBLICATION') %}
+    {% set isAllowedCancelDatasetPublication = true %}
+{% else %}
+    {% set isAllowedCancelDatasetPublication = false %}
+{% endif %}
+
+{# Size of columns array and filename max size #}
+
+    {% set colSizes = {
+        jddActions: 8,
+        tpsId: 16,
+        jddTitleId: 48,
+        creationDate: 18,
+        providerUser: 56,
+        deeDepositDate: 22,
+        deeReports: 8} %}
+
+{# Title of the page #}
+<h1>{{ 'Jdd.list.published.title'|trans }}</h1>
+
+<!-- Show the currently active jdd -->
+{% if jddList is not empty %}
+
+    <!-- Show the currently active location submissions -->
+    <table  id="jddTable" data-toggle="table"
+            data-click-to-select="true" data-search="true" data-search-align="right"
+            data-classes="table table-hover table-bordered jdd-table"
+            data-locale="fr-FR" data-pagination="true" data-page-size="10" data-page-list="[10, 20, 50, 100]" data-advanced-search="true" data-id-table="advancedTable">
+        {# TPS group #}
+        <colgroup>
+            {# TPS id column #}
+            <col style="width: {{ colSizes.tpsId }}%;"/>
+            {# caTitle/caId column #}
+            <col style="width: {{ colSizes.jddTitleId }}%;"/>
+        </colgroup>
+        {# Jdd group #}
+        <colgroup>
+            {# Title/Id column #}
+            <col style="width: {{ colSizes.jddTitleId }}%;"/>
+            {# Creation date column #}
+            <col style="width: {{ colSizes.creationDate }}%;"/>
+            {# Provider / User column #}
+            <col style="width: {{ colSizes.providerUser }}%;"/>
+        </colgroup>
+        {# DBB group #}
+        <colgroup>
+            {# Date column #}
+            <col style="width: {{ colSizes.deeDepositDate }}%;"/>
+            {# Actions column #}
+            <col style="width: {{ colSizes.deeReports }}%;"/>
+        </colgroup>
+        <thead>
+            <tr>
+            	<th colspan="2" class="text-center color1">{{ 'Jdd.list.procedure'|trans }}</th>
+                <th colspan="3" class="text-center color1">{{ 'Jdd.list.jdd'|trans }}</th>
+				<th colspan="3" class="text-center color1">{{ 'DBB.table.title'|trans }}</th>
+            </tr>
+            <tr>
+                <th data-field="tpsNumber" data-sortable="true" class="color1">{{ 'Jdd.list.tpsNumber'|trans }}</th>
+                <th data-field="titleAndId" data-sortable="true" data-sorter="tpsTitleIdSorter" class="color1">{{ 'Jdd.list.titleAndId'|trans }}</th>
+                <th data-field="nameAndId" data-sortable="true" data-sorter="jddTitleIdSorter" class="color1">{{ 'Jdd.list.nameAndId'|trans }}</th>
+                <th data-field="createdOn" data-sortable="true" data-sorter="createdOnSorter" class="color1">{{ 'Jdd.list.createdOn'|trans }}</th>
+				<th data-field="providerAndUser" data-searchable="true" data-sortable="true" class="color1">{{ 'Jdd.list.providerAndUser'|trans }}</th>
+                <th data-field="deeCreationDate" data-searchable="true" data-sort-name="sentOnDate" data-sortable="true" data-sorter="sentOnSorter" class="color1">{{ 'DBB.table.depositDate'|trans }}</th>
+                <th data-field="sentOnDate" data-visible="false" data-searchable="false"></th>
+                <th data-searchable="false" class="color1"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for jdd in jddList %}
+            <tr>
+                {# TPS number #}
+                <td>
+                    {# View #}
+                    <a  data-title="{{ jdd.field('tpsId') }}" title="{{ 'Jdd.list.tps'|trans }}" href="{{ path('published_jdds_by_tps', { 'tpsId': jdd.field('tpsId') }) }}">
+                        {{ jdd.field('tpsId') }}
+                    </a>
+
+                    {# Cancel JDD Publication #}
+                    {% if isAllowedCancelDatasetPublication and (jdd.field('status') is not empty) and (jdd.field('status') == 'published') %}
+                        <a class="btn btn-xs btn-warning" title="{{ 'Dépublier (annuler le dépôt) le JDD'|trans }}" href="{{ path('unpublish_dlb', { 'id': jdd.id }) }}">
+                            <span class="glyphicon glyphicon-stop" aria-hidden="true"></span>
+                        </a>
+                    {% endif %}
+                </td>
+                                
+                {# Title and metadata id of the tps #}
+                <td>
+                    <p>{{ jdd.field('caTitle') }}</p>
+                    <span class="text-muted longtext">{{ jdd.field('metadataCAId') }}</span>
+                </td>
+
+                {# Title and metadata id of the jdd #}
+                <td>
+                    <a data-title="{{ jdd.field('title') }}" title="{{ 'Jdd.list.view'|trans }}" href="{{ path('jdd_show', { 'id': jdd.id }) }}">{{ jdd.field('title') }}</a>
+                    <br/>
+                    <span class="text-muted longtext">{{ jdd.field('metadataId') }}</span>
+                </td>
+
+                {# Creation date of the jdd #}
+                <td>
+                    <p data-full-date={{ jdd.createdAt|date('c') }}>{{ jdd.createdAt|date('d/m/Y') }}<br/>{{ jdd.createdAt|date('H\\hi') }}</p>
+                </td>
+
+                {# Provider label and username of the jdd #}
+                <td>
+                   <p>{{ jdd.provider.label }}</p>
+                   <p>{{ jdd.user.username }}</p>
+                </td>
+
+                {# DBB Column - Empty / filled by Ajax #}
+                    <td>
+                        <div class="dbb" data-jdd-id="{{ jdd.id }}">
+                            <div class="dbb-state">
+                                <div class="progress-label hidden"></div>
+                                <div class="progress hidden">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                            0%
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dbb-content"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        {{ jdd.field('publishedAt') ? jdd.field('publishedAt')|replace({'_':' ', '-':':'})|date('Y-m-d H:i:s') : '1970-01-01 00:00:00' }}
+                    </td>
+                    <td>
+                        <div class="dbb" data-jdd-id="{{ jdd.id }}">
+                            <div class="dbb-actions text-center"></div>
+                        </div>
+                    </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+    <p>{% trans %}Jdd.none{% endtrans %}</p>
+{% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        {% include '@IgnGinco/Integration/integration-progress-bars.js.twig' %}
+        {% include '@IgnGinco/Integration/integration-cancel.js.twig' %}
+        {% include '@IgnGinco/Jdd/dee-generation.js.twig' %}
+        {% include '@IgnGinco/Jdd/dbb-generation.js.twig' %}
+        {% include '@IgnGinco/Jdd/dee-column-sorters.js.twig' %}
+    </script>
+{% endblock %}

@@ -1,6 +1,7 @@
 <?php
 namespace Ign\Bundle\DlbBundle\Controller;
 
+use Ign\Bundle\OGAMBundle\Controller\GincoController;
 use Ign\Bundle\GincoBundle\Entity\RawData\DEE;
 use Ign\Bundle\GincoBundle\Entity\Website\Message;
 use Ign\Bundle\GincoBundle\Exception\DEEException;
@@ -14,11 +15,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 /**
- * @Route("/dlb")
+ * @Route("/")
  *
  * @author AMouget
  */
-class DBBController extends Controller {
+class DBBController extends GincoController {
 
 	/**
 	 * DLB generation action
@@ -28,7 +29,7 @@ class DBBController extends Controller {
 	 * @param Request $request        	
 	 * @return JsonResponse GET parameter: jddId, the Jdd identifier
 	 *        
-	 *         @Route("/generate_dlb", name = "generate_dlb")
+	 *         @Route("/dlb/generate_dlb", name = "generate_dlb")
 	 */
 	public function generateDLB(Request $request) {
 		$em = $this->get('doctrine.orm.entity_manager');
@@ -71,7 +72,7 @@ class DBBController extends Controller {
 	/**
 	 * Direct generation of DLB (dbb, metadatas, certificate, dee) for testing
 	 *
-	 * @Route("/{id}/generate_dlb_direct", name = "generate_dlb_direct", requirements={"id": "\d+"})
+	 * @Route("/dlb/{id}/generate_dlb_direct", name = "generate_dlb_direct", requirements={"id": "\d+"})
 	 */
 	public function directDLBAction(Jdd $jdd) {
 		$dbbProcess = $this->get('dlb.dbb_process');
@@ -89,7 +90,7 @@ class DBBController extends Controller {
 	 * Undo generation of DLB and unpublish JDD
 	 * (for testing)
 	 *
-	 * @Route("/{id}/unpublish", name = "unpublish_dlb", requirements={"id": "\d+"})
+	 * @Route("/dlb/{id}/unpublish", name = "unpublish_dlb", requirements={"id": "\d+"})
 	 */
 	public function undoDLBAction(Jdd $jdd) {
 		if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -107,7 +108,7 @@ class DBBController extends Controller {
 	/**
 	 * Direct generation of DBB for testing
 	 *
-	 * @Route("/{jddId}/generate_dbb", name = "generate_dbb", requirements={"jddId": "\d+"})
+	 * @Route("/dlb/{jddId}/generate_dbb", name = "generate_dbb", requirements={"jddId": "\d+"})
 	 */
 	public function generateDbbCsvAction($jddId) {
 		$em = $this->get('doctrine.orm.entity_manager');
@@ -127,7 +128,7 @@ class DBBController extends Controller {
 	/**
 	 * Save PDF Certificate for testing
 	 *
-	 * @Route("/{jddId}/generate_certificate", name="generate_certificate", requirements={"jddId": "\d+"})
+	 * @Route("/dlb/{jddId}/generate_certificate", name="generate_certificate", requirements={"jddId": "\d+"})
 	 */
 	public function pdfSaveAction($jddId) {
 		$em = $this->get('doctrine.orm.entity_manager');
@@ -141,7 +142,7 @@ class DBBController extends Controller {
 	/**
 	 * Save PDF Certificate for testing
 	 *
-	 * @Route("/{jddId}/generate_certificate_twig", name="generate_certificate_twig", requirements={"jddId": "\d+"})
+	 * @Route("/dlb/{jddId}/generate_certificate_twig", name="generate_certificate_twig", requirements={"jddId": "\d+"})
 	 */
 	public function pdftwigSaveAction($jddId) {
 		$em = $this->get('doctrine.orm.entity_manager');
@@ -158,9 +159,14 @@ class DBBController extends Controller {
 	 *
 	 * @param
 	 *        	$jddId
-	 * @return BinaryFileResponse @Route("/{jddId}/download-dbb", name = "download_dbb", requirements={"jddId": "\d+"})
+	 * @return BinaryFileResponse @Route("/dlb-download/{jddId}/download-dbb", name = "download_dbb", requirements={"jddId": "\d+"})
 	 */
 	public function downloadDbb($jddId) {
+		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
+		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->getUser()->isAllowed('MANAGE_DATASETS')) {
+			throw $this->createAccessDeniedException();
+		}
+		
 		$em = $this->get('doctrine.orm.entity_manager');
 		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
 		$filePath = $jdd->getField('dbbFilePath');
@@ -173,9 +179,14 @@ class DBBController extends Controller {
 	 *
 	 * @param
 	 *        	$jddId
-	 * @return BinaryFileResponse @Route("/{jddId}/download-certificate", name = "download_certificate", requirements={"jddId": "\d+"})
+	 * @return BinaryFileResponse @Route("/dlb-download/{jddId}/download-certificate", name = "download_certificate", requirements={"jddId": "\d+"})
 	 */
 	public function downloadCertificate($jddId) {
+		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
+		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->getUser()->isAllowed('MANAGE_DATASETS')) {
+			throw $this->createAccessDeniedException();
+		}
+		
 		$em = $this->get('doctrine.orm.entity_manager');
 		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
 		$filePath = $jdd->getField('certificateFilePath');
@@ -188,9 +199,14 @@ class DBBController extends Controller {
 	 *
 	 * @param
 	 *        	$jddId
-	 * @return BinaryFileResponse @Route("/{jddId}/download-mtdca", name = "download_mtdca", requirements={"jddId": "\d+"})
+	 * @return BinaryFileResponse @Route("/dlb-download/{jddId}/download-mtdca", name = "download_mtdca", requirements={"jddId": "\d+"})
 	 */
 	public function downloadMtdCA($jddId) {
+		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
+		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->getUser()->isAllowed('MANAGE_DATASETS')) {
+			throw $this->createAccessDeniedException();
+		}
+		
 		$em = $this->get('doctrine.orm.entity_manager');
 		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
 		
@@ -207,9 +223,14 @@ class DBBController extends Controller {
 	 *
 	 * @param
 	 *        	$jddId
-	 * @return BinaryFileResponse @Route("/{jddId}/download-mtdjdd", name = "download_mtdjdd", requirements={"jddId": "\d+"})
+	 * @return BinaryFileResponse @Route("/dlb-download/{jddId}/download-mtdjdd", name = "download_mtdjdd", requirements={"jddId": "\d+"})
 	 */
 	public function downloadMtdJdd($jddId) {
+		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
+		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->getUser()->isAllowed('MANAGE_DATASETS')) {
+			throw $this->createAccessDeniedException();
+		}
+		
 		$em = $this->get('doctrine.orm.entity_manager');
 		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
 		
@@ -227,7 +248,7 @@ class DBBController extends Controller {
 	 *
 	 * @param DEE $DEE        	
 	 * @return BinaryFileResponse
-	 * @throws DEEException @Route("/{jddId}/download-dee-dlb", name = "download_dee_dlb", requirements={"jddId": "\d+"})
+	 * @throws DEEException @Route("/dlb/{jddId}/download-dee-dlb", name = "download_dee_dlb", requirements={"jddId": "\d+"})
 	 */
 	public function downloadDEE($jddId) {
 		$em = $this->get('doctrine.orm.entity_manager');
@@ -284,9 +305,12 @@ class DBBController extends Controller {
 	 *         @Route("/status", name = "dbb_status")
 	 */
 	public function getDBBStatus(Request $request) {
+		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
+ 		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->getUser()->isAllowed('MANAGE_DATASETS')) {
+ 			throw $this->createAccessDeniedException();
+ 		}
 		// Find jddId if given in GET parameters
 		$jddId = intval($request->query->get('jddId', 0));
-		
 		return new JsonResponse($this->getStatus($jddId));
 	}
 
@@ -299,6 +323,11 @@ class DBBController extends Controller {
 	 *         @Route("/status/all", name = "dbb_status_all")
 	 */
 	public function getDBBStatusAll(Request $request) {
+		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
+		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->getUser()->isAllowed('MANAGE_DATASETS')) {
+			throw $this->createAccessDeniedException();
+		}
+		
 		// Find jddIds if given in GET parameters
 		$jddIds = $request->query->get('jddIds', []);
 		
@@ -318,8 +347,15 @@ class DBBController extends Controller {
 	 *        	$jddId
 	 * @param DBB|null $DBB        	
 	 * @return array
+	 * 
+     *         @Route("/status/get", name = "dbb_status_get")
 	 */
 	protected function getStatus($jddId) {
+		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
+		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->getUser()->isAllowed('MANAGE_DATASETS')) {
+			throw $this->createAccessDeniedException();
+		}
+
 		$em = $this->get('doctrine.orm.entity_manager');
 		$jddRepo = $em->getRepository('OGAMBundle:RawData\Jdd');
 		

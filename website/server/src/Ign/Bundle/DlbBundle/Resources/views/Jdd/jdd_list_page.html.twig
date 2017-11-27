@@ -101,7 +101,7 @@
         {% endif %}
         <thead>
             <tr>
-                <th colspan="{{ allJdds ? 5:4 }}" class="text-center color1">{{ 'Jdd.list.procedure'|trans }}</th>
+                <th colspan="{{ allJdds ? 5:4 }}" class="text-center color1">{{ 'Jdd.list.jdd'|trans }}</th>
                 <th colspan="3" class="text-center color2">{{ 'Jdd.list.submissions'|trans }}</th>
                 {% if user is not null and user.isAllowed('MANAGE_DATASETS') %}
                     <th colspan="3" class="text-center color1">{{ 'DBB.table.title'|trans }}</th>
@@ -188,7 +188,7 @@
 
                 {# TPS number #}
                 <td>
-                    <a title="{{ 'Jdd.list.view'|trans }}" href="{{ path('jdd_show', { 'id': jdd.id }) }}">{{ jdd.field('tpsId') }}</a>
+                    <a title="{{ 'Jdd.list.view'|trans }}" href="{{ path('published_jdds_by_tps', { 'tpsId': jdd.field('tpsId') }) }}">{{ jdd.field('tpsId') }}</a>
                 </td>
 
                 {# Title and metadata id of the jdd #}

@@ -33,6 +33,10 @@ Jdd:
     submissions: Import de Données Brutes de Biodiversité
     procedure: Procédure
     tpsNumber: n°TPS
+    published.title: Jeux de données ayant fait l'objet d'un dépôt légal
+    titleAndId: Titre / Identifiant
+    publishedByTps.title: Procédure TPS n°
+    notExist.title: Aucune procédure pour l'identifiant TPS n° 
   new:
     modelUnpublished: Publiez le modèle d'import pour pouvoir créer un jeu de données.
     tpsId: Identifiant TPS
@@ -43,4 +47,6 @@ Jdd:
      <p>Le numéro TPS est l'identifiant qui a été attribué à votre procédure par l'application TPS.</p>
      <p>Vous devez avoir déjà créé une métadonnée de cadre dacquisition dans <a href="%metadataUrl%" target='_blank'>l'application de métadonnées de l'INPN</a>, pour ce numéro TPS.</p>
     tpsIdInfo: <div><label class="col-sm-4 control-label">Procédure</label> <div class="col-sm-4"> %title% </div></div>
-        
+  page:
+    caTitle: Titre
+    projectManager: Déposant
