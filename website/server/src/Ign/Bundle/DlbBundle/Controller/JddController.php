@@ -231,7 +231,7 @@ class JddController extends BaseController {
 		), array(
 			'id' => 'DESC'
 		));
-		$jddList = array_uintersect($jddListPublished, $jddListByTpsId, function ($jdd1, $jdd2) { return $jdd1 == $jdd2; });
+		$jddList = array_uintersect($jddListPublished, $jddListByTpsId, function ($jdd1, $jdd2) { return !($jdd1->getId() == $jdd2->getId()); });
 	
 		$deeRepo = $em->getRepository('IgnGincoBundle:RawData\DEE');
 		foreach ($jddList as $jdd) {
