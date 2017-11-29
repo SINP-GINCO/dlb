@@ -9,8 +9,8 @@ Documentation de la plateforme Dépôt Légal de données de Biodiversité
 .. toctree::
     :maxdepth: 2
 
-    introduction/index
-    metadonnees/index
+    Présentation_générale/index
+
 
 Index
 =====
