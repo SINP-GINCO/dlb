@@ -1,18 +1,14 @@
 <?php
 namespace Ign\Bundle\DlbBundle\Controller;
 
-use Ign\Bundle\GincoBundle\Entity\RawData\DEE;
-use Ign\Bundle\GincoBundle\Exception\MetadataException;
 use Ign\Bundle\DlbBundle\Form\DlbJddType;
 use Ign\Bundle\GincoBundle\Controller\JddController as BaseController;
+use Ign\Bundle\GincoBundle\Entity\RawData\DEE;
+use Ign\Bundle\GincoBundle\Exception\MetadataException;
 use Ign\Bundle\OGAMBundle\Entity\RawData\Jdd;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 /**
  * @Route("/jdd")
@@ -27,38 +23,38 @@ class JddController extends BaseController {
 	 * @Route("/new", name = "jdd_new")
 	 */
 	public function newAction(Request $request) {
-		
+
 		// Redirect url is integration_home when creating a new jdd, put it in session to redirect to it at the end of the process
 		$redirectUrl = $this->generateUrl('integration_home');
 		$session = $request->getSession();
 		if (!$session->has('redirectToUrl'))
 			$session->set('redirectToUrl', $redirectUrl);
-		
+
 		$em = $this->get('doctrine.orm.entity_manager');
-		
+
 		/* Get info on tps and metadata to display in the view */
 		$tpsId = null;
 		$choices = null;
-		
+
 		// Get the url of the metadata service
 		$metadataServiceUrl = $this->get('ogam.configuration_manager')->getConfig('jddMetadataFileDownloadServiceURL');
 		// Format the URL to only get prefix
 		$endUrl = strpos($metadataServiceUrl, "cadre");
 		$metadataServiceUrl = substr($metadataServiceUrl, 0, $endUrl + 6);
 		$tpsDescription = "";
-		
+
 		// Get input user values from ajax
 		if (!empty($_POST)) {
 			$tpsId = $_POST['dlb_jdd']['tps_id'];
 		}
-		
+
 		// Get jdds from tpsId (using a xml concatenating several jdd metadatas)
 		if ($tpsId != null) {
 			$metadataJddsFields = $this->get('dlb.metadata_tps_reader')->getJddMetadatas($tpsId);
 			$choices = $metadataJddsFields['jddIds'];
 			// By default the tpsId is unknown : stock an error message to display
 			$tpsDescription = $this->get('translator')->trans('Jdd.new.tpsIdError', array());
-			
+
 			if (count($choices) > 0) {
 				if (!array_key_exists(0, $choices)) {
 					// Get info on tps from CA metadata
@@ -73,7 +69,7 @@ class JddController extends BaseController {
 				}
 			}
 		}
-		
+
 		/* Manage form */
 		$jdd = new Jdd();
 		$form = $this->createForm(new DlbJddType($this->get('dlb.metadata_tps_reader')), $jdd, array(
@@ -81,14 +77,14 @@ class JddController extends BaseController {
 			'entity_manager' => $em,
 			'option_key' => $this->get('dlb.metadata_tps_reader')
 		));
-		
+
 		// Pre-fill form if parameters are passed in the query
 		if (null !== $request->query->get('idtps')) {
 			$tpsId = $request->query->get('idtps');
 			$this->get('logger')->debug('tpsid from URL : ' . $tpsId);
 			$form->get('tps_id')->setData($tpsId);
 		}
-		
+
 		// Pre-fill form if parameters are passed in the query
 		$jddId = null;
 		if (null !== $request->query->get('idjdd')) {
@@ -98,30 +94,30 @@ class JddController extends BaseController {
 				// Get ca_id from jdd metadata
 				$metadataFields = $this->get('ginco.metadata_reader')->getMetadata($jddId);
 				$caId = $metadataFields['metadataCAId'];
-				
+
 				// Get tps_id from ca metadata
 				$metadataTpsFields = $this->get('dlb.metadata_tps_reader')->getTpsIdFromCaId($caId);
 				$tpsId = $metadataTpsFields['tpsId'];
 				$projetOwner = $metadataTpsFields['projetOwner'];
 				$projetManager = $metadataTpsFields['projetManager'];
-				
+
 				$form->get('tps_id')->setData($tpsId);
 				$form->get('jdd_id')->setData($jddId);
-				
+
 			} catch (Exception $e) {
 				$error = new FormError($this->get('translator')->trans($e->getMessage(), array(), 'validators'));
 				$form->get('jdd_id')->addError($error);
 			}
 		}
-		
+
 		$form->handleRequest($request);
-		
+
 		// Add a custom step to test validity of the jdd_id, with the metadata service
 		$formIsValid = $form->isValid();
 		if ($formIsValid) {
 			$jddId = $form->get('jdd_id')->getData();
 			$this->get('logger')->debug('metadataId is : ' . $jddId);
-			
+
 			// Test if another jdd already exists with this jddId
 			$jddWithSameMetadataId = $em->getRepository('OGAMBundle:RawData\Jdd')->findByField(array(
 				'metadataId' => $jddId
@@ -148,7 +144,7 @@ class JddController extends BaseController {
 			$jdd->setUser($this->getUser());
 			$jdd->setProvider($this->getUser()
 				->getProvider());
-			
+
 			// writes the jdd to the database
 			// persist won't work (because user and provider are not retrieved via the same entity manager ?)
 			// So merge and get the merged object to access auto-generated id
@@ -162,13 +158,13 @@ class JddController extends BaseController {
 			$attachedJdd->setField('projetManager', $projetManager);
 			$attachedJdd->setField('caTitle', $tpsLibelle);
 			$em->flush();
-			
+
 			// Redirects to the new submission form: upload data
 			return $this->redirect($this->generateUrl('integration_creation', array(
 				'jddid' => $attachedJdd->getId()
 			)));
 		}
-		
+
 		return $this->render('IgnDlbBundle:Jdd:jdd_new_page.html.twig', array(
 			'form' => $form->createView(),
 			'tpsDescription' => $tpsDescription,
@@ -176,7 +172,7 @@ class JddController extends BaseController {
 			'idjdd' => $jddId
 		));
 	}
-	
+
 	/**
 	 * Show the published jdd list page
 	 *
@@ -187,7 +183,7 @@ class JddController extends BaseController {
 		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS')) {
 			throw $this->createAccessDeniedException();
 		}
-		
+
 		$em = $this->get('doctrine.orm.raw_data_entity_manager');
 
 		$jddList = $em->getRepository('OGAMBundle:RawData\Jdd')->findByField(array(
@@ -195,19 +191,19 @@ class JddController extends BaseController {
 		), array(
 			'id' => 'DESC'
 		));
-		
+
 		$deeRepo = $em->getRepository('IgnGincoBundle:RawData\DEE');
 		foreach ($jddList as $jdd) {
 			// Add DEE information
 			$jdd->dee = $deeRepo->findLastVersionByJdd($jdd);
 		}
-		
+
 		return $this->render('OGAMBundle:Jdd:jdd_published_list_page.html.twig', array(
 			'jddList' => $jddList,
 			'user' => $this->getUser()
-		));		
+		));
 	}
-	
+
 	/**
 	 * Show the published jdd list page for a tpsId
 	 *
@@ -218,7 +214,7 @@ class JddController extends BaseController {
 		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS')) {
 			throw $this->createAccessDeniedException();
 		}
-		
+
 		$em = $this->get('doctrine.orm.raw_data_entity_manager');
 
 		$jddListPublished = $em->getRepository('OGAMBundle:RawData\Jdd')->findByField(array(
@@ -232,13 +228,13 @@ class JddController extends BaseController {
 			'id' => 'DESC'
 		));
 		$jddList = array_uintersect($jddListPublished, $jddListByTpsId, function ($jdd1, $jdd2) { return !($jdd1->getId() == $jdd2->getId()); });
-	
+
 		$deeRepo = $em->getRepository('IgnGincoBundle:RawData\DEE');
 		foreach ($jddList as $jdd) {
 			// Add DEE information
 			$jdd->dee = $deeRepo->findLastVersionByJdd($jdd);
 		}
-	
+
 		return $this->render('OGAMBundle:Jdd:jdd_published_by_tpsid_list_page.html.twig', array(
 			'jddList' => $jddList,
 			'user' => $this->getUser(),

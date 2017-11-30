@@ -192,8 +192,6 @@ function updateDBBContent(jddId) {
     }
 
     // Content if DBB is not GENERATING
-    console.log(jddId);
-    console.log(dbbStatus);
     contentDiv.html('');
     var content = $('<p></p>');
     if (dbbStatus == 'generating' || dbbStatus == 'published') {
