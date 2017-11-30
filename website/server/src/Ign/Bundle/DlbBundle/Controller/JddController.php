@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 /**
- * @Route("/")
+ * @Route("/jdd")
  */
 class JddController extends BaseController {
 
@@ -24,7 +24,7 @@ class JddController extends BaseController {
 	 * Dlb customisation: hide model field, add tps_id field, add jdd_id field dynamicaly
 	 * Checks, via a service, the xml file on metadata platform, and fills jdd fields with metadata fields
 	 *
-	 * @Route("/jdd/new", name = "jdd_new")
+	 * @Route("/new", name = "jdd_new")
 	 */
 	public function newAction(Request $request) {
 		

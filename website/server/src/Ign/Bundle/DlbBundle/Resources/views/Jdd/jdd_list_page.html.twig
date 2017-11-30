@@ -247,10 +247,12 @@
                         </div>
                     {% endfor %}
                     {# Add a new submission to dataset #}
-                    <div class="submission-line">
-                        <a href="{{ path("integration_creation", { 'jddid': jdd.id }) }}">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>  {{ 'Jdd.submission.add'|trans }}
-                        </a>
+                    <div class="new-submission" data-jdd-id="{{ jdd.id }}"
+                        <div class="submission-line">
+                            <a href="{{ path("integration_creation", { 'jddid': jdd.id }) }}">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>  {{ 'Jdd.submission.add'|trans }}
+                            </a>
+                        </div>
                     </div>
                 </td>
                 {# Status -- see integration-progress-bars.js.twig #}
