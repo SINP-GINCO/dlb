@@ -17,4 +17,4 @@ INSERT INTO metadata_work.form_field VALUES ('tpsid', 'form_autres', '1', '1', '
 
 INSERT INTO metadata_work.field_mapping VALUES ('tpsid', 'form_autres', 'tpsid', 'table_observation', 'FORM');
 
-INSERT INTO metadata_work.dataset_fields VALUES ('dataset_2', 'RAW_DATA', 'table_observation', 'tpsid');
+INSERT INTO metadata_work.dataset_fields VALUES ('dataset_02', 'RAW_DATA', 'table_observation', 'tpsid');
