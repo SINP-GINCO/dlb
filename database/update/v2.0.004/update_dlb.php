@@ -55,12 +55,10 @@ try {
 
 $CLIParams = implode(' ', array_slice($argv, 1));
 /* patch user raw_data here */
-//  system("php $currentDir/script1.php $CLIParams", $returnCode1);
-// system("php $currentDir/script2.php $CLIParams", $returnCode2);
-/*
- if ($returnCode1 != 0 || $returnCode2 != 0) {
- echo "$currentDir/apply_db_patch.php\n";
- echo "exception: " . $e->getMessage() . "\n";
- exit(1);
- }
- */
+system("php $currentDir/update_roles.php $CLIParams", $returnCode1);
+
+if ($returnCode1 != 0) {
+	echo "$currentDir/apply_db_patch.php\n";
+	echo "exception: " . $e->getMessage() . "\n";
+	exit(1);
+}
