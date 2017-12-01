@@ -193,9 +193,11 @@
 
                 {# Title and metadata id of the jdd #}
                 <td>
-                    <a data-title="{{ jdd.field('title') }}" title="{{ 'Jdd.list.view'|trans }}" href="{{ path('jdd_show', { 'id': jdd.id }) }}">{{ jdd.field('title') }}</a>
-                    <br/>
-                    <span class="text-muted longtext">{{ jdd.field('metadataId') }}</span>
+                    <p data-title="{{ jdd.field('title') }}">
+                        {{ jdd.field('title') }}
+                        <br/>
+                        <span class="text-muted longtext">{{ jdd.field('metadataId') }}</span>
+                    </p>
                 </td>
 
                 {# Creation date of the jdd #}
@@ -298,7 +300,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="dbb-content"></div>
+                                <div class="dbb-content">
+                                {{ jdd.field('publishedAt') ? jdd.field('publishedAt')|replace({'_':' ', '-':':'})|date('d/m/Y H\\hi') : 'DBB.status.noDBB'|trans }}
+                                </div>
                             </div>
                         </div>
                     </td>

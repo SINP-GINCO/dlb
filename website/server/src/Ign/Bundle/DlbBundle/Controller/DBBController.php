@@ -389,7 +389,7 @@ class DBBController extends GincoController {
 					'id' => $jdd->getId(),
 					'status' => $jdd->getField('status'),
 					'createdDate' => $createdDateTime->format('d/m/Y'),
-					'createdTime' => $createdDateTime->format('H:i'),
+					'createdTime' => $createdDateTime->format('H\hi'),
 					'fullCreated' => $jdd->getField('publishedAt')
 				);
 
