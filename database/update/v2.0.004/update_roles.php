@@ -9,12 +9,12 @@ if (is_file("$currentDir/../../../lib/share.php")) {
 	echo "Can't find file ..../lib/share.php\n\n";
 	exit(1);
 }
-/********************************************************************
+/**
  * #1230: Configure roles and permissions for dlb platform
  * - Delete 'administrateur' and 'producteur' roles
  * - Add 'petitionnaire' role
  * - Update 'grand public' role with new permission (export raw data)
- *******************************************************************/
+ */
 try {
 
 	$config = loadPropertiesFromArgs();
@@ -33,8 +33,12 @@ try {
 
 	while ($row = pg_fetch_assoc($results)) {
 		$roleCode = $row['role_code'];
-		pg_execute($dbconn, "deletePermissions", $roleCode);
-		pg_execute($dbconn, "deleteRoles", $roleCode);
+		pg_execute($dbconn, "deletePermissions", array(
+			$roleCode
+		));
+		pg_execute($dbconn, "deleteRoles", array(
+			$roleCode
+		));
 	}
 
 	// Insert new role and its permissions
@@ -49,7 +53,7 @@ try {
 		'DATA_EDITION',
 		'MANAGE_DATASETS',
 		'CONFIRM_SUBMISSION',
-		'MANAGE_PRIVATE_REQUEST'
+		'MANAGE_OWNED_PRIVATE_REQUEST'
 	);
 	$insertNewRoleSql = "INSERT INTO permission_per_role(role_code, permission_code) VALUES ($1, $2)";
 	$insertNewRole = pg_prepare($dbconn, "insertNewRole", $insertNewRoleSql);
