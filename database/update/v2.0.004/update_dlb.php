@@ -40,9 +40,7 @@ try {
 	execCustSQLFile("$currentDir/add_permission_on_published_dataset.sql", $config);
 	
 	# setting metadata and metadata_work schema
-	//execCustSQLFile("$currentDir/create_metadata_schema_tpl.sql", $config + ['schema' => 'metadata']);
 	system("php $currentDir/metadata/import_metadata_from_csv.php $paramStr -Dschema=metadata");
-	//execCustSQLFile("$currentDir/create_metadata_schema_tpl.sql", $config + ['schema' => 'metadata_work']);
 	system("php $currentDir/metadata/import_metadata_from_csv.php $paramStr -Dschema=metadata_work");
 	
 	execCustSQLFile("$currentDir/add_tps_id_field.sql", $config);

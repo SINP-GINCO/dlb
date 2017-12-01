@@ -274,7 +274,7 @@ INSERT INTO table_schema VALUES ('WEBSITE','WEBSITE','Website','Contains the tab
 INSERT INTO table_schema VALUES ('PUBLIC','PUBLIC','Public','Contains the default PostgreSQL tables and PostGIS functions');
 
 -- INSERTION IN TABLE model
-INSERT INTO model VALUES ('model_01','modèle de données brutes de biodiversité','modèle de données brutes de biodiversité','RAW_DATA',TRUE);
+INSERT INTO model VALUES ('model_01','Données brutes de biodiversité','Données brutes de biodiversité','RAW_DATA',TRUE);
 
 -- INSERTION IN TABLE table_format
 INSERT INTO table_format VALUES ('table_observation','model_1_observation','RAW_DATA','OGAM_ID_table_observation, PROVIDER_ID','observation','table_dsr_exemple_observation');
