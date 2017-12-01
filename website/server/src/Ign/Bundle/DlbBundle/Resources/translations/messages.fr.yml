@@ -50,4 +50,7 @@ Jdd:
   page:
     caTitle: Titre
     projectManager: Déposant
+Submission:
+  delete:
+    impossible: La suppression de ce fichier est impossible car le jeu de données a été déposé.
 Menu.publishedDatasets: Consulter les jeux de données déposés
