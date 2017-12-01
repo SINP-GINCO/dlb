@@ -42,26 +42,30 @@ try {
 	}
 
 	// Insert new role and its permissions
-	$insert = "INSERT INTO role(role_label, role_definition, is_default) VALUES ('Pétitionnaire', 'Pétitionnaire', false) RETURNING role_code;";
-	$results = pg_query($insert);
-	$roleCode = pg_fetch_result($results, 0, 0);
+	$select = "SELECT role_code FROm role where role_label ='Pétitionnaire'";
+	$result = pg_query($dbconn, $select);
+	if (pg_num_rows($result) == 0) {
+		$insert = "INSERT INTO role(role_label, role_definition, is_default) VALUES ('Pétitionnaire', 'Pétitionnaire', false) RETURNING role_code;";
+		$results = pg_query($insert);
+		$roleCode = pg_fetch_result($results, 0, 0);
 
-	$permissions = array(
-		'DATA_INTEGRATION',
-		'DATA_QUERY',
-		'EXPORT_RAW_DATA',
-		'DATA_EDITION',
-		'MANAGE_DATASETS',
-		'CONFIRM_SUBMISSION',
-		'MANAGE_OWNED_PRIVATE_REQUEST'
-	);
-	$insertNewRoleSql = "INSERT INTO permission_per_role(role_code, permission_code) VALUES ($1, $2)";
-	$insertNewRole = pg_prepare($dbconn, "insertNewRole", $insertNewRoleSql);
-	foreach ($permissions as $permission) {
-		pg_execute($dbconn, "insertNewRole", array(
-			$roleCode,
-			$permission
-		));
+		$permissions = array(
+			'DATA_INTEGRATION',
+			'DATA_QUERY',
+			'EXPORT_RAW_DATA',
+			'DATA_EDITION',
+			'MANAGE_DATASETS',
+			'CONFIRM_SUBMISSION',
+			'MANAGE_OWNED_PRIVATE_REQUEST'
+		);
+		$insertNewRoleSql = "INSERT INTO permission_per_role(role_code, permission_code) VALUES ($1, $2)";
+		$insertNewRole = pg_prepare($dbconn, "insertNewRole", $insertNewRoleSql);
+		foreach ($permissions as $permission) {
+			pg_execute($dbconn, "insertNewRole", array(
+				$roleCode,
+				$permission
+			));
+		}
 	}
 
 	// Update grand_public role
@@ -69,13 +73,15 @@ try {
 
 	$result = pg_query($selectCode);
 	$roleCode = pg_fetch_result($result, 0, 0);
-	$updatePermissionsSql = "INSERT INTO permission_per_role(role_code, permission_code) VALUES ($1, 'EXPORT_RAW_DATA');";
-
-	$updatePermissions = pg_prepare($dbconn, "updatePermissions", $updatePermissionsSql);
-
-	pg_execute($dbconn, "updatePermissions", array(
-		$roleCode
-	));
+	$selectPermission = "SELECT permission_code FROM permission_per_role WHERE role_code = $roleCode AND permission_code = 'EXPORT_RAW_DATA'";
+	$result = pg_query($dbconn, $selectPermission);
+	if (pg_num_rows($result) == 0) {
+		$updatePermissionsSql = "INSERT INTO permission_per_role(role_code, permission_code) VALUES ($1, 'EXPORT_RAW_DATA');";
+		$updatePermissions = pg_prepare($dbconn, "updatePermissions", $updatePermissionsSql);
+		pg_execute($dbconn, "updatePermissions", array(
+			$roleCode
+		));
+	}
 
 	pg_close($dbconn);
 } catch (Exception $e) {

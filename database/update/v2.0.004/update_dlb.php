@@ -37,11 +37,11 @@ try {
 	execCustSQLFile("$currentDir/add_cancel_jdd_publication_permission.sql", $config);
 	execCustSQLFile("$currentDir/add_permission_on_published_dataset.sql", $config);
 	execCustSQLFile("$currentDir/add_integration_service_event_listener.sql", $config);
-	
+
 	# setting metadata and metadata_work schema
 	system("php $currentDir/metadata/import_metadata_from_csv.php $paramStr -Dschema=metadata");
 	system("php $currentDir/metadata/import_metadata_from_csv.php $paramStr -Dschema=metadata_work");
-	
+
 	execCustSQLFile("$currentDir/add_tps_id_field.sql", $config);
 } catch (Exception $e) {
 	echo "$currentDir/update_dlb.php\n";
