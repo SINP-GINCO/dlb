@@ -291,7 +291,7 @@ INSERT INTO file_format VALUES ('file_dbb','CSV','file_dbb',0,'fichier de donné
 
 -- INSERTION IN TABLE event_listener
 INSERT INTO event_listener VALUES ('GincoChecksDSRService','fr.ifn.ogam.integration.business.ChecksDSRGincoService');
-INSERT INTO event_listener VALUES ('JddService','fr.ifn.ogam.integration.business.JddService');
+INSERT INTO event_listener VALUES ('JddDlbService','fr.ifn.ogam.integration.business.JddDlbService');
 INSERT INTO event_listener VALUES ('GincoComputeGeoAssociationService','fr.ifn.ogam.integration.business.ComputeGeoAssociationService');
 INSERT INTO event_listener VALUES ('GenerateReportsService','fr.ifn.ogam.integration.business.GenerateReportsService');
 
