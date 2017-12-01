@@ -3,11 +3,9 @@ $currentDir = dirname(__FILE__);
 // Require file from dev or build environnement
 if (is_file("$currentDir/../../../lib/share.php")) {
 	require_once "$currentDir/../../../lib/share.php";
-}
-else if (is_file("$currentDir/../../../../ginco/lib/share.php")) {
+} else if (is_file("$currentDir/../../../../ginco/lib/share.php")) {
 	require_once "$currentDir/../../../../ginco/lib/share.php";
-}
-else {
+} else {
 	echo "Can't find file ..../lib/share.php\n\n";
 	exit(1);
 }
