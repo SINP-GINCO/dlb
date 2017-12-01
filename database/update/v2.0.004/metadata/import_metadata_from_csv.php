@@ -5,7 +5,15 @@
  * TODO: Possible evolution is automating deletion and re-creation of foreign keys constraints
  */
 $metadataDir = dirname(__FILE__);
-require_once "$metadataDir/../../../../lib/share.php";
+// Require file from dev or build environnement
+if (is_file("$metadataDir/../../../../lib/share.php")) {
+	require_once "$metadataDir/../../../../lib/share.php";
+} else if (is_file("$metadataDir/../../../../../ginco/lib/share.php")) {
+	require_once "$metadataDir/../../../../../ginco/lib/share.php";
+} else {
+	echo "Can't find file ..../lib/share.php\n\n";
+	exit(1);
+}
 
 // in order to read CSV with exotic endlines
 ini_set("auto_detect_line_endings", true);
