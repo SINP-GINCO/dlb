@@ -56,7 +56,7 @@ url.basepath=/localhost
 https.proxy=
 
 # Site Name
-site.name="Plateforme de test GINCO Localhost"
+site.name="Dépôt légal de données de biodiversité"
 
 #url des services ogam avec le protocole et le domaine exemple http://services.ign.fr ou localhost
 ogam.services.host=http://localhost:8080
