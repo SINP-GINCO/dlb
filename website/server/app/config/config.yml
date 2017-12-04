@@ -303,4 +303,11 @@ knp_snappy:
             - { name: 'viewport-size', value: ‘1024x768’ }
             - { name: 'page-size', value: 'A4' }
             - { name: 'lowquality', value: false }
-            
+
+# Ivory CKEditor
+ivory_ck_editor:
+    default_config: my_config
+    configs:
+        my_config:
+            toolbar: standard
+            removeButtons: ''
