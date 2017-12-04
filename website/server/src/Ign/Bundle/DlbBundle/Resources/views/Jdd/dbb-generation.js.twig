@@ -263,11 +263,12 @@ function updateDBBContent(jddId) {
         reports += "<a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.mtd'|trans }}' href='" + href + "'> " +
                 "<span class='glyphicon glyphicon-align-justify' aria-hidden='true'></span></a><br/>";
 
-        // Link to download DEE zipped
-        var href = "{{ path('download_dee_dlb', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
-        reports += "<a role='button' class='btn btn-xs btn-primary' title='{{ 'DEE.download'|trans }}' href='" + href + "'> " +
-                "<span class='glyphicon glyphicon-tree-deciduous' aria-hidden='true'></span></a><br/>";
-
+		if ( {{ app.user|json_encode()|raw }} ) {
+        	// Link to download DEE zipped
+        	var href = "{{ path('download_dee_dlb', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
+        	reports += "<a role='button' class='btn btn-xs btn-primary' title='{{ 'DEE.download'|trans }}' href='" + href + "'> " +
+        	        "<span class='glyphicon glyphicon-tree-deciduous' aria-hidden='true'></span></a><br/>";
+		}
         reports += "</ul></div>";
         actionsDiv.append(reports);
     }
