@@ -43,6 +43,7 @@ try {
 	system("php $currentDir/metadata/import_metadata_from_csv.php $paramStr -Dschema=metadata_work");
 
 	execCustSQLFile("$currentDir/add_tps_id_field.sql", $config);
+	execCustSQLFile("$currentDir/update_home_content.sql", $config);
 } catch (Exception $e) {
 	echo "$currentDir/update_dlb.php\n";
 	echo "exception: " . $e->getMessage() . "\n";

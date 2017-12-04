@@ -3,6 +3,13 @@
 # - overwrite translations from Ginco and Ogam Bundles
 # --> No need to rewrite correct translations from Ginco and Ogam Bundles
 
+
+# Homepage
+# ----------------------
+Presentation:
+  title: La télé-procédure de versement
+  link: Présentation de la télé-procédure
+  
 DBB:
   table:
     title: Dépôt légal
