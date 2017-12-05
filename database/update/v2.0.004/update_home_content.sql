@@ -1,13 +1,11 @@
 UPDATE website.content SET value='<div>
-<p>Bienvenue sur la plateforme de dépôt légal de données de biodiversité, plateforme thématique du <a href="http://www.naturefrance.fr/sinp/presentation-du-sinp">
-Système d’Information Nature et Paysage (SINP)</a> permettant l’agrégation, la standardisation et le versement des données d’observations de biodiversité dans 
+<p>Bienvenue sur la plateforme de dépôt légal de données de biodiversité permettant l’agrégation, la standardisation et le versement des données d’observations de biodiversité dans 
 l’<a href="https://inpn.mnhn.fr/accueil/index">Inventaire national du patrimoine naturel(INPN)</a>.
-Elle s’adresse aux professionnels souhaitant procéder au versement de données brutes de biodiversité (uniquement occurrences de taxons) 
-dans le cadre de l’article L411-1 A du Code l’environnement (Article 7 de la loi du 8 août 2016 pour la reconquête de la biodiversité).</p>
+Elle s’adresse aux maîtres d’ouvrages concernés par le versement de données brutes de biodiversité conformément à l’article L411-1 A du Code l’environnement (Article 7 de la loi du 8 août 2016 pour la reconquête de la biodiversité).</p>
 
-<p>Cette plateforme permet de visualiser les données d’occurrences de taxons alimentant les études d’évaluation préalable ou de suivi des impacts réalisées dans le cadre de 
-l’élaboration de projet d’aménagement soumis à l’approbation de l’autorité administrative.</p>
-<p>Les visiteurs ont accès à l’ensemble des données associées à une <a href="https://tps-dev.apientreprise.fr/commencer/depot-etudes-d-impact-et-biodiversite">télé-procédure</a>
+<p>Cette plateforme permet de télé-verser les données d’occurrences de taxons alimentant les études d’évaluation préalable ou de suivi des impacts réalisées dans le cadre de 
+l’élaboration de projet d’aménagement soumis à une évaluation environnementale donnant lieu à la production ou l’utilisation de données brutes de biodiversité.</p>
+<p>Les utilisateurs ont accès à l’ensemble des données associées à une <a href="https://tps-dev.apientreprise.fr/commencer/depot-etudes-d-impact-et-biodiversite">télé-procédure</a>
  et ayant fait l’objet d’un dépôt légal sur la plateforme, dans la limite de leur niveau de sensibilité définissant un degré de menace sur l’espèce.</p>
 </div>
 ' WHERE name='homepage.intro';
