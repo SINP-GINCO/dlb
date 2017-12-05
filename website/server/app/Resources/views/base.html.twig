@@ -174,7 +174,7 @@
                     <p><strong>A propos</strong></p>
                     <a href="https://ginco.naturefrance.fr/" target="_blank" title="{% trans %}Ginco{% endtrans %}">
                         {% image 'img/logo-ginco.png' %}
-                            <img src="{{ asset_url }}" alt="{{ configurationManager.getConfig('site_name', 'GINCO') }}"/>
+                            <img src="{{ asset_url }}" alt="{{ configurationManager.getConfig('site_name', 'GINCO') }}" class="logo apropos"/>
                         {% endimage %}
                     </a>
                 </div>
@@ -202,7 +202,7 @@
                         <img src="{{ asset_url }}" alt="{% trans %}MNHN - Museum National d'Histoire Naturelle{% endtrans %}"  class="logo mnhn"/>
                     {% endimage %}
                     {% image 'img/logo-biodiversite.png' %}
-                        <img src="{{ asset_url }}" alt="{% trans %}Agence Française de la biodiversité{% endtrans %}"  class="logo"/>
+                        <img src="{{ asset_url }}" alt="{% trans %}Agence Française de la biodiversité{% endtrans %}"  class="logo bio"/>
                     {% endimage %}
                     {% image 'img/logo-mtes.jpg' %}
                         <img src="{{ asset_url }}" alt="{% trans %}MTES - Ministère de la Transition, écologique et solidaire{% endtrans %}"  class="logo"/>
