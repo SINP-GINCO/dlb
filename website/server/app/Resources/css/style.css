@@ -7112,18 +7112,7 @@ body {
 .footer .logo.ign,
 .footer .logo.mnhn {
   height: 52.5px;
-  margin-right: 25px;
-}
-.footer .logo.bio {
-  height: 52.5px;
-  margin-right: 25px;
-  width: auto;
-}
-.footer .logo.apropos {
-  height: 35px;
-  width: auto;
-  margin-top: 10px;
-
+  margin-right: 30px;
 }
 .footer .footer-version {
   margin-bottom: 10px;
@@ -7152,11 +7141,13 @@ body {
 .homepage .blocks-container .blocks > div {
   display: table-cell;
 }
+.homepage .homepage-intro img {
+  margin-top: 65px;
+}
 .password-change-user-name {
   margin-bottom: 20px;
   margin-top: 20px;
 }
-
 .jdd-table thead,
 .submissions-table thead {
   background-color: #7e931e;
@@ -7176,11 +7167,6 @@ body {
   padding: 3px 0;
   width: 100%;
 }
-.submission-line-lines {
-  width: 10%;
-  font-style:italic;
-  font-size:75%;
-}
 .submission-line:before,
 .submission-line:after {
   content: " ";
@@ -7197,38 +7183,32 @@ body {
 .submission-line:after {
   clear: both;
 }
-.submission-line-file {
-  text-align:left;
-  width: 100%;
-  margin-top: 3px;
-  margin-bottom: 3px;
+.submission-line .file,
+.submission-line .lines,
+.submission-line .status,
+.submission-line .reports,
+.submission-line .actions {
+  display: block;
+  float: left;
+  padding-bottom: 1px;
 }
-.submission-line-lines {
+.submission-line .file {
+  width: 35%;
+}
+.submission-line .lines {
   width: 10%;
-  font-style:italic;
-  font-size:75%;
 }
-.submission-line-status {
-  text-align:center;
-  width: 100%;
-  margin-top: 3px;
-  margin-bottom: 3px;
+.submission-line .status {
+  width: 20%;
 }
-.submission-line-reports {
-  width: 100%;
-  text-align:right;
-  float:right;
-  margin-top: 1px;
-  margin-bottom: 1px;
-  margin-right:0px;
-  margin-left:0px;
+.submission-line .reports {
+  width: 25%;
+  padding-right: 5px;
 }
-.submission-line-actions {
-  width: 100%;
-  margin-top: 1px;
-  margin-bottom: 1px;
+.submission-line .actions {
+  width: 10%;
+  text-align: center;
 }
-
 .dee-state,
 .dee-actions,
 .dbb-actions {
