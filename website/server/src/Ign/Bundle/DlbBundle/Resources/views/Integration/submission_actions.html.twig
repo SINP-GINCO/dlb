@@ -5,14 +5,17 @@
 
     {# Cancel submission#}
     {% set remove = false %}
-    {% if submission.step != "VALIDATE" %}
+    {% set notValidateCancel = (submission.step != "VALIDATE" and submission.step != "CANCEL") %}
+    {% set allowedOwnCancel = user.isAllowed('CANCEL_VALIDATED_SUBMISSION') and submission.provider.id is same as (user.provider.id) %}
+    {% set allowedOtherCancel = user.isAllowed('CANCEL_OTHER_PROVIDER_SUBMISSION') %}
+    {% if notValidateCancel and (allowedOwnCancel or allowedOtherCancel) %}
         {% set remove = true %}
     {% endif %}
     <div class = "btn-group">
     <div class="integration-cancel-status hidden" data-target="{{ submission.id }}">Status:{{ submission.status }};Step:{{ submission.step }}</div>
-        <a id="integration-cancel-link-{{ submission.id }}" data-remove-submission-jdd-id="{{ jdd.id }}" href="{{ path('integration_cancel', {'submissionId': submission.id}) }}" title="{{ 'Cancel Submission'|trans }}"
+        <a id="integration-cancel-link-{{ submission.id }}" data-remove-submission-jdd-id="{{ jdd.id }}" title="{{ 'Cancel Submission'|trans }}"
             {% if remove and jdd.field('status') != 'published' %}
-                class="btn btn-xs btn-danger" onClick="return confirm('{{'Are you sure?'|trans }}')"
+                class="btn btn-xs btn-danger" href="{{ path('integration_cancel', {'submissionId': submission.id}) }}" onClick="return confirm('{{'Are you sure?'|trans }}')"
             {% else %}
                 class="btn btn-xs btn-default" data-toggle="modal" data-target="#modal-impossible-delete-submission"
             {% endif %}
