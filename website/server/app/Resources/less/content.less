@@ -223,19 +223,25 @@ form label.required:after {
 //------------------------------
 
 #report-header {
+  @report-header-height: 120px;
   #report-banner {
     height: 150px;
     background-image: url("/../img/bandeau-dlb-report.jpg"); // Don't change the path !!! https://github.com/kriswallsmith/assetic/issues/512
     background-size: 3000px 150px;
     background-repeat: no-repeat;
     #header-logo {
-      margin-top: 5px;
+      height: @report-header-height;
+      line-height: @report-header-height;
       img {
         margin-right: 25px;
       }
     }
     .header-title {
       color: white;
+      height: @report-header-height;
+      line-height: @report-header-height;
+      margin: 0;
+      padding-right: 30px;
     }
   }
 }

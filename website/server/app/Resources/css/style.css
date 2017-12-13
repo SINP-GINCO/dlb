@@ -6928,13 +6928,18 @@ form label.required:after {
   background-repeat: no-repeat;
 }
 #report-header #report-banner #header-logo {
-  margin-top: 5px;
+  height: 120px;
+  line-height: 120px;
 }
 #report-header #report-banner #header-logo img {
   margin-right: 25px;
 }
 #report-header #report-banner .header-title {
   color: white;
+  height: 120px;
+  line-height: 120px;
+  margin: 0;
+  padding-right: 30px;
 }
 /**
 * @see : https://github.com/reficedev/alert-old-browser-detection

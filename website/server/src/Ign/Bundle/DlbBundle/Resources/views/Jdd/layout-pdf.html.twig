@@ -5,40 +5,65 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{% block title %}
         {{ configurationManager.getConfig('site_name', 'GINCO') }}
     {% endblock %}</title>
     <meta name="description" content="{% block description %}{% endblock %}" />
 
+    {% set site_url = configurationManager.getConfig('site_url', '') %}
+    {% set domain = site_url|parse_url('scheme') ~ '://' ~ site_url|parse_url('host') %}
+
     {% block stylesheets %}
         {% stylesheets
         '@bootstrap_css'
         filter='cssrewrite, yui_css' %}
-        <link rel="stylesheet" href="{{ configurationManager.getConfig('site_url', '') ~ asset_url }}" />
+        <link rel="stylesheet" href="{{ domain ~ asset_url }}" />
         {% endstylesheets %}
     {% endblock %}
+    {# Overwrite the background image and glyphicons locations, because not working with asynchronous generation#}
+    {#  Annihilate margin-bottom in body, causing two pages beeing generated instead of one) #}
+    <style>
+        #report-header #report-banner {
+            background-image: url("{{ site_url ~ '/img/bandeau-dlb-report.jpg' }}") !important;
+        }
+        body {
+            margin-bottom: 0 !important;
+        }
+        html {
+            min-height: 1px !important;
+        }
+        @font-face {
+            font-family: 'Glyphicons Halflings';
+            src: url("{{ site_url ~ '/fonts/glyphicons-halflings-regular.eot' }}") !important;
+            src: url("{{ site_url ~ '/fonts/glyphicons-halflings-regular.eot?#iefix' }}") format('embedded-opentype'),
+                 url("{{ site_url ~ '/fonts/glyphicons-halflings-regular.woff2' }}") format('woff2'),
+                 url("{{ site_url ~ '/fonts/glyphicons-halflings-regular.woff' }}") format('woff'),
+                 url("{{ site_url ~ '/fonts/glyphicons-halflings-regular.ttf' }}") format('truetype'),
+                 url("{{ site_url ~ '/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular' }}") format('svg') !important;
+        }
+    </style>
 </head>
 
 <body>
-<div>
+<div class="container">
     <header id="report-header">
         {#== Logo and banner ==#}
-        <div id="report-banner" class="container">
+        <div id="report-banner">
             <div class="row">
-                <div class="col-xs-7">
+                <div class="col-xs-4">
                     <div id="header-logo">
-                        <img src="{{ configurationManager.getConfig('site_url', '') ~ asset('img/logo-mtes.jpg') }}" alt="logo mtes">
-       					<img src="{{ configurationManager.getConfig('site_url', '') ~ asset('img/logo-sinp.png') }}" alt="logo sinp">
+                        <img src="{{ site_url ~ '/img/logo-mtes.png' }}" alt="logo mtes" width="75px" height="auto">
+       					<img src="{{ site_url ~ '/img/logo-SINP.png' }}" alt="logo sinp" width="180px" height="auto">
                     </div>
                 </div>
-                <div class="col-xs-4 text-right h1 header-title">
+                <div class="col-xs-8 text-right h1 header-title">
                     Dépôt Légal de données de Biodiversité
                 </div>
             </div>
         </div>
     </header>
-
 
     {#== Page content ==#}
     <main>

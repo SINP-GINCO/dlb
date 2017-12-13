@@ -54,12 +54,30 @@ class CertificateGenerator {
 			$jddMetadataFileDownloadServiceURL = $this->configuration->getConfig('jddMetadataFileDownloadServiceURL');
 			$jddCAMetadataFileDownloadServiceURL = str_replace("cadre/jdd", "cadre", $jddMetadataFileDownloadServiceURL);
 
-			
-			$this->knp_snappy->generateFromHtml($this->templating->render('IgnDlbBundle:Jdd:certificate_pdf.html.twig', array(
+
+			$html = $this->templating->render('IgnDlbBundle:Jdd:certificate_pdf.html.twig', array(
 				'jdd' => $jdd,
-				'jddCAMetadataFileDownloadServiceURL' => $jddCAMetadataFileDownloadServiceURL
-			)), $filePath . $fileName);
-			
+				'jddCAMetadataFileDownloadServiceURL' => $jddCAMetadataFileDownloadServiceURL,
+			));
+
+			// Output the html (for debugging)
+			// file_put_contents($filePath . "certificat" . date("H:i:s").  ".html", $html);
+
+			try {
+				$this->knp_snappy->generateFromHtml($html, $filePath . $fileName, array(
+					'orientation' => 'Landscape'
+				));
+			}
+			catch (\RuntimeException $e) {
+				echo "Exception Snappy:\n";
+				echo $e->getMessage();
+				// On a real error, re-throw the exception
+				// If just warnings, let it be
+				if (strpos($e->getMessage(), 'Error:') !== false) {
+					throw $e;
+				}
+			}
+
 			$jdd->setField('certificateFilePath', $filePath . $fileName);
 			$this->em->flush();
 		}
