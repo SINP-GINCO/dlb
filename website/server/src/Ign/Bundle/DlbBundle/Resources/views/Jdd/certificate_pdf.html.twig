@@ -31,7 +31,7 @@ Certificat de dépôt pour le jeu de données de biodiversité : {{ jdd.field('t
             <p>Procédure de télé­versement :</p>
         </div>
         <div class="col-md-8">
-            <p>Lien vers la procédure dans TPS (quand on récupèrera les infos via la fiche MTD du CA ­ plus tard)</p>
+            <p><strong>Lien vers la procédure dans TPS ??? / {{ jdd.field('tpsId') }}</strong></p>
         </div>
     </div>
     <div class="row">
@@ -50,7 +50,7 @@ Certificat de dépôt pour le jeu de données de biodiversité : {{ jdd.field('t
             <p>Titre du projet :</p>
         </div>
         <div class="col-md-8">
-            <p>Titre du projet dans TPS (plus tard)</p>
+            <p>{{ jdd.field('caTitle') }}</p>
         </div>
     </div>
     <div class="row">
@@ -58,7 +58,7 @@ Certificat de dépôt pour le jeu de données de biodiversité : {{ jdd.field('t
             <p>Descriptif du projet :</p>
         </div>
         <div class="col-md-8">
-            <p>Descriptif du projet dans TPS (plus tard)</p>
+            <p><strong>Descriptif du projet dans TPS (???)</strong></p>
         </div>
     </div>
     <div class="row">
@@ -66,7 +66,7 @@ Certificat de dépôt pour le jeu de données de biodiversité : {{ jdd.field('t
             <p>Commanditaire :</p>
         </div>
         <div class="col-md-8">
-            <p>Commanditaire dans procédure TPS (plus tard)</p>
+            <p>{{ jdd.field('projetOwner') }}</p>
         </div>
     </div>
 
@@ -93,10 +93,10 @@ Certificat de dépôt pour le jeu de données de biodiversité : {{ jdd.field('t
     </div>
     <div class="row">
         <div class="col-md-4">
-            <p>Organisme dépositaire :</p>
+            <p>Dépositaire :</p>
         </div>
         <div class="col-md-8">
-            <p>{{ jdd.user.username }}</p>
+            <p>{{ jdd.user.username }} / {{ jdd.user.provider.label }}</p>
         </div>
     </div>
     <div class="row">
@@ -112,7 +112,8 @@ Certificat de dépôt pour le jeu de données de biodiversité : {{ jdd.field('t
             <p>Url publique jeu de données :</p>
         </div>
         <div class="col-md-8">
-            <p>https://depot­legal­biodiversite.naturefrance.fr/jdd/{{jdd.field('metadataId')}}/show</p>
+            {% set pubTpsUrl = domain ~path('published_jdds_by_tps', { 'tpsId': jdd.field('tpsId') }) %}
+            <p><a href="{{ pubTpsUrl }}">{{ pubTpsUrl }}</a></p>
         </div>
     </div>
 {% endblock %}
