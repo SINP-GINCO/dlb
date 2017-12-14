@@ -35,6 +35,7 @@ $paramStr = implode(' ', array_slice($argv, 1));
 try {
 	/* patch code here */
 	// execCustSQLFile("$currentDir/xxx.sql", $config);
+	execCustSQLFile("$currentDir/update_taxref_to_v11.sql", $config);
 } catch (Exception $e) {
 	echo "$currentDir/update_dlb.php\n";
 	echo "exception: " . $e->getMessage() . "\n";
@@ -45,11 +46,24 @@ try {
 
 $CLIParams = implode(' ', array_slice($argv, 1));
 /* patch user raw_data here */
-// system("php $currentDir/xxx.php $CLIParams", $returnCode1);
-/*
+$connectStr ="host="     .$config['db.host'];
+$connectStr.=" port="    .$config['db.port'];
+$connectStr.=" user="    .$config['db.adminuser'];
+$connectStr.=" password=".$config['db.adminuser.pw'];
+$connectStr.=" dbname="  .$config['db.name'];
+system("$currentDir/populateTaxref.sh $connectStr", $returnCode1);
+
 if ($returnCode1 != 0) {
-	echo "$currentDir/apply_db_patch.php\n";
+	echo "$sprintDir/update_db_sprint.php\n";
+	echo "exception: error code returned from php sql script \n";
+	exit(1);
+}
+ 
+try {
+	/* patch code here */
+	execCustSQLFile("$currentDir/../../../../ginco/database/init/populate_mode_taxref_table.sql", $config);
+} catch (Exception $e) {
+	echo "$sprintDir/update_db_sprint.php\n";
 	echo "exception: " . $e->getMessage() . "\n";
 	exit(1);
 }
-*/
