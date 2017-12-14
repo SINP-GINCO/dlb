@@ -60,6 +60,7 @@ class JddController extends BaseController {
 					// Get info on tps from CA metadata
 					$metadataTpsFields = $this->get('dlb.metadata_tps_reader')->getTpsMetadata($tpsId);
 					$tpsLibelle = $metadataTpsFields['libelle'];
+					$caDescription = $metadataTpsFields['description'];
 					$projetOwner = $metadataTpsFields['projetOwner'];
 					$projetManager = $metadataTpsFields['projetManager'];
 					// Stock info to display
@@ -157,6 +158,8 @@ class JddController extends BaseController {
 			$attachedJdd->setField('projetOwner', $projetOwner);
 			$attachedJdd->setField('projetManager', $projetManager);
 			$attachedJdd->setField('caTitle', $tpsLibelle);
+			$attachedJdd->setField('caDescription', substr($caDescription, 0, 255));
+
 			$em->flush();
 
 			// Redirects to the new submission form: upload data
