@@ -301,7 +301,7 @@
                                     </div>
                                 </div>
                                 <div class="dbb-content">
-                                {{ jdd.field('publishedAt') ? jdd.field('publishedAt')|replace({'_':' ', '-':':'})|date('d/m/Y H\\hi') : 'DBB.status.noDBB'|trans }}
+                                    {{ jdd.field('publishedAt') ? jdd.field('publishedAt')|replace({'_':' ', '-':':'})|date('d/m/Y H\\hi') : 'DBB.status.noDBB'|trans }}
                                 </div>
                             </div>
                         </div>

@@ -194,10 +194,22 @@ function updateDBBContent(jddId) {
     // Content if DBB is not GENERATING
     contentDiv.html('');
     var content = $('<p></p>');
-    if (dbbStatus == 'generating' || dbbStatus == 'published') {
+    if (dbbStatus == 'generating') {
+        contentDiv.hide();
+    } else if (dbbStatus == 'published') {
+        contentDiv.show();
         content.attr("data-full-date", dbbDiv.data('dbb-created-datetime'));
         content.html(dbbDiv.data('dbb-created-date') + "<br/>" + dbbDiv.data('dbb-created-time'));
         contentDiv.append(content);
+    }
+    else {
+        contentDiv.show();
+        content.html("{{ 'DBB.status.noDBB'|trans }}");
+        contentDiv.append(content);
+    }
+
+    // Disable submissions buttons
+    if (dbbStatus == 'generating' || dbbStatus == 'published') {
         // Hide the "add new file" link
         newSubLineDiv.hide();
         // Disable the delete submissions buttons
@@ -205,10 +217,6 @@ function updateDBBContent(jddId) {
         deleteSubmissionButtons.addClass("btn-default");
         deleteSubmissionButtons.attr({"data-toggle": "modal", "data-target": "#modal-impossible-delete-submission"});
         deleteSubmissionButtons.removeAttr("onClick href");
-    }
-    else {
-        content.html("{{ 'DBB.status.noDBB'|trans }}");
-        contentDiv.append(content);
     }
 
 
