@@ -22,16 +22,18 @@ fi
 #connectionStr="host=localhost port=$PORT_DB user=${db_adminuser} password=${db_adminuser_pw} dbname=${db_name}"
 connectionStr=$@
 rootDir=$(dirname $(readlink -f $0))
+downloadDir=/var/data/download
+mkdir -p $downloadDir
 
 refurl=https://ginco.naturefrance.fr/ref
-taxref=$rootDir/../../download/taxrefv11.txt
+taxref=$downloadDir/taxrefv11.txt
 
 if [ -f "$taxref" ]
 then
 	echo "$taxref a été trouvé localement..."
 else
 	echo "téléchargement de taxref v11..."
-	wget "$refurl/TAXREFv11/TAXREFv11.txt" -O $taxref --no-verbose
+	wget "$refurl/TAXREFv11/TAXREFv11.txt" -O $taxref
 fi
 echo "Intégration des données taxref dans la base..."
 copyOptions="NULL '', FORMAT 'csv', HEADER, DELIMITER E'\t', ENCODING 'UTF-8'"
