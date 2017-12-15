@@ -54,7 +54,7 @@ $connectStr.=" dbname="  .$config['db.name'];
 system("$currentDir/populateTaxref.sh $connectStr", $returnCode1);
 
 if ($returnCode1 != 0) {
-	echo "$sprintDir/update_db_sprint.php\n";
+	echo "$currentDir/update_db_sprint.php\n";
 	echo "exception: error code returned from php sql script \n";
 	exit(1);
 }
@@ -63,7 +63,7 @@ try {
 	/* patch code here */
 	execCustSQLFile("$currentDir/../../../../ginco/database/init/populate_mode_taxref_table.sql", $config);
 } catch (Exception $e) {
-	echo "$sprintDir/update_db_sprint.php\n";
+	echo "$currentDir/update_db_sprint.php\n";
 	echo "exception: " . $e->getMessage() . "\n";
 	exit(1);
 }
