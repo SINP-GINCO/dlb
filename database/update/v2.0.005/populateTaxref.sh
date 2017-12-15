@@ -33,7 +33,7 @@ then
 	echo "$taxref a été trouvé localement..."
 else
 	echo "téléchargement de taxref v11..."
-	wget "$refurl/TAXREFv11/TAXREFv11.txt" -O $taxref
+	wget "$refurl/TAXREFv11/TAXREFv11.txt" -O $taxref --no-verbose
 fi
 echo "Intégration des données taxref dans la base..."
 copyOptions="NULL '', FORMAT 'csv', HEADER, DELIMITER E'\t', ENCODING 'UTF-8'"

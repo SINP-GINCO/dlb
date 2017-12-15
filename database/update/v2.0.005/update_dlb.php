@@ -61,7 +61,11 @@ if ($returnCode1 != 0) {
  
 try {
 	/* patch code here */
-	execCustSQLFile("$currentDir/../../../../ginco/database/init/populate_mode_taxref_table.sql", $config);
+	if ($config['deploy.host'] != 'localhost') {
+		execCustSQLFile("$currentDir/../../init/populate_mode_taxref_table.sql", $config);
+	} else {
+		execCustSQLFile("$currentDir/../../../../ginco/database/init/populate_mode_taxref_table.sql", $config);
+	}
 } catch (Exception $e) {
 	echo "$currentDir/update_db_sprint.php\n";
 	echo "exception: " . $e->getMessage() . "\n";
