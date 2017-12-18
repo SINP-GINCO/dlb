@@ -7,9 +7,12 @@ Documentation de la plateforme Dépôt Légal de données de Biodiversité
 =====================================================================
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 5
 
     Présentation_générale/index
+    Etapes_processus/index
+    Visualisation/index
+    Faq/index
 
 
 Index
