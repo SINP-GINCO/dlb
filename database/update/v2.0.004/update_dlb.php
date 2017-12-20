@@ -3,11 +3,9 @@ $currentDir = dirname(__FILE__);
 // Require file from dev or build environnement
 if (is_file("$currentDir/../../../lib/share.php")) {
 	require_once "$currentDir/../../../lib/share.php";
-}
-else if (is_file("$currentDir/../../../../ginco/lib/share.php")) {
+} else if (is_file("$currentDir/../../../../ginco/lib/share.php")) {
 	require_once "$currentDir/../../../../ginco/lib/share.php";
-}
-else {
+} else {
 	echo "Can't find file ..../lib/share.php\n\n";
 	exit(1);
 }
@@ -32,12 +30,20 @@ function usage($mess = NULL) {
 if (count($argv) == 1)
 	usage();
 $config = loadPropertiesFromArgs();
+$paramStr = implode(' ', array_slice($argv, 1));
 
 try {
 	/* patch code here */
 	execCustSQLFile("$currentDir/add_cancel_jdd_publication_permission.sql", $config);
-	execCustSQLFile("$currentDir/add_tps_id_field.sql", $config);
 	execCustSQLFile("$currentDir/add_permission_on_published_dataset.sql", $config);
+	execCustSQLFile("$currentDir/add_integration_service_event_listener.sql", $config);
+
+	# setting metadata and metadata_work schema
+	system("php $currentDir/metadata/import_metadata_from_csv.php $paramStr -Dschema=metadata");
+	system("php $currentDir/metadata/import_metadata_from_csv.php $paramStr -Dschema=metadata_work");
+
+	execCustSQLFile("$currentDir/add_tps_id_field.sql", $config);
+	execCustSQLFile("$currentDir/update_home_content.sql", $config);
 } catch (Exception $e) {
 	echo "$currentDir/update_dlb.php\n";
 	echo "exception: " . $e->getMessage() . "\n";
@@ -48,12 +54,10 @@ try {
 
 $CLIParams = implode(' ', array_slice($argv, 1));
 /* patch user raw_data here */
-//  system("php $currentDir/script1.php $CLIParams", $returnCode1);
-// system("php $currentDir/script2.php $CLIParams", $returnCode2);
-/*
- if ($returnCode1 != 0 || $returnCode2 != 0) {
- echo "$currentDir/apply_db_patch.php\n";
- echo "exception: " . $e->getMessage() . "\n";
- exit(1);
- }
- */
+system("php $currentDir/update_roles.php $CLIParams", $returnCode1);
+
+if ($returnCode1 != 0) {
+	echo "$currentDir/apply_db_patch.php\n";
+	echo "exception: " . $e->getMessage() . "\n";
+	exit(1);
+}

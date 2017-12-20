@@ -1,17 +1,17 @@
 <?php
 namespace Ign\Bundle\DlbBundle\Controller;
 
-use Ign\Bundle\OGAMBundle\Controller\GincoController;
 use Ign\Bundle\GincoBundle\Entity\RawData\DEE;
 use Ign\Bundle\GincoBundle\Entity\Website\Message;
 use Ign\Bundle\GincoBundle\Exception\DEEException;
+use Ign\Bundle\OGAMBundle\Controller\GincoController;
 use Ign\Bundle\OGAMBundle\Entity\RawData\Jdd;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 /**
@@ -26,14 +26,14 @@ class DBBController extends GincoController {
 	 * Publish a RabbitMQ message to generate the DLB in background
 	 * Include generation of dbb, metadatas, certificate and dee
 	 *
-	 * @param Request $request        	
+	 * @param Request $request
 	 * @return JsonResponse GET parameter: jddId, the Jdd identifier
-	 *        
+	 *
 	 *         @Route("/dlb/generate_dlb", name = "generate_dlb")
 	 */
 	public function generateDLB(Request $request) {
 		$em = $this->get('doctrine.orm.entity_manager');
-		
+
 		// Find jddId if given in GET parameters
 		$jddId = intval($request->query->get('jddId', 0));
 		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
@@ -43,29 +43,29 @@ class DBBController extends GincoController {
 				'message' => 'No jdd found for this id: ' . $jddId
 			]);
 		}
-		
+
 		$dbbProcess = $this->get('dlb.dbb_process');
 		$deeProcess = $this->get('ginco.dee_process');
-		
+
 		// Create a line in the DEE table
 		$newDEE = $deeProcess->createDEELine($jdd, $this->getUser(), 'Dépôt Légal de données de Biodiversité');
-		
+
 		// Add information in jddField table
 		$jdd->setField('status', 'generating');
 		$now = new \DateTime();
 		$jdd->setField('publishedAt', $now->format('Y-m-d_H-i-s'));
 		$em->flush();
-		
+
 		// Publish the message to RabbitMQ
 		$messageId = $this->get('old_sound_rabbit_mq.ginco_generic_producer')->publish('dbbProcess', [
 			'DEEId' => $newDEE->getId()
 		]);
 		$message = $em->getRepository('IgnGincoBundle:Website\Message')->findOneById($messageId);
-		
+
 		// Attach message id to the DEE (use it for the progress bar)
 		$newDEE->setMessage($message);
 		$em->flush();
-		
+
 		return new JsonResponse($this->getStatus($jddId));
 	}
 
@@ -77,12 +77,12 @@ class DBBController extends GincoController {
 	public function directDLBAction(Jdd $jdd) {
 		$dbbProcess = $this->get('dlb.dbb_process');
 		$deeProcess = $this->get('ginco.dee_process');
-		
+
 		// Create a line in the DEE table
 		$newDEE = $deeProcess->createDEELine($jdd, $this->getUser(), 'Dépôt Légal de données de Biodiversité - test');
-		
+
 		$dbbProcess->generateAndSendDBB($newDEE->getId());
-		
+
 		return $this->redirect($this->generateUrl('integration_home'));
 	}
 
@@ -114,14 +114,14 @@ class DBBController extends GincoController {
 		$em = $this->get('doctrine.orm.entity_manager');
 		$deeProcess = $this->get('ginco.dee_process');
 		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
-		
+
 		// Create a line in the DEE table
 		$newDEE = $deeProcess->createDEELine($jdd, $this->getUser(), 'Dépôt Légal de données de Biodiversité - test');
-		
+
 		// Use DEE entity to generate dbb (attributes are the same)
 		$DEE = $em->getRepository('IgnGincoBundle:RawData\DEE')->findOneByJdd($jddId);
 		$this->get('dlb.dbb_generator')->generateDBB($DEE);
-		
+
 		return $this->redirect($this->generateUrl('integration_home'));
 	}
 
@@ -133,9 +133,9 @@ class DBBController extends GincoController {
 	public function pdfSaveAction($jddId) {
 		$em = $this->get('doctrine.orm.entity_manager');
 		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
-		
+
 		$this->get('dlb.certificate_generator')->generateCertificate($jdd);
-		
+
 		return $this->redirect($this->generateUrl('integration_home'));
 	}
 
@@ -147,7 +147,7 @@ class DBBController extends GincoController {
 	public function pdftwigSaveAction($jddId) {
 		$em = $this->get('doctrine.orm.entity_manager');
 		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
-		
+
 		return $this->render('IgnDlbBundle:Jdd:certificate_pdf.html.twig', array(
 			'jdd' => $jdd,
 			'jddCAMetadataFileDownloadServiceURL' => 'dsf'
@@ -166,11 +166,11 @@ class DBBController extends GincoController {
 		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->getUser()->isAllowed('MANAGE_DATASETS')) {
 			throw $this->createAccessDeniedException();
 		}
-		
+
 		$em = $this->get('doctrine.orm.entity_manager');
 		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
 		$filePath = $jdd->getField('dbbFilePath');
-		
+
 		return $this->download($filePath);
 	}
 
@@ -186,11 +186,11 @@ class DBBController extends GincoController {
 		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->getUser()->isAllowed('MANAGE_DATASETS')) {
 			throw $this->createAccessDeniedException();
 		}
-		
+
 		$em = $this->get('doctrine.orm.entity_manager');
 		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
 		$filePath = $jdd->getField('certificateFilePath');
-		
+
 		return $this->download($filePath);
 	}
 
@@ -206,15 +206,15 @@ class DBBController extends GincoController {
 		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->getUser()->isAllowed('MANAGE_DATASETS')) {
 			throw $this->createAccessDeniedException();
 		}
-		
+
 		$em = $this->get('doctrine.orm.entity_manager');
 		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
-		
+
 		$dbbPublicDirectory = $this->get('ogam.configuration_manager')->getConfig('dbbPublicDirectory');
 		$metadataCAId = $jdd->getField('metadataCAId');
-		
+
 		$caMetadataFile = $dbbPublicDirectory . '/' . $jdd->getId() . '/' . $metadataCAId;
-		
+
 		return $this->download($caMetadataFile);
 	}
 
@@ -230,15 +230,15 @@ class DBBController extends GincoController {
 		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->getUser()->isAllowed('MANAGE_DATASETS')) {
 			throw $this->createAccessDeniedException();
 		}
-		
+
 		$em = $this->get('doctrine.orm.entity_manager');
 		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
-		
+
 		$dbbPublicDirectory = $this->get('ogam.configuration_manager')->getConfig('dbbPublicDirectory');
 		$metadataId = $jdd->getField('metadataId');
-		
+
 		$jddMetadataFile = $dbbPublicDirectory . '/' . $jdd->getId() . '/' . $metadataId;
-		
+
 		return $this->download($jddMetadataFile);
 	}
 
@@ -246,7 +246,7 @@ class DBBController extends GincoController {
 	 * Download the zip archive of a DEE for a jdd
 	 * Note: direct downloading is prohibited by apache configuration, except for a list of IPs
 	 *
-	 * @param DEE $DEE        	
+	 * @param DEE $DEE
 	 * @return BinaryFileResponse
 	 * @throws DEEException @Route("/dlb/{jddId}/download-dee-dlb", name = "download_dee_dlb", requirements={"jddId": "\d+"})
 	 */
@@ -254,20 +254,20 @@ class DBBController extends GincoController {
 		$em = $this->get('doctrine.orm.entity_manager');
 		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
 		$DEE = $em->getRepository('IgnGincoBundle:RawData\DEE')->findOneByJdd($jddId);
-		
+
 		// Get archive
 		$archivePath = $DEE->getFilePath();
 		if (!$archivePath) {
 			throw new DEEException("No archive file path for this DEE: " . $DEE->getId());
 		}
-		
+
 		// Test the existence of the zip file
 		$fileName = pathinfo($archivePath, PATHINFO_BASENAME);
 		$archiveFilePath = $this->get('ogam.configuration_manager')->getConfig('deePublicDirectory') . '/' . $fileName;
 		if (!is_file($archiveFilePath)) {
 			throw new DEEException("DEE archive file does not exist for this DEE: " . $DEE->getId() . ' ' . $archiveFilePath);
 		}
-		
+
 		// Get back the file
 		$response = new BinaryFileResponse($archiveFilePath);
 		$response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $fileName);
@@ -278,7 +278,7 @@ class DBBController extends GincoController {
 	 * Download a file
 	 * Note: direct downloading is prohibited by apache configuration, except for a list of IPs
 	 *
-	 * @param string $file        	
+	 * @param string $file
 	 * @return BinaryFileResponse
 	 * @throws Exception
 	 *
@@ -287,9 +287,9 @@ class DBBController extends GincoController {
 		if (!is_file($filePath)) {
 			throw new \Exception("file does not exist: " . $filePath);
 		}
-		
+
 		$fileName = pathinfo($filePath, PATHINFO_BASENAME);
-		
+
 		// -- Get back the file
 		$response = new BinaryFileResponse($filePath);
 		$response->setContentDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $fileName);
@@ -299,16 +299,16 @@ class DBBController extends GincoController {
 	/**
 	 * DBB generation - get status of the background task
 	 *
-	 * @param Request $request        	
+	 * @param Request $request
 	 * @return JsonResponse GET parameter: jddId, the Jdd identifier
-	 *        
+	 *
 	 *         @Route("/status", name = "dbb_status")
 	 */
 	public function getDBBStatus(Request $request) {
 		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
- 		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->getUser()->isAllowed('MANAGE_DATASETS')) {
- 			throw $this->createAccessDeniedException();
- 		}
+		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->getUser()->isAllowed('MANAGE_DATASETS')) {
+			throw $this->createAccessDeniedException();
+		}
 		// Find jddId if given in GET parameters
 		$jddId = intval($request->query->get('jddId', 0));
 		return new JsonResponse($this->getStatus($jddId));
@@ -317,9 +317,9 @@ class DBBController extends GincoController {
 	/**
 	 * DBBgeneration - get status of a set of background task
 	 *
-	 * @param Request $request        	
+	 * @param Request $request
 	 * @return JsonResponse GET parameter: jddIds, an array of Jdd identifiers
-	 *        
+	 *
 	 *         @Route("/status/all", name = "dbb_status_all")
 	 */
 	public function getDBBStatusAll(Request $request) {
@@ -327,15 +327,15 @@ class DBBController extends GincoController {
 		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->getUser()->isAllowed('MANAGE_DATASETS')) {
 			throw $this->createAccessDeniedException();
 		}
-		
+
 		// Find jddIds if given in GET parameters
 		$jddIds = $request->query->get('jddIds', []);
-		
+
 		$json = array();
 		foreach ($jddIds as $jddId) {
 			$json[] = $this->getStatus($jddId);
 		}
-		
+
 		return new JsonResponse($json);
 	}
 
@@ -345,10 +345,8 @@ class DBBController extends GincoController {
 	 *
 	 * @param
 	 *        	$jddId
-	 * @param DBB|null $DBB        	
-	 * @return array
-	 * 
-     *         @Route("/status/get", name = "dbb_status_get")
+	 * @param DBB|null $DBB
+	 * @return array @Route("/status/get", name = "dbb_status_get")
 	 */
 	protected function getStatus($jddId) {
 		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
@@ -358,13 +356,13 @@ class DBBController extends GincoController {
 
 		$em = $this->get('doctrine.orm.entity_manager');
 		$jddRepo = $em->getRepository('OGAMBundle:RawData\Jdd');
-		
+
 		// The returned informations
 		$json = array(
 			'jddId' => $jddId,
 			'success' => true
 		);
-		
+
 		$jdd = $jddRepo->findOneById($jddId);
 		if (!$jdd) {
 			$json['success'] = false;
@@ -389,7 +387,7 @@ class DBBController extends GincoController {
 					'id' => $jdd->getId(),
 					'status' => $jdd->getField('status'),
 					'createdDate' => $createdDateTime->format('d/m/Y'),
-					'createdTime' => $createdDateTime->format('H:i'),
+					'createdTime' => $createdDateTime->format('H\hi'),
 					'fullCreated' => $jdd->getField('publishedAt')
 				);
 

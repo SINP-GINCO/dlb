@@ -196,9 +196,10 @@ class MetadataTpsReader {
 			$xpath = new \DOMXpath($doc);
 			
 			$fields['libelle'] = $xpath->query('//ca:CadreAcquisition/ca:libelle')->item(0)->nodeValue;
+			$fields['description'] = $xpath->query('//ca:CadreAcquisition/ca:description')->item(0)->nodeValue;
 			$fields['projetOwner'] = $xpath->query('//ca:CadreAcquisition/ca:acteurAutre[ca:ActeurType/ca:roleActeur="3"]/ca:ActeurType/ca:organisme')->item(0)->nodeValue;
 			$fields['projetManager'] = $xpath->query('//ca:CadreAcquisition/ca:acteurAutre[ca:ActeurType/ca:roleActeur="4"]/ca:ActeurType/ca:organisme')->item(0)->nodeValue;
-			
+
 			$this->logger->debug('libelle : ' . $xpath->query('//ca:CadreAcquisition/ca:libelle')
 				->item(0)->nodeValue);
 		} catch (\Exception $e) {
@@ -244,6 +245,7 @@ class MetadataTpsReader {
 			$xpath = new \DOMXpath($doc);
 			
 			$fields['tpsId'] = $xpath->query('//ca:CadreAcquisition/ca:idTPS')->item(0)->nodeValue;
+			$fields['description'] = $xpath->query('//ca:CadreAcquisition/ca:description')->item(0)->nodeValue;
 			$fields['projetOwner'] = $xpath->query('//ca:CadreAcquisition/ca:acteurAutre[ca:ActeurType/ca:roleActeur="3"]/ca:ActeurType/ca:organisme')->item(0)->nodeValue;
 			$fields['projetManager'] = $xpath->query('//ca:CadreAcquisition/ca:acteurAutre[ca:ActeurType/ca:roleActeur="4"]/ca:ActeurType/ca:organisme')->item(0)->nodeValue;
 			

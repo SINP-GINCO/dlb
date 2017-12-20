@@ -64,6 +64,7 @@ htmlandpdf:
 	@echo "Building html..."
 	make html
 	@echo
+	mkdir -p $(BUILDDIR)/html/_downloads/
 	cp $(BUILDDIR)/latex/Ginco.pdf $(BUILDDIR)/html/_downloads/
 	@echo
 	@echo "Pdf documentation copied to $(BUILDDIR)/html/_downloads/"

@@ -3,6 +3,13 @@
 # - overwrite translations from Ginco and Ogam Bundles
 # --> No need to rewrite correct translations from Ginco and Ogam Bundles
 
+
+# Homepage
+# ----------------------
+Presentation:
+  title: La télé-procédure de versement
+  link: Présentation de la télé-procédure
+  
 DBB:
   table:
     title: Dépôt légal
@@ -33,7 +40,7 @@ Jdd:
     submissions: Import de Données Brutes de Biodiversité
     procedure: Procédure
     tpsNumber: n°TPS
-    published.title: Jeux de données ayant fait l'objet d'un dépôt légal
+    published.title: Liste des études et jeux de données déposés
     titleAndId: Titre / Identifiant
     publishedByTps.title: Procédure TPS n°
     notExist.title: Aucune procédure pour l'identifiant TPS n° 
@@ -50,4 +57,9 @@ Jdd:
   page:
     caTitle: Titre
     projectManager: Déposant
+Submission:
+  delete:
+    impossible: La suppression de ce fichier est impossible car le jeu de données a été déposé.
 Menu.publishedDatasets: Consulter les jeux de données déposés
+Menu:
+  RegionalData: Données de biodiversité

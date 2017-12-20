@@ -223,19 +223,25 @@ form label.required:after {
 //------------------------------
 
 #report-header {
+  @report-header-height: 120px;
   #report-banner {
     height: 150px;
     background-image: url("/../img/bandeau-dlb-report.jpg"); // Don't change the path !!! https://github.com/kriswallsmith/assetic/issues/512
     background-size: 3000px 150px;
     background-repeat: no-repeat;
     #header-logo {
-      margin-top: 5px;
+      height: @report-header-height;
+      line-height: @report-header-height;
       img {
         margin-right: 25px;
       }
     }
     .header-title {
       color: white;
+      height: @report-header-height;
+      line-height: @report-header-height;
+      margin: 0;
+      padding-right: 30px;
     }
   }
 }
@@ -422,9 +428,13 @@ body {
     height: @logo-height-base;
     width: auto;
     vertical-align: bottom;
-    &.ign, &.mnhn {
+    &.ign, &.mnhn, &.bio {
       height: @logo-height-base * 0.75;
-      margin-right: 30px;
+      margin-right: 25px;
+    }
+    &.apropos {
+      height: @logo-height-base * 0.5;
+      margin-top: 10px;
     }
   }
 
@@ -466,7 +476,11 @@ body {
       }
     }
   }
-
+  .homepage-intro {
+    img {
+      margin-top: 65px;
+    }
+  }
 }
 
 

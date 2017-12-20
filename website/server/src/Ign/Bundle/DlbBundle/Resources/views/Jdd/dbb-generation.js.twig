@@ -119,7 +119,6 @@ function updateDBBData(jddId, data) {
 
     // DBB status
     if ("dbb" in data && "status" in data.dbb ) {
-
         dbbDiv.data('dbb-status', data.dbb.status);
         if (data.dbb.status == 'published') {
             dbbDiv.data('dbb-id', data.dbb.id );
@@ -165,6 +164,8 @@ function updateDBBContent(jddId) {
     var messageStatus = dbbDiv.data('message-status');
     var messageProgress = Math.round(dbbDiv.data('message-progress'));
 
+    var deleteSubmissionButtons = $("a[data-remove-submission-jdd-id='" + jddId + "']");
+
     //-- Content OR progress
 
     // Update progress bar if DBB is GENERATING
@@ -191,24 +192,31 @@ function updateDBBContent(jddId) {
     }
 
     // Content if DBB is not GENERATING
+    contentDiv.html('');
+    var content = $('<p></p>');
     if (dbbStatus == 'generating') {
-        contentDiv.html('');
-        // Hide import and delete submission in the jdd
-        subLineDiv.addClass('hidden');
-        deleteSubDiv.addClass('hidden');
+        contentDiv.hide();
+    } else if (dbbStatus == 'published') {
+        contentDiv.show();
+        content.attr("data-full-date", dbbDiv.data('dbb-created-datetime'));
+        content.html(dbbDiv.data('dbb-created-date') + "<br/>" + dbbDiv.data('dbb-created-time'));
+        contentDiv.append(content);
     }
     else {
-        contentDiv.html('');
-        var content = $('<p></p>');
+        contentDiv.show();
+        content.html("{{ 'DBB.status.noDBB'|trans }}");
         contentDiv.append(content);
-        content.attr("data-full-date", dbbDiv.data('dbb-created-datetime'));
+    }
 
-        if (dbbStatus == 'unpublished') {
-            content.html("{{ 'DBB.status.noDBB'|trans }}");
-        }
-        else {
-            content.html(dbbDiv.data('dbb-created-date') + "<br/>" + dbbDiv.data('dbb-created-time'));
-        }
+    // Disable submissions buttons
+    if (dbbStatus == 'generating' || dbbStatus == 'published') {
+        // Hide the "add new file" link
+        newSubLineDiv.hide();
+        // Disable the delete submissions buttons
+        deleteSubmissionButtons.removeClass("btn-danger");
+        deleteSubmissionButtons.addClass("btn-default");
+        deleteSubmissionButtons.attr({"data-toggle": "modal", "data-target": "#modal-impossible-delete-submission"});
+        deleteSubmissionButtons.removeAttr("onClick href");
     }
 
 
@@ -263,11 +271,12 @@ function updateDBBContent(jddId) {
         reports += "<a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.mtd'|trans }}' href='" + href + "'> " +
                 "<span class='glyphicon glyphicon-align-justify' aria-hidden='true'></span></a><br/>";
 
-        // Link to download DEE zipped
-        var href = "{{ path('download_dee_dlb', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
-        reports += "<a role='button' class='btn btn-xs btn-primary' title='{{ 'DEE.download'|trans }}' href='" + href + "'> " +
-                "<span class='glyphicon glyphicon-tree-deciduous' aria-hidden='true'></span></a><br/>";
-
+		if ( {{ app.user|json_encode()|raw }} ) {
+        	// Link to download DEE zipped
+        	var href = "{{ path('download_dee_dlb', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
+        	reports += "<a role='button' class='btn btn-xs btn-primary' title='{{ 'DEE.download'|trans }}' href='" + href + "'> " +
+        	        "<span class='glyphicon glyphicon-tree-deciduous' aria-hidden='true'></span></a><br/>";
+		}
         reports += "</ul></div>";
         actionsDiv.append(reports);
     }

@@ -75,6 +75,7 @@ assetic:
                 - "%kernel.root_dir%/Resources/css/style.css"
                 - "%kernel.root_dir%/../vendor/wenzhixin/bootstrap-table/dist/bootstrap-table.min.css"
                 - "%kernel.root_dir%/Resources/css/roboto-condensed.css"
+                - "%kernel.root_dir%/../vendor/components/jqueryui/themes/base/jquery-ui.css"
 # - "%kernel.root_dir%/../web/bundles/ignogamconfigurateur/css/style.css"
             filters: [cssrewrite]
             output: "css/bootstrap.css"
@@ -300,7 +301,14 @@ knp_snappy:
     enabled:    true
     binary:     "%kernel.root_dir%/../vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64"
     options:
-            - { name: 'viewport-size', value: ‘1024x768’ }
+            - { name: 'viewport-size', value: 1 }
             - { name: 'page-size', value: 'A4' }
             - { name: 'lowquality', value: false }
-            
+
+# Ivory CKEditor
+ivory_ck_editor:
+    default_config: my_config
+    configs:
+        my_config:
+            toolbar: standard
+            removeButtons: ''
