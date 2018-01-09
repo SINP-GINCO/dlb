@@ -74,10 +74,11 @@ class JddController extends BaseController {
 
 		/* Manage form */
 		$jdd = new Jdd();
-		$form = $this->createForm(new DlbJddType($this->get('dlb.metadata_tps_reader')), $jdd, array(
+		$form = $this->createForm(new DlbJddType($em, $this->get('translator'), $this->get('dlb.metadata_tps_reader')), $jdd, array(
 			// the entity manager used for model choices must be the same as the one used to persist the $jdd entity
 			'entity_manager' => $em,
-			'option_key' => $this->get('dlb.metadata_tps_reader')
+			'option_key' => $this->get('dlb.metadata_tps_reader'),
+			'current_user' => $this->getUser()
 		));
 
 		// Pre-fill form if parameters are passed in the query
@@ -116,7 +117,8 @@ class JddController extends BaseController {
 
 		// Add a custom step to test validity of the jdd_id, with the metadata service
 		$formIsValid = $form->isValid();
-		if ($formIsValid) {
+		/*
+		 if ($formIsValid) {
 			$jddId = $form->get('jdd_id')->getData();
 			$this->get('logger')->debug('metadataId is : ' . $jddId);
 
@@ -130,9 +132,11 @@ class JddController extends BaseController {
 				$formIsValid = false;
 			}
 		}
+		 */
 		if ($formIsValid) {
 			// Read the metadata XML file
 			$mr = $this->get('ginco.metadata_reader');
+			$jddId = $form->get('jdd_id')->getData();
 			try {
 				$fields = $mr->getMetadata($jddId);
 			} catch (MetadataException $e) {
@@ -142,30 +146,44 @@ class JddController extends BaseController {
 			}
 		}
 		if ($formIsValid) {
-			// Add user and provider relationship
-			$jdd->setUser($this->getUser());
-			$jdd->setProvider($this->getUser()
-				->getProvider());
 
-			// writes the jdd to the database
-			// persist won't work (because user and provider are not retrieved via the same entity manager ?)
-			// So merge and get the merged object to access auto-generated id
-			$attachedJdd = $em->merge($jdd);
-			// and we must create the fields for the attached Jdd... beurk !!
-			foreach ($fields as $key => $value) {
-				$attachedJdd->setField($key, $value);
+			// Do we create a new Jdd or get an existing one ?
+			$createJdd = true;
+			$jddId = $form->get('jdd_id')->getData();
+			$jddWithSameMetadataId =$em->getRepository('OGAMBundle:RawData\Jdd')->findByField(array(
+				'metadataId' => $jddId
+			));
+			if (count($jddWithSameMetadataId) > 0) {
+				$createJdd = false;
+				$jddId = $jddWithSameMetadataId[0]->getId();
 			}
-			$attachedJdd->setField('tpsId', $tpsId);
-			$attachedJdd->setField('projetOwner', $projetOwner);
-			$attachedJdd->setField('projetManager', $projetManager);
-			$attachedJdd->setField('caTitle', $tpsLibelle);
-			$attachedJdd->setField('caDescription', substr($caDescription, 0, 255));
 
-			$em->flush();
+			if ($createJdd) {
+				// Add user and provider relationship
+				$jdd->setUser($this->getUser());
+				$jdd->setProvider($this->getUser()
+					->getProvider());
+
+				// writes the jdd to the database
+				// persist won't work (because user and provider are not retrieved via the same entity manager ?)
+				// So merge and get the merged object to access auto-generated id
+				$attachedJdd = $em->merge($jdd);
+				// and we must create the fields for the attached Jdd... beurk !!
+				foreach ($fields as $key => $value) {
+					$attachedJdd->setField($key, $value);
+				}
+				$attachedJdd->setField('tpsId', $tpsId);
+				$attachedJdd->setField('projetOwner', $projetOwner);
+				$attachedJdd->setField('projetManager', $projetManager);
+				$attachedJdd->setField('caTitle', $tpsLibelle);
+				$attachedJdd->setField('caDescription', substr($caDescription, 0, 255));
+				$em->flush();
+				$jddId = $attachedJdd->getId();
+			}
 
 			// Redirects to the new submission form: upload data
 			return $this->redirect($this->generateUrl('integration_creation', array(
-				'jddid' => $attachedJdd->getId()
+				'jddid' => $jddId
 			)));
 		}
 

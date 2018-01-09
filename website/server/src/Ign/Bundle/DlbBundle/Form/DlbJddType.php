@@ -3,6 +3,7 @@ namespace Ign\Bundle\DlbBundle\Form;
 
 use Doctrine\ORM\EntityRepository;
 use Ign\Bundle\OGAMBundle\Entity\RawData\Jdd;
+use Ign\Bundle\OGAMBundle\Entity\Website\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormEvents;
@@ -23,12 +24,20 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 class DlbJddType extends AbstractType {
 
 	private $metadataTpsReader;
+	private $em;
+	private $translator;
+	private $currentUser;
 
-	public function __construct($metadataTpsReader) {
+	public function __construct($em, $translator, $metadataTpsReader) {
+		$this->em = $em;
+		$this->translator = $translator;
 		$this->metadataTpsReader = $metadataTpsReader;
 	}
 
 	public function buildForm(FormBuilderInterface $builder, array $options) {
+
+		$this->currentUser = $options['current_user'];
+
 		$builder->add('tps_id', TextType::class, array(
 			'label' => 'Jdd.new.tpsId',
 			'mapped' => false,
@@ -61,19 +70,17 @@ class DlbJddType extends AbstractType {
 			)
 		))
 			->add('submit', SubmitType::class, array(
-			'label' => 'Créer le jeu de données'
+			'label' => 'Jdd.new.submit'
 		));
 		
 		// We add a select list jdd_id dynamically (cf ajax in the twig)
 		$formModifier = function ($form, $tpsId = null) {
 			$choices = array();
 			
-			// Get jdd from CA metadata
 			if ($tpsId != null) {
+				// Get jdd from CA metadata
 				$metadataFields = $this->metadataTpsReader->getJddMetadatas($tpsId);
-				$choices = $metadataFields['jddIds'];
-				//var_dump($choices);
-				//exit();
+				$choices = array_flip($metadataFields['jddIds']);
 			}
 			if (array_key_exists(0, $choices)) {
 				$form->get('tps_id')->addError(new FormError('error message'));
@@ -82,10 +89,31 @@ class DlbJddType extends AbstractType {
 			
 			$form->add('jdd_id', ChoiceType::class, array(
 				'choices' => $choices,
+				'choices_as_values' => true,
 				'expanded' => true,
 				'multiple' => false,
 				'mapped' => false,
-				'label' => 'Jdd.new.jddId'
+				'label' => 'Jdd.new.jddId',
+				'choice_attr' => function($val, $key, $index) {
+					// Adds a disabled state if the user can't add data on the jdd
+					$disabled = false;
+					$jddWithSameMetadataId = $this->em->getRepository('OGAMBundle:RawData\Jdd')->findByField(array(
+						'metadataId' => $val
+					));
+					if (count($jddWithSameMetadataId) > 0) {
+						$jdd = $jddWithSameMetadataId[0];
+						if ($this->currentUser
+							&& $this->currentUser->getLogin() != $jdd->getUser()->getLogin()
+							&& !$this->currentUser->isAllowed('MANAGE_DATASETS_OTHER_PROVIDER')) {
+							$disabled = true;
+						}
+					}
+					return ($disabled) ? [
+						'disabled' => true,
+						'title' => $this->translator->trans('Jdd.new.disabled'),
+						'data-toggle' => "tooltip"
+					] : [];
+				}
 			));
 		};
 		// before form submit
@@ -118,6 +146,7 @@ class DlbJddType extends AbstractType {
 		));
 		$resolver->setRequired('entity_manager');
 		$resolver->setRequired('option_key');
+		$resolver->setRequired('current_user');
 	}
 
 	public function getParent() {

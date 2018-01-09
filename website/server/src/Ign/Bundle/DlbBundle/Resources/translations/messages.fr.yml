@@ -54,6 +54,8 @@ Jdd:
      <p>Le numéro TPS est l'identifiant qui a été attribué à votre procédure par l'application TPS.</p>
      <p>Vous devez avoir déjà créé une métadonnée de cadre dacquisition dans <a href="%metadataUrl%" target='_blank'>l'application de métadonnées de l'INPN</a>, pour ce numéro TPS.</p>
     tpsIdInfo: <div><label class="col-sm-4 control-label">Procédure</label> <div class="col-sm-4"> %title% </div></div>
+    disabled: Ce jeu de données a déjà été instancié dans la plateforme par un autre utilisateur, vous ne pouvez pas y importer des données.
+    submit: Importer des données dans le jeu de données
   page:
     caTitle: Titre
     projectManager: Déposant
