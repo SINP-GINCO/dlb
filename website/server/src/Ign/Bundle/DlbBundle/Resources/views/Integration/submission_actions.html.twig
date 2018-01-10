@@ -43,6 +43,7 @@
         {% set integrationDisabled = false %}
         {% set sensitiveDisabled = false %}
         {% set permanentDisabled = false %}
+        {% set statusSubmissionOk = true %}
         {% if submission.step is not constant('STEP_CANCELLED', submission) %}
             {% set integrationDisabled = true %}
             {% set sensitiveDisabled = true %}
@@ -53,37 +54,42 @@
         {% endif %}
         {% if submission.status is constant('STATUS_OK', submission) %}
             {% if user.isAllowed('VIEW_SENSITIVE') %}
-                {% set sensitiveDisabled = false %}
+                {% set statusSubmissionOk = false %}
                 {% set permanentDisabled = false %}
+                {% set sensitiveDisabled = false %}
             {% endif %}
         {% endif %}
         <div class = "btn-group">
-        <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
-            Rapports<span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu dropup" role ="menu">
-            <li>
-                <a class="btn btn-xs" {{ integrationDisabled ? 'disabled' : ''}}
-                   title="{{ integrationDisabled ? 'Report.Integration.DisabledTitle'|trans : 'Report.Integration.Title'|trans }}"
-                   href="{{ path('download-report', {'submissionId': submission.id , 'report': 'integrationReport'}) }}">
-                    {{ 'Report.Integration.Title'|trans }}
-                </a>
-            </li>
-            <li>
-                <a class="btn btn-xs" {{ sensitiveDisabled ? 'disabled' : ''}}
-                   title="{{ sensitiveDisabled ? 'Report.Sensitivity.DisabledTitle'|trans : 'Report.Sensitivity.Title'|trans }}"
-                   href="{{ path('download-report', {'submissionId': submission.id, 'report': 'sensibilityReport'}) }}">
-                    {{ 'Report.Sensitivity.Title'|trans }}
-                </a>
-            </li>
-            <li>
-                <a  class="btn btn-xs" {{ permanentDisabled ? 'disabled' : ''}}
-                    title="{{ permanentDisabled ? 'Report.PermanentIds.DisabledTitle'|trans : 'Report.PermanentIds.Title'|trans }}"
-                    href="{{ path('download-report', {'submissionId': submission.id, 'report': 'permanentIdsReport'}) }}">
-                    {{ 'Report.PermanentIds.Title'|trans }}
-                </a>
-            </li>
-        </ul>
+            <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
+                Rapports<span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropup" role ="menu">
+                {% if statusSubmissionOk %}
+                    <li>
+                        <a class="btn {{ integrationDisabled ? 'disabled'}} btn-xs"
+                           title="{{ integrationDisabled ? 'Report.Integration.DisabledTitle'|trans : 'Report.Integration.Title'|trans }}"
+                           href="{{ path('download-report', {'submissionId': submission.id , 'report': 'integrationReport'}) }}">
+                           {{ 'Report.Integration.Title'|trans }}
+                        </a>
+                    </li>
+                {% endif %}
+                {% if  not statusSubmissionOk %}
+                    <li>
+                        <a class="btn {{ sensitiveDisabled ? 'disabled'}} btn-xs"
+                            title="{{ sensitiveDisabled ? 'Report.Sensitivity.DisabledTitle'|trans : 'Report.Sensitivity.Title'|trans }}"
+                            href="{{ path('download-report', {'submissionId': submission.id, 'report': 'sensibilityReport'}) }}">
+                            {{ 'Report.Sensitivity.Title'|trans  }}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn  {{ permanentDisabled ? 'disabled'}} btn-xs"
+                            title="{{ permanentDisabled ? 'Report.PermanentIds.DisabledTitle'|trans : 'Report.PermanentIds.Title'|trans }}"
+                            href="{{ path('download-report', {'submissionId': submission.id, 'report': 'permanentIdsReport'}) }}">
+                            {{ 'Report.PermanentIds.Title'|trans }}
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
         </div>
     </div>
 {% endif %}
