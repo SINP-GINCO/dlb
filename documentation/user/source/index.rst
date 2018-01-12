@@ -4,24 +4,22 @@
     contain the root `toctree` directive.
     
 .. toctree::
-   :maxdepth: 3
-   :caption: FAQ
-   
+    :maxdepth: 3
+    :caption: FAQ
+
    Questions_juridiques/index
    Questions_techniques/index
    Questions_metiers/index
-   
 
 .. toctree::
     :maxdepth: 4
     :caption: Documentation de la plateforme Dépôt Légal de données de Biodiversité
 
-    Présentation_générale/index
-    Etapes_processus/index
-    Visualisation/index
-    Glossaire/index
-    Documents_annexes/index
-
+   Présentation_générale/index
+   Etapes_processus/index
+   Visualisation/index
+   Glossaire/index
+   Documents_annexes/index
 
 Index
 =====
