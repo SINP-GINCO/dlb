@@ -7,7 +7,7 @@ La constitution du dossier concernant la déclaration de l’étude d’impact p
 
 *Lien en cours de construction*
 
-.. image:: /images/TPS_connexion.png
+.. image:: ../../images//TPS_connexion.png
 
 **1.** Si vous vous connectez-vous au site pour la première fois : créez votre compte.
 

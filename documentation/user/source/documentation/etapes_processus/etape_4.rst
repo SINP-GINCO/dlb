@@ -10,7 +10,7 @@ Une fois que le cadre d’acquisition du(des) jeu(x) de données et le(les) jeu(
 Pour accéder à la plateforme de Dépôt légal, cliquez sur `ici <https://depot-legal-biodiversite.naturefrance.fr/>`_.
 Une fois connecté avec votre identifiant INPN, plusieurs onglets sont visibles.
 
-.. image:: /images/DLDBB_accueil.png
+.. image:: ../../images/DLDBB_accueil.png
 
 Sélectionner et importer un jeu de données via l'identifiant TPS
 -----------------------------------------------------------------
@@ -24,7 +24,7 @@ Sélectionner un jeu de données
 
 **1.** Pour sélectionner un jeu de données, cliquez sur [Créer un jeu de données].
 
-.. image:: /images/DLDBB_creer_jdd.png
+.. image:: ../../images/DLDBB_creer_jdd.png
 
 **2.** Indiquez le numéro TPS et le jeu de données dans lequel vous souhaitez insérer votre fichier de données brutes. 
 
@@ -32,7 +32,7 @@ Si vous souhaitez créer une nouvelle fiche de métadonnée de jeu de données, 
 
 **3.** Validez le formulaire via le bouton [Créer un jeu de données].
 
-.. image:: /images/DLDBB_jdd_tps.png
+.. image:: ../../images/DLDBB_jdd_tps.png
 
 
 Choix de l'organisme associé au jeu de données
@@ -40,7 +40,7 @@ Choix de l'organisme associé au jeu de données
 
 Une fois le jeu de données sélectionner à partir de l’identifiant TPS, une nouvelle page [Gérer les jeux de données – Ajouter un fichier] s’ouvre.
 
-.. image:: /images/DLDBB_jdd_organisme.png
+.. image:: ../../images/DLDBB_jdd_organisme.png
 
 **1.** Un unique modèle d’import est proposé.
 
@@ -55,7 +55,7 @@ Une fois le choix du jeu de données à importer est fait, vous devez choisir le
 
 **1.** Choisissez le format en cliquant sur l’onglet correspondant. 
 
-.. image:: /images/DLDBB_jdd_format.png
+.. image:: ../../images/DLDBB_jdd_format.png
 
 **2.a.** Si vous choisissez de transmettre votre ou vos fichiers en format csv, sélectionnez le fichier, renseignez le système de référence (SRID) de vos données (code EPSG des géométries des observations), puis cliquez sur [Valider].
 Un encart d’informations succinctes situé plus bas présente les principaux systèmes de référence utilisés Les données seront automatiquement converties en WGS84 lors de l’import dans la plateforme

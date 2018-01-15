@@ -8,23 +8,23 @@ Affichage des résultats de la recherche
 
 Sous l’onglet **[Résultats]**, les résultats de la recherche sont affichés sous forme de tableau. 
 
-.. image:: /images/visualisation/visu-tableau.png
+.. image:: ../../images/visualisation/visu-tableau.png
 
 La liste des résultats est paginée, à raison de 20 lignes par page. La navigation entre les pages de résultats se fait via les flèches au bas de la grille.
 
 En cliquant à côté des titres des colonnes, il est possible d’**ordonner l’affichage des résultats** selon les valeurs de la colonne sélectionnée.
 
-.. image:: /images/visualisation/visu-tableau-tri.png
+.. image:: ../../images/visualisation/visu-tableau-tri.png
 
 Il est aussi possible de **masquer des colonnes** en les décochant.
 
-.. image:: /images/visualisation/visu-tableau-masquer-colonnes.png
+.. image:: ../../images/visualisation/visu-tableau-masquer-colonnes.png
 
 Vous pouvez **déplacer les colonnes** si vous le souhaitez en les **glissant/déposant**.
 
 Les icônes en début de ligne permettent d’afficher la fiche détaillée de l’observation, de la visualiser sur la carte, ou de l’éditer. Selon les droits de l’utilisateur, elles ne sont pas toujours toutes disponibles.
 
-.. image:: /images/visualisation/visu-tableau-boutons.png
+.. image:: ../../images/visualisation/visu-tableau-boutons.png
 
 .. note:: Il est possible qu’une donnée ne comporte pas de géométrie, dans ce cas l’icône [Voir sur la carte] est grisée et inactive.
 

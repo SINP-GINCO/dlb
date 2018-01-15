@@ -8,7 +8,7 @@ Sur l’outil de gestion métadonnées SINP
 
 Accédez à l'outil de `gestion de métadonnées SINP <https://inpn.mnhn.fr/mtd/>`_. 
 
-.. |edition_jdd| image:: /images/FAQ/jdd.png
+.. |edition_jdd| image:: ../../images/FAQ/jdd.png
                :width: 2 em
 
 |edition_jdd| Edition et gestion d’un cadre d’acquisition
@@ -41,9 +41,9 @@ Sur la plateforme de Dépôt légal
 
 Accédez à la `plateforme de Dépôt légal <https://depot-legal-biodiversite.naturefrance.fr/dailybuild/>`_.
 
-.. image:: /images/DLDBB_accueil.png
+.. image:: ../../images/DLDBB_accueil.png
 
-.. |import_data| image:: /images/FAQ/import.png
+.. |import_data| image:: ../../images/FAQ/import.png
                :width: 2 em
 
 |import_data| Importation des données
@@ -150,7 +150,7 @@ Comment modifier un jeu de données ayant fait l’objet d’un dépôt légal ?
 
 Le dépôt légal d’un jeu de données est définitif ! Une fois qu’un jeu de données a fait l’objet d’un dépôt légal, ce jeu est clos et le déposant ne peut pas annuler son action.
 
-.. |sensible_data| image:: /images/FAQ/sensible.png
+.. |sensible_data| image:: ../../images/FAQ/sensible.png
                :width: 2 em
 
 |sensible_data| Sensibilité des données
@@ -165,7 +165,7 @@ L’attribution de la sensibilité sur les données implique différents process
 
 **2.** L’attribution automatique d'un niveau de sensibilité 
 
-Pour plus d’information, reportez-vous à la définition des données sensibles présente dans le :doc:`glossaire </Glossaire/index>`.
+Pour plus d’information, reportez-vous à la définition des données sensibles présente dans le :doc:`glossaire <../../documentation/glossaire/index>`.
 
 Comment récupérer le rapport de sensibilité de mon jeu de données ?
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -187,7 +187,7 @@ Un tableau des fichiers soumis apparaît.
 
 **5.** Cliquez sur [Sensibilité].
 
-.. |control_data| image:: /images/FAQ/controle.png
+.. |control_data| image:: ../../images/FAQ/controle.png
                :width: 2 em
 
 |control_data| Contrôle des données
@@ -228,7 +228,7 @@ Un tableau des fichiers soumis apparaît.
 
 **5.** Cliquez sur [Cohérence et Conformité].
 
-.. |dépôt_légal| image:: /images/FAQ/depot.png
+.. |dépôt_légal| image:: ../../images/FAQ/depot.png
                :width: 2 em
                
 |dépôt_légal| Dépôt légal des données brutes de biodiversité

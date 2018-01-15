@@ -10,7 +10,7 @@ Couches et légendes
 
 Le panneau à droite de la carte est découpé en deux onglets : **[Couches] et [Légendes]** [1]. 
 
-.. image:: /images/visualisation/couche_legende.png
+.. image:: ../../images/visualisation/couche_legende.png
 
 Pour l’onglet **[Couches]**, seules sont affichées les couches sélectionnées et activées (non grisées). Il permet de masquer les couches que vous ne souhaitez pas afficher en les désélectionnant, et inversement.
 
@@ -34,21 +34,21 @@ Lorsqu’une recherche est effectuée, les couches « Mailles », « Départemen
 
 Les résultats de la recherche sont affichés sur la carte en fonction de leurs géométries précises et de leurs rattachements géo-administratifs. Les départements sont affichés en bleu les mailles en vert, les communes en jaune, et les géométries précises en rouge.
 
-.. image:: /images/visualisation/visu-carto-recherche.png
+.. image:: ../../images/visualisation/visu-carto-recherche.png
 
 Selon le niveau de zoom, du plus haut au plus bas, le résultat sera placé soit dans son ou ses département(s), puis dans sa ou ses maille(s), puis dans sa ou ses commune(s), et enfin sa géométrie précise sera affichée.
 
 Voici une idée de la visualisation des **résultats de recherche à la maille** :
 
-.. image:: /images/visualisation/visu-carto-recherche-maille.png
+.. image:: ../../images/visualisation/visu-carto-recherche-maille.png
 
 Un zoom supplémentaire permet de visualiser la ou les **communes** du résultat :
 
-.. image:: /images/visualisation/visu-carto-recherche-commune.png
+.. image:: ../../images/visualisation/visu-carto-recherche-commune.png
 
 Enfin un zoom maximal affiche la **géométrie précise** de l’observation (ici, un polygone situé sur plusieurs communes) :
 
-.. image:: /images/visualisation/visu-carto-recherche-geometrie.png
+.. image:: ../../images/visualisation/visu-carto-recherche-geometrie.png
 
 .. warning:: Attention, certaines observations sensibles seront floutées (i.e : non affichées) à partir d’une certaine échelle. Par exemple, si l’application a déterminé qu’une observation est sensible et qu’elle ne peut pas être visualisée à une échelle plus précise que celle de la maille, un zoom poussé pour voir la commune de l’observation ou sa géométrie précise n’affichera rien.
 
@@ -62,7 +62,7 @@ En haut à droite de la carte :
 * Le deuxième de **dézoomer** au maximum, 
 * Le troisième d’**imprimer la carte**.
 
-.. image:: /images/visualisation/visu-carto-barre-outils.png
+.. image:: ../../images/visualisation/visu-carto-barre-outils.png
 
 
 Table attributaire d'une localisation
@@ -70,4 +70,4 @@ Table attributaire d'une localisation
 
 A partir d’un niveau de zoom suffisamment précis, il est possible d’afficher la table attributaire des données d’une localisation en cliquant dessus. Lorsque plusieurs observations correspondent à l’endroit cliqué, elles apparaissent toutes dans la table.
 
-.. image:: /images/visualisation/visu-carto-table-attributaire.png
+.. image:: ../../images/visualisation/visu-carto-table-attributaire.png

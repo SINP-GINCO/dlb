@@ -19,7 +19,7 @@ L’application permet aux pétitionnaires de gérer des cadres d’acquisition 
 Concepts et définitions
 -----------------------
 
-Voir le :doc:`glossaire </Glossaire/index>`.
+Voir le :doc:`glossaire <../glossaire/index>`.
 
 
 

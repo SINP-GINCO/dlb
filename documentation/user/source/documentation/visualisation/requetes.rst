@@ -5,7 +5,7 @@ Requêtes
 
 Le volet gauche du module de visualisation des données comprend un **requêteur** [1], un **formulaire de requêtes simples** [2] qui permet de sélectionner et de croiser les critères d’une recherche sur l’ensemble des champs du standard de données brutes de biodiversité. Le formulaire de requêtes permet aussi de sélectionner les champs affichés dans le tableau de résultat des requêtes.
 
-.. image:: /images/visualisation/accueil_requeteur.png
+.. image:: ../../images/visualisation/accueil_requeteur.png
    :scale: 50%
 
 
@@ -49,7 +49,7 @@ Critère de recherche géométrique
 
 Dans le **formulaire [Localisation]** le critère **« geometrie »** permet de définir un **polygone** que les géométries des observations doivent intersecter pour correspondre au critère.
 
-.. image:: /images/visualisation/requete_polygone.png
+.. image:: ../../images/visualisation/requete_polygone.png
    
 **Définir un polygone**
 
@@ -80,7 +80,7 @@ Il est possible de filtrer les colonnes de résultats. Pour ce faire, plusieurs 
 * Le **bouton [-]** est un raccourci permettant de supprimer tous les champs d’un coup [3].
 * Chaque **bouton [corbeille]** permet de désélectionner le champ correspondant [4].
 
-.. image:: /images/visualisation/requete_resultat.png
+.. image:: ../../images/visualisation/requete_resultat.png
 
 Par défaut, certains champs de résultats sont sélectionnés. Il s’agit des champs obligatoires du standard de donnée brute de biodiversité.
 
@@ -94,7 +94,7 @@ Exécuter une recherche
 * Le bouton **[Annuler]** permet d’arrêter une recherche en cours [2]. 
 * Enfin, **[Réinitialiser]** permet de recharger les valeurs par défaut du requêteur [3].
 
-.. image:: /images/visualisation/recherche.png
+.. image:: ../../images/visualisation/recherche.png
 
 Les résultats de la recherche sont visibles au centre de la page de visualisation, sous forme cartographique dans l’onglet **[Carte]** [4], et sous forme tabulaire dans l’onglet **[Résultats]** [5].
 

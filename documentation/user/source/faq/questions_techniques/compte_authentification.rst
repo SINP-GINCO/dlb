@@ -10,7 +10,7 @@ Comment créer un compte INPN ?
 
 **2.** Remplissez les différents champs demandés. 
 
-.. image:: /images/FAQ/compte_inpn.png
+.. image:: ../../images/FAQ/compte_inpn.png
 
 .. warning:: Le login et mot de passe de ce compte vous seront utiles pour vous connecter sur l’outil de gestion des métadonnées SINP ainsi que sur la plateforme de Dépôt légal.
 
