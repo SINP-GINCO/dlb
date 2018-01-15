@@ -2,15 +2,14 @@
     Severine in 28/11/2017
     You can adapt this file completely to your liking, but it should at least
     contain the root `toctree` directive.
-    
+  
 .. toctree::
-   :maxdepth: 3
-   :caption: FAQ
-   
-   Questions_juridiques/index
-   Questions_techniques/index
-   Questions_metiers/index
-   
+    :maxdepth: 3
+    :caption: FAQ
+
+    Questions_juridiques/index
+    Questions_techniques/index
+    Questions_metiers/index
 
 .. toctree::
     :maxdepth: 4
@@ -21,7 +20,6 @@
     Visualisation/index
     Glossaire/index
     Documents_annexes/index
-
 
 Index
 =====
