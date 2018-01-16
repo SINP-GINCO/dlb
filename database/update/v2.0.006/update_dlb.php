@@ -36,6 +36,7 @@ try {
 	/* patch code here */
 	// execCustSQLFile("$currentDir/xxx.sql", $config);
 	execCustSQLFile("$currentDir/insert_admin_role.sql", $config);
+	execCustSQLFile("$currentDir/update_doc_base_url.sql", $config);
 } catch (Exception $e) {
 	echo "$currentDir/update_dlb.php\n";
 	echo "exception: " . $e->getMessage() . "\n";
