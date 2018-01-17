@@ -6,7 +6,7 @@ Principes généraux
 Présentation des différents outils impliqués dans le processus de versement de données brutes de biodiversité
 -------------------------------------------------------------------------------------------------------------
 
-Le Ministère de la Transition écologique et solidaire a choisi d’utiliser une série d’outils existants dont la complémentarité et la convergence permet d’offrir une solution exhaustive. différents outils développés dans le cadre du `Système d’Information sur la Nature et les Paysages <http://www.naturefrance.fr/sinp/presentation-du-sinp>`_ (SINP) – à savoir une plateforme GINCO dédiée, l’application de gestion des métadonnées du SINP – en y associant les applications Géonature, développée par le Parc National des Écrins, et TPS, outil de dématérialisation des procédures administratives, afin de répondre aux obligations légales des maîtres d’ouvrages concernant les données brutes de biodiversité (loi du 8 août 2016).
+Le Ministère de la Transition écologique et solidaire a choisi d’utiliser une série d’outils existants dont la complémentarité et la convergence permet d’offrir une solution exhaustive. différents outils développés dans le cadre du `Système d’Information sur la Nature et les Paysages <http://www.naturefrance.fr/sinp/presentation-du-sinp>`_ (SINP) – à savoir une plateforme GINCO dédiée, l’application de gestion des métadonnées du SINP – en y associant les applications GeoNature, développée par le Parc National des Écrins, et TPS, outil de dématérialisation des procédures administratives, afin de répondre aux obligations légales des maîtres d’ouvrages concernant les données brutes de biodiversité (loi du 8 août 2016).
 
 
 .. image:: ../../images/TPS.png
@@ -24,7 +24,7 @@ L’outil de gestion des métadonnées, à travers l’instauration d’un `stan
 
 .. image:: ../../images/geonature_ecrins.png
 
-Géonature est un outil naturaliste open source développé initialement par le Parc National des Ecrins. Cet outil est mis à disposition des utilisateurs n’ayant pas d’outil naturaliste ou de système interne de gestion de données naturaliste. Géonature permet de déployer un système d'informations complet pour la gestion des données Faune/Flore d'une structure, allant de : la gestion des référentiels (taxonomiques et utilisateurs), à la saisie web et mobile dans différents protocoles, en passant par l'export des données selon les formats attendus par chaque partenaire.
+GeoNature est un outil naturaliste open source développé initialement par le Parc National des Ecrins. Cet outil est mis à disposition des utilisateurs n’ayant pas d’outil naturaliste ou de système interne de gestion de données naturalistes. GeoNature permet de déployer un système d'informations complet pour la gestion des données Faune/Flore d'une structure, allant de : la gestion des référentiels (taxonomiques et utilisateurs), à la saisie web et mobile dans différents protocoles, en passant par l'export des données selon les formats attendus par chaque partenaire.
 
 Pour plus d’information cliquez `ici. <http://geonature.fr/>`_
 
@@ -46,7 +46,7 @@ Le processus de dépôt légal de données brutes de biodiversité se déroule e
 
   **2.** Description des métadonnées SINP dans l’outil de gestion des métadonnées de l’INPN,
 
-  **3.** Saisie de données brutes de biodiversité dans l’outil Géonature dans le cas où l’utilisateur n’a pas d’outil naturaliste interne à sa disposition (étape optionnelle),
+  **3.** Saisie de données brutes de biodiversité dans l’outil GeoNature, dans le cas où l’utilisateur n’a pas d’outil naturaliste interne à sa disposition (étape optionnelle),
 
   **4.** Versement des données sur la plateforme de dépôt légal de données brutes de biodiversité,
 
@@ -62,7 +62,7 @@ Authentification partagée sur les applications permettant la saisie et le verse
 Un service d’authentification partagée a été mis en place afin d’accéder à l’ensemble des outil mis à disposition dans le cadre du dépôt légal des données brutes de biodiversité, excepté pour l’application de téléprocédure TPS. Ce service d’authentification partagée passe par la création d’un compte INPN. L’identifiant et le mot de passe de l’utilisateur renseigné lors de la création de son compte INPN sont utilisés pour se connecter simultanément sur : 
 
 * L’outil de gestion des métadonnées SINP,
-* L’application Géonature,
+* L’application GeoNature,
 * La plateforme de Dépôt légal.
 
 
