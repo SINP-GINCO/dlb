@@ -41,7 +41,7 @@ security:
         - { path: ^/integration/, allow_if: "user and is_authenticated() and user.isAllowed('DATA_INTEGRATION')"}
         - { path: ^/jdd/published-jdds, roles: "IS_AUTHENTICATED_ANONYMOUSLY"}
         - { path: ^/jdd/, allow_if: "user and is_authenticated() and user.isAllowed('DATA_INTEGRATION')"}
-        - { path: ^/submission/download-report, allow_if: "user and is_authenticated() and user.isAllowed('DATA_INTEGRATION') and user.isAllowed('VIEW_SENSITIVE')"}
+        - { path: ^/submission/download-report, allow_if: "user and is_authenticated() and user.isAllowed('DATA_INTEGRATION')"}
         - { path: ^/dee/, allow_if: "user and is_authenticated() and user.isAllowed('MANAGE_DATASETS')"}
         - { path: ^/dlb/, allow_if: "user and is_authenticated() and user.isAllowed('MANAGE_DATASETS')"}
         - { path: ^/dlb-download/, roles: IS_AUTHENTICATED_ANONYMOUSLY}
