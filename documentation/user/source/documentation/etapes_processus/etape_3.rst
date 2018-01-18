@@ -35,7 +35,7 @@ Un bouton en haut à droite permet de se déconnecter de l'application
 OCCTAX
 ------
 
-Ce module permet de saisir des données selon le standard Occurrences de taxon du SINP 
+Ce module permet de saisir des données selon le standard Occurrence de taxon du SINP 
 (https://inpn.mnhn.fr/telechargement/standard-occurrence-taxon). 
 
 Les données sont organisées en relevés (localisation, jeu de données, date, observateur...) qui sont composés d'observations 
@@ -50,7 +50,7 @@ préalable les jeux de données dans l'application Métadonnées (MTD) du SINP.
 
 .. image :: http://geonature.fr/docs/img/user-manual/02-occtax.jpg
 
-Quand on accède au module OccTax, celui-ci affiche vos données présentes dans le module sur la carte ainsi que dans une liste. 
+Quand on accède au module OccTax, celui-ci affiche vos données présentes dans le module, sur la carte ainsi que dans une liste. 
 
 La carte et la liste sont interactives. 
 
@@ -156,12 +156,12 @@ Pour les afficher, il faut cliquer sur le bouton d'information :
 
 .. image :: http://geonature.fr/docs/img/user-manual/05-occtax-create-geo.jpg
 
-Une fois les informations du relevé renseignées (observateurs, jeux de données, date et commentaire optionnel), 
+Une fois les informations du relevé renseignées (observateurs, jeu de données, date et commentaire optionnel), 
 vous pouvez ajouter un premier taxon à celui-ci : 
 
 .. image :: http://geonature.fr/docs/img/user-manual/05-occtax-create-taxon.jpg
 
-Pour sélectionner un taxon, saisiseez au moins les 3 premières lettres de son nom latin ou français. 
+Pour sélectionner un taxon, saisissez au moins les 3 premières lettres de son nom latin ou français. 
 
 Vous pouvez aussi saisir les 3 premières lettres de l'espèce et de la sous-espèce.
 
@@ -172,7 +172,7 @@ du rang et du groupe du taxon selectionné :
 
 Des valeurs par défaut sont renseignées par défaut pour certains.
 
-Vous pouvez ensuite rensigner un ou plusieurs dénombrements pour le taxon observé. 
+Vous pouvez ensuite renseigner un ou plusieurs dénombrements pour le taxon observé. 
 
 Par défaut, un dénombrement indéterminé d'un individu est renseigné : 
 
@@ -182,7 +182,8 @@ Une fois le taxon renseigné, cliquer sur AJOUTER LE TAXON pour l'enregistrer :
 
 .. image :: http://geonature.fr/docs/img/user-manual/05-occtax-create-taxon-save.jpg
 
-Vous pouvez alors : 
+Vous pouvez alors :
+
 - Modifier le taxon enegistré
 - Supprimer le taxon enregistrés
 - Ajouter un autre taxon au relevé
@@ -195,7 +196,7 @@ Pour ajouter un taxon au relevé, il faut cliquer sur TAXON et le renseigner com
 MODIFIER UN RELEVE
 ------------------
 
-Si vous modifier un relevé existant, vous accédez à sa fiche renseigner sur laquelle vous pouvez modifier la localisation, les informations du relevé, les taxons observés et leurs dénombrements : 
+Si vous modifier un relevé existant, vous accédez à sa fiche renseignée, sur laquelle vous pouvez modifier la localisation, les informations du relevé, les taxons observés et leurs dénombrements : 
 
 .. image :: http://geonature.fr/docs/img/user-manual/04-occtax-edit.jpg
 
@@ -220,6 +221,6 @@ Les exports se font jeu de données par jeu de données.
 
 Vous obtenez alors un CSV par jeu de données.
 
-Pour exporter toutes les informations saisies, une ligne correspond à un dénombrement d'un taxon. 
+Pour disposer de toutes les informations saisies dans l'export, une ligne correspond à un dénombrement d'un taxon. 
 
 .. image :: http://geonature.fr/docs/img/user-manual/06-export-csv.jpg
