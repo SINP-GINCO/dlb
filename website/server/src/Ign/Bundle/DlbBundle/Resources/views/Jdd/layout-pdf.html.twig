@@ -16,9 +16,7 @@
     {% set domain = site_url|parse_url('scheme') ~ '://' ~ site_url|parse_url('host') %}
 
     {% block stylesheets %}
-        {% stylesheets
-        '@bootstrap_css'
-        filter='cssrewrite, yui_css' %}
+        {% stylesheets '@bootstrap_css' output='css/bootstrap.css'  debug=false %}
         <link rel="stylesheet" href="{{ domain ~ asset_url }}" />
         {% endstylesheets %}
     {% endblock %}
