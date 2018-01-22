@@ -35,6 +35,8 @@ Si vous souhaitez créer une nouvelle fiche de métadonnée de jeu de données, 
 .. image:: ../../images/DLDBB_jdd_tps.png
 
 
+.. _choix_organisme:
+
 Choix de l'organisme associé au jeu de données
 """"""""""""""""""""""""""""""""""""""""""""""
 
@@ -86,6 +88,7 @@ Une fois le choix du format de fichier effectué, les informations nécessaires 
 
 **3.** Dans le cas où le statut affiché est Un “Rapport de conformité et cohérence” est disponible en téléchargement ; il liste les erreurs rencontrées lors des différentes phases de contrôles et d’import, pour vous aider à corriger le fichier versé. 
 
+Après avoir chargé ce premier fichier, il est possible d’ajouter d’autres fichiers à ce jeu de données via la page de gestion de vos jeux de données ainsi que la page de gestion de tous les jeux de données.
 
 Phases de contrôles et rapport d'erreur
 ---------------------------------------
@@ -250,6 +253,14 @@ Un lien permet d’ajouter un nouveau fichier au jeu de données en cours de vis
 Il est possible de mettre à jour la fiche de métadonnée et les informations la concernant via le bouton “Mettre à jour les métadonnées depuis l’INPN”.
 
 Enfin, si le jeu de données ne comporte aucun versement il est possible de le supprimer.
+
+**Ajouter un fichier au jeu de données**
+
+Pour chaque jeu de données importé il est possible de lui associer plusieurs fichiers. Pour cela cliquez sur **[+Ajouter un fichier]** dans la colonne **[Fichiers]** du tableau.
+Vous serez alors redirigez vers la page ajout de fichier et de chargement des données.
+
+Pour plus d'information voir :ref:`choix_organisme`
+
 
 **Supprimer un jeu de données**
 

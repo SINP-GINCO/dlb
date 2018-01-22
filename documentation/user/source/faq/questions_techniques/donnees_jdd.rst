@@ -18,7 +18,7 @@ Comment :ref:`editer_CA` ?
 """"""""""""""""""""""""""
 
 Comment :ref:`supprimer_CA` ?
-""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""
 
 Il est impossible de supprimer un cadre d’acquisition déjà créé. Pour ce faire, contactez l’administrateur de la plateforme : XXX@XXX.fr.
 
