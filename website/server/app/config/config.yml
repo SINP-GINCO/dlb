@@ -284,16 +284,14 @@ old_sound_rabbit_mq:
             connection:       default
             exchange_options: {name: 'ginco_%instance_name%_generic', type: direct}
     consumers:
-       #ginco_generic:
-       #     connection:       default
-       #     exchange_options: {name: 'ginco_%instance_name%_generic', type: direct}
-       #     queue_options: {name: 'ginco_%instance_name%_generic'}
-       #     callback: generic_consumer_service
         dlb_generic:
             connection:       default
             exchange_options: {name: 'ginco_%instance_name%_generic', type: direct}
             queue_options: {name: 'ginco_%instance_name%_generic'}
             callback: dlb_generic_consumer_service
+            graceful_max_execution:
+                timeout: 3600 # 1 hour
+                exit_code: 10 # default is 0
             
 # KnpSnappyBundle configuration            
 knp_snappy:  

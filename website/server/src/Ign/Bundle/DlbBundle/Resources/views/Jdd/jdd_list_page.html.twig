@@ -18,7 +18,7 @@
 {% endif %}
 
 {# Size of columns array and filename max size #}
-{% if allJdds %}
+{% if allJdds is defined and allJdds == true %}
     {% set colSizes = {
         jddActions: 12,
         tpsId: 24,
@@ -32,6 +32,7 @@
         deeReports: 12} %}
     {% set filenameMaxLength = 18 %}
 {% else %}
+    {% set allJdds = false %}
     {% set colSizes = {
         jddActions: 8,
         tpsId: 16,

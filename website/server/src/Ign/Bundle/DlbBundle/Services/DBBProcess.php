@@ -160,18 +160,18 @@ class DBBProcess {
 			// Delete csv file
 			@unlink($csvFile);
 			
+			/* Send mail to user */
+			$this->sendDBBNotificationMail($DEE, $submissions);
+			
+			/* Send mail to MNHN */
+			$this->DEEProcess->sendDEENotificationMail($DEE, false);
+
 			/* Add publication informations */
 			$now = new \DateTime();
 			$jdd->setField('publishedAt', $now->format('Y-m-d_H-i-s'));
 			$jdd->setField('dbbZipFilePath', $archiveName);
 			$jdd->setField('status', 'published');
 			$this->em->flush();
-			
-			/* Send mail to user */
-			$this->sendDBBNotificationMail($DEE, $submissions);
-			
-			/* Send mail to MNHN */
-			$this->DEEProcess->sendDEENotificationMail($DEE, false);
 		}
 	}
 
@@ -179,8 +179,8 @@ class DBBProcess {
 	 * Send notification email after creation of the DBB archive:
 	 * to the user who created the DBB
 	 *
-	 * @param DEE $DEE
-	 *        	the DEE object
+	 * @param DEE $DEE the DEE object
+	 * @param $submissions
 	 */
 	public function sendDBBNotificationMail(DEE $DEE, $submissions) {
 		$jdd = $DEE->getJdd();
@@ -241,7 +241,6 @@ class DBBProcess {
 			foreach ($submissions as $submission) {
 				$this->integration->invalidateDataSubmission($submission->getId());
 			}
-
 		}
 	}
 }
