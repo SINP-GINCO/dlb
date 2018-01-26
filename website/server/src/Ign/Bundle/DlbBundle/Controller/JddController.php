@@ -11,7 +11,8 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Route("/jdd")
+ * Class JddController
+ * @package Ign\Bundle\DlbBundle\Controller
  */
 class JddController extends BaseController {
 
@@ -20,7 +21,7 @@ class JddController extends BaseController {
 	 * Dlb customisation: hide model field, add tps_id field, add jdd_id field dynamicaly
 	 * Checks, via a service, the xml file on metadata platform, and fills jdd fields with metadata fields
 	 *
-	 * @Route("/new", name = "jdd_new")
+	 * @Route("/jdd/new", name = "jdd_new")
 	 */
 	public function newAction(Request $request) {
 
