@@ -37,6 +37,7 @@ try {
 	// execCustSQLFile("$currentDir/xxx.sql", $config);
 	execCustSQLFile("$currentDir/insert_admin_role.sql", $config);
 	execCustSQLFile("$currentDir/update_doc_base_url.sql", $config);
+	execCustSQLFile("$currentDir/add_permission_on_published_dataset_for_all_roles.sql", $config);
 } catch (Exception $e) {
 	echo "$currentDir/update_dlb.php\n";
 	echo "exception: " . $e->getMessage() . "\n";
