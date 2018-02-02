@@ -1,0 +1,1 @@
+UPDATE referentiels.liste_referentiels SET version='v11' WHERE table_name='taxref';

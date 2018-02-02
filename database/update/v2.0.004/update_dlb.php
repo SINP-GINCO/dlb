@@ -36,7 +36,7 @@ try {
 	/* patch code here */
 	execCustSQLFile("$currentDir/add_cancel_jdd_publication_permission.sql", $config);
 	execCustSQLFile("$currentDir/add_permission_on_published_dataset.sql", $config);
-	execCustSQLFile("$currentDir/add_integration_service_event_listener.sql", $config);
+	// execCustSQLFile("$currentDir/add_integration_service_event_listener.sql", $config); No more needed
 
 	# setting metadata and metadata_work schema
 	system("php $currentDir/metadata/import_metadata_from_csv.php $paramStr -Dschema=metadata");

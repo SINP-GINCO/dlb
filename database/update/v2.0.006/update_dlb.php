@@ -39,6 +39,7 @@ try {
 	execCustSQLFile("$currentDir/update_doc_base_url.sql", $config);
 	execCustSQLFile("$currentDir/add_permission_on_published_dataset_for_all_roles.sql", $config);
 	execCustSQLFile("$currentDir/update_heuredate_parameters.sql", $config);
+	execCustSQLFile("$currentDir/update_taxref_version_in_list.sql", $config);
 } catch (Exception $e) {
 	echo "$currentDir/update_dlb.php\n";
 	echo "exception: " . $e->getMessage() . "\n";
