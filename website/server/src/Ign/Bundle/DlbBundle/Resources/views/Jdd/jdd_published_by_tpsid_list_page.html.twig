@@ -84,7 +84,7 @@
             <tr>
                 {# Title and metadata id of the jdd #}
                 <td>
-                    <a data-title="{{ jdd.field('title') }}" title="{{ 'Jdd.list.view'|trans }}" href="{{ path('jdd_show', { 'id': jdd.id }) }}">{{ jdd.field('title') }}</a>
+                    {{ jdd.field('title') }}
                     <br/>
                     <span class="text-muted longtext">{{ jdd.field('metadataId') }}</span>
                 </td>
