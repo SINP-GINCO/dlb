@@ -11,7 +11,9 @@ class DlbGenericConsumer extends GenericConsumer {
 	/**
 	 * The DBBProcess Service, in charge of the construction of DLB data file, certificate,
 	 * and DEE generation
+	 * 
 	 * @var
+	 *
 	 */
 	protected $DBBProcess;
 
@@ -20,16 +22,16 @@ class DlbGenericConsumer extends GenericConsumer {
 	}
 
 	/**
-	 * Specific code to execute  when receiving a message with RUNNING or PENDING status
+	 * Specific code to execute when receiving a message with RUNNING or PENDING status
 	 *
 	 * Adds the action 'dbbProcess' to the list of tasks handled by the Generic Consumer
 	 *
-	 * @param $action
-	 * @param null $parameters
-	 * @param null $message
+	 * @param
+	 *        	$action
+	 * @param null $parameters        	
+	 * @param null $message        	
 	 */
-	protected function onRunning($action, $parameters = null, $message = null)
-	{
+	protected function onRunning($action, $parameters = null, $message = null) {
 		// -- DLB generation, archive creation and notifications
 		if ($action == 'dbbProcess') {
 			sleep(1); // let the time to the application to update message before starting
@@ -40,8 +42,7 @@ class DlbGenericConsumer extends GenericConsumer {
 			$this->em->flush();
 			echo $this->datelog() . "DBB Process finished\n";
 		}
-
+		
 		parent::onRunning($action, $parameters, $message);
 	}
-
 }

@@ -139,6 +139,7 @@ services:
         arguments: ["@doctrine.orm.entity_manager","@ogam.configuration_manager", "@logger", "@=service('ogam.locale_listener').getLocale()"]
         calls:
           - [setDEEProcess, ['@ginco.dee_process']]
+          - [setExportCSV, ['@ginco.export_csv']]
 
     #templatehelper
     ogam.helper.AddLink:
@@ -169,10 +170,10 @@ services:
 
     # Twig extensions
     twig.extension.text:
-       class: Twig_Extensions_Extension_Text
-       tags:
-         - { name: twig.extension }
- 
+      class: Twig_Extensions_Extension_Text
+      tags:
+        - { name: twig.extension }
+
     ginco.help_link_extension:
         class: Ign\Bundle\GincoBundle\Twig\HelpLinkExtension
         public: false
@@ -211,6 +212,11 @@ services:
     ginco.dee_process:
         class: Ign\Bundle\GincoBundle\Services\DEEGeneration\DEEProcess
         arguments: ["@doctrine.orm.entity_manager","@ogam.configuration_manager", "@ginco.dee_generator", "@app.mail_manager","@logger"]
+        
+    # Service doing the whole process of generating and sending the export file
+    ginco.export_csv:
+        class: Ign\Bundle\GincoBundle\Services\ExportCSV
+        arguments: ["@doctrine.orm.entity_manager","@ogam.configuration_manager", "@app.mail_manager", "@ogam.query_service", "@logger", "@=service('ogam.locale_listener').getLocale()", "@translator"]
 
     # Forms
     form.type.link_file:
@@ -224,7 +230,7 @@ services:
         arguments: ['%kernel.root_dir%/../web/upload']
         tags:
             - { name: form.type }
-            
+
     validator.unique.epsg_code:
       class: Ign\Bundle\OGAMBundle\Validator\Constraints\EPSGCodeValidator
       tags:

@@ -13,6 +13,7 @@ services:
         arguments: ["@doctrine.orm.entity_manager","@ogam.configuration_manager", "@logger", "@=service('ogam.locale_listener').getLocale()"]
         calls:
           - [setDBBProcess, ['@dlb.dbb_process']]
+          - [setExportCSV, ['@ginco.export_csv']]
 
     # Service downloading the xml metadata files from INPN metadata application
     dlb.metadata_dowloader:
