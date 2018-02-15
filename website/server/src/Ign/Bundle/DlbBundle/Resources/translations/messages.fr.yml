@@ -3,6 +3,11 @@
 # - overwrite translations from Ginco and Ogam Bundles
 # --> No need to rewrite correct translations from Ginco and Ogam Bundles
 
+# Help
+# -------
+Help:
+  import: Aide dépôt d'un jeu de données
+  published: Aide jeux de données déposés
 
 # Homepage
 # ----------------------

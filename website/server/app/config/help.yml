@@ -1,4 +1,5 @@
 # Configuration file for help links
+# Specific to DLB !!!
 #
 # For every help page, set attributes label an url (relative to help site domain).
 # And routes of all pages with tis label/url.
@@ -28,7 +29,7 @@ home:
 
 usermanagement:
   label: Help.users
-  url: /utilisateurs/index.html
+  url: /redirections/index.html
   routes:
     - usermanagement_home
     - usermanagement_showUsers
@@ -42,24 +43,36 @@ usermanagement:
 
 datasets:
   label: Help.datasets
-  url: /gestion-jdd/index.html
+  url: /documentation/etapes_processus/etape_4.html#gerer-et-deposer-les-jeux-de-donnees
   routes:
     - all_jdd_list
     - user_jdd_list
     - jdd_show
+
+import:
+  label: Help.import
+  url: /documentation/etapes_processus/etape_4.html#selectionner-et-importer-un-jeu-de-donnees-via-l-identifiant-tps
+  routes:
     - jdd_new
     - integration_creation
     - integration_upload_data
     - integration_validate_upload
 
+published_jdds:
+  label: Help.published
+  url: /faq/questions_techniques/donnees_jdd.html#quelles-sont-les-tele-procedures-ayant-fait-lobjet-dun-depot-legal
+  routes:
+    - published_jdds
+    - published_jdds_by_tps
+
 configurator:
   label: Help.configurator.home
-  url: /configurateur/index.html
+  url: /redirections/index.html
   route: configurateur_homepage
 
 configurator_models:
   label: Help.configurator.models
-  url: /configurateur/modele-de-donnees.html
+  url: /redirections/index.html
   routes:
     - configurateur_model_new
     - configurateur_model_index
@@ -76,7 +89,7 @@ configurator_models:
 
 configurator_import_models:
   label:  Help.configurator.import_models
-  url: /configurateur/modele-d-import.html
+  url: /redirections/index.html
   routes:
     - configurateur_dataset_import_index
     - configurateur_dataset_import_new
@@ -92,10 +105,18 @@ configurator_import_models:
 
 configurator_data:
   label: Help.configurator.data
-  url: /configurateur/dictionnaire-donnees.html
+  url: /redirections/index.html
   routes:
     - configurateur_data_index
     - configurateur_data_new
     - configurateur_data_new_addtoformat
     - configurateur_data_show
     - configurateur_data_edit
+
+platform_parameters:
+  label: Help.platform_config
+  url: /redirections/index.html
+  routes:
+    - configuration_parameters
+    - configuration_homepage
+    - configuration_presentation
