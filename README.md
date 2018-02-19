@@ -1,5 +1,8 @@
 # Dépôt Légal de Biodiversité
 
+This code creates a variant of the [Ginco](https://github.com/SINP-GINCO/ginco) platforms, dedicated to 
+the legal uploading of biodiversity data collected during impact studies. 
+
 ## Installation
 
 * Create or select a folder on your local machine where you will install the project:
