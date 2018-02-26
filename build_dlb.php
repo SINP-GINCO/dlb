@@ -67,7 +67,7 @@ function buildJavaServices($config, $buildMode) {
 	// build du service d'intégration
 	echo ("Building integration service...\n");
 	system("mv -f $gincoDir/service_integration/config/log4j.properties $gincoDir/service_integration/config/log4j.properties.save");
-	substituteInFile("$projectDir/services_configs/service_integration/log4j_tpl.properties", "$gincoDir/service_integration/config/log4j.properties", $config);
+	substituteInFile("$gincoDir/services_configs/service_integration/log4j_tpl.properties", "$gincoDir/service_integration/config/log4j.properties", $config);
 	// copie des services Java custom
 	foreach ($dlbCustomServicesNames as $serviceName) {
 		copy("$dlbCustomPath/business/$serviceName.java", "$ogamCustomPath/business/$serviceName.java");
@@ -87,16 +87,16 @@ function buildJavaServices($config, $buildMode) {
 	}
 	
 	copy("$gincoDir/service_integration/build/libs/service_integration-4.0.0.war", "$servicesBuildDir/webapps/$ISFilename.war");
-	substituteInFile("$projectDir/services_configs/service_integration/IntegrationService_tpl.xml", "$servicesBuildDir/conf/$ISFilename.xml", $config);
+	substituteInFile("$gincoDir/services_configs/service_integration/IntegrationService_tpl.xml", "$servicesBuildDir/conf/$ISFilename.xml", $config);
 	
 	// build du service de rapport
 	echo ("Building report service...\n");
 	// remplacement des rapports par défaut d'ogam par le rapport d'erreur GINCO
 	system("mv -f $gincoDir/service_generation_rapport/report $gincoDir/service_generation_rapport/report.save");
 	mkdir("$gincoDir/service_generation_rapport/report", 0755, true);
-	copy("$projectDir/services_configs/service_generation_rapport/ErrorReport.rptdesign", "$gincoDir/service_generation_rapport/report/ErrorReport.rptdesign");
+	copy("$gincoDir/services_configs/service_generation_rapport/ErrorReport.rptdesign", "$gincoDir/service_generation_rapport/report/ErrorReport.rptdesign");
 	// build
-	chdir($projectDir);
+	chdir($gincoDir);
 	// system("./gradlew service_generation_rapport:war");
 	// le war contenant les rapports se trouve dans
 	// ${ogamDir}/service_generation_rapport/build/libs/service_generation_rapport-3.0.0.war
@@ -110,7 +110,7 @@ function buildJavaServices($config, $buildMode) {
 	 rm -rf $gincoDir/service_generation_rapport/report.save");
 	
 	copy("$gincoDir/service_generation_rapport/build/libs/OGAMRG.war", "$servicesBuildDir/webapps/$RGFilename.war");
-	substituteInFile("$projectDir/services_configs/service_generation_rapport/ReportService_tpl.xml", "$servicesBuildDir/conf/$RGFilename.xml", $config);
+	substituteInFile("$gincoDir/services_configs/service_generation_rapport/ReportService_tpl.xml", "$servicesBuildDir/conf/$RGFilename.xml", $config);
 	
 	// Post installation command
 	if ($buildMode == 'dev') {
