@@ -1,0 +1,74 @@
+{# Override ginco index.html.twig. Increase first block length before truncate. First block link sends to root page #}
+{% extends 'base.html.twig' %}
+
+{% block description %}{% endblock %}
+{% block breadcrumb %}
+<ol class="breadcrumb">
+	{% if route_exists('homepage') %}<li><a href="{{ path('homepage') }}">{%trans %}&nbsp;{% endtrans %}</a></li>{% endif %}
+	
+</ol>
+{% endblock breadcrumb %}
+{% block body %}
+<div class="homepage">
+    <div class="row homepage-intro">
+        <div class="{{ content.image is empty ? 'col-sm-12' : 'col-sm-8' }}">
+            <h1 class="stick-to-top underlined">{{ content.title|raw }}</h1>
+            {{ content.intro|raw }}
+        </div>
+        {% if content.image is not empty %}
+            <div class="col-sm-4">
+                <img src="{{ asset('upload/' ~ content.image) }}">
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="v-spacer"></div>
+
+    <div class="row blocks-container">
+        <div class="blocks">
+        {% block firstBlock %}
+            <div class="well">
+                <h2 class="underlined green stick-to-top">{{ 'Presentation.title'|trans }}</h2>
+                <div>{{ content.presentation|striptags|truncate(300,true,'...')|raw }}</div>
+                <ul class="triangle-bullets orange">
+                    <li><a href="https://depot-legal-biodiversite.naturefrance.fr">{{ 'Presentation.link'|trans }}</a></li>
+                </ul>
+            </div>
+        {% endblock firstBlock%}
+
+            <div class="well">
+                <h2 class="underlined green stick-to-top">{{ content.publicLinksTitle|raw }}</h2>
+                <ul class="triangle-bullets orange">
+                {% for link in content.links if ( link.href is not empty and link.anchor is not empty) %}
+                    <li><a href="{{ link.href }}" target="{{ link.target }}">
+                            {{ link.anchor|raw }}</a></li>
+                {% endfor %}
+
+                {% for doc in content.docs if ( doc.file is not empty and doc.anchor is not empty) %}
+                    <li><a href="{{ asset('upload/' ~ doc.file) }}" target="_blank">{{ doc.anchor|raw }}
+                        </a></li>
+                {% endfor %}
+                </ul>
+            </div>
+
+            {% if app.user %}
+                <div class="well">
+                    <h2 class="underlined green stick-to-top">{{ content.privateLinksTitle|raw }}</h2>
+
+                    <ul class="triangle-bullets orange">
+                    {% for link in content.privateLinks if ( link.href is not empty and link.anchor is not empty) %}
+                        <li><a href="{{ link.href }}" target="{{ link.target }}">
+                                {{ link.anchor|raw }}</a></li>
+                    {% endfor %}
+
+                    {% for doc in content.privateDocs if ( doc.file is not empty and doc.anchor is not empty) %}
+                        <li><a href="{{ asset('upload/' ~ doc.file) }}" target="_blank">{{ doc.anchor|raw }}
+                            </a></li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
