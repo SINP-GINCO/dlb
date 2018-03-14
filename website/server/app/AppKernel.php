@@ -19,7 +19,6 @@ class AppKernel extends Kernel {
 			new OldSound\RabbitMqBundle\OldSoundRabbitMqBundle(),
 			new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
 			new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
-			new Ign\Bundle\OGAMBundle\OGAMBundle(),	// Order is important for translations !
 			new Ign\Bundle\GincoBundle\IgnGincoBundle(),
 			new Ign\Bundle\DlbBundle\IgnDlbBundle(),
 			new Ign\Bundle\OGAMConfigurateurBundle\IgnOGAMConfigurateurBundle(),

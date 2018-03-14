@@ -1,4 +1,4 @@
-# Services config for the OGAM/Ginco part of the application
+# Services config for the Ginco part of the application
 
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/book/service_container.html
@@ -10,7 +10,7 @@ services:
     # RabbitMQ Consumers
     dlb_generic_consumer_service:
         class: Ign\Bundle\DlbBundle\Services\RabbitMQ\DlbGenericConsumer
-        arguments: ["@doctrine.orm.entity_manager","@ogam.configuration_manager", "@logger", "@=service('ogam.locale_listener').getLocale()"]
+        arguments: ["@doctrine.orm.entity_manager","@ginco.configuration_manager", "@logger", "@=service('ginco.locale_listener').getLocale()"]
         calls:
           - [setDBBProcess, ['@dlb.dbb_process']]
           - [setExportCSV, ['@ginco.export_csv']]
@@ -18,27 +18,27 @@ services:
     # Service downloading the xml metadata files from INPN metadata application
     dlb.metadata_dowloader:
         class: Ign\Bundle\DlbBundle\Services\MetadataDownloader
-        arguments: ["@ogam.configuration_manager","@logger"]
+        arguments: ["@ginco.configuration_manager","@logger"]
         
     # Service generating DBB
     dlb.dbb_generator:
         class: Ign\Bundle\DlbBundle\Services\DBBGenerator
-        arguments: ["@doctrine.orm.entity_manager","@ogam.configuration_manager", "@ogam.generic_service", "@ogam.query_service","@logger"]
+        arguments: ["@doctrine.orm.entity_manager","@ginco.configuration_manager", "@ginco.generic_service", "@ginco.query_service","@logger"]
 
     # Service generating Certificate
     dlb.certificate_generator:
         class: Ign\Bundle\DlbBundle\Services\CertificateGenerator
-        arguments: ["@doctrine.orm.entity_manager","@ogam.configuration_manager", "@templating", "@knp_snappy.pdf", "@logger"]
+        arguments: ["@doctrine.orm.entity_manager","@ginco.configuration_manager", "@templating", "@knp_snappy.pdf", "@logger"]
         
     # Service doing the whole process of generating and sending the DBB files
     dlb.dbb_process:
         class: Ign\Bundle\DlbBundle\Services\DBBProcess
-        arguments: ["@doctrine.orm.entity_manager","@ogam.configuration_manager", "@ogam.integration_service", "@ginco.dee_process", "@ginco.dee_generator", "@dlb.dbb_generator", "@dlb.certificate_generator", "@dlb.metadata_dowloader", "@app.mail_manager","@logger"]
+        arguments: ["@doctrine.orm.entity_manager","@ginco.configuration_manager", "@ginco.integration_service", "@ginco.dee_process", "@ginco.dee_generator", "@dlb.dbb_generator", "@dlb.certificate_generator", "@dlb.metadata_dowloader", "@app.mail_manager","@logger"]
   
     # Service reading the xml metadata files from INPN metadata application
     dlb.metadata_tps_reader:
         class: Ign\Bundle\DlbBundle\Services\MetadataTpsReader
-        arguments: ["@ogam.configuration_manager","@logger"]   
+        arguments: ["@ginco.configuration_manager","@logger"]   
         
     # Define form as a service to create new jdd
     app.form.type.DlbJdd:

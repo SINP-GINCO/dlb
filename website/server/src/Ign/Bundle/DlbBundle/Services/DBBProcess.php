@@ -5,10 +5,10 @@ use Ign\Bundle\GincoBundle\Entity\RawData\DEE;
 use Ign\Bundle\GincoBundle\Entity\Website\Message;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
-use Ign\Bundle\OGAMBundle\Entity\RawData\Jdd;
-use Ign\Bundle\OGAMBundle\Entity\Website\User;
-use Ign\Bundle\OGAMBundle\Services\ConfigurationManager;
-use Ign\Bundle\OGAMBundle\Services\MailManager;
+use Ign\Bundle\GincoBundle\Entity\RawData\Jdd;
+use Ign\Bundle\GincoBundle\Entity\Website\User;
+use Ign\Bundle\GincoBundle\Services\ConfigurationManager;
+use Ign\Bundle\GincoBundle\Services\MailManager;
 use Symfony\Bridge\Monolog\Logger;
 
 /**
@@ -187,7 +187,7 @@ class DBBProcess {
 		$user = $DEE->getUser();
 		
 		$submissionFilesNames = array();
-		$submissionRepo = $this->em->getRepository('OGAMBundle:RawData\Submission');
+		$submissionRepo = $this->em->getRepository('IgnGincoBundle:RawData\Submission');
 		foreach ($submissions as $submission) {
 			foreach ($submission->getFiles() as $file) {
 				$this->logger->debug('fileName : ' . $file->getFileName());
