@@ -44,20 +44,20 @@ Jdd:
   list:
     submissions: Import de Données Brutes de Biodiversité
     procedure: Procédure
-    tpsNumber: n°TPS
+    tpsNumber: n°Dossier
     published.title: Liste des études et jeux de données déposés
     titleAndId: Titre / Identifiant
-    publishedByTps.title: Procédure TPS n°
-    notExist.title: Aucune procédure pour l'identifiant TPS n° 
+    publishedByTps.title: Procédure demarches-simplifiees.fr n°
+    notExist.title: Aucune procédure pour l'identifiant demarches-simplifiees.fr n° 
   new:
     modelUnpublished: Publiez le modèle d'import pour pouvoir créer un jeu de données.
-    tpsId: Identifiant TPS
+    tpsId: Identifiant demarches-simplifiees.fr
     jddId: Jeu de données
-    noJddAvailable: Merci de rentrer un numéro TPS valide pour pouvoir choisir un jeu de données.
-    tpsIdError: <div><div class="col-sm-4"></div><div class="col-sm-4">Pas de fiche MTD pour ce n°TPS.</div></div>
+    noJddAvailable: Merci de rentrer un numéro demarches-simplifiees.fr valide pour pouvoir choisir un jeu de données.
+    tpsIdError: <div><div class="col-sm-4"></div><div class="col-sm-4">Pas de fiche MTD pour ce n° demarches-simplifiees.fr.</div></div>
     tpsIdInit: |-
-     <p>Le numéro TPS est l'identifiant qui a été attribué à votre procédure par l'application TPS.</p>
-     <p>Vous devez avoir déjà créé une métadonnée de cadre dacquisition dans <a href="%metadataUrl%" target='_blank'>l'application de métadonnées de l'INPN</a>, pour ce numéro TPS.</p>
+     <p>Le numéro demarches-simplifiees.fr est l'identifiant qui a été attribué à votre procédure par l'application demarches-simplifiees.fr.</p>
+     <p>Vous devez avoir déjà créé une métadonnée de cadre dacquisition dans <a href="%metadataUrl%" target='_blank'>l'application de métadonnées de l'INPN</a>, pour ce numéro demarches-simplifiees.fr</p>
     tpsIdInfo: <div><label class="col-sm-4 control-label">Procédure</label> <div class="col-sm-4"> %title% </div></div>
     disabled: Ce jeu de données a déjà été instancié dans la plateforme par un autre utilisateur, vous ne pouvez pas y importer des données.
     submit: Importer des données dans le jeu de données
