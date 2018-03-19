@@ -159,6 +159,7 @@ function updateDBBContent(jddId) {
     var deleteSubJddDiv = $(".delete-submission-jdd[data-jdd-id='" + jddId + "']");
     var deleteSubDiv = deleteSubJddDiv.find("div.delete-submission");
 
+    var permissionGenerateDBB = dbbDiv.data('perm-generate');
     var canGenerateDBB = dbbDiv.data('can-generate-DBB');
     var dbbStatus = dbbDiv.data('dbb-status');
     var messageStatus = dbbDiv.data('message-status');
@@ -225,8 +226,8 @@ function updateDBBContent(jddId) {
     actionsDiv.html('');
     var titleRunning = "{{ 'DBB.status.generating'|trans }}";
 
-   // GenerateDBB
-    if (dbbStatus == 'unpublished') {
+   // GenerateDBB, if ubpublished yet, and if user has the right to generate DEE
+    if (dbbStatus == 'unpublished' && permissionGenerateDBB) {
         var icon = 'glyphicon-play';
         var title = "{{ 'DBB.create.title'|trans }}";
         var color = (canGenerateDBB) ? 'btn-success' : 'btn-default';
@@ -251,9 +252,11 @@ function updateDBBContent(jddId) {
     
     // Download link if DBB is published is available
     if (dbbStatus == 'published') {
+        var reports = '';
+
         var href = "{{ path('download_dbb', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
         // Link to download DBB CSV zipped
-        reports = "<a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.CSV'|trans }}' href='" + href + "'> " +
+        reports += "<a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.CSV'|trans }}' href='" + href + "'> " +
                    "<span class='glyphicon glyphicon-leaf' aria-hidden='true'></span></a><br/>";
 
         // Link to download certificate
@@ -271,12 +274,12 @@ function updateDBBContent(jddId) {
         reports += "<a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.mtd'|trans }}' href='" + href + "'> " +
                 "<span class='glyphicon glyphicon-align-justify' aria-hidden='true'></span></a><br/>";
 
-		if ( {{ app.user|json_encode()|raw }} ) {
-        	// Link to download DEE zipped
+        // Link to download DEE zipped, but check for permissions before
+        if ( permissionGenerateDBB  ) {
         	var href = "{{ path('download_dee_dlb', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
         	reports += "<a role='button' class='btn btn-xs btn-primary' title='{{ 'DEE.download'|trans }}' href='" + href + "'> " +
         	        "<span class='glyphicon glyphicon-tree-deciduous' aria-hidden='true'></span></a><br/>";
-		}
+        }
         reports += "</ul></div>";
         actionsDiv.append(reports);
     }

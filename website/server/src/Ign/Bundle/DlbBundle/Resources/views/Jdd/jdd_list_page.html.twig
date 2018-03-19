@@ -2,10 +2,11 @@
 
 {% block body %}
 
-{% set user = app.user %}
+{# User is the real user if connected, or the anonymous user 'visiteur' if not - he is never 'null' #}
+{% set user = (app.user) ?: anonymous.user %}
 
 {# Set variables #}
-{% if user is not null and user.isAllowed('MANAGE_DATASETS_OTHER_PROVIDER') %}
+{% if user.isAllowed('MANAGE_DATASETS_OTHER_PROVIDER') %}
     {% set isAllowedMDOP = true %}
 {% else %}
     {% set isAllowedMDOP = false %}
@@ -48,7 +49,7 @@
 {% endif %}
 
 {# Title of the page #}
-{% if allJdds %}
+{% if allJdds is defined and allJdds == true %}
 	<h1>{{ 'Jdd.list.title.all'|trans }}</h1>
 {% else %}
 	<h1>{{ 'Jdd.list.title.user'|trans }}</h1>
@@ -66,7 +67,9 @@
     <table  id="jddTable" data-toggle="table"
             data-click-to-select="true" data-search="true" data-search-align="right"
             data-classes="table table-hover table-bordered jdd-table"
-            data-locale="fr-FR" data-pagination="true" data-page-size="10" data-page-list="[10, 20, 50, 100]" data-advanced-search="true" data-id-table="advancedTable">
+            data-locale="fr-FR" data-pagination="true" data-page-size="10" data-page-list="[10, 25, 50, 100, 500, 1000]"
+            data-advanced-search="true" data-id-table="advancedTable"/>
+
         {# Jdd group #}
         <colgroup>
             {# Actions column #}
@@ -91,39 +94,40 @@
             {# Status column #}
             <col style="width: {{ colSizes.submissionStatus }}%;"/>
         </colgroup>
-        {% if user is not null and user.isAllowed('MANAGE_DATASETS') %}
-            {# DEE group #}
-            <colgroup>
-                {# Date column #}
-                <col style="width: {{ colSizes.deeDepositDate }}%;"/>
-                {# Actions column #}
-                <col style="width: {{ colSizes.deeReports }}%;"/>
-            </colgroup>
-        {% endif %}
+        {# DEE group #}
+        <colgroup>
+            {# Date column #}
+            <col style="width: {{ colSizes.deeDepositDate }}%;"/>
+            {# Actions column #}
+            <col style="width: {{ colSizes.deeReports }}%;"/>
+        </colgroup>
+
+
         <thead>
             <tr>
                 <th colspan="{{ allJdds ? 5:4 }}" class="text-center color1">{{ 'Jdd.list.jdd'|trans }}</th>
                 <th colspan="3" class="text-center color2">{{ 'Jdd.list.submissions'|trans }}</th>
-                {% if user is not null and user.isAllowed('MANAGE_DATASETS') %}
-                    <th colspan="3" class="text-center color1">{{ 'DBB.table.title'|trans }}</th>
-                {% endif %}
+                <th colspan="3" class="text-center color1">{{ 'DBB.table.title'|trans }}</th>
+                <th data-visible="false" ></th>
+                <th data-visible="false" ></th>
             </tr>
             <tr>
                 <th data-searchable="false" class="color1"></th>
                 <th data-field="tpsNumber" data-sortable="true" class="color1">{{ 'Jdd.list.tpsNumber'|trans }}</th>
-                <th data-field="nameAndId" data-sortable="true" data-sorter="jddTitleIdSorter" class="color1">{{ 'Jdd.list.nameAndId'|trans }}</th>
-                <th data-field="createdOn" data-sortable="true" data-sorter="createdOnSorter" class="color1">{{ 'Jdd.list.createdOn'|trans }}</th>
+                <th data-field="nameAndId" data-sortable="true" class="color1">{{ 'Jdd.list.nameAndId'|trans }}</th>
+                <th data-field="createdOn" data-sortable="true" data-sort-name="created" class="color1">{{ 'Jdd.list.createdOn'|trans }}</th>
                 {% if isAllowedMDOP and allJdds %}
                     <th data-field="providerAndUser" data-searchable="true" data-sortable="true" class="color1">{{ 'Jdd.list.providerAndUser'|trans }}</th>
                 {% endif %}
                 <th data-field="actions" data-searchable="false" class="color2" data-align="center">{{ 'Actions'|trans }}</th>
                 <th data-field="filesAndLines" class="color2" style="width: 44%;">{{ 'IntegrationPage.FilesAndLines'|trans }}</th>
                 <th data-field="status" data-searchable="false" class="text-center color2">{{ 'IntegrationPage.Status'|trans }}</th>
-                {% if user is not null and user.isAllowed('MANAGE_DATASETS') %}
-                    <th data-field="deeCreationDate" data-searchable="true" data-sort-name="sentOnDate" data-sortable="true" data-sorter="sentOnSorter" class="color1">{{ 'DBB.table.depositDate'|trans }}</th>
-                    <th data-field="sentOnDate" data-visible="false" data-searchable="false"></th>
-                    <th data-searchable="false" class="color1"></th>
-                {% endif %}
+                <th data-field="deeCreationDate" data-searchable="true" data-sort-name="deedate" data-sortable="true" class="color1">{{ 'DBB.table.depositDate'|trans }}</th>
+                <th data-searchable="false" class="color1"></th>
+
+               {# Non visible columns used for sorting #}
+                <th data-field="created" data-visible="false" data-searchable="false"></th>
+                <th data-field="deedate" data-visible="false" data-searchable="false"></th>
             </tr>
         </thead>
         <tbody>
@@ -194,11 +198,9 @@
 
                 {# Title and metadata id of the jdd #}
                 <td>
-                    <p data-title="{{ jdd.field('title') }}">
-                        {{ jdd.field('title') }}
-                        <br/>
-                        <span class="text-muted longtext">{{ jdd.field('metadataId') }}</span>
-                    </p>
+                    {{ jdd.field('title') }}
+                    <br/>
+                    <span class="text-muted longtext">{{ jdd.field('metadataId') }}</span>
                 </td>
 
                 {# Creation date of the jdd #}
@@ -239,7 +241,7 @@
                         </div>
                     {% endfor %}
                     {# Add a new submission to dataset #}
-                    <div class="new-submission" data-jdd-id="{{ jdd.id }}"
+                    <div class="new-submission" data-jdd-id="{{ jdd.id }}">
                         <div class="submission-line">
                             <a href="{{ path("integration_creation", { 'jddid': jdd.id }) }}">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>  {{ 'Jdd.submission.add'|trans }}
@@ -277,40 +279,46 @@
                     {% endfor %}
                 </td>
 
-                {# DEE Column - Empty / filled by Ajax #}
-                {% if user is not null and user.isAllowed('MANAGE_DATASETS') %}
-                    <td>
-                        <div class="dbb" data-jdd-id="{{ jdd.id }}">
-                            <div class="dbb-state">
-                                <div class="progress-label hidden"></div>
-                                <div class="hidden">
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
-                                            0%
-                                        </div>
+                {# DBB Column - Empty / filled by Ajax #}
+                {% set permToGenerateDEE = user.isAllowed('GENERATE_DEE_ALL_JDD') or (user.isAllowed('GENERATE_DEE_OWN_JDD') and jdd.user.login == user.login ) %}
+                <td>
+                    <div class="dbb" data-jdd-id="{{ jdd.id }}" data-perm-generate="{{ permToGenerateDEE ? 1 : 0 }}">
+                        <div class="dbb-state">
+                            <div class="progress-label hidden"></div>
+                            <div class="hidden">
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                        0%
                                     </div>
                                 </div>
-                                <div class="dbb-content">
-                                    {{ jdd.field('publishedAt') ? jdd.field('publishedAt')|replace({'_':' ', '-':':'})|date('d/m/Y H\\hi') : 'DBB.status.noDBB'|trans }}
-                                </div>
                             </div>
+                            <div class="dbb-content"></div>
                         </div>
-                    </td>
-                    <td>
-                        {{ jdd.field('publishedAt') ? jdd.field('publishedAt')|replace({'_':' ', '-':':'})|date('Y-m-d H:i:s') : '1970-01-01 00:00:00' }}
-                    </td>
-                    <td>
-                        <div class="dbb" data-jdd-id="{{ jdd.id }}">
-                            <div class="dbb-actions text-center"></div>
-                        </div>
-                    </td>
-                {% endif %}
+                    </div>
+                </td>
+                {# Action to generate DEE; data-can-generate express the permission to generate and dowload DEE. See other reports is still possible #}
+                <td>
+                    <div class="dbb" data-jdd-id="{{ jdd.id }}" data-perm-generate="{{ permToGenerateDEE ? 1 : 0 }}">
+                        <div class="dbb-actions text-center"></div>
+                    </div>
+                </td>
+
+                {# Non visible fields used for sorting #}
+                {# Creation date of the jdd #}
+                <td>
+                    {{ jdd.createdAt|date('Y-m-d H:i') }}
+                </td>
+                {# Creation date of the DEE #}
+                <td>
+                    {{ jdd.dee ? jdd.dee.createdAt|date('Y-m-d H:i') : '1970-01-01 00:00'}}
+                </td>
+
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    {% if user is not null and user.isAllowed('MANAGE_DATASETS') %}
+    {% if user.isAllowed('GENERATE_DEE_ALL_JDD') or user.isAllowed('GENERATE_DEE_OWN_JDD') %}
         <!-- DBB dialog popup -->
         <div class="modal fade" id="DBBModal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="dialog">
@@ -349,7 +357,6 @@
                 </div>
             </div>
         </div>
-
     {% endif %}
 
 {% else %}
@@ -367,6 +374,5 @@
         {% include '@IgnGinco/Integration/integration-cancel.js.twig' %}
         {% include '@IgnGinco/Jdd/dee-generation.js.twig' %}
         {% include '@IgnGinco/Jdd/dbb-generation.js.twig' %}
-        {% include '@IgnGinco/Jdd/dee-column-sorters.js.twig' %}
     </script>
 {% endblock %}
