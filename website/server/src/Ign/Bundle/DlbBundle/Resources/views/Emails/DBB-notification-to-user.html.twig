@@ -1,7 +1,7 @@
 {% extends "IgnGincoBundle:Emails:base-email.html.twig" %}
 
 {%- block subject %}
-	Objet : Procédure TPS [n°TPS] - Dépôt du jeu de données {{ jdd.field('metadataId') }}
+	Objet : Procédure demarches-simplifiees.fr [n°Dossier] - Dépôt du jeu de données {{ jdd.field('metadataId') }}
 {% endblock -%}
 
 {%- block email_body_text %}
@@ -18,14 +18,14 @@
 		
 		Ce dépôt a eu lieu dans le cadre de la procédure suivante : 
 		
-		Procédure : [Titre procédure issu de TPS]
-		N° TPS : [ID TPS]
+		Procédure : [Titre procédure issu de demarches-simplifiees.fr]
+		N° Dossier : [ID demarches-simplifiees.fr]
 		Commanditaire de l'étude : [Organisme Petitionnaire]
-		Lien : [Lien vers la procédure dans TPS ]
+		Lien : [Lien vers la procédure dans demarches-simplifiees.fr ]
 		
 		Le jeu de données a été publié sur la plateforme de Dépôt Légal des Données Brutes de Biodiversité et transmis à la plateforme nationale du SINP qui va procéder à son intégration dans l’INPN.
 		
-		Vous devez maintenant reporter dans la procédure TPS (lien) l'URL suivante, à laquelle vous trouverez le certificat de dépôt : [URL_A_PRECISER].
+		Vous devez maintenant reporter dans la procédure demarches-simplifiees.fr (lien) l'URL suivante, à laquelle vous trouverez le certificat de dépôt : [URL_A_PRECISER].
 		
 		Bien cordialement,
 		
@@ -47,14 +47,14 @@
 
         <p>Ce dépôt a eu lieu dans le cadre de la procédure suivante : </p>
         
-		<p>Procédure : [Titre procédure issu de TPS]<br>
-		N° TPS : [ID TPS]<br>
+		<p>Procédure : [Titre procédure issu de demarches-simplifiees.fr]<br>
+		N° demarches-simplifiees.fr : [ID demarches-simplifiees.fr]<br>
 		Commanditaire de l'étude : [Organisme Petitionnaire]<br>
-		Lien : [Lien vers la procédure dans TPS ]</p>
+		Lien : [Lien vers la procédure dans demarches-simplifiees.fr ]</p>
 
         <p>Le jeu de données a été publié sur la plateforme de Dépôt Légal des Données Brutes de Biodiversité et transmis à la plateforme nationale du SINP qui va procéder à son intégration dans l’INPN.</p>
 		
-		<p>Vous devez maintenant reporter dans la procédure TPS (lien) l'URL suivante, à laquelle vous trouverez le certificat de dépôt : [URL_A_PRECISER].</p>
+		<p>Vous devez maintenant reporter dans la procédure demarches-simplifiees.fr (lien) l'URL suivante, à laquelle vous trouverez le certificat de dépôt : [URL_A_PRECISER].</p>
 		</p>
         <p>Bien cordialement,</p>
         
