@@ -11,7 +11,7 @@ if (is_file("$currentDir/../../../lib/share.php")) {
 }
 
 // ----------------------------------------------------
-// Synopsis: migrate DB GINCO/DLB from v2.0.006 to v2.0.007
+// Synopsis: migrate DB GINCO/DLB from v2.0.006 to v2.1.000
 // ----------------------------------------------------
 function usage($mess = NULL) {
 	echo "------------------------------------------------------------------------\n";
