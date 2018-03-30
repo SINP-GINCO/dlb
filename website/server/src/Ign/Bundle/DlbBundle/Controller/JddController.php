@@ -5,7 +5,7 @@ use Ign\Bundle\DlbBundle\Form\DlbJddType;
 use Ign\Bundle\GincoBundle\Controller\JddController as BaseController;
 use Ign\Bundle\GincoBundle\Entity\RawData\DEE;
 use Ign\Bundle\GincoBundle\Exception\MetadataException;
-use Ign\Bundle\OGAMBundle\Entity\RawData\Jdd;
+use Ign\Bundle\GincoBundle\Entity\RawData\Jdd;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,7 +43,7 @@ class JddController extends BaseController {
 		$choices = null;
 
 		// Get the url of the metadata service
-		$metadataServiceUrl = $this->get('ogam.configuration_manager')->getConfig('jddMetadataFileDownloadServiceURL');
+		$metadataServiceUrl = $this->get('ginco.configuration_manager')->getConfig('jddMetadataFileDownloadServiceURL');
 		// Format the URL to only get prefix
 		$endUrl = strpos($metadataServiceUrl, "cadre");
 		$metadataServiceUrl = substr($metadataServiceUrl, 0, $endUrl + 6);
@@ -128,7 +128,7 @@ class JddController extends BaseController {
 			$this->get('logger')->debug('metadataId is : ' . $jddId);
 
 			// Test if another jdd already exists with this jddId
-			$jddWithSameMetadataId = $em->getRepository('OGAMBundle:RawData\Jdd')->findByField(array(
+			$jddWithSameMetadataId = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findByField(array(
 				'metadataId' => $jddId
 			));
 			if (count($jddWithSameMetadataId) > 0) {
@@ -155,7 +155,7 @@ class JddController extends BaseController {
 			// Do we create a new Jdd or get an existing one ?
 			$createJdd = true;
 			$jddId = $form->get('jdd_id')->getData();
-			$jddWithSameMetadataId =$em->getRepository('OGAMBundle:RawData\Jdd')->findByField(array(
+			$jddWithSameMetadataId =$em->getRepository('IgnGincoBundle:RawData\Jdd')->findByField(array(
 				'metadataId' => $jddId
 			));
 			if (count($jddWithSameMetadataId) > 0) {
@@ -213,7 +213,7 @@ class JddController extends BaseController {
 
 		$em = $this->get('doctrine.orm.raw_data_entity_manager');
 
-		$jddList = $em->getRepository('OGAMBundle:RawData\Jdd')->findByField(array(
+		$jddList = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findByField(array(
 			'status' => 'published'
 		), array(
 			'id' => 'DESC'
@@ -225,7 +225,7 @@ class JddController extends BaseController {
 			$jdd->dee = $deeRepo->findLastVersionByJdd($jdd);
 		}
 
-		return $this->render('OGAMBundle:Jdd:jdd_published_list_page.html.twig', array(
+		return $this->render('IgnGincoBundle:Jdd:jdd_published_list_page.html.twig', array(
 			'jddList' => $jddList,
 			'user' => $this->getUser()
 		));
@@ -244,12 +244,12 @@ class JddController extends BaseController {
 
 		$em = $this->get('doctrine.orm.raw_data_entity_manager');
 
-		$jddListPublished = $em->getRepository('OGAMBundle:RawData\Jdd')->findByField(array(
+		$jddListPublished = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findByField(array(
 			'status' => 'published'
 		), array(
 			'id' => 'DESC'
 		));
-		$jddListByTpsId = $em->getRepository('OGAMBundle:RawData\Jdd')->findByField(array(
+		$jddListByTpsId = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findByField(array(
 			'tpsId' => $tpsId
 		), array(
 			'id' => 'DESC'
@@ -262,7 +262,7 @@ class JddController extends BaseController {
 			$jdd->dee = $deeRepo->findLastVersionByJdd($jdd);
 		}
 
-		return $this->render('OGAMBundle:Jdd:jdd_published_by_tpsid_list_page.html.twig', array(
+		return $this->render('IgnGincoBundle:Jdd:jdd_published_by_tpsid_list_page.html.twig', array(
 			'jddList' => $jddList,
 			'user' => $this->getUser(),
 			'tpsId' => $tpsId

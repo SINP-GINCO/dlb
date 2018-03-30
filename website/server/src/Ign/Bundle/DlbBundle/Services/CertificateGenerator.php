@@ -4,8 +4,8 @@ namespace Ign\Bundle\DlbBundle\Services;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
 use Ign\Bundle\GincoBundle\Exception\Exception;
-use Ign\Bundle\OGAMBundle\Entity\RawData\Jdd;
-use Ign\Bundle\OGAMBundle\Services\ConfigurationManager;
+use Ign\Bundle\GincoBundle\Entity\RawData\Jdd;
+use Ign\Bundle\GincoBundle\Services\ConfigurationManager;
 use Symfony\Bridge\Monolog\Logger;
 
 /**

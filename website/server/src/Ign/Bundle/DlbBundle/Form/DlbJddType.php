@@ -2,8 +2,8 @@
 namespace Ign\Bundle\DlbBundle\Form;
 
 use Doctrine\ORM\EntityRepository;
-use Ign\Bundle\OGAMBundle\Entity\RawData\Jdd;
-use Ign\Bundle\OGAMBundle\Entity\Website\User;
+use Ign\Bundle\GincoBundle\Entity\RawData\Jdd;
+use Ign\Bundle\GincoBundle\Entity\Website\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormEvents;
@@ -51,7 +51,7 @@ class DlbJddType extends AbstractType {
 		// Hidden in twig
 		add('model', EntityType::class, array(
 			'label' => 'Modèle de données',
-			'class' => 'OGAMBundle:Metadata\Model',
+			'class' => 'IgnGincoBundle:Metadata\Model',
 			'choice_label' => 'name',
 			'em' => $options['entity_manager'],
 			// Select Models which have an Import Dataset, ie a dataset with at least one FileFormat
@@ -97,7 +97,7 @@ class DlbJddType extends AbstractType {
 				'choice_attr' => function($val, $key, $index) {
 					// Adds a disabled state if the user can't add data on the jdd
 					$disabled = false;
-					$jddWithSameMetadataId = $this->em->getRepository('OGAMBundle:RawData\Jdd')->findByField(array(
+					$jddWithSameMetadataId = $this->em->getRepository('IgnGincoBundle:RawData\Jdd')->findByField(array(
 						'metadataId' => $val
 					));
 					if (count($jddWithSameMetadataId) > 0) {
@@ -150,6 +150,6 @@ class DlbJddType extends AbstractType {
 	}
 
 	public function getParent() {
-		return \Ign\Bundle\OGAMBundle\Form\JddType::class;
+		return \Ign\Bundle\GincoBundle\Form\JddType::class;
 	}
 }

@@ -4,8 +4,8 @@ namespace Ign\Bundle\DlbBundle\Controller;
 use Ign\Bundle\GincoBundle\Entity\RawData\DEE;
 use Ign\Bundle\GincoBundle\Entity\Website\Message;
 use Ign\Bundle\GincoBundle\Exception\DEEException;
-use Ign\Bundle\OGAMBundle\Controller\GincoController;
-use Ign\Bundle\OGAMBundle\Entity\RawData\Jdd;
+use Ign\Bundle\GincoBundle\Controller\GincoController;
+use Ign\Bundle\GincoBundle\Entity\RawData\Jdd;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -36,7 +36,7 @@ class DBBController extends GincoController {
 
 		// Find jddId if given in GET parameters
 		$jddId = intval($request->query->get('jddId', 0));
-		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
+		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
 		if (!$jdd) {
 			return new JsonResponse([
 				'success' => false,
@@ -134,7 +134,7 @@ class DBBController extends GincoController {
 	public function generateDbbCsvAction($jddId) {
 		$em = $this->get('doctrine.orm.entity_manager');
 		$deeProcess = $this->get('ginco.dee_process');
-		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
+		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
 
 		// Check permissions on a per-jdd basis if necessary
 		if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -163,7 +163,7 @@ class DBBController extends GincoController {
 	 */
 	public function pdfSaveAction($jddId) {
 		$em = $this->get('doctrine.orm.entity_manager');
-		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
+		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
 
 		// Check permissions on a per-jdd basis if necessary
 		if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -187,7 +187,7 @@ class DBBController extends GincoController {
 	 */
 	public function pdftwigSaveAction($jddId) {
 		$em = $this->get('doctrine.orm.entity_manager');
-		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
+		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
 
 		// Check permissions on a per-jdd basis if necessary
 		if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -222,7 +222,7 @@ class DBBController extends GincoController {
 		}
 
 		$em = $this->get('doctrine.orm.entity_manager');
-		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
+		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
 		$filePath = $jdd->getField('dbbFilePath');
 
 		return $this->download($filePath);
@@ -245,7 +245,7 @@ class DBBController extends GincoController {
 		}
 
 		$em = $this->get('doctrine.orm.entity_manager');
-		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
+		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
 		$filePath = $jdd->getField('certificateFilePath');
 
 		return $this->download($filePath);
@@ -268,9 +268,9 @@ class DBBController extends GincoController {
 		}
 
 		$em = $this->get('doctrine.orm.entity_manager');
-		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
+		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
 
-		$dbbPublicDirectory = $this->get('ogam.configuration_manager')->getConfig('dbbPublicDirectory');
+		$dbbPublicDirectory = $this->get('ginco.configuration_manager')->getConfig('dbbPublicDirectory');
 		$metadataCAId = $jdd->getField('metadataCAId');
 
 		$caMetadataFile = $dbbPublicDirectory . '/' . $jdd->getId() . '/' . $metadataCAId;
@@ -295,9 +295,9 @@ class DBBController extends GincoController {
 		}
 
 		$em = $this->get('doctrine.orm.entity_manager');
-		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
+		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
 
-		$dbbPublicDirectory = $this->get('ogam.configuration_manager')->getConfig('dbbPublicDirectory');
+		$dbbPublicDirectory = $this->get('ginco.configuration_manager')->getConfig('dbbPublicDirectory');
 		$metadataId = $jdd->getField('metadataId');
 
 		$jddMetadataFile = $dbbPublicDirectory . '/' . $jdd->getId() . '/' . $metadataId;
@@ -315,7 +315,7 @@ class DBBController extends GincoController {
 	 */
 	public function downloadDEE($jddId) {
 		$em = $this->get('doctrine.orm.entity_manager');
-		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
+		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
 		$DEE = $em->getRepository('IgnGincoBundle:RawData\DEE')->findOneByJdd($jddId);
 
 		// Check permissions on a per-jdd basis if necessary
@@ -336,7 +336,7 @@ class DBBController extends GincoController {
 
 		// Test the existence of the zip file
 		$fileName = pathinfo($archivePath, PATHINFO_BASENAME);
-		$archiveFilePath = $this->get('ogam.configuration_manager')->getConfig('deePublicDirectory') . '/' . $fileName;
+		$archiveFilePath = $this->get('ginco.configuration_manager')->getConfig('deePublicDirectory') . '/' . $fileName;
 		if (!is_file($archiveFilePath)) {
 			throw new DEEException("DEE archive file does not exist for this DEE: " . $DEE->getId() . ' ' . $archiveFilePath);
 		}
@@ -414,7 +414,7 @@ class DBBController extends GincoController {
 	 */
 	protected function getStatus($jddId) {
 		$em = $this->get('doctrine.orm.entity_manager');
-		$jddRepo = $em->getRepository('OGAMBundle:RawData\Jdd');
+		$jddRepo = $em->getRepository('IgnGincoBundle:RawData\Jdd');
 
 		// The returned informations
 		$json = array(
