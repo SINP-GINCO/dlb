@@ -2,7 +2,7 @@
 namespace Ign\Bundle\DlbBundle\Controller;
 
 use Ign\Bundle\GincoBundle\Controller\IntegrationController as BaseController;
-use Ign\Bundle\OGAMBundle\Entity\RawData\Submission;
+use Ign\Bundle\GincoBundle\Entity\RawData\Submission;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -33,7 +33,7 @@ class IntegrationController extends BaseController {
 
 		// Find jddid if given in GET parameters
 		$jddId = intval($request->query->get('jddid', 0));
-		$jdd = $em->getRepository('OGAMBundle:RawData\Jdd')->findOneById($jddId);
+		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
 
 		// If the model of the jdd has no published datasets, add a flash error message
 		// which will be seen on next page
