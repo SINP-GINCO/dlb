@@ -10,6 +10,8 @@ use Ign\Bundle\GincoBundle\Entity\Website\User;
 use Ign\Bundle\GincoBundle\Services\ConfigurationManager;
 use Ign\Bundle\GincoBundle\Services\MailManager;
 use Symfony\Bridge\Monolog\Logger;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Class DBBProcess
@@ -57,6 +59,12 @@ class DBBProcess {
 
 	/**
 	 *
+	 * @var Router
+	 */
+	protected $router;
+
+	/**
+	 *
 	 * @var Logger
 	 */
 	protected $logger;
@@ -73,7 +81,7 @@ class DBBProcess {
 	 * @param
 	 *        	$logger
 	 */
-	public function __construct($em, $configuration, $integration, $DEEProcess, $DEEGenerator, $DBBGenerator, $CertificateGenerator, $MetadataDownloader, $mailManager, $logger) {
+	public function __construct($em, $configuration, $integration, $DEEProcess, $DEEGenerator, $DBBGenerator, $CertificateGenerator, $MetadataDownloader, $mailManager, $router, $logger) {
 		$this->em = $em;
 		$this->configuration = $configuration;
 		$this->integration = $integration;
@@ -83,6 +91,7 @@ class DBBProcess {
 		$this->CertificateGenerator = $CertificateGenerator;
 		$this->MetadataDownloader = $MetadataDownloader;
 		$this->mailManager = $mailManager;
+		$this->router = $router;
 		$this->logger = $logger;
 	}
 
@@ -199,7 +208,11 @@ class DBBProcess {
 		$this->logger->debug('filName : ' . implode(', ', $fileNames));
 		$parameters = array(
 			'filename' => implode(', ', $fileNames),
-			'jdd' => $jdd
+			'jdd' => $jdd,
+			'pubTpsUrl' => $this->configuration->getConfig('site_url') . $this->router->generate(
+				'published_jdds_by_tps',
+				[ 'tpsId' => $jdd->getField('tpsId') ]
+			)
 		);
 		
 		// Send mail notification to user
