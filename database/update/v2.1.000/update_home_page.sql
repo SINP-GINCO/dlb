@@ -14,7 +14,7 @@ biodiversité).</p>
   <li>de lister et trier les jeux de données ayant fait l’objet d’un dépôt légal</li>
   <li>de visualiser les données d’occurrences de taxons ayant fait l’objet d’un dépôt légal sur la plateforme, dans la 
 limite de leur niveau de sensibilité définissant un degré de menace sur l’espèce,</li>
-  <li>de consulter les certificats de dépôt d’une télé-procédure (lien télé-procédure TPS) associée à une étude 
+  <li>de consulter les certificats de dépôt d’une <a href="https://www.demarches-simplifiees.fr/" target="_blank">télé-procédure </a> associée à une étude 
 d’évaluation préalable ou de suivi des impacts réalisées dans le cadre de l’élaboration de projet d’aménagement 
 soumis à l’approbation de l’autorité administrative.</li>
 </ol>

@@ -1,10 +1,10 @@
 {% extends "IgnGincoBundle:Emails:base-email.html.twig" %}
-
 {%- block subject %}
 	Objet : Procédure demarches-simplifiees.fr [n°Dossier] - Dépôt du jeu de données {{ jdd.field('metadataId') }}
 {% endblock -%}
 
 {%- block email_body_text %}
+
     {% autoescape true %}
 		Bonjour,
 		
@@ -18,14 +18,14 @@
 		
 		Ce dépôt a eu lieu dans le cadre de la procédure suivante : 
 		
-		Procédure : [Titre procédure issu de demarches-simplifiees.fr]
-		N° Dossier : [ID demarches-simplifiees.fr]
-		Commanditaire de l'étude : [Organisme Petitionnaire]
-		Lien : [Lien vers la procédure dans demarches-simplifiees.fr ]
+		Procédure :  {{ jdd.field('caTitle') }}
+		N° Dossier : {{ jdd.field('tpsId') }}
+		Commanditaire de l'étude : {{ jdd.field('projetOwner') }}
+		Lien : https://www.demarches-simplifiees.fr/dossiers/{{ jdd.field('tpsId') }}
 		
 		Le jeu de données a été publié sur la plateforme de Dépôt Légal des Données Brutes de Biodiversité et transmis à la plateforme nationale du SINP qui va procéder à son intégration dans l’INPN.
 		
-		Vous devez maintenant reporter dans la procédure demarches-simplifiees.fr (lien) l'URL suivante, à laquelle vous trouverez le certificat de dépôt : [URL_A_PRECISER].
+		Vous devez maintenant reporter dans la procédure demarches-simplifiees.fr l'URL suivante, à laquelle vous trouverez le certificat de dépôt : [URL A PRECISER]
 		
 		Bien cordialement,
 		
@@ -47,14 +47,14 @@
 
         <p>Ce dépôt a eu lieu dans le cadre de la procédure suivante : </p>
         
-		<p>Procédure : [Titre procédure issu de demarches-simplifiees.fr]<br>
-		N° demarches-simplifiees.fr : [ID demarches-simplifiees.fr]<br>
-		Commanditaire de l'étude : [Organisme Petitionnaire]<br>
-		Lien : [Lien vers la procédure dans demarches-simplifiees.fr ]</p>
+		<p>Procédure : {{ jdd.field('caTitle') }}<br>
+		N° Dossier : {{ jdd.field('tpsId') }}<br>
+		Commanditaire de l'étude : {{ jdd.field('projetOwner') }}<br>
+		Lien : <a href="https://www.demarches-simplifiees.fr/dossiers/{{ jdd.field('tpsId') }}">https://www.demarches-simplifiees.fr/dossiers/{{ jdd.field('tpsId') }}</a>
 
         <p>Le jeu de données a été publié sur la plateforme de Dépôt Légal des Données Brutes de Biodiversité et transmis à la plateforme nationale du SINP qui va procéder à son intégration dans l’INPN.</p>
 		
-		<p>Vous devez maintenant reporter dans la procédure demarches-simplifiees.fr (lien) l'URL suivante, à laquelle vous trouverez le certificat de dépôt : [URL_A_PRECISER].</p>
+		<p>Vous devez maintenant reporter dans la procédure demarches-simplifiees.fr (lien) l'URL suivante, à laquelle vous trouverez le certificat de dépôt : [URL A PRECISER] </p>
 		</p>
         <p>Bien cordialement,</p>
         
