@@ -206,10 +206,13 @@ class DBBProcess {
 		$fileNames = array_map("basename", $submissionFilesNames);
 		
 		$this->logger->debug('filName : ' . implode(', ', $fileNames));
+
+		$siteUrl = $this->configuration->getConfig('site_url');
+		$domain = parse_url($siteUrl, PHP_URL_SCHEME) . '://' . parse_url($siteUrl, PHP_URL_HOST);
 		$parameters = array(
 			'filename' => implode(', ', $fileNames),
 			'jdd' => $jdd,
-			'pubTpsUrl' => $this->configuration->getConfig('site_url') . $this->router->generate(
+			'pubTpsUrl' => $domain . $this->router->generate(
 				'published_jdds_by_tps',
 				[ 'tpsId' => $jdd->getField('tpsId') ]
 			)
