@@ -1,4 +1,4 @@
-# Services config for the OGAM/Ginco part of the application
+# Services config for the Ginco part of the application
 
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/book/service_container.html
@@ -33,12 +33,12 @@ services:
     # Service doing the whole process of generating and sending the DBB files
     dlb.dbb_process:
         class: Ign\Bundle\DlbBundle\Services\DBBProcess
-        arguments: ["@doctrine.orm.entity_manager","@ogam.configuration_manager", "@ogam.integration_service", "@ginco.dee_process", "@ginco.dee_generator", "@dlb.dbb_generator", "@dlb.certificate_generator", "@dlb.metadata_dowloader", "@app.mail_manager","@logger"]
-  
+        arguments: ["@doctrine.orm.entity_manager","@ogam.configuration_manager", "@ogam.integration_service", "@ginco.dee_process", "@ginco.dee_generator", "@dlb.dbb_generator", "@dlb.certificate_generator", "@dlb.metadata_dowloader", "@app.mail_manager","@router","@logger"]
+
     # Service reading the xml metadata files from INPN metadata application
     dlb.metadata_tps_reader:
         class: Ign\Bundle\DlbBundle\Services\MetadataTpsReader
-        arguments: ["@ogam.configuration_manager","@logger"]   
+        arguments: ["@ogam.configuration_manager","@logger"]
         
     # Define form as a service to create new jdd
     app.form.type.DlbJdd:
