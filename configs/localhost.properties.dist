@@ -24,9 +24,8 @@ db.version=9.6.0
 # La machine sur laquelle déployer cette instance
 deploy.host=localhost
 
-# Chemins des répertoires contenant les projets ogam et configurateur pendant la phase de build
+# Chemins des répertoires contenant les projets ginco et configurateur pendant la phase de build
 # absolu ou relatif au répertoire courant (répertoire où est installé le projet ginco)
-ogam.path=/path/to/ogam
 ginco.path=/path/to/ginco
 configurator.path=/path/to/configurator
 

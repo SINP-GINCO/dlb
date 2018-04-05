@@ -58,7 +58,7 @@ function buildJavaServices($config, $buildMode) {
 		'JddDlbService'
 	);
 	$gincoCustomServicesNames = array(
-		'ComputeGeoAssociationService',
+		'GeoAssociationService',
 		'ChecksDSRGincoService',
 		'JddService',
 		'GenerateReportsService'
@@ -134,10 +134,9 @@ function buildWebsite($config, $buildMode) {
 	global $projectDir, $buildDir, $postBuildInstructions;
 	chdir($projectDir);
 	
-	echo ("building server: Ogam, Ginco, Dlb, Configurator (symfony parts)...\n");
+	echo ("building server: Ginco, Dlb, Configurator (symfony parts)...\n");
 	echo ("-------------------------------------------------------------\n");
 	
-	// $serverDirOgam = realpath($config['ogam.path'] . "/website/htdocs/server/ogamServer");
 	$serverDirGinco = realpath($config['ginco.path'] . "/website/server");
 	$buildServerDir = $buildDir . "/website/server";
 	is_dir($buildServerDir) || mkdir($buildServerDir, 0755, true);
@@ -148,18 +147,12 @@ function buildWebsite($config, $buildMode) {
 		system("cp -r $projectDir/website/server/* $buildServerDir/");
 	}
 	
-	// Copy or symlink OgamBundle and GincoBundle
+	// Copy or symlink GincoBundle
 	if ($buildMode == 'prod') {
-		echo ("Copying OGAMBundle to $buildServerDir/src/Ign/Bundle/...\n");
-		system("rm -rf $buildServerDir/src/Ign/Bundle/OGAMBundle");
-		system("cp -r $serverDirGinco/src/Ign/Bundle/OGAMBundle $buildServerDir/src/Ign/Bundle/");
 		echo ("Copying GincoBundle to $buildServerDir/src/Ign/Bundle/...\n");
 		system("rm -rf $buildServerDir/src/Ign/Bundle/GincoBundle");
 		system("cp -r $serverDirGinco/src/Ign/Bundle/GincoBundle $buildServerDir/src/Ign/Bundle/");
 	} else {
-		echo ("Creating a symlink to OGAMBundle in $buildServerDir/src/Ign/Bundle/...\n");
-		system("rm -rf $buildServerDir/src/Ign/Bundle/OGAMBundle");
-		system("ln -s $serverDirGinco/src/Ign/Bundle/OGAMBundle $buildServerDir/src/Ign/Bundle/OGAMBundle");
 		echo ("Creating a symlink to GincoBundle in $buildServerDir/src/Ign/Bundle/...\n");
 		system("rm -rf $buildServerDir/src/Ign/Bundle/GincoBundle");
 		system("ln -s $serverDirGinco/src/Ign/Bundle/GincoBundle $buildServerDir/src/Ign/Bundle/GincoBundle");
@@ -285,7 +278,6 @@ function buildExtJS($config, $buildMode) {
 	
 	$clientDir = "$projectDir/website/client";
 	$clientDirGinco = realpath($config['ginco.path'] . "/website/client");
-	// $clientDirOgam = realpath($config['ogam.path'] . "/website/htdocs/client");
 	$buildClientDir = $buildDir . "/website/client";
 	is_dir($buildClientDir) || mkdir($buildClientDir, 0755, true);
 	

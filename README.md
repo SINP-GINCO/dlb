@@ -7,7 +7,6 @@ the legal uploading of biodiversity data collected during impact studies.
 
 * Create or select a folder on your local machine where you will install the project:
 ```bash
-# Clone OGAM repo (public repo currently unavailable)
 git clone git@github.com:SINP-GINCO/ginco.git
 git clone git@github.com:SINP-GINCO/ogam-configurator.git
 git clone git@github.com:SINP-GINCO/dlb.git
