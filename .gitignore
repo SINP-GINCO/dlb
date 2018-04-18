@@ -44,3 +44,4 @@
 # Fichier de properties propre à chaque configuration locale
 localhost*.properties
 
+/website/server/nbproject/private/
