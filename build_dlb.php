@@ -50,7 +50,6 @@ function buildJavaServices($config, $buildMode) {
 	is_dir("$servicesBuildDir/conf") || mkdir("$servicesBuildDir/conf", 0755, true);
 	
 	$ISFilename = "SINP" . $config['instance.name'] . "IntegrationService";
-	$RGFilename = "SINP" . $config['instance.name'] . "RGService";
 	$dlbCustomPath = "$projectDir/services/service_integration/custom/fr/ifn/ogam/integration";
 	$gincoCustomPath = "$gincoDir/services/service_integration/custom/fr/ifn/ogam/integration";
 	$ogamCustomPath = "$gincoDir/service_integration/custom/fr/ifn/ogam/integration";
@@ -60,8 +59,7 @@ function buildJavaServices($config, $buildMode) {
 	$gincoCustomServicesNames = array(
 		'GeoAssociationService',
 		'ChecksDSRGincoService',
-		'JddService',
-		'GenerateReportsService'
+		'JddService'
 	);
 	
 	// build du service d'intégration
@@ -88,30 +86,7 @@ function buildJavaServices($config, $buildMode) {
 	
 	copy("$gincoDir/service_integration/build/libs/service_integration-4.0.0.war", "$servicesBuildDir/webapps/$ISFilename.war");
 	substituteInFile("$gincoDir/services_configs/service_integration/IntegrationService_tpl.xml", "$servicesBuildDir/conf/$ISFilename.xml", $config);
-	
-	// build du service de rapport
-	echo ("Building report service...\n");
-	// remplacement des rapports par défaut d'ogam par le rapport d'erreur GINCO
-	system("mv -f $gincoDir/service_generation_rapport/report $gincoDir/service_generation_rapport/report.save");
-	mkdir("$gincoDir/service_generation_rapport/report", 0755, true);
-	copy("$gincoDir/services_configs/service_generation_rapport/ErrorReport.rptdesign", "$gincoDir/service_generation_rapport/report/ErrorReport.rptdesign");
-	// build
-	chdir($gincoDir);
-	// system("./gradlew service_generation_rapport:war");
-	// le war contenant les rapports se trouve dans
-	// ${ogamDir}/service_generation_rapport/build/libs/service_generation_rapport-3.0.0.war
-	// En fait, la target war ne fonctionne pas correctement pour ce service. Il faut utiliser
-	// la target deploy à la place (en attendant que ce soit corrigé)
-	// mkdir("$buildDir/tmp");
-	system("./gradlew service_generation_rapport:addReports --daemon");
-	// Le war se retrouve dans build/tmp/webapps/OGAMRG.war
-	system("rm -rf report/*;
-	 mv -f $gincoDir/service_generation_rapport/report.save/* $gincoDir/service_generation_rapport/report/;
-	 rm -rf $gincoDir/service_generation_rapport/report.save");
-	
-	copy("$gincoDir/service_generation_rapport/build/libs/OGAMRG.war", "$servicesBuildDir/webapps/$RGFilename.war");
-	substituteInFile("$gincoDir/services_configs/service_generation_rapport/ReportService_tpl.xml", "$servicesBuildDir/conf/$RGFilename.xml", $config);
-	
+		
 	// Post installation command
 	if ($buildMode == 'dev') {
 		$postBuildInstructions[] = "Java services war files have been built: $servicesBuildDir/webapps/$ISFilename.war and $servicesBuildDir/webapps/$RGFilename.war\n";
@@ -120,9 +95,6 @@ function buildJavaServices($config, $buildMode) {
 		$postBuildInstructions[] = "sudo rm -rf /var/lib/tomcat7/webapps/$ISFilename\n";
 		$postBuildInstructions[] = "sudo cp -f $servicesBuildDir/webapps/$ISFilename.war /var/lib/tomcat7/webapps/\n";
 		$postBuildInstructions[] = "sudo cp -f $servicesBuildDir/conf/$ISFilename.xml /etc/tomcat7/Catalina/localhost/\n";
-		$postBuildInstructions[] = "sudo rm -rf /var/lib/tomcat7/webapps/$RGFilename\n";
-		$postBuildInstructions[] = "sudo cp -f $servicesBuildDir/webapps/$RGFilename.war /var/lib/tomcat7/webapps/\n";
-		$postBuildInstructions[] = "sudo cp -f $servicesBuildDir/conf/$RGFilename.xml /etc/tomcat7/Catalina/localhost/\n";
 		$postBuildInstructions[] = "sudo service tomcat7 start\n\n";
 	}
 	
