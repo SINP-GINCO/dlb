@@ -32,16 +32,18 @@ class DefaultController extends BaseController {
 
                    if ($form->isValid()) {
                            // Contact recipients
-                           $contactRecipients = $this->get('ginco.configuration_manager')->getConfig('contactEmail', 'sinp-dev@ign.fr');
-                           $contactRecipients = explode(',', $contactRecipients);
+                            $contactRecipients = $this->get('ginco.configuration_manager')->getConfig('contactEmail', 'sinp-dev@ign.fr');
+                            $contactRecipients = explode(',', $contactRecipients);
 
-                           // Send the email
-                           $this->get('app.mail_manager')->sendEmail('IgnGincoBundle:Emails:contact.html.twig', array(
-                                   'email' => $form->get('email')
-                                           ->getData(),
-                                   'message' => $form->get('message')
-                                           ->getData()
-                           ), $contactRecipients);
+                            $this->get('app.mail_manager')->sendEmail(
+                                        'IgnDlbBundle:Emails:contact.html.twig', 
+                                        array(
+                                            'email' => $form->get('email')->getData(),
+                                            'subject' => $form->get('subject')->getData(),
+                                            'message' => $form->get('message')->getData()
+                                        ), 
+                                        $contactRecipients
+                                );
 
                            $request->getSession()
                                    ->getFlashBag()

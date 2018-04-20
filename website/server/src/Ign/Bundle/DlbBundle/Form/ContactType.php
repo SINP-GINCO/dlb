@@ -50,45 +50,45 @@ class ContactType extends AbstractType
                 'label' => 'Contact.subject.title',
                 'choices' => array(
                     'Contact.subject.legal.title' => array(
-                        'Contact.subject.legal.questions' => 'legal_questions',
-                        'Contact.subject.legal.rules' => 'legal_rules',
+                        'Contact.subject.legal.questions' => 'Contact.subject.legal.questions',
+                        'Contact.subject.legal.rules' => 'Contact.subject.legal.rules',
                     ),
                     'Contact.subject.format.title' => array(
-                        'Contact.subject.format.standard' => 'format_standard',
-                        'Contact.subject.format.structure' => 'format_structure',
-                        'Contact.subject.format.taxref' => 'format_taxref',
-                        'Contact.subject.format.sensitivity' => 'format_sensitivity',
+                        'Contact.subject.format.standard' => 'Contact.subject.format.standard',
+                        'Contact.subject.format.structure' => 'Contact.subject.format.structure',
+                        'Contact.subject.format.taxref' => 'Contact.subject.format.taxref',
+                        'Contact.subject.format.sensitivity' => 'Contact.subject.format.sensitivity',
                     ),
                     'Contact.subject.rules.title' => array(
-                        'Contact.subject.rules.architecture' => 'rules_architecture',
-                        'Contact.subject.rules.protocol' => 'rules_protocol',
-                        'Contact.subject.rules.relation' => 'rules_relation',
-                        'Contact.subject.rules.validation' => 'rules_validation',
+                        'Contact.subject.rules.architecture' => 'Contact.subject.rules.architecture',
+                        'Contact.subject.rules.protocol' => 'Contact.subject.rules.protocol',
+                        'Contact.subject.rules.relation' => 'Contact.subject.rules.relation',
+                        'Contact.subject.rules.validation' => 'Contact.subject.rules.validation',
                     ),
                     'Contact.subject.operation.title' => array(
-                        'Contact.subject.operation.organism' => 'operation_organism',
-                        'Contact.subject.operation.metadata' => 'operation_metadata',
-                        'Contact.subject.operation.geonature' => 'operation_geonature',
-                        'Contact.subject.operation.geonatureWorkflow' => 'operation_geonatureWorkflow',
-                        'Contact.subject.operation.ginco' => 'operation_ginco',
-                        'Contact.subject.operation.import' => 'operation_import',
-                        'Contact.subject.operation.gincoWorkflow' => 'operation_gincoWorkflow'
+                        'Contact.subject.operation.organism' => 'Contact.subject.operation.organism',
+                        'Contact.subject.operation.metadata' => 'Contact.subject.operation.metadata',
+                        'Contact.subject.operation.geonature' => 'Contact.subject.operation.geonature',
+                        'Contact.subject.operation.geonatureWorkflow' => 'Contact.subject.operation.geonatureWorkflow',
+                        'Contact.subject.operation.ginco' => 'Contact.subject.operation.ginco',
+                        'Contact.subject.operation.import' => 'Contact.subject.operation.import',
+                        'Contact.subject.operation.gincoWorkflow' => 'Contact.subject.operation.gincoWorkflow'
                     ),
                     'Contact.subject.blocking.title' => array(
-                        'Contact.subject.blocking.ginco' => 'blocking_ginco',
-                        'Contact.subject.blocking.geonature' => 'blocking_geonature',
-                        'Contact.subject.blocking.metadata' => 'blocking_metadata',
-                        'Contact.subject.blocking.authentication' => 'blocking_authentication',
-                        'Contact.subject.blocking.sinpDirectory' => 'blocking_sinpDirectory'
+                        'Contact.subject.blocking.ginco' => 'Contact.subject.blocking.ginco',
+                        'Contact.subject.blocking.geonature' => 'Contact.subject.blocking.geonature',
+                        'Contact.subject.blocking.metadata' => 'Contact.subject.blocking.metadata',
+                        'Contact.subject.blocking.authentication' => 'Contact.subject.blocking.authentication',
+                        'Contact.subject.blocking.sinpDirectory' => 'Contact.subject.blocking.sinpDirectory'
                     ),
                     'Contact.subject.evolution.title' => array(
-                        'Contact.subject.evolution.geonature' => 'evolution_geonature',
-                        'Contact.subject.evolution.ginco' => 'evolution_ginco',
-                        'Contact.subject.evolution.dldbb' => 'evolution_dldbb',
-                        'Contact.subject.evolution.metadata' => 'evolution_metadata',
-                        'Contact.subject.evolution.directory' => 'evolution_directory'
+                        'Contact.subject.evolution.geonature' => 'Contact.subject.evolution.geonature',
+                        'Contact.subject.evolution.ginco' => 'Contact.subject.evolution.ginco',
+                        'Contact.subject.evolution.dldbb' => 'Contact.subject.evolution.dldbb',
+                        'Contact.subject.evolution.metadata' => 'Contact.subject.evolution.metadata',
+                        'Contact.subject.evolution.directory' => 'Contact.subject.evolution.directory'
                     ),
-                    'Contact.subject.other'=>'other'
+                    'Contact.subject.other'=> 'Contact.subject.other'
                 ),
                 'choices_as_values' => true,
             ))
