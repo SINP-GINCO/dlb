@@ -412,7 +412,7 @@ function buildSupervisorConf($config, $buildMode) {
 		mkdir($confsupervisorBuildDir, 0755, true);
 	}
 	
-	$buildConfFile = "$confsupervisorBuildDir/dlb_{$config['instance.name']}.conf";
+	$buildConfFile = "$confsupervisorBuildDir/ginco_{$config['instance.name']}.conf";
 	echo ("Creating supervisor configuration file: $buildConfFile...\n");
 	
 	// Add parameter in config
