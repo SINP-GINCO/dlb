@@ -68,7 +68,7 @@
                     <li>
                         <a class="btn {{ integrationDisabled ? 'disabled'}} btn-xs"
                            title="{{ integrationDisabled ? 'Report.Integration.DisabledTitle'|trans : 'Report.Integration.Title'|trans }}"
-                           href="{{ path('download-report', {'submissionId': submission.id , 'report': 'integrationReport'}) }}">
+                           href="{{ path('submission_view-error-report', {'submissionId': submission.id }) }}">
                            {{ 'Report.Integration.Title'|trans }}
                         </a>
                     </li>
