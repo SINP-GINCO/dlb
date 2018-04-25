@@ -1,23 +1,32 @@
-.. Questions relatives à la création de compte et authentification
+.. 1. Questions relatives à la création de compte utilisateur
 
-Questions relatives à la création de compte et authentification
-===============================================================
+1. Questions relatives à la création de compte utilisateur
+==========================================================
 
-Comment créer un compte INPN ?
-------------------------------
+.. _creation_compte_INPN:
 
-**1.** Allez sur le lien https://inpn.mnhn.fr/accueil/compte/Compte 
+1.1. Comment créer un compte utilisateur pour accéder aux outils du processus de dépôt légal de biodiversité ?
+--------------------------------------------------------------------------------------------------------------
+
+Pour réaliser le dépôt légal de données de biodiversité, chaque utilisateur doit se créer un compte sur : 
+
+**1.** demarches-simplifiees.fr pour déclarer son projet
+
+**2.** l'INPN pour accéder au reste des outils mis à disposition des maîtres d'ouvrages et bureaux d'études pour décrire leur cadre d'acquisition et jeux de données avec l'outil Métadonnées, saisir leurs données avec GeoNature, et verser leurs données sur la plateforme Ginco de dépôt légal de biodiversité.
+
+.. tip:: Pas besoin de renseigner sur chaque outil votre identifiant et mot de passe pour se connecter. Métadonnées, GeoNature et Ginco sont interconnectés ! 
+
+1.2. Comment créer un compte INPN ?
+-----------------------------------
+
+**1.** Allez sur le site de l'INPN et cliquez sur `"Créer un compte ?"  <https://inpn.mnhn.fr/accueil/compte/Compte>`_ 
 
 **2.** Remplissez les différents champs demandés. 
 
-.. image:: ../../images/FAQ/compte_inpn.png
-
-.. warning:: Le login et mot de passe de ce compte vous seront utiles pour vous connecter sur l’outil de gestion des métadonnées SINP ainsi que sur la plateforme de Dépôt légal.
-
 **3.** Cliquez sur enregistrer.
 
+.. tip:: Le login et mot de passe de ce compte vous seront utiles pour vous connecter aux outils de gestion des métadonnées SINP, de saisie GeoNature et de versement Ginco.
 
-Comment créer un compte sur l’application métadonnées SINP ou sur la plateforme de Dépôt Légal de Données Biodiversité ?
-------------------------------------------------------------------------------------------------------------------------
+.. raw:: html
 
-Il n’est pas nécessaire de se créer un compte spécifique pour accéder à l’application métadonnées SINP ou à la plateforme de Dépôt légal. Votre identifiant et mot de passe de votre compte INPN suffisent pour se connecter à l’application métadonnées SINP, de même pour se connecter à la plateforme de Dépôt légal.
+   <video controls src="../../../source/_static/creation_compte_inpn.mp4" width=100% frameborder="0" allowfullscreen></video>

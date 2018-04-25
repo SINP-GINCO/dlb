@@ -1,5 +1,7 @@
 .. Standard de données brutes de biodiversité
 
+.. _standard_dbb:
+
 Standard de données brutes de biodiversité
 ==========================================
 

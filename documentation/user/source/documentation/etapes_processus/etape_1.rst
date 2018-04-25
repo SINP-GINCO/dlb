@@ -1,22 +1,35 @@
-.. Etape 1 : Déclaration de l'étude d'impact sur TPS
+.. Etape 1 : Déclaration de l'étude d'impact sur demarches-simplifiees.fr
 
-Etape 1 : Déclaration de l'étude d'impact sur TPS
-=================================================
+Etape 1 : Déclaration de l'étude d'impact sur demarches-simplifiees.fr
+======================================================================
 
-La constitution du dossier concernant la déclaration de l’étude d’impact par les maîtres d’ouvrage se fait grâce à un téléservice en ligne « Télé Procédure Simplifiée (TPS) Saisie ou Versement de données brutes de biodiversité ».
+La constitution du dossier par les maîtres d’ouvrage concernant la déclaration de l’étude d’impact se fait grâce au téléservice en ligne demarches-simplifiees.fr.
 
-*Lien en cours de construction*
 
-.. image:: ../../images//TPS_connexion.png
+.. raw:: html
 
-**1.** Si vous vous connectez-vous au site pour la première fois : créez votre compte.
+   <video controls src="../../../source/_static/processus_dbb_demarches_simplifiees.mp4" width=100% frameborder="0" allowfullscreen></video>
 
-*Le pétitionnaire créé son dossier dans TPS. Il saisit ses coordonnées, le nom des contacts, l’objet de son dossier, soit environ 10 champs à saisir.*
+**1.** Démarrez la télé-procédure de votre projet via le site projets-environnement.gouv.fr ou allez sur `demarches-simplifiees.fr <https://www.demarches-simplifiees.fr/commencer/formation-projets-environnement-gouv-fr>`_ *(instance de test)*.
 
-  .. tip:: Il est conseillé de prendre note de son numéro d’identifiant de dossier qui est généré par l'application : le numéro de la procédure TPS sera utile pour la traçabilité du dépôt, et sera à renseigner dans les prochaines étapes du processus de dépôt légal.
+**2.** Si vous vous connectez pour la première fois sur demarches-simplifiees.fr, créez un compte ou utilisez vos identifiants FranceConnect. Sinon renseignez l'identifiant et mot de passe de votre compte demarches-simplifiees.fr.
+ 
+**3.** Renseignez le **SIRET de votre établissement**.
 
-**1bis.** Si vous avez déjà créé un compte : connectez-vous au site avec vos identifiants.
+**4.** Cochez la case « J'autorise les décideurs publics à vérifier les informations de mon organisation auprès des administrations concernées. Ces informations resteront strictement confidentielles. » et passez à l’étape suivante.
 
-**2.** Identifiez-vous et renseignez les champs nécessaires au projet donnant lieu au transfert de données.
+**5.** Positionnez la **zone d’emprise de votre projet** directement en traçant la zone sur la carte ou en renseignant une adresse. Par défaut, la carte est centré sur la zone de l’établissement renseigné précédemment. 
 
-Une fois les informations relatives à l’étude d’impact indiquées dans l’outil TPS, un lien vers l’outil de gestion des métadonnées SINP permet de poursuivre le processus de dépôt légal.
+.. warning:: Le tracé réalisé à ce niveau sera reporté sur la cartographie utilisé sur le site projets-environnement.gouv.fr, site de consultation des études d'impact par le grand-public. Ce tracé n'est pas engageant pour la suite du processus.
+
+**6.** Après avoir lu les informations concernant la télé-procédure, renseignez les différents champs. Les **champs obligatoires** sont marqués par une *****
+
+**7.** Enregistrer votre brouillon, et poursuivez le processus de dépôt légal afin d’obtenir les fichiers obligatoires manquants. Vous pouvez retrouver le dossier que vous venez de créer dans l’**onglet Brouillons**. 
+
+.. tip:: Notez le **numéro de dossier** indiqué en haut de la page récapitulant les dossiers en brouillon. Il vous sera demandé lors d’une prochaine étape.
+
+.. image:: ../../images/dossier_demarches_simplifiees.png
+
+Une fois les informations relatives à l’étude d’impact indiquées sur demarches-simplifiees.fr, un lien vers l’outil de gestion des métadonnées SINP permet de poursuivre le processus de dépôt légal. Ce lien est indiqué dans le formulaire. 
+
+Vous pouvez également accéder à la suite du processus de dépôt légal de biodiversité en cliquant `ici <https://preprod-inpn.mnhn.fr/mtd/cadre/dbb/recherche>`_ *(instance de test)*. 

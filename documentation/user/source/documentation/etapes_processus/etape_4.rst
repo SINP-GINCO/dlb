@@ -1,32 +1,57 @@
-.. Etape 4 : Versement des données sur la plateforme de Dépôt légal
+.. Etape 4 : Versement des données sur la plateforme de Dépôt légal de biodiversité
 
 .. _versement_jdd:
 
-Etape 4 : Versement des données sur la plateforme de Dépôt légal
-================================================================
+Etape 4 : Versement des données sur la plateforme de Dépôt légal de biodiversité
+================================================================================
 
-Une fois que le cadre d’acquisition du(des) jeu(x) de données et le(les) jeu(x) de données correspondant(s) à l’étude d’impact indiquée dans l’application TPS sont édités, les données peuvent être versées dans la plateforme de Dépôt légal.
+I. Présentation générale du processus de versement des données
+--------------------------------------------------------------
 
-Pour accéder à la plateforme de Dépôt légal, cliquez sur `ici <https://depot-legal-biodiversite.naturefrance.fr/>`_.
+.. |icone_verser| image:: ../../images/icone_verser.png
+               :width: 3 em
+
+.. raw:: html
+
+   <video controls src="../../../source/_static/processus_dbb_ginco.mp4" width=100% frameborder="0" allowfullscreen></video>
+   
+   
+**1.** Allez sur la plateforme de Dépôt, en cliquant via Métadonnées sur le lien « Voir dans Ginco » |icone_verser| ou directement via https://depot-legal-biodiversite.naturefrance.fr/test/ 
+
+**2.** Sélectionnez le jeu de données à importer, puis choisissez le format de fichier à importer (CSV ou SHAPEFILE), le système de référence (SRID) utilisé, et validez.
+
+.. warning:: Les fichiers exportés via GeoNature ont pour système de référence WGS 84 : 4326
+
+**3.** Si votre fichier ne comporte pas d’erreur, déposez vos jeux de données. Sinon téléchargez le rapport d’erreur et corrigez votre fichier selon les indications du rapport.
+
+**4.** A la suite du dépôt téléchager le certificat de dépôt du jeu de données.
+
+
+II. Présentation détaillée du processus de versement des données
+----------------------------------------------------------------
+
+Une fois que le cadre d’acquisition du(des) jeu(x) de données et le(les) jeu(x) de données correspondant(s) à l’étude d’impact indiquée sur demarches-simplifiees.fr sont édités, les données peuvent être versées dans la plateforme Ginco de Dépôt légal de biodiversité.
+
+Pour accéder à la plateforme de Dépôt légal de biodiversité, cliquez sur `ici <https://depot-legal-biodiversite.naturefrance.fr/>`_.
 Une fois connecté avec votre identifiant INPN, plusieurs onglets sont visibles.
 
-.. image:: ../../images/DLDBB_accueil.png
+.. image:: ../../images/DLB_accueil_connexion.png
 
-Sélectionner et importer un jeu de données via l'identifiant TPS
------------------------------------------------------------------
+II.1. Sélectionner et importer un jeu de données via l'identifiant du dossier de demarches-simplifiees.fr 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 .. note:: Il est possible de passer cette étape en cliquant sur [Voir dans GINCO] sur l’application métadonnées SINP. Cette action permet d’accéder directement à la plateforme de Dépôt légal et d’utiliser le jeu de données sélectionné pour l’importer dans la plateforme.
 
 Dans la barre de menu située en haut de la page, l’onglet [Jeux de données] vous offre plusieurs possibilités. 
 
 Sélectionner un jeu de données
-"""""""""""""""""""""""""""""" 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 
 **1.** Pour sélectionner un jeu de données, cliquez sur [Créer un jeu de données].
 
 .. image:: ../../images/DLDBB_creer_jdd.png
 
-**2.** Indiquez le numéro TPS et le jeu de données dans lequel vous souhaitez insérer votre fichier de données brutes. 
+**2.** Indiquez le numéro de dossier de demarches-simplifiees.fr et le jeu de données dans lequel vous souhaitez insérer votre fichier de données brutes. 
 
 Si vous souhaitez créer une nouvelle fiche de métadonnée de jeu de données, un lien vers l’application de métadonnées de l’INPN vous est proposé.
 
@@ -35,23 +60,8 @@ Si vous souhaitez créer une nouvelle fiche de métadonnée de jeu de données, 
 .. image:: ../../images/DLDBB_jdd_tps.png
 
 
-.. _choix_organisme:
-
-Choix de l'organisme associé au jeu de données
-""""""""""""""""""""""""""""""""""""""""""""""
-
-Une fois le jeu de données sélectionner à partir de l’identifiant TPS, une nouvelle page [Gérer les jeux de données – Ajouter un fichier] s’ouvre.
-
-.. image:: ../../images/DLDBB_jdd_organisme.png
-
-**1.** Un unique modèle d’import est proposé.
-
-**2.** Choisissez l’organisme producteur du jeu de données : l’administrateur peut livrer des jeux de données provenant d’autres organismes que le sien. Les données seront alors attribuées à l’organisme choisi.  
-
-
-
 Choix du format du fichier à importer
-"""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Une fois le choix du jeu de données à importer est fait, vous devez choisir le format sous lequel vous souhaitez l’importer. Deux formats de fichier sont possibles : csv ou shapefile.
 
@@ -74,11 +84,11 @@ Vous pouvez télécharger un fichier d’exemple pour chaque fichier demandé, c
 .. warning:: Les fichiers Shape doivent, pour être acceptés par l’application, comprendre un fichier .prj indiquant le système de coordonnées utilisé.
 
 
-# Ouverture d’une nouvelle page « Gérer mes jeux de données »
+Ouverture d’une nouvelle page « Gérer mes jeux de données »
 
 
 Transférer votre ou vos fichier(s)
-""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Une fois le choix du format de fichier effectué, les informations nécessaires renseignées, et que vous avez validé ces éléments, le transfert du fichier se fait automatiquement. 
 
@@ -90,11 +100,13 @@ Une fois le choix du format de fichier effectué, les informations nécessaires 
 
 Après avoir chargé ce premier fichier, il est possible d’ajouter d’autres fichiers à ce jeu de données via la page de gestion de vos jeux de données ainsi que la page de gestion de tous les jeux de données.
 
-Phases de contrôles et rapport d'erreur
----------------------------------------
+
+
+II.2. Phases de contrôles et rapport d'erreur
+"""""""""""""""""""""""""""""""""""""""""""""
 
 Fonctionnement des phases de contrôles
-""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 En cas d’erreur lors de l’import, la nature et la localisation des erreurs sont indiquées dans le “Rapport de conformité et cohérence”, disponible pour chaque soumission sur la page listant les jeux de données. Le service d’import détecte les erreurs en 3 étapes :
 
@@ -126,7 +138,7 @@ Cette étape concerne les contrôles sur le champ géométrique ainsi que les er
 
 
 Localisation des erreurs et étude de cas d’erreur
-"""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Dans la partie “Détails des erreurs de conformité”, le nom du champ ainsi que la ligne dans le fichier où est localisée l’erreur, s’ils ont identifiables, sont indiqués.
 
@@ -219,11 +231,12 @@ Un seul géoréférencement doit être livré ; un seul champ “typeInfoGeo” 
 La valeur de jourdatedebut est ultérieure à celle de jourdatefin ou la valeur de jourdatefin est ultérieure à la date du jour.
 
 
-Gérer et déposer les jeux de données
-------------------------------------
+
+II.3. Gérer et déposer les jeux de données
+""""""""""""""""""""""""""""""""""""""""""
 
 Accéder à la liste de vos jeux de données
-"""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
  
 Lorsque vous êtes authentifié sur la plateforme, cliquez dans la barre de menu sur [Jeux de données] > [Gérer mes jeux de données]. 
 
@@ -236,7 +249,7 @@ Un tableau regroupe les jeux de données existants en indiquant leur titre et le
 * le statut de la soumission (en cours, ok, error)
 
 Actions réalisables sur un jeu de données
-"""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **Visualiser la page de détail d’un jeu de données**
 
@@ -259,8 +272,6 @@ Enfin, si le jeu de données ne comporte aucun versement il est possible de le s
 Pour chaque jeu de données importé il est possible de lui associer plusieurs fichiers. Pour cela cliquez sur **[+Ajouter un fichier]** dans la colonne **[Fichiers]** du tableau.
 Vous serez alors redirigez vers la page ajout de fichier et de chargement des données.
 
-Pour plus d'information voir :ref:`choix_organisme`
-
 
 **Supprimer un jeu de données**
 
@@ -276,7 +287,7 @@ Pour supprimer un jeu de données il est nécessaire de supprimer toutes les don
 
 
 Procéder au Dépôt légal des jeux de données
-"""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Lorsqu’un jeu de données a été créé dans la plateforme, et que tous les fichiers versés dans ce jeu ont un statut OK, le déposant peut procéder au dépôt légal du jeu de données. 
 

@@ -3,8 +3,8 @@
     You can adapt this file completely to your liking, but it should at least
     contain the root `toctree` directive.
 
-Documentation de la plateforme Dépôt Légal de données de Biodiversité:
-======================================================================
+Documentation de la plateforme Dépôt Légal de Biodiversité
+==========================================================
 
 .. toctree::
     :maxdepth: 4
