@@ -240,7 +240,14 @@
 
 	<script>
 		$(document).ready(function(){
+			// Enable tooltips
 			$('[data-toggle="tooltip"]').tooltip();
+			
+			// Use javascript to translate search modal title and close button
+            $("button[name='advancedSearch']").on('click',function(e) {
+                $("#avdSearchModal_advancedTable .modal-title").html('Rechercher');
+                $("#btnCloseAvd_advancedTable").html('Fermer');
+            });
 		});
 	</script>
 	{% endjavascripts %}
