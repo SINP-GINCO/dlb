@@ -8,7 +8,7 @@ La constitution du dossier par les maîtres d’ouvrage concernant la déclarati
 
 .. raw:: html
 
-   <video controls src="../../../source/_static/processus_dbb_demarches_simplifiees.mp4" width=100% frameborder="0" allowfullscreen></video>
+   <video controls src="../../_static/processus_dbb_demarches_simplifiees.mp4" width=100% frameborder="0" allowfullscreen></video>
 
 **1.** Démarrez la télé-procédure de votre projet via le site projets-environnement.gouv.fr ou allez sur `demarches-simplifiees.fr <https://www.demarches-simplifiees.fr/commencer/formation-projets-environnement-gouv-fr>`_ *(instance de test)*.
 

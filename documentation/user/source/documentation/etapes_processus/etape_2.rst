@@ -56,7 +56,7 @@ IV. Présentation générale du processus de description des métadonnées
 
 .. raw:: html
 
-   <video controls src="../../../source/_static/processus_dbb_mtd.mp4" width=100% frameborder="0" allowfullscreen></video>
+   <video controls src="../../_static/processus_dbb_mtd.mp4" width=100% frameborder="0" allowfullscreen></video>
    
 **1.** Allez sur l’application `Métadonnées <https://preprod-inpn.mnhn.fr/mtd/cadre/dbb/recherche>`_ *(instance de test)* et connectez vous avec votre compte INPN.
 

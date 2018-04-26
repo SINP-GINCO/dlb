@@ -29,4 +29,4 @@ Pour réaliser le dépôt légal de données de biodiversité, chaque utilisateu
 
 .. raw:: html
 
-   <video controls src="../../../source/_static/creation_compte_inpn.mp4" width=100% frameborder="0" allowfullscreen></video>
+   <video controls src="../../_static/creation_compte_inpn.mp4" width=100% frameborder="0" allowfullscreen></video>

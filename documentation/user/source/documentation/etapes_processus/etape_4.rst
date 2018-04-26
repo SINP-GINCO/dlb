@@ -13,7 +13,7 @@ I. Présentation générale du processus de versement des données
 
 .. raw:: html
 
-   <video controls src="../../../source/_static/processus_dbb_ginco.mp4" width=100% frameborder="0" allowfullscreen></video>
+   <video controls src="../../_static/processus_dbb_ginco.mp4" width=100% frameborder="0" allowfullscreen></video>
    
    
 **1.** Allez sur la plateforme de Dépôt, en cliquant via Métadonnées sur le lien « Voir dans Ginco » |icone_verser| ou directement via https://depot-legal-biodiversite.naturefrance.fr/test/ 

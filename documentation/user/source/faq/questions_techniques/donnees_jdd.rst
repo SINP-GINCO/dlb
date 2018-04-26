@@ -135,7 +135,7 @@ Un tableau des fichiers soumis, déposés et non déposés,  apparaît.
 
 .. raw:: html
 
-   <video controls src="../../../source/_static/gerer_mes_jdd.mp4" width=100% frameborder="0" allowfullscreen></video>
+   <video controls src="../../_static/gerer_mes_jdd.mp4" width=100% frameborder="0" allowfullscreen></video>
    
 
 Comment transmettre un jeu de données sur la plateforme de Dépôt légal ?
