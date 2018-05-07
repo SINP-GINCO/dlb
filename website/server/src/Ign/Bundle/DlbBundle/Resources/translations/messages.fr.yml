@@ -50,14 +50,15 @@ Jdd:
     publishedByTps.title: Procédure demarches-simplifiees.fr n°
     notExist.title: Aucune procédure pour l'identifiant demarches-simplifiees.fr n° 
   new:
+    description: Renseigner le numéro du dossier déclaré dans Démarches publiques et sélectionner un jeu de données dans lequel importer des données.
     modelUnpublished: Publiez le modèle d'import pour pouvoir créer un jeu de données.
-    tpsId: Identifiant demarches-simplifiees.fr
+    tpsId: Numéro de dossier
     jddId: Jeu de données
     noJddAvailable: Merci de rentrer un numéro demarches-simplifiees.fr valide pour pouvoir choisir un jeu de données.
     tpsIdError: <div><div class="col-sm-4"></div><div class="col-sm-4">Pas de fiche MTD pour ce n° demarches-simplifiees.fr.</div></div>
     tpsIdInit: |-
-     <p>Le numéro demarches-simplifiees.fr est l'identifiant qui a été attribué à votre procédure par l'application demarches-simplifiees.fr.</p>
-     <p>Vous devez avoir déjà créé une métadonnée de cadre dacquisition dans <a href="%metadataUrl%" target='_blank'>l'application de métadonnées de l'INPN</a>, pour ce numéro demarches-simplifiees.fr</p>
+     <p>Le numéro de dossier est l'identifiant qui a été attribué à votre télé-procédure déclarée dans Démarches simplifiées.</p>
+     <p>Pour verser et associer des données à un numéro de dossier, vous devez avoir décrit au préalable le cadre d'acquisition et les jeux de données associés dans <a href="%metadataUrl%" target='_blank'>l'application de métadonnées de l'INPN</a>.</p>
     tpsIdInfo: <div><label class="col-sm-4 control-label">Procédure</label> <div class="col-sm-4"> %title% </div></div>
     disabled: Ce jeu de données a déjà été instancié dans la plateforme par un autre utilisateur, vous ne pouvez pas y importer des données.
     submit: Importer des données dans le jeu de données
