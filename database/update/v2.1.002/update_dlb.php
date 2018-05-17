@@ -36,7 +36,6 @@ try {
 	/* patch code here */
 	// execCustSQLFile("$currentDir/xxx.sql", $config);
 	execCustSQLFile("$currentDir/update_permissions.sql", $config);
-	execCustSQLFile("$currentDir/update_metadata_event_listener.sql", $config);
 } catch (Exception $e) {
 	echo "$currentDir/update_dlb.php\n";
 	echo "exception: " . $e->getMessage() . "\n";
