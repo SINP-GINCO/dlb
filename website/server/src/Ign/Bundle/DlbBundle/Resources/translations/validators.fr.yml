@@ -3,4 +3,4 @@
 # - overwrite validators from Ginco and Ogam Bundles
 # --> No need to rewrite correct validators from Ginco and Ogam Bundles
 
-Jdd.new.modelUnpublished: Publiez le modèle d'import pour pouvoir créer un jeu de données.
+Jdd.new.modelUnpublished: Publiez le modèle d'import pour pouvoir importer des données.

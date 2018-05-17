@@ -51,7 +51,7 @@ Jdd:
     notExist.title: Aucune procédure pour l'identifiant demarches-simplifiees.fr n° 
   new:
     description: Renseigner le numéro du dossier déclaré dans demarches-simplifiees.fr et sélectionner un jeu de données dans lequel importer des données.
-    modelUnpublished: Publiez le modèle d'import pour pouvoir créer un jeu de données.
+    modelUnpublished: Publiez le modèle d'import pour pouvoir importer des données.
     tpsId: Numéro de dossier
     jddId: Jeu de données
     noJddAvailable: Merci de rentrer un numéro <a href="https://www.demarches-simplifiees.fr/" target="_blank">demarches-simplifiees.fr</a> valide pour pouvoir choisir un jeu de données.
@@ -61,7 +61,7 @@ Jdd:
      <p>Pour verser et associer des données à un numéro de dossier, vous devez avoir décrit au préalable le cadre d'acquisition et les jeux de données associés dans <a href="%metadataUrl%" target='_blank'>l'application de métadonnées de l'INPN</a>.</p>
     tpsIdInfo: <div><label class="col-sm-4 control-label">Procédure</label> <div class="col-sm-4"> %title% </div></div>
     disabled: Ce jeu de données a déjà été instancié dans la plateforme par un autre utilisateur, vous ne pouvez pas y importer des données.
-    submit: Importer des données dans le jeu de données
+    submit: Importer des données
   page:
     caTitle: Titre
     projectManager: Déposant
