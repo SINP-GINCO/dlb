@@ -6,7 +6,7 @@ Etape 3 (optionnelle) : Saisie de données dans l'application GeoNature
 Authentification
 ----------------
 
-Accéder à l'application sur http://demo.geonature.fr/geonature
+Accéder à l'application sur https://depot-legal-biodiversite.naturefrance.fr/saisie/
 
 Si vous n'êtes pas déjà authentifié avec votre compte INPN, vous serez invité à le faire : 
 
@@ -41,7 +41,7 @@ Ce module permet de saisir des données selon le standard Occurrence de taxon du
 Les données sont organisées en relevés (localisation, jeu de données, date, observateur...) qui sont composés d'observations 
 d'un ou plusieurs taxons (méthode, état, statut, détermination...).
 
-Pour chaque taxon observé, il est possible de renseigner un plusieurs dénombrements. 
+Pour chaque taxon observé, il est possible de renseigner un ou plusieurs dénombrements. 
 
 Chaque dénombrement correspond à un stade de vie et un sexe.
 
@@ -74,11 +74,11 @@ Il est possible de filtrer la liste des taxons par règne, en affichant le filtr
 
 .. image :: http://geonature.fr/docs/img/user-manual/02-occtax-filters-regne.jpg
 
-Il est possible d'afficher des filtres complémentaires : 
+Il est possible d'afficher des filtres complémentaires, et de supprimer les filtres existants : 
 
 .. image :: http://geonature.fr/docs/img/user-manual/02-occtax-filters-more.jpg
 
-Cela permet de filtrer sur tous les champs du module mais aussi de modifier les colonnes affichées dans la liste des résultats : 
+Cela permet de filtrer sur tous les champs du module : 
 
 .. image :: http://geonature.fr/docs/img/user-manual/02-occtax-filters-more-tools.jpg
 
@@ -86,10 +86,17 @@ Selon les droits dont vous disposez, il est possible d'afficher, de modifier ou 
 
 .. image :: http://geonature.fr/docs/img/user-manual/02-occtax-tools.jpg
 
-AFFICHER UN RELEVE
-------------------
+Sur la liste, il est également possible de modifier les colonnes affichées :
 
-Si vous afficher un relevé, vous accéderez à sa fiche complète : 
+.. image :: http://geonature.fr/docs/img/user-manual/02-occtax-modify-columns.jpg
+
+.. image :: http://geonature.fr/docs/img/user-manual/02-occtax-modify-columns-2.jpg
+
+
+AFFICHER UN RELEVE
+""""""""""""""""""
+
+Si vous affichez un relevé, vous accéderez à sa fiche complète : 
 
 .. image :: http://geonature.fr/docs/img/user-manual/03-occtax-detail.jpg
 
@@ -97,7 +104,7 @@ Si vous cliquez sur un des taxons observé dans ce relevé, cela affichera le d�
 
 .. image :: http://geonature.fr/docs/img/user-manual/03-occtax-detail-info.jpg
 
-Vous pouvez aussi consultez les dénombrement du taxon observé : 
+Vous pouvez aussi consulter les dénombrements du taxon observé : 
 
 .. image :: http://geonature.fr/docs/img/user-manual/03-occtax-detail-counting.jpg
 
@@ -112,7 +119,7 @@ Selon les droits dont vous disposez, il est possible de modifier un relevé dire
 .. image :: http://geonature.fr/docs/img/user-manual/03-occtax-detail-edit.jpg
 
 AJOUTER UN RELEVE
------------------
+"""""""""""""""""
 
 Depuis la liste des relevés, cliquer sur le bouton de création d'un relevé : 
 
@@ -157,7 +164,9 @@ Pour les afficher, il faut cliquer sur le bouton d'information :
 .. image :: http://geonature.fr/docs/img/user-manual/05-occtax-create-geo.jpg
 
 Une fois les informations du relevé renseignées (observateurs, jeu de données, date et commentaire optionnel), 
-vous pouvez ajouter un premier taxon à celui-ci : 
+vous pouvez ajouter un premier taxon à celui-ci en cliquant sur "Ajouter un taxon sur ce relevé" :
+
+.. image :: http://geonature.fr/docs/img/user-manual/05-occtax-add-taxon.jpg
 
 .. image :: http://geonature.fr/docs/img/user-manual/05-occtax-create-taxon.jpg
 
@@ -178,29 +187,29 @@ Par défaut, un dénombrement indéterminé d'un individu est renseigné :
 
 .. image :: http://geonature.fr/docs/img/user-manual/05-occtax-create-taxon-counting.jpg
 
-Une fois le taxon renseigné, cliquer sur AJOUTER LE TAXON pour l'enregistrer : 
+Une fois le taxon renseigné, cliquer sur VALIDER LE TAXON pour l'enregistrer : 
 
 .. image :: http://geonature.fr/docs/img/user-manual/05-occtax-create-taxon-save.jpg
 
 Vous pouvez alors :
 
-- Modifier le taxon enegistré
-- Supprimer le taxon enregistrés
+- Modifier le taxon enregistré
+- Supprimer le taxon enregistré
 - Ajouter un autre taxon au relevé
 - Enregistrer le relevé pour revenir à la liste des relevés.
 
-Pour ajouter un taxon au relevé, il faut cliquer sur TAXON et le renseigner comme le précédent : 
+Pour ajouter un taxon au relevé, il faut cliquer sur "Ajouter un taxon sur ce relevé" et le renseigner comme le précédent : 
 
 .. image :: http://geonature.fr/docs/img/user-manual/05-occtax-create-taxon-2.jpg
 
 MODIFIER UN RELEVE
-------------------
+""""""""""""""""""
 
-Si vous modifier un relevé existant, vous accédez à sa fiche renseignée, sur laquelle vous pouvez modifier la localisation, les informations du relevé, les taxons observés et leurs dénombrements : 
+Si vous modifiez un relevé existant, vous accédez à sa fiche renseignée, sur laquelle vous pouvez modifier la localisation, les informations du relevé, les taxons observés et leurs dénombrements : 
 
 .. image :: http://geonature.fr/docs/img/user-manual/04-occtax-edit.jpg
 
-Vous pouvez ajouter un taxon au relevé en cliquant sur TAXON : 
+Vous pouvez ajouter un taxon au relevé en cliquant sur "Ajouter un taxon sur ce relevé" : 
 
 .. image :: http://geonature.fr/docs/img/user-manual/04-occtax-edit-taxon.jpg
 
@@ -211,13 +220,32 @@ Ou modifier une observation existante d'un taxon en le selectionnant dans la lis
 .. image :: http://geonature.fr/docs/img/user-manual/04-occtax-edit-taxon-2.jpg
 
 EXPORT
-------
+""""""
 
-Une fois que vous avez saisi vos relevés et observations dans le module OccTax, vous pouvez exporter ces données en CSV selon le standard Occurrence de taxon du SINP. 
+Une fois que vous avez saisi vos relevés et observations depuis le formulaire, vous pouvez exporter ces données en CSV selon le standard Occurrence de taxon du SINP.
 
-Les exports se font jeu de données par jeu de données.
+Deux méthodes sont possibles pour exporter les données :
+
+- Depuis le module "OccTax"
+
+Depuis la liste de vos relevés de l'interface carte-liste, filtrez d'abord vos relevés par **jeu de données** et cliquez sur le bouton "Rechercher". 
+
+.. image :: http://geonature.fr/docs/img/user-manual/06-occtax-search-bar.jpg
+
+Puis cliquez sur le bouton "Télécharger les données" en bas de la liste des relevés.
+
+.. image :: http://geonature.fr/docs/img/user-manual/06-occtax-download-data.jpg
+
+Une fenêtre s'ouvre, fournissant des informations sur le téléchargement des données. Selectionnez ensuite le format CSV pour GINCO :
+
+.. image :: http://geonature.fr/docs/img/user-manual/06-occtax-download.jpg
+
+- Depuis le module d'export:
+
+  Les exports se font jeu de données par jeu de données.
 
 .. image :: http://geonature.fr/docs/img/user-manual/06-export.jpg
+
 
 Vous obtenez alors un CSV par jeu de données.
 
