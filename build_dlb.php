@@ -252,11 +252,7 @@ function buildExtJS($config, $buildMode) {
 	$clientDirGinco = realpath($config['ginco.path'] . "/website/client");
 	$buildClientDir = $buildDir . "/website/client";
 	is_dir($buildClientDir) || mkdir($buildClientDir, 0755, true);
-	
-	// Copy ext and ginco code to project
-	echo ("Copying ginco custom ext code from ginco project...\n");
-	system("cp -r $clientDirGinco/gincoDesktop $clientDir");
-	
+		
 	// Copy ext and ogam code to project
 	echo ("Copying ext and ogam code from ogam project...\n");
 	system("cp -r $clientDirGinco/ext $clientDir");
@@ -267,13 +263,13 @@ function buildExtJS($config, $buildMode) {
 	
 	// Customize app.json and index.html
 	echo ("Customize app.json...\n");
-	substituteInFile("$clientDir/gincoDesktop/app_tpl.json", "$clientDir/ogamDesktop/app.json", $config);
+	substituteInFile("$clientDir/ogamDesktop/app_tpl.json", "$clientDir/ogamDesktop/app.json", $config);
 	// in dev mode, keep original file
 	if ($buildMode == 'dev') {
-		system("cp $clientDir/gincoDesktop/index.html $clientDir/gincoDesktop/index.html.keep");
+		system("cp $clientDir/ogamDesktop/index.html $clientDir/ogamDesktop/index.html.keep");
 	}
 	echo ("Customize index.html...\n");
-	substituteInFile("$clientDir/gincoDesktop/index.html", "$clientDir/gincoDesktop/index.html", $config);
+	substituteInFile("$clientDir/ogamDesktop/index.html", "$clientDir/ogamDesktop/index.html", $config);
 	
 	// Build with sencha command
 	echo ("Upgrade sencha command...\n");
@@ -292,7 +288,7 @@ function buildExtJS($config, $buildMode) {
 		echo ("Cleaning up...\n");
 		// Delete code : all but gincoDesktop
 		chdir($clientDir);
-		system("rm -rf .sencha ext ogamDesktop gincoDesktop packages workspace.json");
+		system("rm -rf .sencha ext ogamDesktop packages workspace.json");
 	} 	// Prod mode: mv build directory to $buildDir
 	else {
 		echo ("Moving build files to $buildClientDir...\n");
