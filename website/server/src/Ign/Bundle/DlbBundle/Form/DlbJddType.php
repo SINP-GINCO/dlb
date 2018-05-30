@@ -3,6 +3,7 @@ namespace Ign\Bundle\DlbBundle\Form;
 
 use Doctrine\ORM\EntityRepository;
 use Ign\Bundle\GincoBundle\Entity\RawData\Jdd;
+use Ign\Bundle\GincoBundle\Entity\RawData\DEE;
 use Ign\Bundle\GincoBundle\Entity\Website\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -81,6 +82,7 @@ class DlbJddType extends AbstractType {
 				// Get jdd from CA metadata
 				$metadataFields = $this->metadataTpsReader->getJddMetadatas($tpsId);
 				$choices = array_flip($metadataFields['jddIds']);
+			
 			}
 			if (array_key_exists(0, $choices)) {
 				$form->get('tps_id')->addError(new FormError('error message'));
@@ -97,16 +99,24 @@ class DlbJddType extends AbstractType {
 				'choice_attr' => function($val, $key, $index) {
 					// Adds a disabled state if the user can't add data on the jdd
 					$disabled = false;
-					$jddWithSameMetadataId = $this->em->getRepository('IgnGincoBundle:RawData\Jdd')->findByField(array(
+                    $jddWithSameMetadataId = $this->em->getRepository('IgnGincoBundle:RawData\Jdd')->findByField(array(
 						'metadataId' => $val
 					));
+					
 					if (count($jddWithSameMetadataId) > 0) {
-						$jdd = $jddWithSameMetadataId[0];
-						if ($this->currentUser
-							&& $this->currentUser->getLogin() != $jdd->getUser()->getLogin()
-							&& !$this->currentUser->isAllowed('MANAGE_DATASETS_OTHER_PROVIDER')) {
-							$disabled = true;
-						}
+                        $jdd = $jddWithSameMetadataId[0];
+                        if ($this->currentUser
+                            && $this->currentUser->getLogin() != $jdd->getUser()->getLogin()
+                            && !$this->currentUser->isAllowed('MANAGE_DATASETS_OTHER_PROVIDER')) {
+                                $disabled = true;
+                        }
+                        if ($disabled == false) {
+                            //Search JDDid in Submit DEE
+                            $jddIdSearchDEE= $this->em->getRepository('IgnGincoBundle:RawData\DEE')->findByJdd($jdd);
+                            if (count($jddIdSearchDEE) > 0) { 
+                                $disabled = true;
+                            }
+                        }
 					}
 					return ($disabled) ? [
 						'disabled' => true,
