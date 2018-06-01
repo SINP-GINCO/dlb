@@ -60,7 +60,7 @@ Jdd:
      <p>Le numéro de dossier est l'identifiant qui a été attribué à votre télé-procédure déclarée dans <a href="https://www.demarches-simplifiees.fr/" target="_blank">demarches-simplifiees.fr</a>.</p>
      <p>Pour verser et associer des données à un numéro de dossier, vous devez avoir décrit au préalable le cadre d'acquisition et les jeux de données associés dans <a href="%metadataUrl%" target='_blank'>l'application de métadonnées de l'INPN</a>.</p>
     tpsIdInfo: <div><label class="col-sm-4 control-label">Procédure</label> <div class="col-sm-4"> %title% </div></div>
-    disabled: Ce jeu de données a déjà été instancié dans la plateforme par un autre utilisateur, vous ne pouvez pas y importer des données.
+    disabled: Ce jeu de donnée a déjà fait l'objet d'un dépôt légal.
     submit: Importer des données
   page:
     caTitle: Titre
