@@ -192,10 +192,15 @@
                 </td>
 
                 {# TPS number #}
-                <td>
-                    <a title="{{ 'Jdd.list.view'|trans }}" href="{{ path('published_jdds_by_tps', { 'tpsId': jdd.field('tpsId') }) }}">{{ jdd.field('tpsId') }}</a>
-                </td>
-
+                {% if (jdd.field('status') == 'published') %}
+                	<td>
+                    	<a title="{{ 'Jdd.list.view'|trans }}" href="{{ path('published_jdds_by_tps', { 'tpsId': jdd.field('tpsId') }) }}">{{ jdd.field('tpsId') }}</a>
+                	</td>
+				{% else %}
+					<td>
+                    	{{ jdd.field('tpsId') }}
+                	</td>
+                {% endif %}
                 {# Title and metadata id of the jdd #}
                 <td>
                     {{ jdd.field('title') }}
