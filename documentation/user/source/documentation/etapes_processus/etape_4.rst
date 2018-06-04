@@ -47,7 +47,7 @@ Dans la barre de menu située en haut de la page, l’onglet [Jeux de données] 
 Sélectionner un jeu de données
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 
-**1.** Pour sélectionner un jeu de données, cliquez sur [Importer des données].
+**1.** Pour sélectionner un jeu de données, cliquez sur [Verser des données].
 
 .. image:: ../../images/DLDBB_creer_jdd.png
 
@@ -55,7 +55,7 @@ Sélectionner un jeu de données
 
 Si vous souhaitez créer une nouvelle fiche de métadonnée de jeu de données, un lien vers l’application de métadonnées de l’INPN vous est proposé.
 
-**3.** Validez le formulaire via le bouton [Importer des données].
+**3.** Validez le formulaire via le bouton [Verser des données].
 
 .. image:: ../../images/DLDBB_jdd_tps.png
 

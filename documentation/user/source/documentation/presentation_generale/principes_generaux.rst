@@ -78,7 +78,7 @@ Profils et droits sur la plateforme de Dépôt légal
 
 **Le profil Pétitionnaire avec les permissions suivantes :**
 
-* Importer des données
+* Verser des données
 * Visualiser les données régionales publiées
 * Exporter les données (au format CSV, GeoJson, kml...)
 * Editer les données 

@@ -45,10 +45,10 @@ Accédez à la `plateforme Ginco de Dépôt légal de biodiversité <https://dep
 |import_data| *Importation des données*
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Comment importer des données dans la plateforme Ginco ? 
+Comment verser des données dans la plateforme Ginco ? 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-L’import de données dans la plateforme Ginco de Dépôt légal de biodiversité ne correspond pas à une action unique de dépôt d’un fichier. En conformité avec les règles du protocole SINP, l’intégration de données nécessite de créer et fournir une fiche de métadonnées du jeu de données.
+Le versement de données dans la plateforme Ginco de Dépôt légal de biodiversité ne correspond pas à une action unique de dépôt d’un fichier. En conformité avec les règles du protocole SINP, l’intégration de données nécessite de créer et fournir une fiche de métadonnées du jeu de données.
 
 **L’intégration de données sur la plateforme se déroule donc en 2 temps**.
 
@@ -74,7 +74,7 @@ Dans certains cas, des correspondances devront être faites entre les champs ou 
 
 Pour plus d'information sur les exigences attendues sur le format des fichiers et les informations pouvant être importées sur la plateforme, référez vous au :ref:`standard_dbb`.
 
-Dans quel format peut-on importer des données dans la plateforme de Dépôt légal ? 
+Dans quel format peut-on verser des données dans la plateforme de Dépôt légal ? 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Les données doivent être importées à partir d’un fichier CSV ou Shapefile. 
