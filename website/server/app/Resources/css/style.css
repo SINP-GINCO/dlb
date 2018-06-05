@@ -6944,6 +6944,23 @@ form .checkboxes.disabled {
 #page-header #banner .header-title {
   color: white;
 }
+#test-banner {
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+#test-banner a:link {
+  color: white !important;
+  text-decoration: none;
+}
+#test-banner a:hover {
+  color: white !important;
+}
+#test-banner a:visited {
+  color: white !important;
+}
 #report-header #report-banner {
   height: 150px;
   background-image: url("img/bandeau-dlb-report.jpg");
