@@ -10,7 +10,7 @@ La constitution du dossier par les maîtres d’ouvrage concernant la déclarati
 
    <video controls src="../../_static/processus_dbb_demarches_simplifiees.mp4" width=100% frameborder="0" allowfullscreen></video>
 
-**1.** Démarrez la télé-procédure de votre projet via le site projets-environnement.gouv.fr ou allez sur `demarches-simplifiees.fr <https://www.demarches-simplifiees.fr/commencer/formation-projets-environnement-gouv-fr>`_ *(instance de test)*.
+**1.** Démarrez la télé-procédure de votre projet via le site projets-environnement.gouv.fr ou allez sur `demarches-simplifiees.fr <https://www.demarches-simplifiees.fr/commencer/projets-environnement-gouv-fr>`_ .
 
 **2.** Si vous vous connectez pour la première fois sur demarches-simplifiees.fr, créez un compte ou utilisez vos identifiants FranceConnect. Sinon renseignez l'identifiant et mot de passe de votre compte demarches-simplifiees.fr.
  
@@ -32,4 +32,4 @@ La constitution du dossier par les maîtres d’ouvrage concernant la déclarati
 
 Une fois les informations relatives à l’étude d’impact indiquées sur demarches-simplifiees.fr, un lien vers l’outil de gestion des métadonnées SINP permet de poursuivre le processus de dépôt légal. Ce lien est indiqué dans le formulaire. 
 
-Vous pouvez également accéder à la suite du processus de dépôt légal de biodiversité en cliquant `ici <https://preprod-inpn.mnhn.fr/mtd/cadre/dbb/recherche>`_ *(instance de test)*. 
+Vous pouvez également accéder à la suite du processus de dépôt légal de biodiversité en cliquant `ici <https://inpn.mnhn.fr/mtd/cadre/dbb/recherche>`_ . 

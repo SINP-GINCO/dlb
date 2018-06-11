@@ -6,7 +6,7 @@
 2.1. Sur l’outil de gestion Métadonnées INPN
 --------------------------------------------
 
-Accédez à l'outil de `gestion de métadonnées INPN <https://preprod-inpn.mnhn.fr/mtd/>`_. 
+Accédez à l'outil de `gestion de métadonnées INPN <https://inpn.mnhn.fr/mtd/>`_. 
 
 .. |edition_jdd| image:: ../../images/FAQ/jdd.png
                :width: 1 em
@@ -37,7 +37,7 @@ Comment :ref:`supprimer_jdd` ?
 2.2. Sur la plateforme de Dépôt légal
 -------------------------------------
 
-Accédez à la `plateforme Ginco de Dépôt légal de biodiversité <https://depot-legal-biodiversite.naturefrance.fr/test/>`_.
+Accédez à la `plateforme Ginco de Dépôt légal de biodiversité <https://depot-legal-biodiversite.naturefrance.fr/versement/>`_.
 
 .. |import_data| image:: ../../images/FAQ/import.png
                :width: 1 em
@@ -52,9 +52,9 @@ L’import de données dans la plateforme Ginco de Dépôt légal de biodiversit
 
 **L’intégration de données sur la plateforme se déroule donc en 2 temps**.
 
-**Temps n°1** : La déclaration des métadonnées sur `l’outil de gestion des métadonnées SINP <https://preprod-inpn.mnhn.fr/mtd/>`_.
+**Temps n°1** : La déclaration des métadonnées sur `l’outil de gestion des métadonnées SINP <https://inpn.mnhn.fr/mtd/>`_.
 
-**Temps n°2** : L’import du fichier de données sur la `plateforme Ginco de Dépôt légal de biodiversité <https://depot-legal-biodiversite.naturefrance.fr/test/>`_.
+**Temps n°2** : L’import du fichier de données sur la `plateforme Ginco de Dépôt légal de biodiversité <https://depot-legal-biodiversite.naturefrance.fr/versement/>`_.
 
 Pour plus d'informations sur l'importation des données cliquez sur le lien suivant :ref:`versement_jdd`.
 
@@ -121,7 +121,7 @@ Pour plus d’information voir le document `Principes et cas d’usages pour le 
 Comment visualiser mes jeux de données sur Ginco et obtenir la liste des jeux de données fournis pour une télé-procédure ?
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-Sur la `plateforme Ginco de Dépôt légal de biodiversité <https://depot-legal-biodiversite.naturefrance.fr/test/>`_ 
+Sur la `plateforme Ginco de Dépôt légal de biodiversité <https://depot-legal-biodiversite.naturefrance.fr/versement/>`_ 
 
 Si vous n'êtes pas déjà connecté, cliquez sur **[Connexion]** en haut à droite sur la barre de menu. Puis renseignez votre identifiant et mot de passe de votre compte INPN.
 
@@ -175,7 +175,7 @@ Comment récupérer le rapport de sensibilité de mon jeu de données ?
 
 Un rapport de sensibilité est disponible pour chaque jeu de données importé à partir du tableau des soumissions qui se trouve sur la plateforme de Dépôt légal.
 
-Une fois connecté sur la `plateforme Ginco de Dépôt légal de biodiversité <https://depot-legal-biodiversite.naturefrance.fr/test/>`_ :
+Une fois connecté sur la `plateforme Ginco de Dépôt légal de biodiversité <https://depot-legal-biodiversite.naturefrance.fr/versement/>`_ :
 
 **1.**  Cliquez dans la barre de menu sur **[Jeux de données] > [Gérer mes jeux de données]**. Le tableau des fichiers soumis apparaît. 
 
@@ -218,7 +218,7 @@ Lors de l’import, la plateforme de Dépôt légal de biodiversité produit pou
 Où puis-je récupérer le rapport d'erreur ?
 """"""""""""""""""""""""""""""""""""""""""
 
-Une fois connecté sur la `plateforme Ginco de Dépôt légal de biodiversité <https://depot-legal-biodiversite.naturefrance.fr/test/>`_ :
+Une fois connecté sur la `plateforme Ginco de Dépôt légal de biodiversité <https://depot-legal-biodiversite.naturefrance.fr/versement/>`_ :
 
 **1.**  Cliquez dans la barre de menu sur **[Jeux de données] > [Gérer mes jeux de données]**. Le tableau des fichiers soumis apparaît. 
 

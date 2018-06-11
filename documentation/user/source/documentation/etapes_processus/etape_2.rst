@@ -58,7 +58,7 @@ IV. Présentation générale du processus de description des métadonnées
 
    <video controls src="../../_static/processus_dbb_mtd.mp4" width=100% frameborder="0" allowfullscreen></video>
    
-**1.** Allez sur l’application `Métadonnées <https://preprod-inpn.mnhn.fr/mtd/cadre/dbb/recherche>`_ *(instance de test)* et connectez vous avec votre compte INPN.
+**1.** Allez sur l’application `Métadonnées <https://inpn.mnhn.fr/mtd/cadre/dbb/recherche>`_ et connectez vous avec votre compte INPN.
 
 **2.** Renseignez le numéro de dossier indiqué sur demarches-simplifiees.fr
 
@@ -81,7 +81,7 @@ V.1. Accéder à l'application de métadonnées de l'INPN
 
 .. note:: L’application de métadonnées du SINP et de l’INPN possède son propre système d’authentification, qui n’est actuellement pas relié à celui de demarches-simplifiees.fr. Il faut se créer un compte INPN pour se connecter à l’ensemble des applications permettant la saisie et le dépôt des données brutes de biodiversité.
 
-**1.** Accédez à l’application `Métadonnées <https://preprod-inpn.mnhn.fr/mtd/cadre/dbb/recherche>`_ *(instance de test)*
+**1.** Accédez à l’application `Métadonnées <https://inpn.mnhn.fr/mtd/cadre/dbb/recherche>`_
 
 **2.** **Créez un compte INPN** s’il s’agit de votre première connexion ou **authentifiez-vous** à l’aide de l'identifiant personnel et mot de passe de votre compte INPN. 
 
@@ -104,7 +104,7 @@ V.2. Le cadre d'acquisition
 Editer / modifier un cadre d'acquisition
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**1.** Accédez à `l’application métadonnées <https://preprod-inpn.mnhn.fr/mtd/cadre/dbb/recherche>`_ *(instance de test)* et connectez vous.
+**1.** Accédez à `l’application métadonnées <https://inpn.mnhn.fr/mtd/cadre/dbb/recherche>`_ et connectez vous.
 
 **2.** Indiquez le numéro d’identifiant du dossier indiqué sur demarches-simplifiees.fr lié au cadre d’acquisition correspondant.
 
@@ -146,7 +146,7 @@ V.3. Les jeux de données
 
 Pour accéder aux fonctionnalités rattachées à l’édition et la gestion d’un jeu de données : 
 
-**1.** Connectez-vous à `l’application métadonnées <https://preprod-inpn.mnhn.fr/mtd/cadre/dbb/recherche>`_ *(instance de test)* avec votre compte INPN.
+**1.** Connectez-vous à `l’application métadonnées <https://inpn.mnhn.fr/mtd/cadre/dbb/recherche>`_ avec votre compte INPN.
 
 **2.** Indiquez le **numéro d’identifiant du dossier** pour accéder au cadre d’acquisition correspondant puis à la page listant les jeux de données associés à ce cadre d'acquisition.
 

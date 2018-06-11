@@ -16,7 +16,7 @@ I. Présentation générale du processus de versement des données
    <video controls src="../../_static/processus_dbb_ginco.mp4" width=100% frameborder="0" allowfullscreen></video>
    
    
-**1.** Allez sur la plateforme de Dépôt, en cliquant via Métadonnées sur le lien « Voir dans Ginco » |icone_verser| ou directement via https://depot-legal-biodiversite.naturefrance.fr/test/ 
+**1.** Allez sur la plateforme de Dépôt, en cliquant via Métadonnées sur le lien « Voir dans Ginco » |icone_verser| ou directement via https://depot-legal-biodiversite.naturefrance.fr/versement/ 
 
 **2.** Sélectionnez le jeu de données à importer, puis choisissez le format de fichier à importer (CSV ou SHAPEFILE), le système de référence (SRID) utilisé, et validez.
 
