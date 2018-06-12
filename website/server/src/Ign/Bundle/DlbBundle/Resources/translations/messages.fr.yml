@@ -74,6 +74,9 @@ Menu:
   
 # Contact
 Contact:
+  send:
+    button: Envoyer
+    success: Votre message a bien été envoyé au service d'assistance de la plateforme qui y répondra au plus vite.
   subject:
     title: Sujet
     legal:
