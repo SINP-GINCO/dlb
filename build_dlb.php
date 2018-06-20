@@ -51,15 +51,9 @@ function buildJavaServices($config, $buildMode) {
 	
 	$ISFilename = "SINP" . $config['instance.name'] . "IntegrationService";
 	$dlbCustomPath = "$projectDir/services/service_integration/custom/fr/ifn/ogam/integration";
-	$gincoCustomPath = "$gincoDir/services/service_integration/custom/fr/ifn/ogam/integration";
 	$ogamCustomPath = "$gincoDir/service_integration/custom/fr/ifn/ogam/integration";
 	$dlbCustomServicesNames = array(
 		'JddDlbService'
-	);
-	$gincoCustomServicesNames = array(
-		'GeoAssociationService',
-		'ChecksDSRGincoService',
-		'JddService'
 	);
 	
 	// build du service d'intégration
@@ -71,16 +65,13 @@ function buildJavaServices($config, $buildMode) {
 		copy("$dlbCustomPath/business/$serviceName.java", "$ogamCustomPath/business/$serviceName.java");
 	}
 	
-	foreach ($gincoCustomServicesNames as $serviceName) {
-		copy("$gincoCustomPath/business/$serviceName.java", "$ogamCustomPath/business/$serviceName.java");
-	}
 	chdir("$gincoDir");
 	system("./gradlew service_integration:war --daemon");
 	// le war se trouve dans ${$gincoDir}/service_integration/build/libs/service_integration-4.0.0.war
 	
 	// Cleaning Ogam dir
 	system("mv -f $gincoDir/service_integration/config/log4j.properties.save $gincoDir/service_integration/config/log4j.properties ");
-	foreach (array_merge($dlbCustomServicesNames, $gincoCustomServicesNames) as $serviceName) {
+	foreach ($dlbCustomServicesNames as $serviceName) {
 		system("rm -f $ogamCustomPath/business/$serviceName.java");
 	}
 	
