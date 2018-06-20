@@ -53,11 +53,8 @@ console.log('update form');
 			});
 
 			// If there is at least one jdd_id, print the submit button
-			if (typeof document.getElementById("dlb_jdd_jdd_id").getElementsByClassName("radio")[0] === 'undefined') {
+			if ($('.radio').not('.disabled').size() == 0) {
 				$submitField.prop('disabled', true);
-				$('#dlb_jdd_jdd_id').replaceWith(
-					"<p id='dlb_jdd_jdd_id'>" + invalidTPS + "</p>"
-				);
 			} else {
 				$submitField.prop('disabled', false);
 			}
@@ -65,6 +62,11 @@ console.log('update form');
 			$('#tpsDescription').replaceWith(
 				$(html).find('#tpsDescription')
 			);
+			
+			// Print message when disabled jdd is selected
+			$('div .disabled').one('click', function(){
+				$(this).find('label').append('<span class="help-block">{{ 'Jdd.new.disabled' | trans }}</span>')
+			});
 
 		},
 		error : function(resultat, statut, erreur){

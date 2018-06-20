@@ -122,7 +122,7 @@
                 <th data-field="actions" data-searchable="false" class="color2" data-align="center">{{ 'Actions'|trans }}</th>
                 <th data-field="filesAndLines" class="color2" style="width: 44%;">{{ 'IntegrationPage.FilesAndLines'|trans }}</th>
                 <th data-field="status" data-searchable="false" class="text-center color2">{{ 'IntegrationPage.Status'|trans }}</th>
-                <th data-field="deeCreationDate" data-searchable="true" data-sort-name="deedate" data-sortable="true" class="color1">{{ 'DBB.table.depositDate'|trans }}</th>
+                <th data-field="deeCreationDate" data-searchable="false" data-sort-name="deedate" data-sortable="true" class="color1">{{ 'DBB.table.depositDate'|trans }}</th>
                 <th data-searchable="false" class="color1"></th>
 
                {# Non visible columns used for sorting #}
@@ -192,10 +192,15 @@
                 </td>
 
                 {# TPS number #}
-                <td>
-                    <a title="{{ 'Jdd.list.view'|trans }}" href="{{ path('published_jdds_by_tps', { 'tpsId': jdd.field('tpsId') }) }}">{{ jdd.field('tpsId') }}</a>
-                </td>
-
+                {% if (jdd.field('status') == 'published') %}
+                	<td>
+                    	<a title="{{ 'Jdd.list.view'|trans }}" href="{{ path('published_jdds_by_tps', { 'tpsId': jdd.field('tpsId') }) }}">{{ jdd.field('tpsId') }}</a>
+                	</td>
+				{% else %}
+					<td>
+                    	{{ jdd.field('tpsId') }}
+                	</td>
+                {% endif %}
                 {# Title and metadata id of the jdd #}
                 <td>
                     {{ jdd.field('title') }}

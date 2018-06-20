@@ -56,7 +56,7 @@ Un guide plus complet d’aide à la décision pour le remplissage des métadonn
 
 .. raw:: html
 
-   <video controls src="../../../source/_static/processus_dbb_mtd.mp4" width=100% frameborder="0" allowfullscreen></video>
+   <video controls src="../../_static/processus_dbb_mtd.mp4" width=100% frameborder="0" allowfullscreen></video>
    
 **1.** Allez sur l’application `Métadonnées <https://inpn.mnhn.fr/mtd/cadre/dbb/recherche>`_ et connectez vous avec votre compte INPN.
 
