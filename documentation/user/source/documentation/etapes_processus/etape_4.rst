@@ -1,11 +1,11 @@
-.. Etape 4 : Versement des données sur la plateforme de Dépôt légal de biodiversité
+.. Etape 4 : Verser les données dans la plateforme de Dépôt légal de biodiversité
 
 .. _versement_jdd:
 
-Etape 4 : Versement des données sur la plateforme de Dépôt légal de biodiversité
-================================================================================
+Etape 4 : Verser les données sur la plateforme de Dépôt légal de biodiversité
+=============================================================================
 
-I. Présentation générale du processus de versement des données
+1. Présentation générale du processus de versement des données
 --------------------------------------------------------------
 
 .. |icone_verser| image:: ../../images/icone_verser.png
@@ -16,7 +16,7 @@ I. Présentation générale du processus de versement des données
    <video controls src="../../../source/_static/processus_dbb_ginco.mp4" width=100% frameborder="0" allowfullscreen></video>
    
    
-**1.** Allez sur la plateforme de Dépôt, en cliquant via Métadonnées sur le lien « Voir dans Ginco » |icone_verser| ou directement via https://depot-legal-biodiversite.naturefrance.fr/test/ 
+**1.** Allez sur la plateforme de Dépôt légal de biodiversité, en cliquant via Métadonnées sur le lien « Voir dans Ginco » |icone_verser| ou directement via https://depot-legal-biodiversite.naturefrance.fr/versement/ 
 
 **2.** Sélectionnez le jeu de données à importer, puis choisissez le format de fichier à importer (CSV ou SHAPEFILE), le système de référence (SRID) utilisé, et validez.
 
@@ -24,30 +24,27 @@ I. Présentation générale du processus de versement des données
 
 **3.** Si votre fichier ne comporte pas d’erreur, déposez vos jeux de données. Sinon téléchargez le rapport d’erreur et corrigez votre fichier selon les indications du rapport.
 
-**4.** A la suite du dépôt téléchager le certificat de dépôt du jeu de données.
+**4.** A la suite du dépôt, téléchager le certificat de dépôt du jeu de données.
 
 
-II. Présentation détaillée du processus de versement des données
+2. Présentation détaillée du processus de versement des données
 ----------------------------------------------------------------
 
-Une fois que le cadre d’acquisition du(des) jeu(x) de données et le(les) jeu(x) de données correspondant(s) à l’étude d’impact indiquée sur demarches-simplifiees.fr sont édités, les données peuvent être versées dans la plateforme Ginco de Dépôt légal de biodiversité.
+Une fois que le cadre d’acquisition du(des) jeu(x) de données et le(les) jeu(x) de données correspondant(s) au projet indiqué sur demarches-simplifiees.fr sont édités, les données peuvent être versées dans la plateforme Ginco de Dépôt légal de biodiversité.
 
-Pour accéder à la plateforme de Dépôt légal de biodiversité, cliquez sur `ici <https://depot-legal-biodiversite.naturefrance.fr/>`_.
+Pour y accéder, cliquez sur `ici <https://depot-legal-biodiversite.naturefrance.fr/versement>`_.
 Une fois connecté avec votre identifiant INPN, plusieurs onglets sont visibles.
 
 .. image:: ../../images/DLB_accueil_connexion.png
 
-II.1. Sélectionner et importer un jeu de données via l'identifiant du dossier de demarches-simplifiees.fr 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-.. note:: Il est possible de passer cette étape en cliquant sur [Voir dans GINCO] sur l’application métadonnées SINP. Cette action permet d’accéder directement à la plateforme de Dépôt légal et d’utiliser le jeu de données sélectionné pour l’importer dans la plateforme.
-
-Dans la barre de menu située en haut de la page, l’onglet [Jeux de données] vous offre plusieurs possibilités. 
+2.1. Sélectionner et importer un jeu de données via l'identifiant du dossier de demarches-simplifiees.fr 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Sélectionner un jeu de données
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+.. note:: Il est possible de passer cette étape en cliquant sur [Voir dans GINCO] sur l’application métadonnées SINP. Cette action permet d’accéder directement à la plateforme et d’utiliser le jeu de données sélectionné pour l’importer.
 
-**1.** Pour sélectionner un jeu de données, cliquez sur [Créer un jeu de données].
+**1.** Cliquez sur [Créer un jeu de données] dans la barre de menu.
 
 .. image:: ../../images/DLDBB_creer_jdd.png
 
@@ -94,21 +91,30 @@ Une fois le choix du format de fichier effectué, les informations nécessaires 
 
 **1.** Le transfert du fichier peut prendre un certain temps en fonction de sa taille. Une barre de progression indique le pourcentage des traitements réalisés et de données importées. 
 
-**2.** Le résultat de l’import est ensuite affiché :  OK ou X
+.. |etat_ok| image:: ../../images/etat_ok.png
+               :width: 2 em
+               
+.. |etat_error| image:: ../../images/etat_error.png
+               :width: 2 em
+               
+**2.** Le résultat de l’import est ensuite affiché :  |etat_ok| ou |etat_error|
 
-**3.** Dans le cas où le statut affiché est Un “Rapport de conformité et cohérence” est disponible en téléchargement ; il liste les erreurs rencontrées lors des différentes phases de contrôles et d’import, pour vous aider à corriger le fichier versé. 
+**3.** Dans le cas où l'état du fichier importé est |etat_error|, un rapport d'erreur est disponible et accessible dans la colonne [Action] ; ce rapport d'erreur liste les erreurs rencontrées lors des différentes phases de contrôles et d’import, pour vous aider à corriger le fichier versé. 
 
-Après avoir chargé ce premier fichier, il est possible d’ajouter d’autres fichiers à ce jeu de données via la page de gestion de vos jeux de données ainsi que la page de gestion de tous les jeux de données.
+.. |ajout_fichier| image:: ../../images/bouton_ajouter_fichier.png
+               :width: 8 em
+               
+Après avoir chargé ce premier fichier et **avant de procéder au dépôt définitif de vos données** il est possible d’ajouter d’autres fichiers à ce jeu de données via la page de gestion de vos jeux de données ainsi que la page de gestion de tous les jeux de données, en cliquant sur |ajout_fichier|
 
 
 
-II.2. Phases de contrôles et rapport d'erreur
-"""""""""""""""""""""""""""""""""""""""""""""
+2.2. Phases de contrôles et rapport d'erreur
+""""""""""""""""""""""""""""""""""""""""""""
 
 Fonctionnement des phases de contrôles
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-En cas d’erreur lors de l’import, la nature et la localisation des erreurs sont indiquées dans le “Rapport de conformité et cohérence”, disponible pour chaque soumission sur la page listant les jeux de données. Le service d’import détecte les erreurs en 3 étapes :
+En cas d’erreur lors de l’import, la nature et la localisation des erreurs sont indiquées dans le rapport d'erreur disponible pour chaque soumission sur la page listant les jeux de données. Le service d’import détecte les erreurs en 3 étapes :
 
 **ÉTAPE 1**
 
@@ -118,9 +124,9 @@ Dans un premier temps, le service d’import s’assure que la ligne d’en-têt
 * pas de nom de colonne inconnu dans le modèle d’import ;
 * pas de colonne obligatoire manquante ;
 
-Le nom des colonnes doit correspondre exactement aux noms indiqués dans le standard de fichier de données brutes de biodiversité publié au Bulletin officiel et fournis dans le modèle proposé en téléchargement.
+Le nom des colonnes doit correspondre exactement aux **noms courts** indiqués dans le standard de fichier de données brutes de biodiversité publié au Bulletin officiel et fournis dans le modèle proposé en téléchargement.
 
-Toute la ligne est évaluée pour ces 3 contrôles. Si une erreur est relevée, l’import est rejeté.
+Toute la ligne est évaluée pour ces 3 contrôles. Si une erreur est relevée, l’import est rejeté et l'erreur sera indiqué dans le rapport d'erreur.
 
 **ÉTAPE 2**
 
@@ -140,9 +146,7 @@ Cette étape concerne les contrôles sur le champ géométrique ainsi que les er
 Localisation des erreurs et étude de cas d’erreur
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Dans la partie “Détails des erreurs de conformité”, le nom du champ ainsi que la ligne dans le fichier où est localisée l’erreur, s’ils ont identifiables, sont indiqués.
-
-Dans la partie “Détails des erreurs de cohérence”, la ligne où est localisée l’erreur est indiquée, ainsi qu’un message permettant d’identifier les champs en erreur.
+Sur le rapport d'erreur, la ligne où est localisée l’erreur est indiquée, ainsi qu’un message permettant d’identifier les champs en erreur.
 
 
 Des **erreurs de conformité** ont lieu lorsque :
@@ -202,7 +206,6 @@ L’identifiant du système de coordonnées (SRID) indiqué ne correspond pas à
 
 
 
-
 Des **erreurs de cohérence** ont lieu lorsque :
 
 * Des **champs obligatoires conditionnels** sont manquants 
@@ -232,8 +235,8 @@ La valeur de jourdatedebut est ultérieure à celle de jourdatefin ou la valeur 
 
 
 
-II.3. Gérer et déposer les jeux de données
-""""""""""""""""""""""""""""""""""""""""""
+2.3. Gérer et déposer les jeux de données
+"""""""""""""""""""""""""""""""""""""""""
 
 Accéder à la liste de vos jeux de données
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -242,11 +245,11 @@ Lorsque vous êtes authentifié sur la plateforme, cliquez dans la barre de menu
 
 Cette page d’accueil de gestion des jeux de données liste l’ensemble de vos jeux de données ainsi que leurs actions associées.
 
-Un tableau regroupe les jeux de données existants en indiquant leur titre et leur identifiant de métadonnée. Au sein d’un jeu de données, ce tableau liste les fichiers de données qui ont été soumis à l’application. Pour chaque soumission, on visualise :
+Un tableau regroupe les jeux de données existants en indiquant leur titre et leur identifiant de métadonnées. Au sein d’un jeu de données, ce tableau liste les fichiers de données qui ont été soumis à l’application. Pour chaque soumission, on visualise :
 
 * le nom du fichier
 * le nombre de lignes (plus exactement le nombre de données) que comporte le fichier
-* le statut de la soumission (en cours, ok, error)
+* le statut de la soumission (en cours, |etat_ok|, |etat_error|)
 
 Actions réalisables sur un jeu de données
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -269,35 +272,38 @@ Enfin, si le jeu de données ne comporte aucun versement il est possible de le s
 
 **Ajouter un fichier au jeu de données**
 
-Pour chaque jeu de données importé il est possible de lui associer plusieurs fichiers. Pour cela cliquez sur **[+Ajouter un fichier]** dans la colonne **[Fichiers]** du tableau.
-Vous serez alors redirigez vers la page ajout de fichier et de chargement des données.
+Pour chaque jeu de données importé il est possible de lui associer plusieurs fichiers. Pour cela cliquez sur |ajout_fichier| dans la colonne **[Fichiers]** du tableau.
+Vous serez alors redirigez vers la page d'ajout de fichier et de chargement des données.
 
 
 **Supprimer un jeu de données**
 
-La suppression n’est possible que si le jeu de données ne comporte aucun versement (matérialisé par croix rouge). Dans le cas contraire, la croix est grisée.
+La suppression d'un jeu de données n’est possible que si le jeu de données n'a pas été déposé. 
 
-Pour supprimer un jeu de données il est nécessaire de supprimer toutes les données qui y ont été versées puis de supprimer le jeu de données ; la suppression d’un jeu de données peut être réalisée alors même que les données ont fait l’objet d’un Dépôt légal.
+Pour supprimer un jeu de données il est nécessaire de supprimer tous les fichiers qui y ont été transférés puis de supprimer le jeu de données.
 
 **Télécharger un rapport**
  
-* **Le rapport de conformité et cohérence** est un fichier PDF listant les éventuelles erreurs rencontrées lors de l’intégration.
+* **Le rapport d'erruer** est liste les erreurs rencontrées lors du transfère de fichier.
 * **Le rapport de sensibilité** est un fichier CSV listant les données sensibles du jeu de données (le calcul de la sensibilité fait partie des traitements réalisés par l’application lors de l’import). Ce rapport est téléchargeable seulement si le statut de la soumission est OK.
-* **Le rapport des identifiants SINP** (identifiant permanent) qui est un fichier CSV listant les identifiants SINP attribués aux données versés. L’attribution de l’identifiant SINP est réalisé par l’application lorsque le champ du fichier est vide à l’import. Ce rapport est téléchargeable seulement si le statut de la soumission est OK.
+* **Le rapport des identifiants SINP** (identifiant permanent) est un fichier CSV listant les identifiants SINP attribués aux données versés. L’attribution de l’identifiant SINP est réalisé par l’application lorsque le champ du fichier est vide à l’import. Ce rapport est téléchargeable seulement si le statut de la soumission est |etat_ok|.
 
 
 Procéder au Dépôt légal des jeux de données
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Lorsqu’un jeu de données a été créé dans la plateforme, et que tous les fichiers versés dans ce jeu ont un statut OK, le déposant peut procéder au dépôt légal du jeu de données. 
+Lorsqu’un jeu de données a été créé dans la plateforme, et qu'au moins un fichier versés dans ce jeu est validé, le déposant peut procéder au dépôt légal du jeu de données. 
 
 .. warning:: Le dépôt légal d’un jeu de données est définitif ! Une fois qu’un jeu de données a fait l’objet d’un dépôt légal, ce jeu est clos et le déposant ne peut pas annuler son action.
 
-Pour procéder au dépôt légal d’un jeu de données, il faut cliquer sur le bouton “Dépôt légal” dans la colonne “Dépôt légal” (matérialisé par bouton dépôt). Dans le cas contraire, le bouton est grisée bouton grisé.
+.. |depot_donnees| image:: ../../images/deposer_donnees.png
+               :width: 2 em
+               
+Pour procéder au dépôt légal d’un jeu de données, il faut cliquer sur le bouton “Déposer les données” dans la colonne “Dépôt légal” matérialisé par |depot_donnees|.
 
 Une fenêtre de confirmation valide le processus de dépôt légal. 
 
-Après validation du dépôt légal, une barre de progression, indique l’avancée du processus.
+Après validation du dépôt légal, une barre de progression indique l’avancée du processus.
 
 Quand le processus est terminé, plusieurs fichiers sont disponibles en téléchargement. 
 

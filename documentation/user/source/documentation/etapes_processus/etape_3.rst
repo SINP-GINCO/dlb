@@ -3,10 +3,22 @@
 Etape 3 (optionnelle) : Saisie de données dans l'application GeoNature
 ======================================================================
 
+1. Présentation générale du processus de saisie dans GeoNature
+--------------------------------------------------------------
+
+.. raw:: html
+
+   <video controls src="../../_static/processus_dbb_geonature.mp4" width=100% frameborder="0" allowfullscreen></video>
+
+   
+   
+2. Présentation détaillée du processus de saisie dans GeoNature
+---------------------------------------------------------------
+
 Authentification
 ----------------
 
-Accéder à l'application sur http://demo.geonature.fr/geonature
+Accéder à l'application sur https://depot-legal-biodiversite.naturefrance.fr/pp-saisie (instance test)
 
 Si vous n'êtes pas déjà authentifié avec votre compte INPN, vous serez invité à le faire : 
 
@@ -32,7 +44,7 @@ Un bouton en haut à droite permet de se déconnecter de l'application
 
 .. image :: http://geonature.fr/docs/img/user-manual/01-home-logout.jpg
 
-OCCTAX
+OccTax
 ------
 
 Ce module permet de saisir des données selon le standard Occurrence de taxon du SINP 
@@ -86,8 +98,8 @@ Selon les droits dont vous disposez, il est possible d'afficher, de modifier ou 
 
 .. image :: http://geonature.fr/docs/img/user-manual/02-occtax-tools.jpg
 
-AFFICHER UN RELEVE
-------------------
+Afficher un relevé
+""""""""""""""""""
 
 Si vous afficher un relevé, vous accéderez à sa fiche complète : 
 
@@ -111,8 +123,8 @@ Selon les droits dont vous disposez, il est possible de modifier un relevé dire
 
 .. image :: http://geonature.fr/docs/img/user-manual/03-occtax-detail-edit.jpg
 
-AJOUTER UN RELEVE
------------------
+Ajouter un relevé
+"""""""""""""""""
 
 Depuis la liste des relevés, cliquer sur le bouton de création d'un relevé : 
 
@@ -193,8 +205,8 @@ Pour ajouter un taxon au relevé, il faut cliquer sur TAXON et le renseigner com
 
 .. image :: http://geonature.fr/docs/img/user-manual/05-occtax-create-taxon-2.jpg
 
-MODIFIER UN RELEVE
-------------------
+Modifier un relevé
+""""""""""""""""""
 
 Si vous modifier un relevé existant, vous accédez à sa fiche renseignée, sur laquelle vous pouvez modifier la localisation, les informations du relevé, les taxons observés et leurs dénombrements : 
 
@@ -210,8 +222,8 @@ Ou modifier une observation existante d'un taxon en le selectionnant dans la lis
 
 .. image :: http://geonature.fr/docs/img/user-manual/04-occtax-edit-taxon-2.jpg
 
-EXPORT
-------
+Exports
+-------
 
 Une fois que vous avez saisi vos relevés et observations dans le module OccTax, vous pouvez exporter ces données en CSV selon le standard Occurrence de taxon du SINP. 
 

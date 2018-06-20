@@ -9,7 +9,7 @@ Présentation des différents outils
 Le Ministère de la Transition écologique et solidaire a choisi d’utiliser une série d’outils existants dont la complémentarité et la convergence permet d’offrir une solution exhaustive. différents outils développés dans le cadre du `Système d’Information sur la Nature et les Paysages <http://www.naturefrance.fr/sinp/presentation-du-sinp>`_ (SINP) – à savoir une plateforme GINCO dédiée, l’application de gestion des métadonnées du SINP – en y associant les applications GeoNature, développée par le Parc National des Écrins, et demarches-simplifiees.fr, outil de dématérialisation des procédures administratives, afin de répondre aux obligations légales des maîtres d’ouvrages concernant les données brutes de biodiversité (loi du 8 août 2016).
 
 
-.. image:: ../../images/demarches_simplifiees.png
+.. image:: ../../images/logo/demarches_simplifiees.png
    :scale: 30%
 
 demarches-simplifiees.fr permet aux pétitionnaires (maîtres d’ouvrage) de venir déposer à la fois les données brutes de biodiversité et la version complète d’un dossier dans le cadre des études d’impact et évaluation environnementale soumis à l’enquête publique.
@@ -17,13 +17,14 @@ demarches-simplifiees.fr permet aux pétitionnaires (maîtres d’ouvrage) de ve
 Pour plus d’information cliquez `ici <https://www.demarches-simplifiees.fr/>`_. 
 
 
-.. image:: ../../images/mtd_sinp.png
+.. image:: ../../images/logo/mtd_sinp.png
    :scale: 50%
 
 L’outil de gestion des métadonnées, à travers l’instauration d’un `standard de métadonnées SINP <http://standards-sinp.mnhn.fr/metadonnees-1-3-8/>`_, a pour objet de définir un format commun de description des métadonnées attachées aux données naturalistes en tenant compte des obligations de la directive INSPIRE et des formats de rapportage internationaux. Ce format de métadonnées spécifique est utilisé pour les échanges entre plateformes informatiques du SINP. L’outil de gestion des métadonnées SINP permet de renseigner le cadre d’acquisition des données et le ou les jeux de données associés.
 
 
-.. image:: ../../images/geonature_ecrins.png
+.. image:: ../../images/logo/geonature_ecrins.png
+   :scale: 45%
 
 GeoNature est un outil naturaliste open source développé initialement par le Parc National des Ecrins. Cet outil est mis à disposition des utilisateurs n’ayant pas d’outil naturaliste ou de système interne de gestion de données naturalistes. GeoNature permet de déployer un système d'informations complet pour la gestion des données Faune/Flore d'une structure, allant de : la gestion des référentiels (taxonomiques et utilisateurs), à la saisie web et mobile dans différents protocoles, en passant par l'export des données selon les formats attendus par chaque partenaire.
 
@@ -31,7 +32,7 @@ Pour plus d’information cliquez `ici. <http://geonature.fr/>`_
 
 
 
-.. image:: ../../images/ginco.png
+.. image:: ../../images/logo/ginco.png
 
 GINCO - `Gestion d'Information Naturaliste Collaborative et Ouverte <https://ginco.naturefrance.fr/>`_ est une application co-developpée par le Ministère de la Transition écologique et solidaire (MTES), l'Institut national de l'information géographique et forestière (IGN), et le Museum National d’Histoire Naturelle (MNHN). Elle s’inscrit dans le cadre du SINP dont le but est de faciliter la mise en relation d’acteurs en vue d’améliorer la gestion et la circulation d’informations géolocalisées en offrant un cadre méthodologique de référence. 
 GINCO assure les principales fonctions de plateformes régionales et thématique du SINP - à savoir la déclaration, le traitement et la diffusion des jeux de données transmises par les producteurs de données - ainsi que de plateforme de dépôt légal des données brutes de biodiversité. 

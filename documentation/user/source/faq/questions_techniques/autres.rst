@@ -1,13 +1,13 @@
-.. Autres questions
+.. 3. Autres questions
 
-Autres questions
-================
+3. Autres questions
+===================
  
 
 J’ai un problème technique ou j’ai détecté un bug lié au fonctionnement de l’application, que dois-je faire ? 
 -------------------------------------------------------------------------------------------------------------
 
-Pour plus d’information contactez : XXX@XXX
+Pour plus d’information contactez : assistance.depobio@afbiodiversite.fr
 
 
 Au sein du module de visualisation des données, certains champs du requêteur ne sont pas dans le standard de données brutes de biodiversité, à quoi correspondent-ils ?
