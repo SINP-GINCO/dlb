@@ -36,7 +36,6 @@ try {
 	/* patch code here */
 	// execCustSQLFile("$currentDir/xxx.sql", $config);
 	execCustSQLFile("$currentDir/update_permissions.sql", $config);
-	execCustSQLFile("$currentDir/add_manage_own_provider_permission.sql", $config);
 } catch (Exception $e) {
 	echo "$currentDir/update_dlb.php\n";
 	echo "exception: " . $e->getMessage() . "\n";
