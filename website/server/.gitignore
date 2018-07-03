@@ -24,3 +24,4 @@ src/Ign/Bundle/OGAMConfigurateurBundle
 src/Ign/Bundle/GincoConfigurateurBundle
 /.settings/
 /.buildpath
+/nbproject/
