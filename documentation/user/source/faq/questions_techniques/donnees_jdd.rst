@@ -9,7 +9,7 @@
 .. |logo_mtd| image:: ../../images/logo/logo_mtd.png
                :width: 8 em
 
-|logo_mtd| Accédez à l'outil de `gestion de métadonnées INPN <https://inpn.mnhn.fr/mtd/>`_. 
+|logo_mtd| Accédez à l'outil de :mtd_url:`gestion de métadonnées INPN <>`. 
 
 
 .. |edition_jdd| image:: ../../images/icone/jdd.png
@@ -41,7 +41,7 @@ Comment :ref:`supprimer_jdd` ?
 .. |logo_ginco| image:: ../../images/logo/logo_ginco.png
                :width: 8 em
 
-|logo_ginco| Accédez à la `plateforme Ginco de Dépôt légal de biodiversité <https://depot-legal-biodiversite.naturefrance.fr/versement/>`_.
+|logo_ginco| Accédez à la :dlb_url:`plateforme Ginco de Dépôt légal de biodiversité <>`.
 
 .. |import_data| image:: ../../images/icone/import.png
                :width: 1 em
@@ -56,9 +56,9 @@ Le versement de données ne correspond pas à une action unique de dépôt d’u
 
 **L’intégration de données sur la plateforme se déroule donc en 2 temps**.
 
-**Temps n°1** : La déclaration des métadonnées sur `l’outil de gestion des métadonnées SINP <https://inpn.mnhn.fr/mtd/>`_.
+**Temps n°1** : La déclaration des métadonnées sur :mtd_url:`l’outil de gestion des métadonnées SINP <>`.
 
-**Temps n°2** : L’import du fichier de données sur la `plateforme Ginco de Dépôt légal de biodiversité <https://depot-legal-biodiversite.naturefrance.fr/versement/>`_.
+**Temps n°2** : L’import du fichier de données sur la :dlb_url:`plateforme Ginco de Dépôt légal de biodiversité <>`.
 
 Pour plus d'informations sur le versement des données cliquez sur le lien suivant :ref:`versement_jdd`.
 
@@ -214,7 +214,7 @@ La plateforme de Dépôt légal de biodiversité produit pour chaque jeu de donn
 Où puis-je récupérer le rapport d'erreur ?
 """"""""""""""""""""""""""""""""""""""""""
 
-Une fois connecté sur la `plateforme <https://depot-legal-biodiversite.naturefrance.fr/versement/>`_ :
+Une fois connecté sur la :dlb_url:`plateforme <>` :
 
 **1.** Cliquez dans la barre de menu sur **[Jeux de données] > [Gérer mes jeux de données]**. Le tableau des fichiers soumis apparaît. 
 
