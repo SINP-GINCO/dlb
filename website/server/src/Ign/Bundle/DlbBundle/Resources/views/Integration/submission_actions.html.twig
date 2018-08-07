@@ -15,7 +15,7 @@
     <div class="integration-cancel-status hidden" data-target="{{ submission.id }}">Status:{{ submission.status }};Step:{{ submission.step }}</div>
         <a id="integration-cancel-link-{{ submission.id }}" data-remove-submission-jdd-id="{{ jdd.id }}" title="{{ 'Cancel Submission'|trans }}"
             {% if remove and jdd.field('status') != 'published' %}
-                class="btn btn-xs btn-danger" href="{{ path('integration_cancel', {'submissionId': submission.id}) }}" onClick="return confirm('{{'Are you sure?'|trans }}')"
+                class="btn btn-xs btn-danger" href="{{ path('integration_cancel', {'submission': submission.id}) }}" onClick="return confirm('{{'Are you sure?'|trans }}')"
             {% else %}
                 class="btn btn-xs btn-default" data-toggle="modal" data-target="#modal-impossible-delete-submission"
             {% endif %}
@@ -68,7 +68,7 @@
                     <li>
                         <a class="btn {{ integrationDisabled ? 'disabled'}} btn-xs"
                            title="{{ integrationDisabled ? 'Report.Integration.DisabledTitle'|trans : 'Report.Integration.Title'|trans }}"
-                           href="{{ path('submission_view-error-report', {'submissionId': submission.id }) }}">
+                           href="{{ path('submission_view-error-report', {'submission': submission.id }) }}">
                            {{ 'Report.Integration.Title'|trans }}
                         </a>
                     </li>
@@ -77,14 +77,14 @@
                     <li>
                         <a class="btn {{ sensitiveDisabled ? 'disabled'}} btn-xs"
                             title="{{ sensitiveDisabled ? 'Report.Sensitivity.DisabledTitle'|trans : 'Report.Sensitivity.Title'|trans }}"
-                            href="{{ path('download-report', {'submissionId': submission.id, 'report': 'sensibilityReport'}) }}">
+                            href="{{ path('download-report', {'submission': submission.id, 'report': 'sensibilityReport'}) }}">
                             {{ 'Report.Sensitivity.Title'|trans  }}
                         </a>
                     </li>
                     <li>
                         <a class="btn  {{ permanentDisabled ? 'disabled'}} btn-xs"
                             title="{{ permanentDisabled ? 'Report.PermanentIds.DisabledTitle'|trans : 'Report.PermanentIds.Title'|trans }}"
-                            href="{{ path('download-report', {'submissionId': submission.id, 'report': 'permanentIdsReport'}) }}">
+                            href="{{ path('download-report', {'submission': submission.id, 'report': 'permanentIdsReport'}) }}">
                             {{ 'Report.PermanentIds.Title'|trans }}
                         </a>
                     </li>
