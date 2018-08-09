@@ -83,7 +83,6 @@ class ContactType extends AbstractType
                     ),
                     'Contact.subject.evolution.title' => array(
                         'Contact.subject.evolution.geonature' => 'Contact.subject.evolution.geonature',
-                        'Contact.subject.evolution.ginco' => 'Contact.subject.evolution.ginco',
                         'Contact.subject.evolution.dldbb' => 'Contact.subject.evolution.dldbb',
                         'Contact.subject.evolution.metadata' => 'Contact.subject.evolution.metadata',
                         'Contact.subject.evolution.directory' => 'Contact.subject.evolution.directory'
