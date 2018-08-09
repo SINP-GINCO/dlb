@@ -34,7 +34,11 @@ class IntegrationController extends BaseController {
 		// Find jddid if given in GET parameters
 		$jddId = intval($request->query->get('jddid', 0));
 		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
-
+                // If no jdd, add a flash error message
+		// And disable the whole form
+                if (!$jdd) {
+			$this->addFlash('error', 'Integration.Submission.noJdd');
+		}
 		// If the model of the jdd has no published datasets, add a flash error message
 		// which will be seen on next page
 		$dataset = null;
@@ -52,7 +56,7 @@ class IntegrationController extends BaseController {
 
 		// Add user and provider relationship
 		$submission->setUser($this->getUser());
-		$submission->setProvider($this->getUser()->getProvider());
+		$submission->setProvider($jdd->getProvider());
 
 		// Add jdd relationship
 		// And update jdd "dataUpdatedAt"
