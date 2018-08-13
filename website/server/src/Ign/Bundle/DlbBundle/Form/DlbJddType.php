@@ -28,11 +28,13 @@ class DlbJddType extends AbstractType {
 	private $em;
 	private $translator;
 	private $currentUser;
+	private $authorizationChecker ;
 
-	public function __construct($em, $translator, $metadataTpsReader) {
+	public function __construct($em, $translator, $metadataTpsReader, $authorizationChecker) {
 		$this->em = $em;
 		$this->translator = $translator;
 		$this->metadataTpsReader = $metadataTpsReader;
+		$this->authorizationChecker = $authorizationChecker ;
 	}
 
 	public function buildForm(FormBuilderInterface $builder, array $options) {
@@ -105,9 +107,7 @@ class DlbJddType extends AbstractType {
 					
 					if (count($jddWithSameMetadataId) > 0) {
                         $jdd = $jddWithSameMetadataId[0];
-                        if ($this->currentUser
-                            && $this->currentUser->getLogin() != $jdd->getUser()->getLogin()
-                            && !$this->currentUser->isAllowed('MANAGE_DATASETS_OTHER_PROVIDER')) {
+                        if (!$this->authorizationChecker->isGranted('CREATE_SUBMISSION', $jdd)) {
                                 $disabled = true;
                         }
                         if ($disabled == false) {

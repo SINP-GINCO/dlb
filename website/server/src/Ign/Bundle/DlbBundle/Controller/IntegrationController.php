@@ -50,6 +50,8 @@ class IntegrationController extends BaseController {
 		else {
 			$dataset = $jdd->getModel()->getImportDatasets()->first();
 		}
+		
+		$this->denyAccessUnlessGranted('CREATE_SUBMISSION', $jdd) ;
 
 		// Instantiate a new submission
 		$submission = new Submission();

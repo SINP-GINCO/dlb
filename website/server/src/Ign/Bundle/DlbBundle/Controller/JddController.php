@@ -24,6 +24,8 @@ class JddController extends BaseController {
 	 * @Route("/jdd/new", name = "jdd_new")
 	 */
 	public function newAction(Request $request) {
+		
+		$this->denyAccessUnlessGranted('CREATE_JDD') ;
 
 		// Get the referer url, to redirect to it at the end of the action
 		$refererUrl = $request->headers->get('referer');
@@ -79,7 +81,7 @@ class JddController extends BaseController {
 
 		/* Manage form */
 		$jdd = new Jdd();
-		$form = $this->createForm(new DlbJddType($em, $this->get('translator'), $this->get('dlb.metadata_tps_reader')), $jdd, array(
+		$form = $this->createForm(new DlbJddType($em, $this->get('translator'), $this->get('dlb.metadata_tps_reader'), $this->get('security.authorization_checker')), $jdd, array(
 			// the entity manager used for model choices must be the same as the one used to persist the $jdd entity
 			'entity_manager' => $em,
 			'option_key' => $this->get('dlb.metadata_tps_reader'),
@@ -122,22 +124,7 @@ class JddController extends BaseController {
 
 		// Add a custom step to test validity of the jdd_id, with the metadata service
 		$formIsValid = $form->isValid();
-		/*
-		 if ($formIsValid) {
-			$jddId = $form->get('jdd_id')->getData();
-			$this->get('logger')->debug('metadataId is : ' . $jddId);
-
-			// Test if another jdd already exists with this jddId
-			$jddWithSameMetadataId = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findByField(array(
-				'metadataId' => $jddId
-			));
-			if (count($jddWithSameMetadataId) > 0) {
-				$error = new FormError($this->get('translator')->trans('Metadata.Unique', array(), 'validators'));
-				$form->get('jdd_id')->addError($error);
-				$formIsValid = false;
-			}
-		}
-		 */
+		
 		if ($formIsValid) {
 			// Read the metadata XML file
 			$mr = $this->get('ginco.metadata_reader');

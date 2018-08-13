@@ -44,11 +44,6 @@ class DBBController extends GincoController {
 			]);
 		}
 
- 		// Check permissions on a per-jdd basis if necessary
-		if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-			throw $this->createAccessDeniedException();
-		}
-
 		if ( !$this->isGranted('GENERATE_DEE', $jdd) ) {
 			throw $this->createAccessDeniedException("You don't have the rights to generate a DEE for this JDD.");
 		}
