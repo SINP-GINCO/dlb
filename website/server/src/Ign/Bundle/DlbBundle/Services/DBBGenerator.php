@@ -120,6 +120,7 @@ class DBBGenerator {
 		$userInfos = [
 			"providerId" => NULL,
 			"userLogin" => NULL,
+			"DATA_QUERY_OTHER_PROVIDER" => true,
 			"EDIT_DATA_OWN" => true,
 			"EDIT_DATA_PROVIDER" => true,
 			"EDIT_DATA_ALL" => true
