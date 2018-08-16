@@ -102,7 +102,7 @@ Contact:
       geonature: Assistance fonctionnelle GeoNature
       geonatureWorkflow: Calculs et processus GeoNature
       ginco: Assistance fonctionnelle plateforme Dépôt légal de Biodiversité
-      import: Import GINCO et DLDBB
+      import: Verser des données dans la plateforme Dépôt légal de Biodiversité
       gincoWorkflow: Calculs automatiques et processus de la plateforme Dépôt légal de Biodiversité
     blocking:
       title: Besoin d'assistance pour un blocage technique
