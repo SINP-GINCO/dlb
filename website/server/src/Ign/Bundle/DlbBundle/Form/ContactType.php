@@ -39,6 +39,12 @@ class ContactType extends AbstractType
                     new Blank(array('message' => 'Contact.validation.name.blank')),
                 ),
             ))
+            ->add('sender', TextType::class, array(
+                'label' => 'Contact.sender',
+                'constraints' => array(
+                    new NotBlank(array('message' => 'Contact.validation.sender.notblank'))
+                ),
+            ))
             ->add('email', EmailType::class, array(
                 'label' => 'Contact.email',
                 'constraints' => array(
