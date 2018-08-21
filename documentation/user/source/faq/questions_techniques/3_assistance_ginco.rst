@@ -9,7 +9,11 @@
 Où trouver un modèle de fichier CSV constitué des champs requis pour le téléversement des données brutes de biodiversité ?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+<<<<<<< HEAD:documentation/user/source/faq/questions_techniques/3_assistance_ginco.rst
 **En amont du processus de versement des données** :
+=======
+|logo_mtd| Accédez à l'outil de :mtd_url:`gestion de métadonnées INPN <>`. 
+>>>>>>> e26ec66eab07e76beaa0a48e6854ca7387202c8c:documentation/user/source/faq/questions_techniques/donnees_jdd.rst
 
 Un modèle de fichier CSV au format attendu est téléchargeable sur le site http://www.naturefrance.fr/reglementation/depot-legal-de-donnees-brutes-de-biodiversite/ressource dans la partie intitulée "Standard technique".
 
@@ -37,8 +41,12 @@ Dans certains cas, des correspondances devront être faites entre les champs ou 
 Pour plus d'information sur les exigences attendues sur le format des fichiers et les informations pouvant être importées sur la plateforme, référez vous au :ref:`standard_dbb`.
 
 
+<<<<<<< HEAD:documentation/user/source/faq/questions_techniques/3_assistance_ginco.rst
 Dans quel format de fichier peut-on importer des données dans la plateforme ? 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+=======
+|logo_ginco| Accédez à la :dlb_url:`plateforme Ginco de Dépôt légal de biodiversité <>`.
+>>>>>>> e26ec66eab07e76beaa0a48e6854ca7387202c8c:documentation/user/source/faq/questions_techniques/donnees_jdd.rst
 
 Les données doivent être importées à partir d’un fichier CSV ou Shapefile. 
 
@@ -50,7 +58,11 @@ Le versement de données ne correspond pas à une action unique de dépôt d’u
 
 **L’intégration de données sur la plateforme se déroule donc en 2 temps**.
 
+<<<<<<< HEAD:documentation/user/source/faq/questions_techniques/3_assistance_ginco.rst
 **Temps n°1** : La description des métadonnées sur :mtd_url:`l’outil de gestion des métadonnées </cadre/dbb/recherche>`.
+=======
+**Temps n°1** : La déclaration des métadonnées sur :mtd_url:`l’outil de gestion des métadonnées SINP <>`.
+>>>>>>> e26ec66eab07e76beaa0a48e6854ca7387202c8c:documentation/user/source/faq/questions_techniques/donnees_jdd.rst
 
 **Temps n°2** : L’import du fichier de données sur la :dlb_url:`plateforme Ginco de Dépôt légal de biodiversité <>`.
 

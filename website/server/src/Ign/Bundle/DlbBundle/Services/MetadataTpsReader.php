@@ -195,10 +195,15 @@ class MetadataTpsReader {
 			$doc->loadXML($jddFromTpsIdxmlStr);
 			$xpath = new \DOMXpath($doc);
 			
-			$fields['libelle'] = $xpath->query('//ca:CadreAcquisition/ca:libelle')->item(0)->nodeValue;
-			$fields['description'] = $xpath->query('//ca:CadreAcquisition/ca:description')->item(0)->nodeValue;
-			$fields['projetOwner'] = $xpath->query('//ca:CadreAcquisition/ca:acteurAutre[ca:ActeurType/ca:roleActeur="3"]/ca:ActeurType/ca:organisme')->item(0)->nodeValue;
-			$fields['projetManager'] = $xpath->query('//ca:CadreAcquisition/ca:acteurAutre[ca:ActeurType/ca:roleActeur="4"]/ca:ActeurType/ca:organisme')->item(0)->nodeValue;
+			$libelleNodeList = $xpath->query('//ca:CadreAcquisition/ca:libelle') ;
+			$descriptionNodeList = $xpath->query('//ca:CadreAcquisition/ca:description') ;
+			$projetOwnerNodeList = $xpath->query('//ca:CadreAcquisition/ca:acteurAutre[ca:ActeurType/ca:roleActeur="3"]/ca:ActeurType/ca:organisme') ;
+			$projetManagerNodeList = $xpath->query('//ca:CadreAcquisition/ca:acteurAutre[ca:ActeurType/ca:roleActeur="4"]/ca:ActeurType/ca:organisme') ;
+			
+			$fields['libelle'] = $libelleNodeList->length > 0 ? $libelleNodeList->item(0)->nodeValue : null ;
+			$fields['description'] = $descriptionNodeList->length > 0 ? $descriptionNodeList->item(0)->nodeValue : null ;
+			$fields['projetOwner'] = $projetOwnerNodeList->length > 0 ? $projetOwnerNodeList->item(0)->nodeValue : null ;
+			$fields['projetManager'] = $projetManagerNodeList->length > 0 ? $projetManagerNodeList->item(0)->nodeValue : null ;
 
 			$this->logger->debug('libelle : ' . $xpath->query('//ca:CadreAcquisition/ca:libelle')
 				->item(0)->nodeValue);
@@ -244,10 +249,15 @@ class MetadataTpsReader {
 			$doc->loadXML($caFromCaIdxmlStr);
 			$xpath = new \DOMXpath($doc);
 			
-			$fields['tpsId'] = $xpath->query('//ca:CadreAcquisition/ca:idTPS')->item(0)->nodeValue;
-			$fields['description'] = $xpath->query('//ca:CadreAcquisition/ca:description')->item(0)->nodeValue;
-			$fields['projetOwner'] = $xpath->query('//ca:CadreAcquisition/ca:acteurAutre[ca:ActeurType/ca:roleActeur="3"]/ca:ActeurType/ca:organisme')->item(0)->nodeValue;
-			$fields['projetManager'] = $xpath->query('//ca:CadreAcquisition/ca:acteurAutre[ca:ActeurType/ca:roleActeur="4"]/ca:ActeurType/ca:organisme')->item(0)->nodeValue;
+			$tpsIdNodeList = $xpath->query('//ca:CadreAcquisition/ca:idTPS') ;
+			$descriptionNodeList = $xpath->query('//ca:CadreAcquisition/ca:description') ;
+			$projetOwnerNodeList = $xpath->query('//ca:CadreAcquisition/ca:acteurAutre[ca:ActeurType/ca:roleActeur="3"]/ca:ActeurType/ca:organisme') ;
+			$projetManagerNodeList = $xpath->query('//ca:CadreAcquisition/ca:acteurAutre[ca:ActeurType/ca:roleActeur="4"]/ca:ActeurType/ca:organisme') ;
+			
+			$fields['tpsId'] = $tpsIdNodeList->length > 0 ? $tpsIdNodeList->item(0)->nodeValue : null ;
+			$fields['description'] = $descriptionNodeList->length > 0 ? $descriptionNodeList->item(0)->nodeValue : null ;
+			$fields['projetOwner'] = $projetOwnerNodeList->length > 0 ? $projetOwnerNodeList->item(0)->nodeValue : null ;
+			$fields['projetManager'] = $projetManagerNodeList->length > 0 ? $projetManagerNodeList->item(0)->nodeValue : null ;
 			
 			$this->logger->debug('idTPS : ' . $xpath->query('//ca:CadreAcquisition/ca:idTPS')
 				->item(0)->nodeValue);

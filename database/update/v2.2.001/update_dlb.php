@@ -10,9 +10,6 @@ if (is_file("$currentDir/../../../lib/share.php")) {
 	exit(1);
 }
 
-// ----------------------------------------------------
-// Synopsis: migrate DB GINCO/DLB from v2.0.006 to v2.1.000
-// ----------------------------------------------------
 function usage($mess = NULL) {
 	echo "------------------------------------------------------------------------\n";
 	echo ("\nApplies DLB patches to latest Ginco/DLB version database (the database should be up to date before launching this script");
@@ -35,7 +32,7 @@ $paramStr = implode(' ', array_slice($argv, 1));
 try {
 	/* patch code here */
 	// execCustSQLFile("$currentDir/xxx.sql", $config);
-	execCustSQLFile("$currentDir/update_permissions.sql", $config);
+
 } catch (Exception $e) {
 	echo "$currentDir/update_dlb.php\n";
 	echo "exception: " . $e->getMessage() . "\n";

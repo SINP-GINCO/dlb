@@ -122,7 +122,7 @@ class DBBProcess {
 			foreach ($submissions as $submission) {
 				$submissionsIds[] = $submission->getId();
 				try {
-					$this->integration->validateDataSubmission($submission->getId());
+					$this->integration->validateDataSubmission($submission);
 				} catch (\Exception $e) {
 					throw new \Exception("Error during upload: " . $e->getMessage());
 				}
@@ -255,7 +255,7 @@ class DBBProcess {
 			// Unpublish all submissions for this jdd
 			$submissions = $jdd->getValidatedSubmissions();
 			foreach ($submissions as $submission) {
-				$this->integration->invalidateDataSubmission($submission->getId());
+				$this->integration->invalidateDataSubmission($submission);
 			}
 		}
 	}

@@ -43,7 +43,7 @@ services:
     # Define form as a service to create new jdd
     app.form.type.DlbJdd:
         class: DlbBundle\Form\DlbJddType
-        arguments: ["@doctrine.orm.entity_manager", "@translator", "@dlb.metadata_tps_reader"]
+        arguments: ["@doctrine.orm.entity_manager", "@translator", "@dlb.metadata_tps_reader", "@security.authorization_checker"]
         tags:
           - {name: form.type}
         

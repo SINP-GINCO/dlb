@@ -35,20 +35,20 @@ security:
         - { path: ^/usermanagement/search-providers, allow_if: "user and is_authenticated() and (user.isAllowed('MANAGE_OWN_PROVIDER') or user.isAllowed('MANAGE_USERS'))"}
         - { path: ^/usermanagement/, allow_if: "user and is_authenticated() and user.isAllowed('MANAGE_USERS')"}
         - { path: ^/admin/, roles: ROLE_ADMIN }
-        - { path: ^/dataedition/, allow_if: "user and is_authenticated() and user.isAllowed('DATA_EDITION')"}
+        - { path: ^/dataedition/, roles: "EDIT_DATA"}
         - { path: ^/query/csv-export, allow_if: "user and is_authenticated() and user.isAllowed('EXPORT_RAW_DATA')"}
         - { path: ^/query/, roles: "IS_AUTHENTICATED_ANONYMOUSLY"}
         - { path: ^/map/, roles: "IS_AUTHENTICATED_ANONYMOUSLY"}
-        - { path: ^/integration/, allow_if: "user and is_authenticated() and user.isAllowed('DATA_INTEGRATION')"}
+        - { path: ^/integration/, roles: "IS_AUTHENTICATED_FULLY"}
         - { path: ^/jdd/published-jdds, roles: "IS_AUTHENTICATED_ANONYMOUSLY"}
-        - { path: ^/jdd/, allow_if: "user and is_authenticated() and user.isAllowed('DATA_INTEGRATION')"}
-        - { path: ^/submission/download-report, allow_if: "user and is_authenticated() and user.isAllowed('DATA_INTEGRATION')"}
-        - { path: ^/dee/, allow_if: "user and is_authenticated() and (user.isAllowed('GENERATE_DEE_OWN_JDD') or user.isAllowed('GENERATE_DEE_ALL_JDD'))"}
-        - { path: ^/dlb/, allow_if: "user and is_authenticated() and (user.isAllowed('GENERATE_DEE_OWN_JDD') or user.isAllowed('GENERATE_DEE_ALL_JDD'))"}
+        - { path: ^/jdd/, roles: "IS_AUTHENTICATED_FULLY"}
+        - { path: ^/submission/download-report, roles: "IS_AUTHENTICATED_FULLY"}
+        - { path: ^/dee/, roles: "IS_AUTHENTICATED_FULLY"}
+        - { path: ^/dlb/, roles: "IS_AUTHENTICATED_FULLY"}
         - { path: ^/dlb-download/, roles: IS_AUTHENTICATED_ANONYMOUSLY}
         - { path: ^/status, roles: IS_AUTHENTICATED_ANONYMOUSLY}
-        - { path: ^/proxy/, allow_if: "user and is_authenticated() and user.isAllowed('DATA_INTEGRATION')"}
-        - { path: ^/harmonization/, allow_if: "user and is_authenticated() and user.isAllowed('DATA_INTEGRATION')"}
+        - { path: ^/proxy/, roles: "IS_AUTHENTICATED_FULLY"}
+        - { path: ^/harmonization/, roles: "IS_AUTHENTICATED_FULLY"}
         - { path: ^/configuration/, allow_if: "user and is_authenticated() and user.isAllowed('CONFIGURE_WEBSITE_PARAMETERS')"}
         - { path: ^/configurator/, allow_if: "user and is_authenticated() and user.isAllowed('CONFIGURE_METAMODEL')"}
 

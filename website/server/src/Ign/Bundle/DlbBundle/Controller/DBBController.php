@@ -44,13 +44,7 @@ class DBBController extends GincoController {
 			]);
 		}
 
- 		// Check permissions on a per-jdd basis if necessary
-		if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-			throw $this->createAccessDeniedException();
-		}
-
-		if ( !$this->getUser()->isAllowed('GENERATE_DEE_ALL_JDD') &&
-			!($this->getUser()->isAllowed('GENERATE_DEE_OWN_JDD') && $jdd->getUser() == $this->getUser()) ) {
+		if ( !$this->isGranted('GENERATE_DEE', $jdd) ) {
 			throw $this->createAccessDeniedException("You don't have the rights to generate a DEE for this JDD.");
 		}
 
@@ -91,8 +85,7 @@ class DBBController extends GincoController {
 			throw $this->createAccessDeniedException();
 		}
 
-		if ( !$this->getUser()->isAllowed('GENERATE_DEE_ALL_JDD') &&
-			!($this->getUser()->isAllowed('GENERATE_DEE_OWN_JDD') && $jdd->getUser() == $this->getUser()) ) {
+		if ( !$this->isGranted('GENERATE_DEE', $jdd) ) {
 			throw $this->createAccessDeniedException("You don't have the rights to generate a DEE for this JDD.");
 		}
 
@@ -114,10 +107,8 @@ class DBBController extends GincoController {
 	 * @Route("/dlb/{id}/unpublish", name = "unpublish_dlb", requirements={"id": "\d+"})
 	 */
 	public function undoDLBAction(Jdd $jdd) {
-		if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-			throw $this->createAccessDeniedException();
-		}
-		if (!$this->getUser()->isAllowed('CANCEL_DATASET_PUBLICATION')) {
+		
+		if (!$this->isGranted('GENERATE_DEE', $jdd)) {
 			throw $this->createAccessDeniedException();
 		}
 
@@ -136,13 +127,8 @@ class DBBController extends GincoController {
 		$deeProcess = $this->get('ginco.dee_process');
 		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
 
-		// Check permissions on a per-jdd basis if necessary
-		if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-			throw $this->createAccessDeniedException();
-		}
 
-		if ( !$this->getUser()->isAllowed('GENERATE_DEE_ALL_JDD') &&
-			!($this->getUser()->isAllowed('GENERATE_DEE_OWN_JDD') && $jdd->getUser() == $this->getUser()) ) {
+		if ( !$this->isGranted('GENERATE_DEE', $jdd) ) {
 			throw $this->createAccessDeniedException("You don't have the rights to generate a DEE for this JDD.");
 		}
 
@@ -165,13 +151,8 @@ class DBBController extends GincoController {
 		$em = $this->get('doctrine.orm.entity_manager');
 		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
 
-		// Check permissions on a per-jdd basis if necessary
-		if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-			throw $this->createAccessDeniedException();
-		}
 
-		if ( !$this->getUser()->isAllowed('GENERATE_DEE_ALL_JDD') &&
-			!($this->getUser()->isAllowed('GENERATE_DEE_OWN_JDD') && $jdd->getUser() == $this->getUser()) ) {
+		if ( !$this->isGranted('GENERATE_DEE', $jdd) ) {
 			throw $this->createAccessDeniedException("You don't have the rights to generate a DEE for this JDD.");
 		}
 
@@ -189,13 +170,7 @@ class DBBController extends GincoController {
 		$em = $this->get('doctrine.orm.entity_manager');
 		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
 
-		// Check permissions on a per-jdd basis if necessary
-		if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-			throw $this->createAccessDeniedException();
-		}
-
-		if ( !$this->getUser()->isAllowed('GENERATE_DEE_ALL_JDD') &&
-			!($this->getUser()->isAllowed('GENERATE_DEE_OWN_JDD') && $jdd->getUser() == $this->getUser()) ) {
+		if ( !$this->isGranted('GENERATE_DEE', $jdd) ) {
 			throw $this->createAccessDeniedException("You don't have the rights to generate a DEE for this JDD.");
 		}
 
@@ -213,16 +188,15 @@ class DBBController extends GincoController {
 	 * @return BinaryFileResponse @Route("/dlb-download/{jddId}/download-dbb", name = "download_dbb", requirements={"jddId": "\d+"})
 	 */
 	public function downloadDbb($jddId) {
-		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
-		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') &&
-			!$this->getUser()->isAllowed('GENERATE_DEE_ALL_JDD') &&
-			!$this->getUser()->isAllowed('GENERATE_DEE_OWN_JDD')
-		) {
-			throw $this->createAccessDeniedException();
-		}
-
+		
 		$em = $this->get('doctrine.orm.entity_manager');
 		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
+		
+		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
+		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->isGranted('GENERATE_DEE', $jdd)) {
+			throw $this->createAccessDeniedException();
+		}
+				
 		$filePath = $jdd->getField('dbbFilePath');
 
 		return $this->download($filePath);
@@ -236,16 +210,16 @@ class DBBController extends GincoController {
 	 * @return BinaryFileResponse @Route("/dlb-download/{jddId}/download-certificate", name = "download_certificate", requirements={"jddId": "\d+"})
 	 */
 	public function downloadCertificate($jddId) {
-		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
-		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') &&
-			!$this->getUser()->isAllowed('GENERATE_DEE_ALL_JDD') &&
-			!$this->getUser()->isAllowed('GENERATE_DEE_OWN_JDD')
-		) {
-			throw $this->createAccessDeniedException();
-		}
-
+				
 		$em = $this->get('doctrine.orm.entity_manager');
 		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
+		
+		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
+		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->isGranted('GENERATE_DEE', $jdd)) {
+			throw $this->createAccessDeniedException();
+		}
+		
+		
 		$filePath = $jdd->getField('certificateFilePath');
 
 		return $this->download($filePath);
@@ -259,17 +233,15 @@ class DBBController extends GincoController {
 	 * @return BinaryFileResponse @Route("/dlb-download/{jddId}/download-mtdca", name = "download_mtdca", requirements={"jddId": "\d+"})
 	 */
 	public function downloadMtdCA($jddId) {
-		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
-		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') &&
-			!$this->getUser()->isAllowed('GENERATE_DEE_ALL_JDD') &&
-			!$this->getUser()->isAllowed('GENERATE_DEE_OWN_JDD')
-		) {
-			throw $this->createAccessDeniedException();
-		}
-
+		
 		$em = $this->get('doctrine.orm.entity_manager');
 		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
-
+		
+		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
+		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->isGranted('GENERATE_DEE', $jdd)) {
+			throw $this->createAccessDeniedException();
+		}
+		
 		$dbbPublicDirectory = $this->get('ginco.configuration_manager')->getConfig('dbbPublicDirectory');
 		$metadataCAId = $jdd->getField('metadataCAId');
 
@@ -286,16 +258,14 @@ class DBBController extends GincoController {
 	 * @return BinaryFileResponse @Route("/dlb-download/{jddId}/download-mtdjdd", name = "download_mtdjdd", requirements={"jddId": "\d+"})
 	 */
 	public function downloadMtdJdd($jddId) {
-		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
-		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') &&
-			!$this->getUser()->isAllowed('GENERATE_DEE_ALL_JDD') &&
-			!$this->getUser()->isAllowed('GENERATE_DEE_OWN_JDD')
-		) {
-			throw $this->createAccessDeniedException();
-		}
-
+		
 		$em = $this->get('doctrine.orm.entity_manager');
 		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
+		
+		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
+		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->isGranted('GENERATE_DEE', $jdd)) {
+			throw $this->createAccessDeniedException();
+		}
 
 		$dbbPublicDirectory = $this->get('ginco.configuration_manager')->getConfig('dbbPublicDirectory');
 		$metadataId = $jdd->getField('metadataId');
@@ -323,8 +293,7 @@ class DBBController extends GincoController {
 			throw $this->createAccessDeniedException();
 		}
 
-		if ( !$this->getUser()->isAllowed('GENERATE_DEE_ALL_JDD') &&
-			!($this->getUser()->isAllowed('GENERATE_DEE_OWN_JDD') && $jdd->getUser() == $this->getUser()) ) {
+		if ( !$this->isGranted('GENERATE_DEE', $jdd) ) {
 			throw $this->createAccessDeniedException("You don't have the rights to generate a DEE for this JDD.");
 		}
 
