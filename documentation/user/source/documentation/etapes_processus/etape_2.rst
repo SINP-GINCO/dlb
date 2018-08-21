@@ -48,7 +48,6 @@ Les critères déterminant le périmètre de constitution d’un jeu de données
 
 * Un jeu de données par jeu de données d'origine, en mentionnant dans le nom et le descriptif du jeu de données la provenance (producteur) et la référence (identifiant) du jeu de données source.
 
-Un guide plus complet d’aide à la décision pour le remplissage des métadonnées sera prochainement disponible.
 
 
 4. Présentation générale du processus de description des métadonnées
@@ -58,7 +57,7 @@ Un guide plus complet d’aide à la décision pour le remplissage des métadonn
 
    <video controls src="../../_static/processus_dbb_mtd.mp4" width=100% frameborder="0" allowfullscreen></video>
    
-**1.** Allez sur l’application `Métadonnées <https://inpn.mnhn.fr/mtd/cadre/dbb/recherche>`_ et connectez vous avec votre compte INPN.
+**1.** Allez sur l’application :mtd_url:`Métadonnées <cadre/dbb/recherche>` et connectez vous avec votre compte INPN.
 
 **2.** Renseignez le numéro de dossier indiqué sur demarches-simplifiees.fr
 
@@ -83,7 +82,7 @@ Un guide plus complet d’aide à la décision pour le remplissage des métadonn
 
 .. note:: L’application de métadonnées du SINP et de l’INPN possède son propre système d’authentification, qui n’est actuellement pas relié à celui de demarches-simplifiees.fr. Il faut se créer un compte INPN pour se connecter à l’ensemble des applications permettant la saisie et le dépôt des données brutes de biodiversité.
 
-**1.** Accédez à l’application `Métadonnées <https://inpn.mnhn.fr/mtd/cadre/dbb/recherche>`_ 
+**1.** Accédez à l’application :mtd_url:`Métadonnées <cadre/dbb/recherche>` 
 
 **2.** **Créez un compte INPN** s’il s’agit de votre première connexion ou **authentifiez-vous** à l’aide de l'identifiant personnel et mot de passe de votre compte INPN. 
 
@@ -145,7 +144,7 @@ Il est impossible de supprimer un cadre d’acquisition déjà créé. Pour ce f
 
 Pour accéder aux fonctionnalités rattachées à l’édition et la gestion d’un jeu de données : 
 
-**1.** Connectez-vous à `l’application métadonnées <https://inpn.mnhn.fr/mtd/cadre/dbb/recherche>`_ avec votre compte INPN.
+**1.** Connectez-vous à :mtd_url:`Métadonnées <cadre/dbb/recherche>` avec votre compte INPN.
 
 **2.** Indiquez le **numéro d’identifiant du dossier** pour accéder au cadre d’acquisition correspondant puis à la page listant les jeux de données associés à ce cadre d'acquisition.
 

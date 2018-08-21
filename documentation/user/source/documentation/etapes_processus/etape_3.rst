@@ -18,7 +18,7 @@ Etape 3 (optionnelle) : Saisie de données dans l'application GeoNature
 Authentification
 ----------------
 
-Accéder à l'application sur https://depot-legal-biodiversite.naturefrance.fr/pp-saisie (instance test)
+Accédez à l'application :geonature_url:`GeoNature <>`.
 
 Si vous n'êtes pas déjà authentifié avec votre compte INPN, vous serez invité à le faire : 
 
