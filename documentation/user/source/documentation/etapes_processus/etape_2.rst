@@ -48,7 +48,6 @@ Les critères déterminant le périmètre de constitution d’un jeu de données
 
 * Un jeu de données par jeu de données d'origine, en mentionnant dans le nom et le descriptif du jeu de données la provenance (producteur) et la référence (identifiant) du jeu de données source.
 
-Un guide plus complet d’aide à la décision pour le remplissage des métadonnées sera prochainement disponible.
 
 
 4. Présentation générale du processus de description des métadonnées

@@ -1,74 +1,33 @@
-.. 2. Questions relatives aux données et jeux de données 
+.. 3. Verser ses données dans Ginco 
 
-2. Questions relatives aux données et jeux de données 
-=====================================================
+3. Verser des données dans Ginco 
+================================
 
-2.1. Sur l’outil de gestion Métadonnées INPN
---------------------------------------------
+3.1. Fichier de données à importer
+----------------------------------
 
-.. |logo_mtd| image:: ../../images/logo/logo_mtd.png
-               :width: 8 em
+Où trouver un modèle de fichier CSV constitué des champs requis pour le téléversement des données brutes de biodiversité ?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 |logo_mtd| Accédez à l'outil de :mtd_url:`gestion de métadonnées INPN <>`. 
+**En amont du processus de versement des données** :
+
+Un modèle de fichier CSV au format attendu est téléchargeable sur le site http://www.naturefrance.fr/reglementation/depot-legal-de-donnees-brutes-de-biodiversite/ressource dans la partie intitulée "Standard technique".
+
+Il s’agit d’un fichier vide. La première ligne du fichier est composée de tous les champs du standard de dépôt légal de biodiversité. Un astérisque sur la deuxième ligne indique les champs obligatoires. Sur cette deuxième ligne sont indiqués également les formats attendus pour les types de champ DATE et HEURE. 
 
 
-.. |edition_jdd| image:: ../../images/icone/jdd.png
-               :width: 1 em
+**Lors du processus de versement des données** : 
 
-|edition_jdd| *Edition et gestion d’un cadre d’acquisition*
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Comment :ref:`editer_CA` ? 
-
-
-Comment :ref:`supprimer_CA` ?
-
-
-
-|edition_jdd| *Edition et gestion d’un jeu de données*
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Comment :ref:`editer_jdd` ?
-
-Comment :ref:`modifier_jdd` ? 
-
-Comment :ref:`supprimer_jdd` ? 
-
-
-2.2. Sur la plateforme de Dépôt légal de biodiversité
------------------------------------------------------
-
-.. |logo_ginco| image:: ../../images/logo/logo_ginco.png
-               :width: 8 em
-
-|logo_ginco| Accédez à la :dlb_url:`plateforme Ginco de Dépôt légal de biodiversité <>`.
-
-.. |import_data| image:: ../../images/icone/import.png
-               :width: 1 em
-
-|import_data| *Verser des données*
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Comment verser des données dans la plateforme ? 
-"""""""""""""""""""""""""""""""""""""""""""""""
-
-Le versement de données ne correspond pas à une action unique de dépôt d’un fichier. En conformité avec les règles du protocole SINP, l’intégration de données nécessite de créer et fournir une fiche de métadonnées du jeu de données au préalable.
-
-**L’intégration de données sur la plateforme se déroule donc en 2 temps**.
-
-**Temps n°1** : La déclaration des métadonnées sur :mtd_url:`l’outil de gestion des métadonnées SINP <>`.
-
-**Temps n°2** : L’import du fichier de données sur la :dlb_url:`plateforme Ginco de Dépôt légal de biodiversité <>`.
-
-Pour plus d'informations sur le versement des données cliquez sur le lien suivant :ref:`versement_jdd`.
+Ce modèle de fichier est également téléchargeable lors du chargement des données sur la plateforme GINCO de versement. Ce modèle est accessible lors du choix du format de fichier à transmettre, une fois que l'utilisateur a renseigné son numéro de dossier et sélectionné le jeu de données concerné par le versement de données (onglet "Créer un jeu de données"). 
 
 
 Quelles sont les vérifications préalables à effectuer sur un fichier de données avant de l'importer ?
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Avant d’importer un fichier, vérifier si : 
 
-**1.** Le **format général du fichier** est respecté (séparateur, encodage, projection unique…) et si le fichier correspond au `Standard de fichier occurrences de taxons <http://www.naturefrance.fr/sites/default/files/fichiers/ressources/pdf/standard_fichier_depot_donnees_brutes_biodiversite_v1.pdf>`_.
+**1.** Le **format général du fichier** est respecté (séparateur, encodage, projection unique…).
 
 Dans certains cas, des correspondances devront être faites entre les champs ou entre les nomenclatures du producteur de données et les champs obligatoires attendus. 
 
@@ -78,14 +37,79 @@ Dans certains cas, des correspondances devront être faites entre les champs ou 
 
 Pour plus d'information sur les exigences attendues sur le format des fichiers et les informations pouvant être importées sur la plateforme, référez vous au :ref:`standard_dbb`.
 
+
+|logo_ginco| Accédez à la :dlb_url:`plateforme Ginco de Dépôt légal de biodiversité <>`.
 Dans quel format de fichier peut-on importer des données dans la plateforme ? 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Les données doivent être importées à partir d’un fichier CSV ou Shapefile. 
 
 
+Comment verser des données dans la plateforme ? 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Le versement de données ne correspond pas à une action unique de dépôt d’un fichier. En conformité avec les règles du protocole SINP, l’intégration de données nécessite de créer et fournir une fiche de métadonnées du jeu de données au préalable.
+
+**L’intégration de données sur la plateforme se déroule donc en 2 temps**.
+
+**Temps n°1** : La description des métadonnées sur :mtd_url:`l’outil de gestion des métadonnées </cadre/dbb/recherche>`.
+
+**Temps n°2** : L’import du fichier de données sur la :dlb_url:`plateforme Ginco de Dépôt légal de biodiversité <>`.
+
+Pour plus d'informations sur le versement des données cliquez sur le lien suivant :ref:`versement_jdd`.
+
+
+3.2. Gérer les jeux de données
+------------------------------
+
+Comment visualiser mes jeux de données sur la plateforme ?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Une fois connecté, cliquez dans la barre de menu sur **[Jeux de données] > [Gérer mes jeux de données]**. 
+
+Un tableau de tous les fichiers que vous avez soumis apparaît. 
+
+
+Comment obtenir la liste des jeux de données fournis pour une télé-procédure ?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+La liste des jeux de données fournis pour une télé-procédure est accessible à tous les utilisateurs lorsque le jeux de données a été déposé sur la plateforme Ginco de Dépôt légal de biodiversité.
+
+**1.** Via l'onglet **[Jeux de données] > [Consulter les jeux de données déposés]**, vous accédez à la page listant les études et jeux de données déposés.
+
+**2.** Le détail de la procédure apparaît en cliquant sur le numéro de dossier que vous souhaitez consulter.
+
+
+Comment modifier une donnée d’un jeu de données ?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+La plateforme de Dépôt légal de biodiversité n’a pas pour vocation la saisie de données d’occurrences. Pour ajouter ou modifier des données à un jeu de données, il est nécessaire de dé-publier puis supprimer le jeu de données et de réimporter un fichier de données complété.
+
+
+Comment modifier un jeu de données ayant fait l’objet d’un dépôt légal de biodiversité ?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Le dépôt légal d’un jeu de données est définitif ! Une fois qu’un jeu de données a fait l’objet d’un dépôt légal de biodiversité, ce jeu est clos et l'utilisateur ne peut pas annuler son action.
+
+
+Comment trouver un jeu de données ayant fait l’objet d’un dépôt légal de biodiversité ?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Sur la plateforme de Dépôt légal de biodiversité, la liste des jeux de données déposés qui se trouve dans l’onglet [Jeux de données] > [Consulter les jeux de données déposés] donne accès au jeu de données ayant fait l’objet d’un dépôt légal. Les données brutes de biodiversité sont téléchargeables en format .ZIP.
+
+
+Comment consulter les données d’un jeu de données ayant fait l’objet d’un dépôt légal de biodiversité ?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+               
+Le détail des données d’un jeu de données peut se trouver sur la plateforme de dépôt légal de biodiversité dans la liste des études et jeux de données déposés via l’onglet **[Jeux de données] > [Consulter les jeux de données déposés]**. 
+Cliquez téléchargez le fichier .ZIP des données brutes de biodiversité en cliquant sur l'icône |dbb| dans le tableau récapitulatif des jeux de données déposés.
+
+
+3.3. Calculs automatiques et contrôles
+--------------------------------------
+
 Quels sont les opérations de calculs automatiques et d’attribution de valeurs effectués par la plateforme ?
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **1.** La plateforme attribue des valeurs par défaut pour trois champs du standard de données brutes de biodiversité lorsque ceux-ci n’ont pas été fournis.
 
@@ -119,45 +143,8 @@ Quels sont les opérations de calculs automatiques et d’attribution de valeurs
 Pour plus d’information voir le document `Principes et cas d’usages pour le géo référencement des données <http://www.naturefrance.fr/sites/default/files/fichiers/ressources/pdf/delebio_principes_cas_usages_geo-referencement.pdf>`_.
 
 
-|edition_jdd| *Gérer les jeux de données*
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Comment visualiser mes jeux de données sur la plateforme ?
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-Une fois connecté, cliquez dans la barre de menu sur **[Jeux de données] > [Gérer mes jeux de données]**. 
-
-Un tableau de tous les fichiers que vous avez soumis apparaît. 
-
-
-Comment obtenir la liste des jeux de données fournis pour une télé-procédure ?
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-La liste des jeux de données fournis pour une télé-procédure est accessible à tous les utilisateurs lorsque le jeux de données a été déposé sur la plateforme Ginco de Dépôt légal de biodiversité.
-
-**1.** Via l'onglet **[Jeux de données] > [Consulter les jeux de données déposés]**, vous accédez à la page listant les études et jeux de données déposés.
-
-**2.** Le détail de la procédure apparaît en cliquant sur le numéro de dossier que vous souhaitez consulter.
-
-
-Comment modifier une donnée d’un jeu de données ?
-"""""""""""""""""""""""""""""""""""""""""""""""""
-
-La plateforme de Dépôt légal de biodiversité n’a pas pour vocation la saisie de données d’occurrences. Pour ajouter ou modifier des données à un jeu de données, il est nécessaire de dé-publier puis supprimer le jeu de données et de réimporter un fichier de données complété.
-
-Comment modifier un jeu de données ayant fait l’objet d’un dépôt légal de biodiversité ?
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-Le dépôt légal d’un jeu de données est définitif ! Une fois qu’un jeu de données a fait l’objet d’un dépôt légal de biodiversité, ce jeu est clos et l'utilisateur ne peut pas annuler son action.
-
-.. |sensible_data| image:: ../../images/icone/sensible.png
-               :width: 1 em
-
-|sensible_data| *Sensibilité des données*
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 Comment est attribué le niveau de sensibilité sur les données ?
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 L’attribution de la sensibilité sur les données implique différents processus répartis en plusieurs étapes.
 
@@ -167,8 +154,10 @@ L’attribution de la sensibilité sur les données implique différents process
 
 Pour plus d’information, reportez-vous à la définition des données sensibles présente dans le :doc:`glossaire <../../documentation/glossaire/index>`.
 
+
+
 Comment récupérer le rapport de sensibilité de mon jeu de données ?
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Un rapport de sensibilité est disponible pour chaque jeu de données importé à partir du tableau des soumissions qui se trouve sur la plateforme de Dépôt légal de biodiversité.
 
@@ -183,15 +172,8 @@ Une fois connecté :
 .. image:: ../../images/ginco/jdd/jdd_rapport.png
 
 
-
-.. |control_data| image:: ../../images/icone/controle.png
-               :width: 1 em
-
-|control_data| *Contrôle des données*
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
 Quelles sont les fonctions de contrôles implémentées ?
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Les différents contrôles implémentés ont pour objectif de permettre à l’application de générer sans erreur un fichier valide et conforme de données au format standard. **La plateforme de Dépôt légal de biodiversité n’ayant pas été conçue comme un outil de gestion des données, elle ne permet pas pour l’instant de traiter des données en masse**. De ce fait, le choix a été fait de limiter au maximum la reprise des données dans l’application, de contrôler les erreurs éventuelles en amont de l’intégration et de bloquer l’import des jeux de données lorsque ceux-ci présentent des erreurs bloquantes. 
 
@@ -206,13 +188,13 @@ Il existe **deux types d’erreurs bloquantes dans le SINP**. Celles-ci ont ét�
 À l’heure actuelle, seules les erreurs de conformité sont gérées par la plateforme de Dépôt légal de biodiversité.
 
 Comment puis-je identifier les erreurs de conformité au standard dans mon fichier ? 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 La plateforme de Dépôt légal de biodiversité produit pour chaque jeu de données un rapport d'erreur qui est disponible sur la page listant les jeux de données. Ce rapport d'erreur se génère après avoir soumis un fichier de données si celui-ci comporte des erreurs de conformité.
 
 
 Où puis-je récupérer le rapport d'erreur ?
-""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Une fois connecté sur la :dlb_url:`plateforme <>` :
 
@@ -220,19 +202,14 @@ Une fois connecté sur la :dlb_url:`plateforme <>` :
 
 **2.** Dans la colonne "Action", cliquez sur **[Rapports] > [Rapport d'erreur(s)]**.
 
-.. |dépôt_légal| image:: ../../images/icone/depot.png
-               :width: 1 em
-               
-|dépôt_légal| *Dépôt légal des données brutes de biodiversité*
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Quels sont les fichiers générés lors du dépôt légal de biodiversité et où puis-je les récupérer ?
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Les fichiers générés lors du dépôt légal de biodiversité sont :
 
 .. |dbb| image:: ../../images/ginco/jdd/jdd_icon_dbb.png
-               :width: 1 em
+               :width: 2 em
 
 |dbb| **1.** Les données brutes de biodiversité (fichier .ZIP)
 
@@ -265,7 +242,7 @@ Ces fichiers se récupèrent sur la **plateforme de Dépôt légal de biodiversi
 .. image:: ../../images/ginco/jdd/jdd_fichiers_generes.png
 
 Comment obtenir un certificat de dépôt légal de biodiversité ?
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Pour obtenir un certificat de dépôt légal de biodiversité il est nécessaire que l’intégration du jeu de données soit validé (jeu de données sans erreur) – validation matérialisé par l’état d’import de données OK, puis que le jeu de données soit déposé. 
 
@@ -273,19 +250,7 @@ Ce certificat se trouve dans la colonne "Dépôt légal" du tableau récapitulat
 
 
 Quelles sont les télé-procédures ayant fait l’objet d’un dépôt légal de biodiversité ?
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 L’ensemble des télé-procédures de l’organisme auquel vous êtes rattaché ayant fait l’objet d’un dépôt légal se trouve sur la plateforme de dépôt légal dans l’onglet **[Jeux de données] > [Consulter les jeux de données déposés]**.
 
-Comment trouver un jeu de données ayant fait l’objet d’un dépôt légal de biodiversité ?
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-Sur la plateforme de Dépôt légal de biodiversité, la liste des jeux de données déposés qui se trouve dans l’onglet [Jeux de données] > [Consulter les jeux de données déposés] donne accès au jeu de données ayant fait l’objet d’un dépôt légal. Les données brutes de biodiversité sont téléchargeables en format .ZIP.
-
-Comment consulter les données d’un jeu de données ayant fait l’objet d’un dépôt légal de biodiversité ?
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-.. |dbb| image:: ../../images/jdd_icon_dbb.png
-               :width: 2 em
-               
-Le détail des données d’un jeu de données peut se trouver sur la plateforme de dépôt légal de biodiversité dans la liste des études et jeux de données déposés via l’onglet **[Jeux de données] > [Consulter les jeux de données déposés]**. 
-Cliquez téléchargez le fichier .ZIP des données brutes de biodiversité en cliquant sur l'icône |dbb| dans le tableau récapitulatif des jeux de données déposés.

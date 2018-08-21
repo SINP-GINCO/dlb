@@ -16,7 +16,7 @@ Etape 4 : Verser les données sur la plateforme de Dépôt légal de biodiversit
    <video controls src="../../../source/_static/processus_dbb_ginco.mp4" width=100% frameborder="0" allowfullscreen></video>
    
    
-**1.** Allez sur la plateforme de Dépôt légal de biodiversité, en cliquant via Métadonnées sur le lien « Voir dans Ginco » |icone_verser| ou directement via :dlb_url:`ce lien <>`. 
+**1.** Allez sur la plateforme de Dépôt légal de biodiversité, en cliquant via Métadonnées sur le lien « Voir dans Ginco » |icone_verser| ou directement via :dlb_url:`la plateforme Ginco <>`. 
 
 **2.** Sélectionnez le jeu de données à importer, puis choisissez le format de fichier à importer (CSV ou SHAPEFILE), le système de référence (SRID) utilisé, et validez.
 
