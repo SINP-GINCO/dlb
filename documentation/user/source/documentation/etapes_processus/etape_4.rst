@@ -16,11 +16,7 @@ Etape 4 : Verser les données sur la plateforme de Dépôt légal de biodiversit
    <video controls src="../../../source/_static/processus_dbb_ginco.mp4" width=100% frameborder="0" allowfullscreen></video>
    
    
-<<<<<<< HEAD
 **1.** Allez sur la plateforme de Dépôt légal de biodiversité, en cliquant via Métadonnées sur le lien « Voir dans Ginco » |icone_verser| ou directement via :dlb_url:`la plateforme Ginco <>`. 
-=======
-**1.** Allez sur la plateforme de Dépôt légal de biodiversité, en cliquant via Métadonnées sur le lien « Voir dans Ginco » |icone_verser| ou directement via :dlb_url:`ce lien <>`. 
->>>>>>> e26ec66eab07e76beaa0a48e6854ca7387202c8c
 
 **2.** Sélectionnez le jeu de données à importer, puis choisissez le format de fichier à importer (CSV ou SHAPEFILE), le système de référence (SRID) utilisé, et validez.
 
@@ -36,11 +32,7 @@ Etape 4 : Verser les données sur la plateforme de Dépôt légal de biodiversit
 
 Une fois que le cadre d’acquisition du(des) jeu(x) de données et le(les) jeu(x) de données correspondant(s) au projet indiqué sur demarches-simplifiees.fr sont édités, les données peuvent être versées dans la plateforme Ginco de Dépôt légal de biodiversité.
 
-<<<<<<< HEAD
 Pour y accéder, cliquez :dlb_url:`ici <>`.
-=======
-Pour y accéder, cliquez  :dlb_url:`ici <>`.
->>>>>>> e26ec66eab07e76beaa0a48e6854ca7387202c8c
 Une fois connecté avec votre identifiant INPN, plusieurs onglets sont visibles.
 
 .. image:: ../../images/DLB_accueil_connexion.png

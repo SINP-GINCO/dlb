@@ -10,11 +10,7 @@ La constitution du dossier par les maîtres d’ouvrage concernant la déclarati
 
    <video controls src="../../_static/processus_dbb_demarches_simplifiees.mp4" width=100% frameborder="0" allowfullscreen></video>
 
-<<<<<<< HEAD
-**1.** Démarrez la télé-procédure de votre projet via le site projets-environnement.gouv.fr ou allez sur :tps_url:`demarches-simplifiees.fr <>`. 
-=======
 **1.** Démarrez la télé-procédure de votre projet via le site projets-environnement.gouv.fr ou allez sur :tps_url:`demarches-simplifiees.fr <>`.
->>>>>>> e26ec66eab07e76beaa0a48e6854ca7387202c8c
 
 **2.** Si vous vous connectez pour la première fois sur demarches-simplifiees.fr, créez un compte ou utilisez vos identifiants FranceConnect. Sinon renseignez l'identifiant et mot de passe de votre compte demarches-simplifiees.fr.
  
@@ -34,8 +30,4 @@ La constitution du dossier par les maîtres d’ouvrage concernant la déclarati
 
 .. image:: ../../images/dossier_demarches_simplifiees.png
 
-<<<<<<< HEAD
 Une fois les informations relatives à l’étude d’impact indiquées sur demarches-simplifiees.fr, poursuivez le processus sur l':mtd_url:`application de gestion de métadonnées </cadre/dbb/recherche>`. 
-=======
-Une fois les informations relatives à l’étude d’impact indiquées sur demarches-simplifiees.fr, poursuivez le processus sur l' :mtd_url:`application de gestion de métadonnées </cadre/dbb/recherche>`. 
->>>>>>> e26ec66eab07e76beaa0a48e6854ca7387202c8c

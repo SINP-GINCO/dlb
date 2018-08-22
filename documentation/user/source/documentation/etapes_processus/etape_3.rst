@@ -18,11 +18,7 @@ Etape 3 (optionnelle) : Saisie de données dans l'application GeoNature
 Authentification
 ----------------
 
-<<<<<<< HEAD
 Accédez à l'application :geonature_url:`GeoNature <>`.
-=======
-Accéder à l'application :geonature_url:`Geonature <>`
->>>>>>> e26ec66eab07e76beaa0a48e6854ca7387202c8c
 
 Si vous n'êtes pas déjà authentifié avec votre compte INPN, vous serez invité à le faire : 
 
