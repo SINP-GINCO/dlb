@@ -168,7 +168,7 @@ class JddController extends BaseController {
 				$attachedJdd->setField('projetOwner', $projetOwner);
 				$attachedJdd->setField('projetManager', $projetManager);
 				$attachedJdd->setField('caTitle', $tpsLibelle);
-				$attachedJdd->setField('caDescription', substr($caDescription, 0, 255));
+				$attachedJdd->setField('caDescription', mb_substr($caDescription, 0, 255));
 				$em->flush();
 				$jddId = $attachedJdd->getId();
 			}
