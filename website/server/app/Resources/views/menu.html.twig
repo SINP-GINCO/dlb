@@ -18,15 +18,18 @@
                 {% if (user.isAllowed('MANAGE_JDD_SUBMISSION_ALL')) %}
                     <li><a href="{{ path('all_jdd_list') }}">{{ 'Menu.ManageAllDatasets'|trans }}</a></li>
                 {% endif %}
-				{% if (user.isAllowed('MANAGE_JDD_SUBMISSION_PROVIDER')) %}
+                {% if (user.isAllowed('MANAGE_JDD_SUBMISSION_PROVIDER')) %}
                     <li><a href="{{ path('provider_jdd_list') }}">{{ 'Menu.ManageProviderDatasets'|trans }}</a></li>
                 {% endif %}
                 {% if (user.isAllowed('MANAGE_JDD_SUBMISSION_OWN')) %}
                     <li><a href="{{ path('user_jdd_list') }}">{{ 'Menu.ManageMyDatasets'|trans }}</a></li>
                 {% endif %}
-				{% if is_granted('CREATE_JDD') %}
-					<li><a href="{{ path('jdd_new') }}">{{ 'Menu.ImportDataset'|trans }}</a></li>
-				{% endif %}
+                {% if is_granted('CREATE_JDD') %}
+                        <li><a href="{{ path('jdd_new') }}">{{ 'Menu.ImportDataset'|trans }}</a></li>
+                {% endif %}
+                {% if (user.isAllowed('VIEW_PUBLISHED_DATASETS')) %}
+                    <li><a href="{{ path('published_jdds') }}">{{ 'Menu.publishedDatasets'|trans }}</a></li>
+                {% endif %}
             </ul>
         </li>
     {% endif %}
