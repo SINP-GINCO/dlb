@@ -26,17 +26,18 @@ class IntegrationController extends BaseController {
 		$refererUrl = $request->headers->get('referer');
 		$redirectUrl = ($refererUrl) ? $refererUrl : $this->generateUrl('user_jdd_list');
 		$session = $request->getSession();
-		if (!$session->has('redirectToUrl'))
+		if (!$session->has('redirectToUrl')) {
 			$session->set('redirectToUrl', $redirectUrl);
+		}
 
 		$em = $this->get('doctrine.orm.entity_manager');
 
 		// Find jddid if given in GET parameters
 		$jddId = intval($request->query->get('jddid', 0));
 		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
-                // If no jdd, add a flash error message
+        // If no jdd, add a flash error message
 		// And disable the whole form
-                if (!$jdd) {
+        if (!$jdd) {
 			$this->addFlash('error', 'Integration.Submission.noJdd');
 		}
 		// If the model of the jdd has no published datasets, add a flash error message
@@ -64,20 +65,17 @@ class IntegrationController extends BaseController {
 		// And update jdd "dataUpdatedAt"
 		$submission->setJdd($jdd);
 		$jdd->setDataUpdatedAt(new \DateTime());
-		$em->merge($jdd);
 
 		// Add Import Dataset
 		$submission->setDataset($dataset);
 
-		// writes the submission to the database
-		// merge because cascade persist is not set in the entity
-		// and get the merged object to access auto-generated id
-		$attachedSubmission = $em->merge($submission);
+		$em->persist($submission);
 		$em->flush();
+		$em->refresh($submission) ;
 
 		// Redirects to next page: upload data
 		return $this->redirect($this->generateUrl('integration_upload_data', array(
-			'id' => $attachedSubmission->getId()
+			'id' => $submission->getId()
 		)));
 	}
 }
