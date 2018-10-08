@@ -16,24 +16,41 @@ Non, elles doivent nécessairement être saisies via l'application Métadonnées
 2.2. Le cadre d'acquisition
 ---------------------------
 
-Comment :ref:`editer_CA` ?
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+Comment modifier son cadre d'acquisition ?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Comment :ref:`supprimer_CA` ?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Pour modifier le cadre d'acquisition de votre projet : 
+
+1. Connectez vous à l'application Métadonnées,
+
+2. Indiquez votre numéro de dossier demarches-simplifiees.fr,
+
+3. Cliquez sur le bouton [Modifier le cadre d'acquisition],
+
+4. Modifiez les informations,
+
+5. Enregistrez votre cadre d'acquisition.
+
+Pour plus d'information cliquez sur le lien suivant : :ref:`modifier_CA`
+
+Comment supprimer son cadre d'acquisition ?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Il est impossible de supprimer un cadre d’acquisition déjà créé. Pour ce faire, contactez l’assistance utilisateur : assistance.depobio@afbiodiversite.fr
 
 
 2.3. Le jeu de données
 ----------------------
 
-Comment :ref:`editer_jdd` ?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Comment créer et ajouter un jeu de données ?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Rendez vous sur la documentation à ce sujet :ref:`créer_jdd`
 
-Comment :ref:`modifier_jdd` ? 
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Comment modifier un jeu de données ? 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Rendez vous sur la documentation à ce sujet :ref:`modifier_jdd`
 
 Je souhaite modifier un jeu de données mais je n’ai pas accès aux boutons de modification, que faire ?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Ne pas avoir accès aux boutons de modifications d’un jeu de données, ou d’un cadre d’acquisition, peut avoir lieu :
  
 * Si ce n'est pas vous qui êtes à l’origine de la création du cadre d’acquisition ;
@@ -43,8 +60,9 @@ Seul l'utilisateur/le compte INPN ayant créé la fiche métadonnées du cadre d
 
 Par la suite, seul l'utilisateur/le compte INPN ayant créé le cadre d'acquisition et le jeu de données dans l'application métadonnées pourra verser ses données dans la plateforme de dépôt légal de biodiversité. 
 
-Comment :ref:`supprimer_jdd` ? 
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Comment supprimer un jeu de données ? 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Rendez vous sur la documentation à ce sujet :ref:`supprimer_jdd`
 
 2.4. Blocage technique
 ----------------------

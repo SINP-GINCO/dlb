@@ -13,10 +13,10 @@ Etape 4 : Verser les données sur la plateforme de Dépôt légal de biodiversit
 
 .. raw:: html
 
-   <video controls src="../../../source/_static/processus_dbb_ginco.mp4" width=100% frameborder="0" allowfullscreen></video>
+   <video controls src="../../_static/processus_dbb_ginco.mp4" width=100% frameborder="0" allowfullscreen></video>
    
    
-**1.** Allez sur la plateforme de Dépôt légal de biodiversité, en cliquant via Métadonnées sur le lien « Voir dans Ginco » |icone_verser| ou directement via :dlb_url:`la plateforme Ginco <>`. 
+**1.** Allez sur la plateforme de Dépôt légal de biodiversité, en cliquant via Métadonnées sur le lien « Verser dans Ginco » |icone_verser| ou directement via :dlb_url:`la plateforme Ginco <>`. 
 
 **2.** Sélectionnez le jeu de données à importer, puis choisissez le format de fichier à importer (CSV ou SHAPEFILE), le système de référence (SRID) utilisé, et validez.
 
@@ -30,7 +30,7 @@ Etape 4 : Verser les données sur la plateforme de Dépôt légal de biodiversit
 2. Présentation détaillée du processus de versement des données
 ----------------------------------------------------------------
 
-Une fois que le cadre d’acquisition du(des) jeu(x) de données et le(les) jeu(x) de données correspondant(s) au projet indiqué sur demarches-simplifiees.fr sont édités, les données peuvent être versées dans la plateforme Ginco de Dépôt légal de biodiversité.
+Une fois que le cadre d’acquisition du(des) jeu(x) de données et le(les) jeu(x) de données correspondant(s) au projet indiqué sur demarches-simplifiees.fr sont décrits, les données peuvent être versées dans la plateforme Ginco de Dépôt légal de biodiversité.
 
 Pour y accéder, cliquez :dlb_url:`ici <>`.
 Une fois connecté avec votre identifiant INPN, plusieurs onglets sont visibles.
@@ -42,9 +42,9 @@ Une fois connecté avec votre identifiant INPN, plusieurs onglets sont visibles.
 
 Sélectionner un jeu de données
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
-.. note:: Il est possible de passer cette étape en cliquant sur [Voir dans GINCO] sur l’application métadonnées SINP. Cette action permet d’accéder directement à la plateforme et d’utiliser le jeu de données sélectionné pour l’importer.
+.. note:: Il est possible de passer cette étape en cliquant sur [Verser dans GINCO] sur l’application Métadonnées. Cette action permet d’accéder directement à la plateforme et d’utiliser le jeu de données sélectionné pour l’importer.
 
-**1.** Cliquez sur [Créer un jeu de données] dans la barre de menu.
+**1.** Cliquez sur [Verser des données] dans la barre de menu.
 
 .. image:: ../../images/DLDBB_creer_jdd.png
 
@@ -52,7 +52,7 @@ Sélectionner un jeu de données
 
 Si vous souhaitez créer une nouvelle fiche de métadonnée de jeu de données, un lien vers l’application de métadonnées de l’INPN vous est proposé.
 
-**3.** Validez le formulaire via le bouton [Créer un jeu de données].
+**3.** Validez le formulaire via le bouton [Verser des données].
 
 .. image:: ../../images/DLDBB_jdd_tps.png
 
@@ -71,7 +71,7 @@ Un encart d’informations succinctes situé plus bas présente les principaux s
 
 .. warning:: Les fichiers doivent peser moins de 150 Mo.
 
-Vous pouvez télécharger un fichier d’exemple pour chaque fichier demandé, contenant :
+Vous pouvez télécharger un fichier d’exemple selon le format choisi, contenant dans le cas du CSV :
 
 * Une ligne d’en-tête avec les noms des champs définis dans la configuration du fichier d’import,
 * Une ligne commentée indiquant leur caractère obligatoire (signalé par une étoile), et le format des dates.
@@ -81,7 +81,7 @@ Vous pouvez télécharger un fichier d’exemple pour chaque fichier demandé, c
 .. warning:: Les fichiers Shape doivent, pour être acceptés par l’application, comprendre un fichier .prj indiquant le système de coordonnées utilisé.
 
 
-Ouverture d’une nouvelle page « Gérer mes jeux de données »
+Après avoir choisi le fichier à importer vous êtes redirigé vers la page de gestion de vos jeux de données où apparaît un tableau listant vos jeux de données et fichiers associés.
 
 
 Transférer votre ou vos fichier(s)
@@ -130,13 +130,13 @@ Toute la ligne est évaluée pour ces 3 contrôles. Si une erreur est relevée, 
 
 **ÉTAPE 2**
 
-Contrôles de conformité et cohérence : les erreurs sont enregistrées au fur et à mesure. Elles ne sont pas bloquantes pour le reste de la ligne ou du fichier, dans la limite de 1 000 erreurs, auquel cas les contrôles s’arrêtent.
+Les erreurs sont enregistrées au fur et à mesure. Elles ne sont pas bloquantes pour le reste de la ligne ou du fichier, dans la limite de 1 000 erreurs, auquel cas les contrôles s’arrêtent.
 
-**Conformité** : ce sont les erreurs de format, et de valeurs non conformes aux nomenclatures et aux référentiels (pour les valeurs de type code) listés dans le standard de fichier de données brutes de biodiversité.
+**Erreur de conformité** : ce sont les erreurs de format, et de valeurs non conformes aux nomenclatures et aux référentiels (pour les valeurs de type code) listés dans le standard de fichier de données brutes de biodiversité.
 
-**Cohérence** : ce sont des erreurs spécifiques au standard de fichier de données brutes de biodiversité, qui concernent souvent la cohérence entre plusieurs champs ; par exemple, certains champs doivent être remplis (ou non) en fonction de la valeur prise par d’autres champs.
+**Erreur de cohérence** : ce sont des erreurs spécifiques au standard de fichier de données brutes de biodiversité, qui concernent souvent la cohérence entre plusieurs champs ; par exemple, certains champs doivent être remplis (ou non) en fonction de la valeur prise par d’autres champs.
 
-Le service d’import lance les contrôles de conformité et de cohérence vis à vis du standard de fichier de données brutes de biodiversité. Vous pouvez vous référer au détail du standard “Standard de fichier de données occurrences de taxons. Dépôt légal des données brutes de biodiversité” pour connaître l’ensemble des règles de cohérence.
+Le service d’import lance les contrôles de conformité et de cohérence vis à vis du `standard de fichier de données brutes de biodiversité <http://www.naturefrance.fr/sites/default/files/fichiers/ressources/pdf/standard_fichier_depot_donnees_brutes_biodiversite_v1.pdf>`_.
 
 **ÉTAPE 3**
 
@@ -243,9 +243,9 @@ Accéder à la liste de vos jeux de données
  
 Lorsque vous êtes authentifié sur la plateforme, cliquez dans la barre de menu sur [Jeux de données] > [Gérer mes jeux de données]. 
 
-Cette page d’accueil de gestion des jeux de données liste l’ensemble de vos jeux de données ainsi que leurs actions associées.
+Cette page de gestion des jeux de données liste l’ensemble de vos jeux de données ainsi que leurs actions associées.
 
-Un tableau regroupe les jeux de données existants en indiquant leur titre et leur identifiant de métadonnées. Au sein d’un jeu de données, ce tableau liste les fichiers de données qui ont été soumis à l’application. Pour chaque soumission, on visualise :
+Un tableau regroupe les jeux de données existants en indiquant leur titre et leur identifiant de métadonnées attribué automatiquement par l'application. Au sein d’un jeu de données, ce tableau liste les fichiers de données qui ont été soumis à l’application. Pour chaque soumission, on visualise :
 
 * le nom du fichier
 * le nombre de lignes (plus exactement le nombre de données) que comporte le fichier

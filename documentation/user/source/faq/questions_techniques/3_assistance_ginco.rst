@@ -10,7 +10,8 @@ Où trouver un modèle de fichier CSV constitué des champs requis pour le tél�
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **En amont du processus de versement des données** :
-|logo_mtd| Accédez à l'outil de :mtd_url:`gestion de métadonnées INPN <>`. 
+
+Accédez à l'outil de :mtd_url:`gestion de métadonnées INPN <>`. 
 
 Un modèle de fichier CSV au format attendu est téléchargeable sur le site http://www.naturefrance.fr/reglementation/depot-legal-de-donnees-brutes-de-biodiversite/ressource dans la partie intitulée "Standard technique".
 
@@ -40,7 +41,8 @@ Pour plus d'information sur les exigences attendues sur le format des fichiers e
 
 Dans quel format de fichier peut-on importer des données dans la plateforme ? 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-|logo_ginco| Accédez à la :dlb_url:`plateforme Ginco de Dépôt légal de biodiversité <>`.
+
+Accédez à la :dlb_url:`plateforme Ginco de Dépôt légal de biodiversité <>`.
 
 Les données doivent être importées à partir d’un fichier CSV ou Shapefile. 
 
@@ -247,10 +249,4 @@ Comment obtenir un certificat de dépôt légal de biodiversité ?
 Pour obtenir un certificat de dépôt légal de biodiversité il est nécessaire que l’intégration du jeu de données soit validé (jeu de données sans erreur) – validation matérialisé par l’état d’import de données OK, puis que le jeu de données soit déposé. 
 
 Ce certificat se trouve dans la colonne "Dépôt légal" du tableau récapitulatif des études et jeux de données déposés en cliquant sur l'icône |certificat| dans le tableau récapitulatif des jeux de données déposés. 
-
-
-Quelles sont les télé-procédures ayant fait l’objet d’un dépôt légal de biodiversité ?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-L’ensemble des télé-procédures de l’organisme auquel vous êtes rattaché ayant fait l’objet d’un dépôt légal se trouve sur la plateforme de dépôt légal dans l’onglet **[Jeux de données] > [Consulter les jeux de données déposés]**.
 
