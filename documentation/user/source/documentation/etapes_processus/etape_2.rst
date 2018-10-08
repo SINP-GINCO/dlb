@@ -63,14 +63,11 @@ Les critères déterminant le périmètre de constitution d’un jeu de données
 
 **3.** Complétez le formulaire si besoin et enregistrez le.
 
-.. note:: Le formulaire d’édition du cadre d’acquisition de l’étude est pré-rempli. Certains champs renseignés sur demarches-simplifiees.fr sont récupérés automatiquement par l'application Métadonnées. Vous avez néanmoins la possibilité d'ajouter ou supprimer des informations. Actuellement, les modifications apportées au cadre d’acquisition sur Métadonnées ne sont pas récupérées par demarches-simplifiees.fr. Néanmoins, cela n’impacte pas la suite du processus.
+.. note:: Le formulaire d’édition du cadre d’acquisition de l’étude est pré-rempli. Certains champs renseignés sur demarches-simplifiees.fr sont récupérés automatiquement par l'application Métadonnées. Vous avez néanmoins la possibilité d'ajouter ou supprimer des informations. Actuellement, les modifications apportées au cadre d’acquisition sur Métadonnées ne sont pas récupérées par demarches-simplifiees.fr. Cependant, cela n’impacte pas la suite du processus.
 
-**4.** Ajoutez un jeu de données au cadre d’acquisition. Pour ajouter un jeu de données associé au cadre d'acquisition cliquez sur le bouton en bas à droite du formulaire d'édition d'un cadre d'acquisition.
+**4.** Ajoutez un jeu de données au cadre d’acquisition.
 
 **5.** Remplissez le formulaire et enregistrez le.
-
-.. note:: Pour ajouter un nouveau un jeu de données, retournez sur la page d’édition du cadre d’acquisition. En bas de la page se trouve la liste des jeux de données associés au cadre d'acquisition.
-
 
 
 
@@ -80,35 +77,35 @@ Les critères déterminant le périmètre de constitution d’un jeu de données
 5.1. Accéder à l'application de métadonnées de l'INPN
 """""""""""""""""""""""""""""""""""""""""""""""""""""
 
-.. note:: L’application de métadonnées du SINP et de l’INPN possède son propre système d’authentification, qui n’est actuellement pas relié à celui de demarches-simplifiees.fr. Il faut se créer un compte INPN pour se connecter à l’ensemble des applications permettant la saisie et le dépôt des données brutes de biodiversité.
+.. note:: L’application Métadonnées, tout comme l'application GeoNature et Ginco possède leur propre système d’authentification, qui n’est actuellement pas relié à celui de demarches-simplifiees.fr. Il faut se créer un compte INPN pour se connecter à l’ensemble des applications permettant la saisie et le dépôt des données brutes de biodiversité.
 
 **1.** Accédez à l’application :mtd_url:`Métadonnées </cadre/dbb/recherche>` 
 
 **2.** **Créez un compte INPN** s’il s’agit de votre première connexion ou **authentifiez-vous** à l’aide de l'identifiant personnel et mot de passe de votre compte INPN. 
 
-Pour plus d'information :ref:`creation_compte_inpn`.
+Pour plus d'information sur la création d'un compte INPN, cliquez sur le lien suivant : :ref:`creation_compte_inpn`.
 
-Vous êtes alors automatiquement connecté à l’ensemble des outils à votre disposition dans le cadre du dépôt légal des données brutes de biodiversité, mis à part demarches-simplifiees.fr.
+Vous êtes automatiquement connecté à l’ensemble des outils à votre disposition dans le cadre du dépôt légal des données brutes de biodiversité, mis à part demarches-simplifiees.fr.
 
-L’application de métadonnées s'ouvre sur la page de recherche par identifiant du numéro de dossier.
+L’application de métadonnées s'ouvre sur la page de recherche par numéro de dossier.
 
-**3.** **Indiquer le numéro d’identifiant du dossier** enregistré sur demarches-simplifiees.fr. 
+.. image:: ../../images/metadonnees/page_accueil.png
 
-Vous accédez aux différentes fonctionnalités de gestion des métadonnées, en commençant par la page d’édition d’un cadre d’acquisition. 
+**3.** **Indiquer le numéro de votre dossier** enregistré sur demarches-simplifiees.fr. 
+
+Vous accédez ensuite à la page de création du cadre d'acquisition dans l'application Métadonnées. 
 
 
 5.2. Le cadre d'acquisition
 """""""""""""""""""""""""""
 
-.. _editer_CA:
+Création du cadre d'acquisition dans l'application Métadonnées
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Une fois connecté à l'application Métadonnées et indiqué le numéro de dossier :
 
-Editer / modifier un cadre d'acquisition
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Une fois connecté à l'application métadonnées et indiqué le numéro de dossier :
+**1.** Le formulaire de création du cadre d’acquisition de l’étude est pré-rempli. Certains champs renseignés sur demarches-simplifiees.fr sont récupérés automatiquement par l'application Métadonnées. Vous avez néanmoins la possibilité d'ajouter ou supprimer des informations. Actuellement, les modifications apportées au cadre d’acquisition sur Métadonnées ne sont pas récupérées par demarches-simplifiees.fr. Néanmoins, cela n’impacte pas la suite du processus.
 
-**1.** Le formulaire d’édition du cadre d’acquisition de l’étude est pré-rempli. Certains champs renseignés sur demarches-simplifiees.fr sont récupérés automatiquement par l'application Métadonnées. Vous avez néanmoins la possibilité d'ajouter ou supprimer des informations. Actuellement, les modifications apportées au cadre d’acquisition sur Métadonnées ne sont pas récupérées par demarches-simplifiees.fr. Néanmoins, cela n’impacte pas la suite du processus.
-
-Renseignez à minima les informations obligatoires du formulaire :  
+Les informations obligatoires du formulaire doivent être renseignées :  
 
    * Le libellé du cadre d’acquisition,  
    * Le volet SINP,
@@ -119,14 +116,22 @@ Renseignez à minima les informations obligatoires du formulaire :
 
 .. tip:: Lorsque vous complétez les parties Maître d'ouvrage, Maître d'oeuvre et Financeur, cliquez sur le bouton |bouton_ajouter| pour enregistrer les informations que vous venez de renseigner.
    
-**4.** Enregistrez le formulaire en cliquant sur [Créer] / [Modifier]
+**4.** Enregistrez le formulaire en cliquant sur [Créer].
 
+**Une fois le cadre d’acquisition édité, le pétitionnaire peut ajouter un jeu de donnée afin de poursuivre le processus de dépôt légal**.
 
-.. note:: L’identifiant du cadre d’acquisition et l’identifiant SINP sont attribués automatiquement par l’application. 
+.. _modifier_CA:
 
+Modification du cadre d'acquisition
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Une fois le cadre d'acquisition créé vous pouvez le modifiez en cliquant sur le bouton [Modifier le cadre d'acquisition] à partir de la page récapitulative du cadre d'acquisition et des jeux de données associés.
+
+.. image:: ../../images/metadonnees/ca_modification.png
+
+.. note:: Sur cette page se trouve également l’identifiant SINP du cadre d’acquisition au format UUID attribués automatiquement par l’application.
+ 
 .. Warning:: Le créateur de la fiche métadonnée du cadre d’acquisition est le seul à pouvoir modifier la fiche.
-
-**Une fois le cadre d’acquisition édité, le pétitionnaire doit ajouter un jeu de donnée pour poursuivre le processus de dépôt légal**.
 
 
 .. _supprimer_CA:
@@ -140,25 +145,21 @@ Il est impossible de supprimer un cadre d’acquisition déjà créé. Pour ce f
 5.3. Les jeux de données
 """"""""""""""""""""""""
 
-.. warning:: Avant de pouvoir éditer un jeu de données dans l’application métadonnées il faut obligatoirement éditer le cadre d’acquisition correspondant à ce jeu. Cette étape est également obligatoire pour pouvoir déposer un jeu de données sur la plateforme de Dépôt légal de biodiversité.
+.. warning:: Avant de pouvoir créer un jeu de données dans l’application Métadonnées il faut obligatoirement avoir créer le cadre d’acquisition correspondant à ce jeu. Cette étape est également obligatoire pour pouvoir déposer un jeu de données sur la plateforme de Dépôt légal de biodiversité.
 
-Pour accéder aux fonctionnalités rattachées à l’édition et la gestion d’un jeu de données : 
+Pour accéder aux fonctionnalités rattachées à la création et la gestion d’un jeu de données : 
 
-**1.** Connectez-vous à :mtd_url:`l’application métadonnées </cadre/dbb/recherche>` avec votre compte INPN.
+**1.** Rendez-vous sur :mtd_url:`l’application métadonnées </cadre/dbb/recherche>`.
 
-**2.** Indiquez le **numéro d’identifiant du dossier** pour accéder au cadre d’acquisition correspondant puis à la page listant les jeux de données associés à ce cadre d'acquisition.
+**2.** Indiquez votre **numéro du dossier** pour accéder à la page récapitulative du cadre d’acquisition et jeux de données associés.
 
 
-.. _editer_jdd:
+.. _créer_jdd:
 
-Editer un jeu de données
-^^^^^^^^^^^^^^^^^^^^^^^^
+Création d'un jeu de données
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. warning:: Le créateur de la fiche métadonnées du cadre d’acquisition est le seul à pouvoir modifier la fiche.
-
-**1.** Accédez à la page d’**édition d’un cadre d’acquisition**.
-
-**2.** Cliquez sur **[Ajouter un jeu de données]** pour accéder à l’écran d’édition d’un jeu de données.
+**1.** Cliquez sur **[Ajouter un jeu de données]** pour accéder à l’écran d’édition d’un jeu de données.
 
 .. image:: ../../images/metadonnees/jdd_ajout.png
 
@@ -168,24 +169,23 @@ Editer un jeu de données
 * Le ou les producteurs du jeu de données,
 * Le ou les fournisseurs du jeu de données,
 
-**4.** Cliquez sur **[Créer]**
+**4.** Cliquez sur **[Enregistrer]**
 
-.. note:: L’identifiant du jeu de données est attribué par l’application lors de l’enregistrement.
 
 .. _modifier_jdd:
 
 Modifier un jeu de données
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. warning:: Le créateur de la fiche métadonnées du cadre d’acquisition est le seul à pouvoir modifier le jeu de données.
+.. warning:: Le créateur de la fiche métadonnées du jeu de données est le seul à pouvoir modifier le jeu de données.
 
-**1.**  Aller sur la page **« Edition d’un cadre d’acquisition »** pour accéder à la **liste des jeux de données** correspondant à ce cadre.
+**1.** Aller sur la page récapitulative du cadre d'acquisition et jeux de données associés.
 
-**2.** Cliquez sur l’icône **[modifier/éditer]** pour ouvrir l’écran de modification du jeu de données.
+**2.** Au niveau du tableau listant les jeux de données, cliquez sur l’icône **[modifier]** pour ouvrir la page d'édition du jeu de données.
 
 .. image:: ../../images/metadonnees/jdd_icone_editer.png
 
-**3.** Effectuez les modifications de la même manière qu’à la création du jeu de données en s’assurant que les informations obligatoires sont a minima renseignées.
+**3.** Effectuez les modifications de la même manière qu’à la création du jeu de données en s’assurant que les informations obligatoires soient renseignées.
 
 **4.** Sauvegarder les modifications en cliquant sur **[Enregistrer]**.
 

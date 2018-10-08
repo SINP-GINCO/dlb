@@ -37,9 +37,17 @@ Par exemple, si l’application a déterminé qu’une observation est sensible 
 Export des résultats
 --------------------
 
-En haut à droite du tableau, un menu déroulant permet d’exporter les résultats au format CSV. Les données sont sous forme tabulaire, les valeurs sont séparées par des ”;”.
+En haut à droite du tableau, un menu déroulant permet d’exporter les résultats au format CSV. 
 
+.. image:: ../../images/visualisation/export-tableau-resultats.png
+
+Lorsque le nombre d’observations à exporter est inférieur à 150, leur export est fait directement et au bout de quelques secondes l’application propose à l’utilisateur d’ouvrir ou d’enregistrer le fichier généré.
+
+.. image:: ../../images/visualisation/export-direct.png
+
+.. warning:: Lorsque l’export est généré en arrière plan (après apparition de la popup), il faut patienter plusieurs minutes pour recevoir le mail. Si le mail ne parvient pas, il est conseillé de vérifier qu’il n’a pas été considéré comme un spam par sa messagerie.
+
+Les données sont sous forme tabulaire, les valeurs sont séparées par des ”;”.
 
 .. note:: Les géométries seront exportées en Web Mercator (EPSG 3857).
 
-.. note:: Le processus d’export des résultats est asynchrone pour les exports volumineux. Le processus peut être lancer sans être bloquant pour l’utilisateur qui peut continuer à naviguer sur l’application. Lorsque le processus d’export est terminé une notification est envoyée à l’utilisateur.
