@@ -51,10 +51,12 @@
             {% set integrationDisabled = false %}
         {% endif %}
         {% if submission.status is constant('STATUS_OK', submission) %}
-            {% if user.isAllowed('VIEW_SENSITIVE') %}
-                {% set statusSubmissionOk = false %}
-                {% set permanentDisabled = false %}
-                {% set sensitiveDisabled = false %}
+        	{% if is_granted('VIEW_REPORT', submission) %}
+        		{% set statusSubmissionOk = false %}
+            	{% set permanentDisabled = false %}
+           		{% if user.isAllowed('VIEW_SENSITIVE') %}
+            		{% set sensitiveDisabled = false %}
+            	{% endif %}
             {% endif %}
         {% endif %}
         <div class = "btn-group">

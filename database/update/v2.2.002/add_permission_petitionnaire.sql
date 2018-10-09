@@ -1,0 +1,2 @@
+INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (5, 'VIEW_SENSITIVE');
+INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (5, 'MANAGE_JDD_SUBMISSION_OWN');

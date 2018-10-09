@@ -33,6 +33,7 @@ try {
 	/* patch code here */
 	// execCustSQLFile("$currentDir/xxx.sql", $config);
 	execCustSQLFile("$currentDir/remove_permissions.sql", $config);
+	execCustSQLFile("$currentDir/add_permissions_petitionnaire.sql", $config);
 
 
 } catch (Exception $e) {
