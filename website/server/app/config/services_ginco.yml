@@ -229,8 +229,14 @@ services:
         tags:
             - { name: form.type }
             
-    form.type.provider:
+    form.type.user_role:
         class: Ign\Bundle\GincoBundle\Form\UserRoleType
+        arguments: ["@doctrine.orm.entity_manager", "@ginco.inpn_provider_service"]
+        tags:
+            - { name: form.type }
+            
+    form.type.provider_search:
+        class: Ign\Bundle\GincoBundle\Form\ProviderSearchType
         arguments: ["@doctrine.orm.entity_manager", "@ginco.inpn_provider_service"]
         tags:
             - { name: form.type }
