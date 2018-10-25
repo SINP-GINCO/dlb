@@ -14,31 +14,43 @@ services:
         calls:
           - [setDBBProcess, ['@dlb.dbb_process']]
           - [setExportCSV, ['@ginco.export_csv']]
+        tags:
+          - { name: monolog.logger, channel: ginco }
 
     # Service downloading the xml metadata files from INPN metadata application
     dlb.metadata_dowloader:
         class: Ign\Bundle\DlbBundle\Services\MetadataDownloader
         arguments: ["@ginco.configuration_manager","@logger"]
+        tags:
+          - { name: monolog.logger, channel: ginco }
         
     # Service generating DBB
     dlb.dbb_generator:
         class: Ign\Bundle\DlbBundle\Services\DBBGenerator
         arguments: ["@doctrine.orm.entity_manager","@ginco.configuration_manager", "@ginco.generic_service", "@ginco.query_service","@logger"]
+        tags:
+          - { name: monolog.logger, channel: ginco }
 
     # Service generating Certificate
     dlb.certificate_generator:
         class: Ign\Bundle\DlbBundle\Services\CertificateGenerator
         arguments: ["@doctrine.orm.entity_manager","@ginco.configuration_manager", "@templating", "@knp_snappy.pdf", "@logger"]
+        tags:
+          - { name: monolog.logger, channel: ginco }
         
     # Service doing the whole process of generating and sending the DBB files
     dlb.dbb_process:
         class: Ign\Bundle\DlbBundle\Services\DBBProcess
         arguments: ["@doctrine.orm.entity_manager","@ginco.configuration_manager", "@ginco.integration_service", "@ginco.dee_process", "@ginco.dee_generator", "@dlb.dbb_generator", "@dlb.certificate_generator", "@dlb.metadata_dowloader", "@app.mail_manager","@router","@logger"]
+        tags:
+          - { name: monolog.logger, channel: ginco }
   
     # Service reading the xml metadata files from INPN metadata application
     dlb.metadata_tps_reader:
         class: Ign\Bundle\DlbBundle\Services\MetadataTpsReader
-        arguments: ["@ginco.configuration_manager","@logger"]   
+        arguments: ["@ginco.configuration_manager","@logger"]
+        tags:
+          - { name: monolog.logger, channel: ginco }
         
     # Define form as a service to create new jdd
     app.form.type.DlbJdd:

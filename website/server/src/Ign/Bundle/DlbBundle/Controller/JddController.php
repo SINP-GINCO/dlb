@@ -91,7 +91,7 @@ class JddController extends BaseController {
 		// Pre-fill form if parameters are passed in the query
 		if (null !== $request->query->get('idtps')) {
 			$tpsId = $request->query->get('idtps');
-			$this->get('logger')->debug('tpsid from URL : ' . $tpsId);
+			$this->get('monolog.logger.ginco')->debug('tpsid from URL : ' . $tpsId);
 			$form->get('tps_id')->setData($tpsId);
 		}
 
@@ -99,7 +99,7 @@ class JddController extends BaseController {
 		$jddId = null;
 		if (null !== $request->query->get('idjdd')) {
 			$jddId = $request->query->get('idjdd');
-			$this->get('logger')->debug('idjdd from URL : ' . $jddId);
+			$this->get('monolog.logger.ginco')->debug('idjdd from URL : ' . $jddId);
 			try {
 				// Get ca_id from jdd metadata
 				$metadataFields = $this->get('ginco.metadata_reader')->getMetadata($jddId);
