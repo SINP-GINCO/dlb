@@ -25,3 +25,4 @@ src/Ign/Bundle/GincoConfigurateurBundle
 /.settings/
 /.buildpath
 /nbproject/
+/node_modules/
