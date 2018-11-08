@@ -16,9 +16,10 @@
     {% set domain = site_url|parse_url('scheme') ~ '://' ~ site_url|parse_url('host') %}
 
     {% block stylesheets %}
-        {% stylesheets '@bootstrap_css' output='css/bootstrap.css'  debug=false %}
-        <link rel="stylesheet" href="{{ domain ~ asset_url }}" />
-        {% endstylesheets %}
+        <link rel="stylesheet" href="{{ site_url }}/css/bootstrap.css" />
+        <link rel="stylesheet" href="{{ site_url }}/vendor/bootstrap-table/dist/bootstrap-table.min.css" />
+        <link rel="stylesheet" href="{{ site_url }}/css/roboto-condensed.css" />
+        <link rel="stylesheet" href="{{ site_url }}/vendor/components-jqueryui/themes/base/jquery-ui.min.css" />
     {% endblock %}
     {# Overwrite the background image and glyphicons locations, because not working with asynchronous generation#}
     {#  Annihilate margin-bottom in body, causing two pages beeing generated instead of one) #}
