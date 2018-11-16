@@ -129,28 +129,36 @@ INSERT INTO permission_per_role(role_code, permission_code) VALUES (1, 'VALIDATE
 INSERT INTO permission_per_role(role_code, permission_code) VALUES (1, 'VALIDATE_JDD_PROVIDER');
 INSERT INTO permission_per_role(role_code, permission_code) VALUES (1, 'VALIDATE_JDD_ALL');
 INSERT INTO permission_per_role(role_code, permission_code) VALUES (1, 'CANCEL_DATASET_PUBLICATION');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (1,'VIEW_PUBLISHED_DATASETS');
 
 
 -- Add the permissions for role Administrateur
-INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (2, 'MANAGE_USERS');
-INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (2, 'DATA_INTEGRATION');
-INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (2, 'DATA_QUERY');
-INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (2, 'DATA_QUERY_OTHER_PROVIDER');
-INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (2, 'EXPORT_RAW_DATA');
-INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (2, 'CANCEL_VALIDATED_SUBMISSION');
-INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (2, 'CANCEL_OTHER_PROVIDER_SUBMISSION');
-INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (2, 'CONFIGURE_METAMODEL');
-INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (2, 'VIEW_SENSITIVE');
-INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (2, 'VIEW_PRIVATE');
-INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (2, 'MANAGE_DATASETS');
-INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (2, 'MANAGE_DATASETS_OTHER_PROVIDER');
-INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (2, 'DATA_EDITION');
-INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (2, 'DATA_EDITION_OTHER_PROVIDER');
-INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (2, 'CONFIRM_SUBMISSION');
-INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (2, 'MANAGE_PUBLIC_REQUEST');
-INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (2, 'MANAGE_PRIVATE_REQUEST');
-INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (2, 'CONFIGURE_WEBSITE_PARAMETERS');
-INSERT INTO website.permission_per_role(role_code, permission_code) VALUES (2, 'VIEW_PUBLISHED_DATASETS');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'MANAGE_USERS');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'MANAGE_USERS_PROVIDER');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'MANAGE_JDD_SUBMISSION_OWN');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'MANAGE_JDD_SUBMISSION_PROVIDER');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'MANAGE_JDD_SUBMISSION_ALL');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'DELETE_JDD_SUBMISSION_PROVIDER');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'DATA_QUERY');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'DATA_QUERY_OTHER_PROVIDER');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'EXPORT_RAW_DATA');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'EDIT_DATA_OWN');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'EDIT_DATA_PROVIDER');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'EDIT_DATA_ALL');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'CONFIGURE_METAMODEL');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'VIEW_SENSITIVE');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'VIEW_PRIVATE');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'GENERATE_DEE_OWN');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'GENERATE_DEE_PROVIDER');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'GENERATE_DEE_ALL');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'MANAGE_PUBLIC_REQUEST');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'MANAGE_OWNED_PRIVATE_REQUEST');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'CONFIGURE_WEBSITE_PARAMETERS');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'VALIDATE_JDD_OWN');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'VALIDATE_JDD_PROVIDER');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'VALIDATE_JDD_ALL');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2, 'CANCEL_DATASET_PUBLICATION');
+INSERT INTO permission_per_role(role_code, permission_code) VALUES (2,'VIEW_PUBLISHED_DATASETS');
 
 -- Add the permissions for role Pétitionnaire
 INSERT INTO permission_per_role(role_code, permission_code) VALUES (3, 'DATA_QUERY');

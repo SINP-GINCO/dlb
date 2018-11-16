@@ -215,7 +215,10 @@ INSERT INTO data VALUES ('codedepartementcalcule','CodeDepartementCalculeValue',
 INSERT INTO data VALUES ('heuredatedebut','Time','heureDateDebut','Heure du jour, dans le système local de l’observation dans le système grégorien. En cas d’imprécision, cet attribut représente la date la plus ancienne de la période d’imprécision.',NULL);
 INSERT INTO data VALUES ('heuredatefin','Time','heureDateFin','Heure du jour, dans le système local de l’observation dans le système grégorien. En cas d’imprécision sur la date, cet attribut représente la date la plus récente de la période d’imprécision.',NULL);
 INSERT INTO data VALUES ('nomvalide','CharacterString','nomValide','Le nomValide est le nom du taxon correspondant au cd_ref',NULL);
-INSERT INTO data(data, unit, label, definition, comment)VALUES ('tpsid', 'Integer', 'tpsId', 'Identifiant TPS', 'Identifiant TPS');
+INSERT INTO data VALUES ('tpsid','Integer','tpsId','Identifiant TPS','Identifiant TPS');
+
+-- INSERTION IN TABLE mode
+INSERT INTO mode VALUES ('PROVIDER_ID','1',1,'organisme A','organisme A');
 
 -- INSERTION IN TABLE dataset
 INSERT INTO dataset VALUES ('dataset_01','modèle d''import de données brutes de biodiversité','1','modèle d''import de données brutes de biodiversité','IMPORT');
@@ -414,7 +417,7 @@ INSERT INTO form_field VALUES ('codedepartementcalcule','form_localisation','1',
 INSERT INTO form_field VALUES ('heuredatedebut','form_observation','1','1','TIME',101,'0','1',NULL,NULL,'HH:mm');
 INSERT INTO form_field VALUES ('heuredatefin','form_observation','1','1','TIME',102,'0','1',NULL,NULL,'HH:mm');
 INSERT INTO form_field VALUES ('nomvalide','form_observation','1','1','TEXT',103,'0','0',NULL,NULL,NULL);
-INSERT INTO form_field VALUES ('tpsid', 'form_autres', '1', '1', 'NUMERIC', 104, '0', '0', NULL, NULL, NULL);
+INSERT INTO form_field VALUES ('tpsid','form_autres','1','1','NUMERIC',104,'0','0',NULL,NULL,NULL);
 
 -- INSERTION IN TABLE file_field
 INSERT INTO file_field VALUES ('altitudemax','file_dbb','0',NULL,'altMax');
@@ -435,8 +438,8 @@ INSERT INTO file_field VALUES ('determinateuridentite','file_dbb','0',NULL,'detI
 INSERT INTO file_field VALUES ('determinateurnomorganisme','file_dbb','0',NULL,'detNomOrg');
 INSERT INTO file_field VALUES ('dspublique','file_dbb','1',NULL,'dSPublique');
 INSERT INTO file_field VALUES ('geometrie','file_dbb','0',NULL,'WKT');
-INSERT INTO file_field VALUES ('heuredatedebut','file_dbb','1','HH:mm','heureDebut');
-INSERT INTO file_field VALUES ('heuredatefin','file_dbb','1','HH:mm','heureFin');
+INSERT INTO file_field VALUES ('heuredatedebut','file_dbb','0','HH:mm','heureDebut');
+INSERT INTO file_field VALUES ('heuredatefin','file_dbb','0','HH:mm','heureFin');
 INSERT INTO file_field VALUES ('identifiantorigine','file_dbb','0',NULL,'idOrigine');
 INSERT INTO file_field VALUES ('identifiantpermanent','file_dbb','1',NULL,'permId');
 INSERT INTO file_field VALUES ('identifiantregroupementpermanent','file_dbb','0',NULL,'permIdGrp');
@@ -580,10 +583,10 @@ INSERT INTO table_field VALUES ('codemaillecalcule','table_observation','codemai
 INSERT INTO table_field VALUES ('codecommunecalcule','table_observation','codecommunecalcule','1','0','1','0',98,NULL);
 INSERT INTO table_field VALUES ('nomcommunecalcule','table_observation','nomcommunecalcule','1','0','1','0',99,NULL);
 INSERT INTO table_field VALUES ('codedepartementcalcule','table_observation','codedepartementcalcule','1','0','1','0',100,NULL);
-INSERT INTO table_field VALUES ('heuredatedebut','table_observation','heuredatedebut','0','1','1','1',101,NULL);
-INSERT INTO table_field VALUES ('heuredatefin','table_observation','heuredatefin','0','1','1','1',102,NULL);
+INSERT INTO table_field VALUES ('heuredatedebut','table_observation','heuredatedebut','1','1','1','1',101,NULL);
+INSERT INTO table_field VALUES ('heuredatefin','table_observation','heuredatefin','1','1','1','1',102,NULL);
 INSERT INTO table_field VALUES ('nomvalide','table_observation','nomvalide','1','1','1','0',103,NULL);
-INSERT INTO table_field VALUES ('tpsid', 'table_observation', 'tpsid', '1', '0', '1', '1', 104, NULL);
+INSERT INTO table_field VALUES ('tpsid','table_observation','tpsid','1','0','1','1',104,NULL);
 
 -- Fill the parent table
 INSERT INTO field (data, format, type)
@@ -597,6 +600,8 @@ FROM   table_field;
 INSERT INTO field (data, format, type)
 SELECT data, format, 'FORM'
 FROM   form_field;
+
+
 
 -- INSERTION IN TABLE field_mapping
 INSERT INTO field_mapping VALUES ('codecommune','file_dbb','codecommune','table_observation','FILE');
@@ -762,7 +767,7 @@ INSERT INTO field_mapping VALUES ('nomcommunecalcule','form_localisation','nomco
 INSERT INTO field_mapping VALUES ('codedepartementcalcule','form_localisation','codedepartementcalcule','table_observation','FORM');
 INSERT INTO field_mapping VALUES ('heuredatedebut','form_observation','heuredatedebut','table_observation','FORM');
 INSERT INTO field_mapping VALUES ('heuredatefin','form_observation','heuredatefin','table_observation','FORM');
-INSERT INTO field_mapping VALUES ('tpsid', 'form_autres', 'tpsid', 'table_observation', 'FORM');
+INSERT INTO field_mapping VALUES ('tpsid','form_autres','tpsid','table_observation','FORM');
 
 
 -- INSERTION IN TABLE checks
@@ -903,8 +908,7 @@ INSERT INTO dataset_fields VALUES ('dataset_02','RAW_DATA','table_observation','
 INSERT INTO dataset_fields VALUES ('dataset_02','RAW_DATA','table_observation','heuredatedebut');
 INSERT INTO dataset_fields VALUES ('dataset_02','RAW_DATA','table_observation','heuredatefin');
 INSERT INTO dataset_fields VALUES ('dataset_02','RAW_DATA','table_observation','nomvalide');
-INSERT INTO dataset_fields VALUES ('dataset_02', 'RAW_DATA', 'table_observation', 'tpsid');
-
+INSERT INTO dataset_fields VALUES ('dataset_02','RAW_DATA','table_observation','tpsid');
 
 -- INSERTION IN TABLE dataset_files
 INSERT INTO dataset_files VALUES ('dataset_01','file_dbb');
