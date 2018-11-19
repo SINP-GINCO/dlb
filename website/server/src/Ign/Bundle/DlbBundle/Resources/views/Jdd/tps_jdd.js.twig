@@ -53,7 +53,7 @@ console.log('update form');
 			});
 
 			// If there is at least one jdd_id, print the submit button
-			if ($('.radio').not('.disabled').size() == 0) {
+			if ($('.radio').not('.disabled').length == 0) {
 				$submitField.prop('disabled', true);
 			} else {
 				$submitField.prop('disabled', false);
