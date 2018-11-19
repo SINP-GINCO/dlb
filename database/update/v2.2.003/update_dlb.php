@@ -32,6 +32,8 @@ $paramStr = implode(' ', array_slice($argv, 1));
 try {
 	/* patch code here */
 	// execCustSQLFile("$currentDir/xxx.sql", $config);
+	execCustSQLFile("$currentDir/test_init.sql", $config);
+
 
 
 } catch (Exception $e) {

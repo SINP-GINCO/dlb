@@ -1,0 +1,1 @@
+UPDATE website.application_parameters SET value = 'Init OK' WHERE name = 'Test' ;
