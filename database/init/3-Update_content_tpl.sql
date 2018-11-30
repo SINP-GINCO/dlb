@@ -26,7 +26,7 @@ soumis à l’approbation de l’autorité administrative.</li>
 </p>
 </div>
 ','Texte d''introduction sur la page d''accueil'),
-  ('homepage.image','homepage.private.doc.1','Image d''illustration sur la page d''accueil'),
+  ('homepage.image',NULL,'Image d''illustration sur la page d''accueil'),
   ('homepage.links.title','Plus d''informations','Titre du bloc de liens publics sur la page d''accueil'),
   ('homepage.link.1','{"anchor":"Pr\u00e9sentation du SINP","href":"http:\/\/www.naturefrance.fr","target":"_blank"}','Lien public sur page accueil'),
   ('homepage.link.2','{"anchor":"INPN - Inventaire National du Patrimoine Naturel","href":"https:\/\/inpn.mnhn.fr","target":"_blank"}','Lien public sur page accueil'),
@@ -55,7 +55,7 @@ soumis à l’approbation de l’autorité administrative.</li>
 </div>','Résumé du texte d''introduction de la page de présentation'),
   ('presentation.intro','Le dépôt légal de données brutes de biodiversité s’inscrit dans une démarche partenariale regroupant différents acteurs proposant plusieurs outils interconnectés. 
 Ceux-ci assurent les tâches indispensables du processus de dépôt légal : déclarer une étude, décrire les jeux, saisir et verser les données.','Texte d''introduction sur la page de presentation'),
-  ('presentation.image','montagne.jpg','Image d''illustration sur la page de presentation'),
+  ('presentation.image',NULL,'Image d''illustration sur la page de presentation'),
   ('presentation.links.title','Sites et documents de référence','Titre du bloc de liens publics sur la page de presentation'),
   ('presentation.link.1','{"anchor":"Le portail Nature France","href":"http:\/\/www.naturefrance.fr","target":"_blank"}','Lien public sur page de presentation'),
   ('presentation.link.2','{"anchor":null,"href":null,"target":"_self"}','Lien public sur page de presentation'),
