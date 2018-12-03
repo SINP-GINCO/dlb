@@ -15,7 +15,7 @@ class DefaultController extends BaseController {
      * @Route("/contact", _name="contact")
      */
     public function contactAction(Request $request) {
-           $form = $this->createForm(new ContactType(), null, array(
+           $form = $this->createForm(ContactType::class, null, array(
                    'action' => $this->generateUrl('contact'),
                    'method' => 'POST'
            ));

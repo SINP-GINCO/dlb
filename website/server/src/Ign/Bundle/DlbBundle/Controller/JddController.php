@@ -81,7 +81,7 @@ class JddController extends BaseController {
 
 		/* Manage form */
 		$jdd = new Jdd();
-		$form = $this->createForm(new DlbJddType($em, $this->get('translator'), $this->get('dlb.metadata_tps_reader'), $this->get('security.authorization_checker')), $jdd, array(
+		$form = $this->createForm(DlbJddType::class, $jdd, array(
 			// the entity manager used for model choices must be the same as the one used to persist the $jdd entity
 			'entity_manager' => $em,
 			'option_key' => $this->get('dlb.metadata_tps_reader'),
