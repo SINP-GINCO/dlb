@@ -4,18 +4,15 @@
 /web/images/
 !web/dee/.gitkeep
 /web/dee/
-/app/bootstrap.php.cache
-/app/cache/*
+
 /app/config/parameters.yml
-/app/logs/*
-/app/sessions/*
-!app/cache/.gitkeep
-!app/logs/.gitkeep
-!app/sessions/.gitkeep
 /app/phpunit.xml
+
+/bin/*
+!bin/console
+
 /build/
 /vendor/
-/bin/
 /composer.phar
 src/Ign/Bundle/GincoBundle
 src/Ign/Bundle/OGAMConfigurateurBundle
@@ -24,3 +21,13 @@ src/Ign/Bundle/GincoConfigurateurBundle
 /.buildpath
 /nbproject/
 /node_modules/
+
+# Symfony directories
+/var/cache/*
+!var/cache/.gitkeep
+/var/logs/*
+!var/logs/.gitkeep
+/var/sessions/*
+!var/sessions/.gitkeep
+
+/var/bootstrap.php.cache
