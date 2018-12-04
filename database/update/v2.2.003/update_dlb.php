@@ -38,6 +38,7 @@ try {
 
 	execCustSQLFile("$sprintDir/especesensible.sql", $config) ;
 	execCustSQLFile("$sprintDir/migrate_taxref_to_v12.sql", $config) ;
+	execCustSQLFile("$sprintDir/update_users.sql", $config) ;
 		
 	$connectStr ="host="     .$config['db.host'];
 	$connectStr.=" port="    .$config['db.port'];
