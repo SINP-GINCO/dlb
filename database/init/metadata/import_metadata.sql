@@ -103,9 +103,9 @@ INSERT INTO unit VALUES ('NomCommuneCalculeValue','ARRAY','DYNAMIC','[Liste] Nom
 INSERT INTO unit VALUES ('CodeDepartementCalculeValue','ARRAY','DYNAMIC','[Liste] Code du département calculé','Code du département calculé');
 INSERT INTO unit VALUES ('TypeAttributValue','CODE','DYNAMIC','Type de l''attribut additionnel','Type de l''attribut additionnel (quantitatif ou qualitatif)');
 INSERT INTO unit VALUES ('CodeMasseEauValue','ARRAY','STRING','[Liste] Code de la masse d''eau','Code de la masse d''eau');
-INSERT INTO unit VALUES ('TaxoStatutValue','CODE','DYNAMIC','[Liste] Statut du taxon pour le passage TAXREF V11','Statut du taxon pour le passage TAXREF V11');
-INSERT INTO unit VALUES ('TaxoModifValue','CODE','DYNAMIC','[Liste] Modification effectuée lors du passage TAXREF V11','Modification effectuée sur le taxon lors du passage TAXREF V11');
-INSERT INTO unit VALUES ('TaxoAlerteValue','CODE','DYNAMIC','[Liste] Taxon en alerte ou non pour le passage TAXREF V11','Taxon en alerte ou non pour le passage TAXREF V11');
+INSERT INTO unit VALUES ('TaxoStatutValue','CODE','DYNAMIC','[Liste] Statut du taxon pour la migration TAXREF','Statut du taxon pour la migration TAXREF');
+INSERT INTO unit VALUES ('TaxoModifValue','CODE','DYNAMIC','[Liste] Modification effectuée lors de la migration TAXREF','Modification effectuée sur le taxon lors de la migration TAXREF');
+INSERT INTO unit VALUES ('TaxoAlerteValue','CODE','DYNAMIC','[Liste] Taxon en alerte ou non pour la migration TAXREF','Taxon en alerte ou non pour la migration TAXREF');
 INSERT INTO unit VALUES ('USER_LOGIN','STRING','DYNAMIC','Utilisateur','Utilisateur');
 
 -- INSERTION IN TABLE data
@@ -222,9 +222,9 @@ INSERT INTO data VALUES ('nomvalide','CharacterString','nomValide','Le nomValide
 INSERT INTO data VALUES ('tpsid','Integer','tpsId','Identifiant TPS','Identifiant TPS');
 INSERT INTO data VALUES ('cdnomcalcule','TaxRefValue','cdNomCalcule','Code du taxon « cd_nom » calculé.',NULL);
 INSERT INTO data VALUES ('cdrefcalcule','TaxRefValue','cdRefCalcule','Code du taxon « cd_ref » calculé.',NULL);
-INSERT INTO data VALUES ('taxostatut','TaxoStatutValue','taxoStatut','Statut du taxon pour le passage TAXREF V11.',NULL);
-INSERT INTO data VALUES ('taxomodif','TaxoModifValue','taxoModif','Modification effectuée sur le taxon lors du passage TAXREF V11.',NULL);
-INSERT INTO data VALUES ('taxoalerte','TaxoAlerteValue','taxoAlerte','Alerte sur le taxon pour le passage TAXREF V11.',NULL);
+INSERT INTO data VALUES ('taxostatut','TaxoStatutValue','taxoStatut','Statut du taxon pour la migration TAXREF.',NULL);
+INSERT INTO data VALUES ('taxomodif','TaxoModifValue','taxoModif','Modification effectuée sur le taxon lors de la migration TAXREF.',NULL);
+INSERT INTO data VALUES ('taxoalerte','TaxoAlerteValue','taxoAlerte','Alerte sur le taxon pour la migration TAXREF.',NULL);
 INSERT INTO data VALUES ('USER_LOGIN','USER_LOGIN','Utilisateur','Utilisateur',NULL);
 
 -- INSERTION IN TABLE mode

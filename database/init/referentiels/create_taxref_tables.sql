@@ -1,5 +1,5 @@
 -- --------------------------------------------------
--- 1/ Création des tables du référentiel TAXREF (V11)
+-- 1/ Création des tables du référentiel TAXREF (V12)
 -- --------------------------------------------------
 
 set search_path = referentiels;
