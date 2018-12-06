@@ -1180,16 +1180,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.5.0",
+            "version": "1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "53662d6688033a5eccde987bdd5a4a98ebe2d952"
+                "reference": "9f83dded91781a01c63574e387eaa769be769115"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/53662d6688033a5eccde987bdd5a4a98ebe2d952",
-                "reference": "53662d6688033a5eccde987bdd5a4a98ebe2d952",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/9f83dded91781a01c63574e387eaa769be769115",
+                "reference": "9f83dded91781a01c63574e387eaa769be769115",
                 "shasum": ""
             },
             "require": {
@@ -1243,7 +1243,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2018-12-03T05:07:51+00:00"
+            "time": "2018-12-04T20:46:45+00:00"
         },
         {
             "name": "h4cc/wkhtmltopdf-amd64",
@@ -3165,16 +3165,16 @@
         },
         {
             "name": "twig/extensions",
-            "version": "v1.5.3",
+            "version": "v1.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig-extensions.git",
-                "reference": "e187386bea539a2cc2726689d6b4d468672a8ab4"
+                "reference": "57873c8b0c1be51caa47df2cdb824490beb16202"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/e187386bea539a2cc2726689d6b4d468672a8ab4",
-                "reference": "e187386bea539a2cc2726689d6b4d468672a8ab4",
+                "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/57873c8b0c1be51caa47df2cdb824490beb16202",
+                "reference": "57873c8b0c1be51caa47df2cdb824490beb16202",
                 "shasum": ""
             },
             "require": {
@@ -3216,7 +3216,7 @@
                 "i18n",
                 "text"
             ],
-            "time": "2018-11-16T03:34:09+00:00"
+            "time": "2018-12-05T18:34:18+00:00"
         },
         {
             "name": "twig/twig",
@@ -3286,17 +3286,17 @@
         },
         {
             "name": "whiteoctober/breadcrumbs-bundle",
-            "version": "1.4.2",
+            "version": "1.4.3",
             "target-dir": "WhiteOctober/BreadcrumbsBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/whiteoctober/BreadcrumbsBundle.git",
-                "reference": "07ef1a342d351cce919bc8a037e4b3535148c019"
+                "reference": "1400bc792ccdf0d5824f0e3871d215e020178572"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/whiteoctober/BreadcrumbsBundle/zipball/07ef1a342d351cce919bc8a037e4b3535148c019",
-                "reference": "07ef1a342d351cce919bc8a037e4b3535148c019",
+                "url": "https://api.github.com/repos/whiteoctober/BreadcrumbsBundle/zipball/1400bc792ccdf0d5824f0e3871d215e020178572",
+                "reference": "1400bc792ccdf0d5824f0e3871d215e020178572",
                 "shasum": ""
             },
             "require": {
@@ -3330,7 +3330,7 @@
                 "breadcrumbs",
                 "symfony"
             ],
-            "time": "2018-05-01T09:45:12+00:00"
+            "time": "2018-12-05T16:56:34+00:00"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
