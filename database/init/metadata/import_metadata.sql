@@ -295,7 +295,7 @@ INSERT INTO table_schema VALUES ('PUBLIC','PUBLIC','Public','Contains the defaul
 INSERT INTO model VALUES ('model_01','Données brutes de biodiversité','Données brutes de biodiversité','RAW_DATA',TRUE);
 
 -- INSERTION IN TABLE table_format
-INSERT INTO table_format VALUES ('table_observation','model_1_observation','RAW_DATA','OGAM_ID_table_observation, PROVIDER_ID','observation','table_dsr_exemple_observation');
+INSERT INTO table_format VALUES ('table_observation','model_1_observation','RAW_DATA','OGAM_ID_table_observation, PROVIDER_ID, USER_LOGIN','observation','table_dsr_exemple_observation');
 
 -- INSERTION IN TABLE model_tables
 INSERT INTO model_tables VALUES ('model_01','table_observation');
