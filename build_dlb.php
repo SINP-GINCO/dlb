@@ -114,11 +114,16 @@ function buildWebsite($config, $buildMode) {
 	if ($buildMode == 'prod') {
 		echo ("Copying GincoBundle to $buildServerDir/src/Ign/Bundle/...\n");
 		system("rm -rf $buildServerDir/src/Ign/Bundle/GincoBundle");
+		system("rm -rf $buildServerDir/src/Ign/Bundle/*ConfigurateurBundle");
 		system("cp -r $serverDirGinco/src/Ign/Bundle/GincoBundle $buildServerDir/src/Ign/Bundle/");
+		system("cp -r $serverDirGinco/src/Ign/Bundle/*ConfigurateurBundle $buildServerDir/src/Ign/Bundle/");
 	} else {
 		echo ("Creating a symlink to GincoBundle in $buildServerDir/src/Ign/Bundle/...\n");
 		system("rm -rf $buildServerDir/src/Ign/Bundle/GincoBundle");
+		system("rm -rf $buildServerDir/src/Ign/Bundle/*ConfigurateurBundle");
 		system("ln -s $serverDirGinco/src/Ign/Bundle/GincoBundle $buildServerDir/src/Ign/Bundle/GincoBundle");
+		system("ln -s $serverDirGinco/src/Ign/Bundle/OGAMConfigurateurBundle $buildServerDir/src/Ign/Bundle/OGAMConfigurateurBundle");
+		system("ln -s $serverDirGinco/src/Ign/Bundle/GincoConfigurateurBundle $buildServerDir/src/Ign/Bundle/GincoConfigurateurBundle");
 	}
 	
 	// ajout de la version du build dans le template du site
