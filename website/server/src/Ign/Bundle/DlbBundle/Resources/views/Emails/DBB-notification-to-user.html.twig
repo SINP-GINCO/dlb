@@ -8,7 +8,7 @@
 {%- block email_body_text %}
 	{% set tpsUrl = 'https://www.demarches-simplifiees.fr/dossiers/' ~ jdd.field('tpsId') %}
 
-    {% autoescape true %}
+    {% autoescape %}
 		Bonjour,
 		
 		Nous vous confirmons le succès du dépôt des données brutes de biodiversité suivantes :
