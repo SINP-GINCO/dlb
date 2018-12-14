@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6a40d0c2fcaf5e8f91a95831dcf3de7d",
+    "content-hash": "6c12adc9b8b9b7b5e4f6412ef561ad32",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -1776,31 +1776,32 @@
         },
         {
             "name": "knplabs/knp-snappy-bundle",
-            "version": "v1.5.2",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpSnappyBundle.git",
-                "reference": "f7c2541008525bb621a0bd492e1d83a6d2b48adf"
+                "reference": "87acf8544a2bd498585b3d49b2bb551f088551b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpSnappyBundle/zipball/f7c2541008525bb621a0bd492e1d83a6d2b48adf",
-                "reference": "f7c2541008525bb621a0bd492e1d83a6d2b48adf",
+                "url": "https://api.github.com/repos/KnpLabs/KnpSnappyBundle/zipball/87acf8544a2bd498585b3d49b2bb551f088551b1",
+                "reference": "87acf8544a2bd498585b3d49b2bb551f088551b1",
                 "shasum": ""
             },
             "require": {
                 "knplabs/knp-snappy": "~1.0,>=1.0.1",
-                "php": ">=5.6",
+                "php": ">=7.1",
                 "symfony/framework-bundle": "~2.7|~3.0|^4.0"
             },
             "require-dev": {
                 "doctrine/annotations": "~1.0",
-                "phpunit/phpunit": "~4.8.35",
+                "phpunit/phpunit": "~7.4",
                 "symfony/asset": "~2.7|~3.0|^4.0",
                 "symfony/finder": "~2.7|~3.0|^4.0",
                 "symfony/security-csrf": "~2.7|~3.0|^4.0",
                 "symfony/templating": "~2.7|~3.0|^4.0",
-                "symfony/validator": "~2.7|~3.0|^4.0"
+                "symfony/validator": "~2.7|~3.0|^4.0",
+                "symfony/yaml": "~3.0|~4.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -1836,7 +1837,7 @@
                 "pdf",
                 "snappy"
             ],
-            "time": "2017-12-06T16:31:47+00:00"
+            "time": "2018-12-13T12:14:08+00:00"
         },
         {
             "name": "kriswallsmith/assetic",
