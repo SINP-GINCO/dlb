@@ -49,7 +49,7 @@ $CLIParams = implode(' ', array_slice($argv, 1));
 try {
 
 	//system("php $sprintDir/XXXX.php $CLIParams", $returnCode1);
-    system("php $sprintDir/update_model_nomvalide.php $CLIParams", $returnCode1) ;
+    system("php $sprintDir/change_model_nomvalide.php $CLIParams", $returnCode1) ;
     if ($returnCode1 != 0) {
         echo "$sprintDir/change_model_nomvalide.php crashed.\n";
         exit(1);
