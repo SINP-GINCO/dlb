@@ -262,21 +262,20 @@ class DBBController extends GincoController {
 	 * @return BinaryFileResponse @Route("/dlb-download/{jddId}/download-mtdjdd", name = "download_mtdjdd", requirements={"jddId": "\d+"})
 	 */
 	public function downloadMtdJdd($jddId) {
-		
-		$em = $this->get('doctrine.orm.entity_manager');
-		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
-		
-		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
-		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->isGranted('GENERATE_DEE', $jdd)) {
-			throw $this->createAccessDeniedException();
-		}
-
-		$dbbPublicDirectory = $this->get('ginco.configuration_manager')->getConfig('dbbPublicDirectory');
-		$metadataId = $jdd->getField('metadataId');
-
-		$jddMetadataFile = $dbbPublicDirectory . '/' . $jdd->getId() . '/' . $metadataId;
-
-		return $this->download($jddMetadataFile);
+	    
+	    $em = $this->get('doctrine.orm.entity_manager');
+	    $jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
+	    
+	    // Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
+	    if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->isGranted('GENERATE_DEE', $jdd)) {
+	        throw $this->createAccessDeniedException();
+	    }
+	    $urlMetadataId= $this->get('ginco.configuration_manager')->getConfig('jddMetadataFileDownloadServiceURL');
+	    $metadataId = $jdd->getField('metadataId');
+	    $jddMetadataFile = $urlMetadataId . $metadataId;
+	    
+	    return $this->redirect($jddMetadataFile);
+	    
 	}
 
 	/**
