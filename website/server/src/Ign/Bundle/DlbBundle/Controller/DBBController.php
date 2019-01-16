@@ -48,6 +48,8 @@ class DBBController extends GincoController {
 			throw $this->createAccessDeniedException("You don't have the rights to generate a DEE for this JDD.");
 		}
 
+		$this->get('ginco.jdd_service')->updateMetadataFields($jdd) ;
+		
 		$dbbProcess = $this->get('dlb.dbb_process');
 		$deeProcess = $this->get('ginco.dee_process');
 
@@ -89,6 +91,8 @@ class DBBController extends GincoController {
 			throw $this->createAccessDeniedException("You don't have the rights to generate a DEE for this JDD.");
 		}
 
+		$this->get('ginco.jdd_service')->updateMetadataFields($jdd) ;
+		
 		$dbbProcess = $this->get('dlb.dbb_process');
 		$deeProcess = $this->get('ginco.dee_process');
 

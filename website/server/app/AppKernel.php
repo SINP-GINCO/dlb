@@ -19,9 +19,9 @@ class AppKernel extends Kernel {
 			new FOS\CKEditorBundle\FOSCKEditorBundle(),
 			new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
 			new Ign\Bundle\GincoBundle\IgnGincoBundle(),
-			new Ign\Bundle\DlbBundle\IgnDlbBundle(),
 			new Ign\Bundle\OGAMConfigurateurBundle\IgnOGAMConfigurateurBundle(),
 			new Ign\Bundle\GincoConfigurateurBundle\IgnGincoConfigurateurBundle(),
+			new Ign\Bundle\DlbBundle\IgnDlbBundle(),
 		);
 
 		if (in_array($this->getEnvironment(), array(

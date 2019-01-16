@@ -59,3 +59,9 @@ services:
         tags:
           - {name: form.type}
         
+    # Override jdd_service (add medatatpsreader).
+    ginco.jdd_service:
+        class: Ign\Bundle\DlbBundle\Services\JddService
+        arguments: ["@logger", "@ginco.configuration_manager", "@doctrine.orm.entity_manager", "@ginco.integration_service", "@ginco.metadata_reader", "@dlb.metadata_tps_reader"]
+        tags:
+          - { name: monolog.logger, channel: ginco }
