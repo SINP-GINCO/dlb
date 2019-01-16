@@ -246,12 +246,13 @@ class DBBController extends GincoController {
 			throw $this->createAccessDeniedException();
 		}
 		
-		$dbbPublicDirectory = $this->get('ginco.configuration_manager')->getConfig('dbbPublicDirectory');
+		$metadataCAIdUrl= $this->get('ginco.configuration_manager')->getConfig('jddMetadataFileDownloadServiceURL');
+		$urlMetaDataCAId = str_replace("/cadre/jdd", "/cadre", $metadataCAIdUrl);
 		$metadataCAId = $jdd->getField('metadataCAId');
 
-		$caMetadataFile = $dbbPublicDirectory . '/' . $jdd->getId() . '/' . $metadataCAId;
+		$caMetadataFile = $urlMetaDataCAId . $metadataCAId;
 
-		return $this->download($caMetadataFile);
+		return $this->redirect($caMetadataFile);
 	}
 
 	/**
