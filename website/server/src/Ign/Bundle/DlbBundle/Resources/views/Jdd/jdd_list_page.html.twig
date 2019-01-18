@@ -59,13 +59,23 @@
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> {% trans %}Create data submission{% endtrans %}
         </a>
     </p>
+	
+	<div class="pull-right">
+		<form action="{{ path(route, {page: jddQuery.page, limit: jddQuery.limit}) }}">
+			<div class="input-group">
+				<input type="text" class="form-control" name='search' placeholder="{{ 'Search' | trans }}...">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="submit">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					</button>
+				</span>
+			</div>
+		</form>
+	</div>
 
     <!-- Show the currently active location submissions -->
     <table  id="jddTable" data-toggle="table"
-            data-click-to-select="true" data-search="true" data-search-align="right"
-            data-classes="table table-hover table-bordered jdd-table"
-            data-locale="fr-FR" data-pagination="true" data-page-size="10" data-page-list="[10, 25, 50, 100, 500, 1000]"
-            data-advanced-search="true" data-id-table="advancedTable"/>
+            data-classes="table table-hover table-bordered jdd-table" />
 
         {# Jdd group #}
         <colgroup>
@@ -319,6 +329,10 @@
         {% endfor %}
         </tbody>
     </table>
+		
+	<div class="pull-right">
+		{% include '@IgnGinco/Jdd/pagination.html.twig' with {route: route, jddQuery: jddQuery, numJdds: numJdds} %}
+	</div>
 
     {% if user.isAllowed('GENERATE_DEE_ALL') or user.isAllowed('GENERATE_DEE_PROVIDER') or user.isAllowed('GENERATE_DEE_OWN') %}
         <!-- DBB dialog popup -->
