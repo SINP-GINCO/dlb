@@ -365,4 +365,24 @@ class DBBGenerator {
 		
 		return $filePath . '/' . $filename;
 	}
+	
+	/**
+	 * Create the filepath of the DBB csv file
+	 *
+	 * @param Jdd $jdd
+	 * @return string
+	 */
+	public function generateFilePathDBBUpdateSensibility(Jdd $jdd,jjj) {
+	    $regionCode = $this->configuration->getConfig('regionCode', 'REGION');
+	    $date = $now->format('Y-m-d_H-i-s');
+	    
+	    $uuid = $jdd->getField('metadataId', $jdd->getId());
+	    
+	    $fileNameWithoutExtension = $regionCode . '_' . $date . '_' . $uuid;
+	    $filePath = $this->configuration->getConfig('dbbPublicDirectory') . '/' . $jdd->getId();
+	    @mkdir($filePath); // create the jdd dir
+	    $filename = $fileNameWithoutExtension . '.csv';
+	    
+	    return $filePath . '/' . $filename;
+	}
 }

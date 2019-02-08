@@ -446,4 +446,33 @@ class DBBController extends GincoController {
 		}
 		return $json;
 	}
+	
+	/**
+	 * Direct generation of DLB (dbb, metadatas, certificate, dee) for testing
+	 *
+	 * @Route("/dlb/{id}/update_sensibility", name = "generate_dlb_direct", requirements={"id": "\d+"})
+	 */
+	public function UpdateSensibilityDirect(Jdd $jdd) {
+	    
+	    // Check permissions on a per-jdd basis if necessary
+	    if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+	        throw $this->createAccessDeniedException();
+	    }
+	    
+	    if ( !$this->isGranted('GENERATE_DEE', $jdd) ) {
+	        throw $this->createAccessDeniedException("You don't have the rights to generate a DEE for this JDD.");
+	    }
+	    
+	    $this->get('ginco.jdd_service')->updateMetadataFields($jdd) ;
+	    
+	    $dbbProcess = $this->get('dlb.dbb_process');
+	    $deeProcess = $this->get('ginco.dee_process');
+	    
+	    // Create a line in the DEE table
+	    
+	    $dbbProcess->GenerateForUpdateSensibility($newDEE->getId());
+	    
+	    return $this->redirect($this->generateUrl('integration_home'));
+	}
+    
 }
