@@ -450,13 +450,18 @@ class DBBController extends GincoController {
 	/**
 	 * Direct generation of DLB (dbb, metadatas, certificate, dee) for testing
 	 *
-	 * @Route("/dlb/{id}/update_sensibility", name = "generate_dlb_direct", requirements={"id": "\d+"})
+	 * @Route("/dlb/{id}/update_sensibility", name = "update_sensibility", requirements={"id": "\d+"})
 	 */
 	public function UpdateSensibilityDirect(Jdd $jdd) {
 	    
 	    // Check permissions on a per-jdd basis if necessary
-	    if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-	        throw $this->createAccessDeniedException();
+	    $jddId = intval($request->query->get('jddId', 0));
+	    $jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
+	    if (!$jdd) {
+	        return new JsonResponse([
+	            'success' => false,
+	            'message' => 'No jdd found for this id: ' . $jddId
+	        ]);
 	    }
 	    
 	    if ( !$this->isGranted('GENERATE_DEE', $jdd) ) {
@@ -465,11 +470,16 @@ class DBBController extends GincoController {
 	    
 	    $this->get('ginco.jdd_service')->updateMetadataFields($jdd) ;
 	    
+	    if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+	        throw $this->createAccessDeniedException();
+	    }
+	    
+	   // $this->get('ginco.jdd_service')->updateMetadataFields($jdd) ;
+	    
 	    $dbbProcess = $this->get('dlb.dbb_process');
 	    $deeProcess = $this->get('ginco.dee_process');
 	    
-	    // Create a line in the DEE table
-	    
+	   
 	    $dbbProcess->GenerateForUpdateSensibility($newDEE->getId());
 	    
 	    return $this->redirect($this->generateUrl('integration_home'));

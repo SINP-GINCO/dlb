@@ -102,7 +102,7 @@ class DBBProcess {
 	 *        	$DEEId
 	 * @param null $messageId        	
 	 */
-	public function generateAndSendDBB($DEEId, $messageId = null) {
+	public function generateAndSendDBB($DEEId, $messageId = null,$sendMail = true) {
 		$this->logger->info("GenerateAndSendDBB: " . implode(',', func_get_args()));
 		
 		// Get all objects and variables
@@ -156,7 +156,7 @@ class DBBProcess {
 			$certificateFile = $this->CertificateGenerator->generateCertificate($jdd);
 			
 			/* Zip files */
-			$fileNameDBB = $this->DBBGenerator->generateFilePathDBB($jdd);
+			$fileNameDBB = $this->DBBGenerator->generateFilePathDBB($jdd,$DEE);
 			$parentDir = dirname($fileNameDBB); // dbbPublicDirectory
 			$archiveName = $parentDir . '/dlb_' . basename($fileNameDBB, '.csv') . '.zip';
 			try {
@@ -281,7 +281,7 @@ class DBBProcess {
 	        $submissions = $jdd->getSuccessfulSubmissions();
 	        $submissionsIds = array();
 	        
-	        foreach ($submissions as $submission) {
+	       /* foreach ($submissions as $submission) {
 	            $submissionsIds[] = $submission->getId();
 	            try {
 	                $this->integration->validateDataSubmission($submission);
@@ -289,10 +289,10 @@ class DBBProcess {
 	                throw new \Exception("Error during upload: " . $e->getMessage());
 	            }
 	        }
-	        
+	        */
 	        // Add submissions in dee table as they are validated now
-	        $DEE->setSubmissions($submissionsIds);
-	        $this->em->flush();
+	        //$DEE->setSubmissions($submissionsIds);
+	       // $this->em->flush();
 	        
 	        /* Generate DEE and send notification email to MNHN only */
 	        $this->DEEProcess->generateAndSendDEE($DEEId, $messageId, false);
@@ -301,7 +301,7 @@ class DBBProcess {
 	        $csvFile = $this->DBBGenerator->generateDBB($DEE);
 	        
 	        /* Get metadatas */
-	        $dbbPublicDirectory = $this->configuration->getConfig('dbbPublicDirectory');
+	       /* $dbbPublicDirectory = $this->configuration->getConfig('dbbPublicDirectory');
 	        $metadataId = $jdd->getField('metadataId');
 	        $metadataCAId = $jdd->getField('metadataCAId');
 	        
@@ -312,13 +312,13 @@ class DBBProcess {
 	        $caMetadataFile = $jddCAMetadataFileDownloadURL . $metadataCAId;
 	        
 	        $this->MetadataDownloader->saveXmlFile($jddMetadataFile, $dbbPublicDirectory . '/' . $jdd->getId() . '/' . $metadataId);
-	        $this->MetadataDownloader->saveXmlFile($caMetadataFile, $dbbPublicDirectory . '/' . $jdd->getId() . '/' . $metadataCAId);
+	        $this->MetadataDownloader->saveXmlFile($caMetadataFile, $dbbPublicDirectory . '/' . $jdd->getId() . '/' . $metadataCAId);*/
 	        
 	        /* Generate Certificate */
 	        $certificateFile = $this->CertificateGenerator->generateCertificate($jdd);
 	        
 	        /* Zip files */
-	        $fileNameDBB = $this->DBBGenerator->generateFilePathDBB($jdd);
+	        $fileNameDBB = $this->DBBGenerator->generateFilePathDBB($jdd,$DEE, true);
 	        $parentDir = dirname($fileNameDBB); // dbbPublicDirectory
 	        $archiveName = $parentDir . '/dlb_' . basename($fileNameDBB, '.csv') . '.zip';
 	        try {
@@ -331,18 +331,12 @@ class DBBProcess {
 	        // Delete csv file
 	        @unlink($csvFile);
 	        
-	        /* Send mail to user */
-	        $this->sendDBBNotificationMail($DEE, $submissions);
-	        
-	        /* Send mail to MNHN */
-	        $this->DEEProcess->sendDEENotificationMail($DEE, false);
-	        
 	        /* Add publication informations */
-	        $now = new \DateTime();
+	       /* $now = new \DateTime();
 	        $jdd->setField('publishedAt', $now->format('Y-m-d_H-i-s'));
 	        $jdd->setField('dbbZipFilePath', $archiveName);
 	        $jdd->setField('status', 'published');
-	        $this->em->flush();
+	        $this->em->flush();*/
 	    }
 	}
 	

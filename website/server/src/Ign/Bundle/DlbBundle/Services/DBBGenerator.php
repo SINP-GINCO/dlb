@@ -71,8 +71,8 @@ class DBBGenerator {
 			$this->logger->debug('submission : ' . $submission->getId());
 			$submissionsIds[] = $submission->getId();
 		}
-		//$DEE->setSubmissions($submissionsIds);
-		//$this->em->flush();
+		$DEE->setSubmissions($submissionsIds);
+		$this->em->flush();
 		
 		$model = $jdd->getModel();
 		
@@ -140,7 +140,7 @@ class DBBGenerator {
 		if ($total != 0) {
 			
 			// Opens a file
-			$fileNameDBB = $this->generateFilePathDBB($jdd);
+			$fileNameDBB = $this->generateFilePathDBB($jdd,$DEE);
 			
 			$out = fopen($fileNameDBB, 'w');
 			if (!$out) {
@@ -347,14 +347,21 @@ class DBBGenerator {
 
 	/**
 	 * Create the filepath of the DBB csv file
-	 *
-	 * @param Jdd $jdd        	
+	 * majFiles use for updateFile in case of correction JDD
+	 * @param Jdd $jdd  
+	 * @param DEE  $DEE
+	 * @param majFiles     	
 	 * @return string
 	 */
-	public function generateFilePathDBB(Jdd $jdd) {
+	public function generateFilePathDBB(Jdd $jdd, DEE $DEE, $majFiles = false) {
 		$regionCode = $this->configuration->getConfig('regionCode', 'REGION');
-		$now = new \DateTime();
-		$date = $now->format('Y-m-d_H-i-s');
+		
+		if ($majFiles) {
+		    $date = $DEE->getCreatedAt();
+		} else {
+		    $now = new \DateTime();
+		    $date = $now->format('Y-m-d_H-i-s');
+		}
 		
 		$uuid = $jdd->getField('metadataId', $jdd->getId());
 		
@@ -365,24 +372,5 @@ class DBBGenerator {
 		
 		return $filePath . '/' . $filename;
 	}
-	
-	/**
-	 * Create the filepath of the DBB csv file
-	 *
-	 * @param Jdd $jdd
-	 * @return string
-	 */
-	public function generateFilePathDBBUpdateSensibility(Jdd $jdd,jjj) {
-	    $regionCode = $this->configuration->getConfig('regionCode', 'REGION');
-	    $date = $now->format('Y-m-d_H-i-s');
-	    
-	    $uuid = $jdd->getField('metadataId', $jdd->getId());
-	    
-	    $fileNameWithoutExtension = $regionCode . '_' . $date . '_' . $uuid;
-	    $filePath = $this->configuration->getConfig('dbbPublicDirectory') . '/' . $jdd->getId();
-	    @mkdir($filePath); // create the jdd dir
-	    $filename = $fileNameWithoutExtension . '.csv';
-	    
-	    return $filePath . '/' . $filename;
-	}
+
 }
