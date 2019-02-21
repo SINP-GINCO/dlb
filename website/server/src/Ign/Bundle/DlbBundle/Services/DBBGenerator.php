@@ -54,7 +54,7 @@ class DBBGenerator {
 	 * @return bool
 	 * @throws DEEException
 	 */
-	public function generateDBB(DEE $DEE) {
+	public function generateDBB(DEE $DEE,$majFile = false) {
 		// Configure memory and time limit because the program asks a lot of resources
 		ini_set("memory_limit", $this->configuration->getConfig('memory_limit', '1024M'));
 		ini_set("max_execution_time", 0);
@@ -140,7 +140,11 @@ class DBBGenerator {
 		if ($total != 0) {
 			
 			// Opens a file
-			$fileNameDBB = $this->generateFilePathDBB($jdd,$DEE);
+		    if($majFile) {
+		        $fileNameDBB = $this->generateFilePathDBB($jdd,$DEE,true);
+		    } else {
+			     $fileNameDBB = $this->generateFilePathDBB($jdd,$DEE);
+		    }
 			
 			$out = fopen($fileNameDBB, 'w');
 			if (!$out) {

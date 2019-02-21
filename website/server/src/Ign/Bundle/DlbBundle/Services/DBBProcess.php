@@ -298,7 +298,7 @@ class DBBProcess {
 	        $this->DEEProcess->generateAndSendDEE($DEEId, $messageId, false);
 	        
 	        /* Generate DBB CSV */
-	        $csvFile = $this->DBBGenerator->generateDBB($DEE);
+	        $csvFile = $this->DBBGenerator->generateDBB($DEE, true);
 	        
 	        /* Get metadatas */
 	       /* $dbbPublicDirectory = $this->configuration->getConfig('dbbPublicDirectory');
