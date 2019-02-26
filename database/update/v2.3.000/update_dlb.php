@@ -34,6 +34,8 @@ $paramStr = implode(' ', array_slice($argv, 1));
 try {
 	/* patch code here */
 	// execCustSQLFile("$currentDir/xxx.sql", $config);
+	execCustSQLFile("$currentDir/add_status_fields.sql", $config);
+
 
 
 } catch (Exception $e) {
