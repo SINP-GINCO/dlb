@@ -9,7 +9,7 @@
 /*==============================================================*/
 
 SET client_encoding='UTF8';
-SET search_path TO metadata_work, public;
+SET search_path TO metadata, public;
 
 BEGIN;
 SET CONSTRAINTS ALL DEFERRED;
@@ -231,8 +231,8 @@ INSERT INTO data VALUES ('USER_LOGIN','USER_LOGIN','Utilisateur','Utilisateur',N
 INSERT INTO mode VALUES ('PROVIDER_ID','1',1,'organisme A','organisme A');
 
 -- INSERTION IN TABLE dataset
-INSERT INTO dataset VALUES ('dataset_01','modèle d''import de données brutes de biodiversité','1','modèle d''import de données brutes de biodiversité','IMPORT');
-INSERT INTO dataset VALUES ('dataset_02','modèle de visualisation de données brutes de biodiversité','0','modèle de visualisation de données brutes de biodiversité','QUERY');
+INSERT INTO dataset VALUES ('dataset_01','modèle d''import de données brutes de biodiversité','1','modèle d''import de données brutes de biodiversité','IMPORT','unpublished');
+INSERT INTO dataset VALUES ('dataset_02','modèle de visualisation de données brutes de biodiversité','0','modèle de visualisation de données brutes de biodiversité','QUERY',NULL);
 
 -- INSERTION IN TABLE dynamode
 INSERT INTO dynamode VALUES ('CodeCommuneValue','SELECT insee_com as code, insee_com as label, ''''::text as definition, ''''::text as position FROM referentiels.commune_carto_2017 ORDER BY insee_com');
@@ -292,7 +292,7 @@ INSERT INTO table_schema VALUES ('WEBSITE','WEBSITE','Website','Contains the tab
 INSERT INTO table_schema VALUES ('PUBLIC','PUBLIC','Public','Contains the default PostgreSQL tables and PostGIS functions');
 
 -- INSERTION IN TABLE model
-INSERT INTO model VALUES ('model_01','Données brutes de biodiversité','Données brutes de biodiversité','RAW_DATA',TRUE);
+INSERT INTO model VALUES ('model_01','Données brutes de biodiversité','Données brutes de biodiversité','RAW_DATA',TRUE,'unpublished',NULL);
 
 -- INSERTION IN TABLE table_format
 INSERT INTO table_format VALUES ('table_observation','model_1_observation','RAW_DATA','OGAM_ID_table_observation, PROVIDER_ID, USER_LOGIN','observation','table_dsr_exemple_observation');
@@ -959,7 +959,7 @@ INSERT INTO dataset_forms VALUES ('dataset_02','form_autres');
 
 
 -- INSERTION IN TABLE table_tree
-INSERT INTO table_tree VALUES ('RAW_DATA','table_observation','*',NULL,NULL);
+INSERT INTO table_tree VALUES ('RAW_DATA','table_observation',NULL,NULL,NULL);
 
 
 -- INSERTION IN TABLE translation
