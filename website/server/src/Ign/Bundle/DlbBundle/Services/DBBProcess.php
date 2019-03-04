@@ -132,9 +132,6 @@ class DBBProcess {
 				$this->sendDBBNotificationMail($dee);
 			}
 
-			/* Send mail to MNHN */
-			$this->DEEProcess->sendDEENotificationMail($dee, false);
-
 			// Add publication informations
 			$jdd->setField('status', 'published');
 			$this->em->flush() ;
