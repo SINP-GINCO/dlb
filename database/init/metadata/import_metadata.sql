@@ -332,9 +332,9 @@ INSERT INTO form_field VALUES ('altitudemin','form_localisation','1','1','NUMERI
 INSERT INTO form_field VALUES ('altitudemoyenne','form_localisation','1','1','NUMERIC',3,'0','0',NULL,NULL,NULL);
 INSERT INTO form_field VALUES ('anneerefcommune','form_localisation','1','1','NUMERIC',4,'0','0',NULL,NULL,NULL);
 INSERT INTO form_field VALUES ('anneerefdepartement','form_localisation','1','1','NUMERIC',5,'0','0',NULL,NULL,NULL);
-INSERT INTO form_field VALUES ('cdnom','form_observation','1','1','TAXREF',6,'0','0',NULL,NULL,NULL);
+INSERT INTO form_field VALUES ('cdnom','form_observation','1','1','TEXT',6,'0','0',NULL,NULL,NULL);
 INSERT INTO form_field VALUES ('cdnomcalcule','form_observation','1','1','TAXREF',7,'0','0',NULL,NULL,NULL);
-INSERT INTO form_field VALUES ('cdref','form_observation','1','1','TAXREF',8,'0','0',NULL,NULL,NULL);
+INSERT INTO form_field VALUES ('cdref','form_observation','1','1','TEXT',8,'0','0',NULL,NULL,NULL);
 INSERT INTO form_field VALUES ('cdrefcalcule','form_observation','1','1','TAXREF',9,'0','0',NULL,NULL,NULL);
 INSERT INTO form_field VALUES ('codecommune','form_localisation','1','1','SELECT',10,'0','0',NULL,NULL,NULL);
 INSERT INTO form_field VALUES ('codedepartement','form_localisation','1','1','SELECT',11,'0','0',NULL,NULL,NULL);
@@ -799,6 +799,7 @@ INSERT INTO field_mapping VALUES ('taxostatut','form_observation','taxostatut','
 INSERT INTO field_mapping VALUES ('taxomodif','form_observation','taxomodif','table_observation','FORM');
 INSERT INTO field_mapping VALUES ('taxoalerte','form_observation','taxoalerte','table_observation','FORM');
 INSERT INTO field_mapping VALUES ('USER_LOGIN','form_autres','USER_LOGIN','table_observation','FORM');
+INSERT INTO field_mapping VALUES ('nomvalide','form_observation','nomvalide','table_observation','FORM');
 
 
 -- INSERTION IN TABLE checks

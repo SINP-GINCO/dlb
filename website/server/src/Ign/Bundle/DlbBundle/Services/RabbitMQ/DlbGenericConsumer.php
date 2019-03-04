@@ -34,8 +34,12 @@ class DlbGenericConsumer extends GenericConsumer {
 	protected function onRunning($action, $parameters = null, $message = null) {
 		// -- DLB generation, archive creation and notifications
 		if ($action == 'dbbProcess') {
+			
 			sleep(1); // let the time to the application to update message before starting
-			$this->DBBProcess->generateAndSendDBB($parameters['DEEId'], $message->getId());
+			
+			$dee = $this->em->getRepository('IgnGincoBundle:RawData\DEE')->find($parameters['DEEId']) ;
+			
+			$this->DBBProcess->generateAndSendDBB($dee);
 			if ($message->getStatus() == Message::STATUS_RUNNING) {
 				$message->setStatus(Message::STATUS_COMPLETED);
 			}

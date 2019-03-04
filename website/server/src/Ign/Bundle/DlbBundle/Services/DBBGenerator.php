@@ -54,7 +54,7 @@ class DBBGenerator {
 	 * @return bool
 	 * @throws DEEException
 	 */
-	public function generateDBB(DEE $DEE,$majFile = false) {
+	public function generateDBB(DEE $DEE) {
 		// Configure memory and time limit because the program asks a lot of resources
 		ini_set("memory_limit", $this->configuration->getConfig('memory_limit', '1024M'));
 		ini_set("max_execution_time", 0);
@@ -139,12 +139,7 @@ class DBBGenerator {
 		// -- Export results to a CSV file
 		if ($total != 0) {
 			
-			// Opens a file
-		    if($majFile) {
-		        $fileNameDBB = $this->generateFilePathDBB($jdd,$DEE,true);
-		    } else {
-			     $fileNameDBB = $this->generateFilePathDBB($jdd,$DEE);
-		    }
+			$fileNameDBB = $this->generateFilePathDBB($jdd,$DEE);
 			
 			$out = fopen($fileNameDBB, 'w');
 			if (!$out) {
@@ -351,21 +346,14 @@ class DBBGenerator {
 
 	/**
 	 * Create the filepath of the DBB csv file
-	 * majFiles use for updateFile in case of correction JDD
 	 * @param Jdd $jdd  
-	 * @param DEE  $DEE
-	 * @param majFiles     	
+	 * @param DEE  $DEE  	
 	 * @return string
 	 */
-	public function generateFilePathDBB(Jdd $jdd, DEE $DEE, $majFiles = false) {
+	public function generateFilePathDBB(Jdd $jdd, DEE $DEE) {
 		$regionCode = $this->configuration->getConfig('regionCode', 'REGION');
 		
-		if ($majFiles) {
-		    $date = $DEE->getCreatedAt();
-		} else {
-		    $now = new \DateTime();
-		    $date = $now->format('Y-m-d_H-i-s');
-		}
+		$date = $DEE->getCreatedAt()->format('Y-m-d_H-i-s');
 		
 		$uuid = $jdd->getField('metadataId', $jdd->getId());
 		
