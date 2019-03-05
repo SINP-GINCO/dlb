@@ -71,8 +71,8 @@ class DBBGenerator {
 			$this->logger->debug('submission : ' . $submission->getId());
 			$submissionsIds[] = $submission->getId();
 		}
-		//$DEE->setSubmissions($submissionsIds);
-		//$this->em->flush();
+		$DEE->setSubmissions($submissionsIds);
+		$this->em->flush();
 		
 		$model = $jdd->getModel();
 		
@@ -139,8 +139,7 @@ class DBBGenerator {
 		// -- Export results to a CSV file
 		if ($total != 0) {
 			
-			// Opens a file
-			$fileNameDBB = $this->generateFilePathDBB($jdd);
+			$fileNameDBB = $this->generateFilePathDBB($jdd,$DEE);
 			
 			$out = fopen($fileNameDBB, 'w');
 			if (!$out) {
@@ -347,14 +346,14 @@ class DBBGenerator {
 
 	/**
 	 * Create the filepath of the DBB csv file
-	 *
-	 * @param Jdd $jdd        	
+	 * @param Jdd $jdd  
+	 * @param DEE  $DEE  	
 	 * @return string
 	 */
-	public function generateFilePathDBB(Jdd $jdd) {
+	public function generateFilePathDBB(Jdd $jdd, DEE $DEE) {
 		$regionCode = $this->configuration->getConfig('regionCode', 'REGION');
-		$now = new \DateTime();
-		$date = $now->format('Y-m-d_H-i-s');
+		
+		$date = $DEE->getCreatedAt()->format('Y-m-d_H-i-s');
 		
 		$uuid = $jdd->getField('metadataId', $jdd->getId());
 		
@@ -365,4 +364,5 @@ class DBBGenerator {
 		
 		return $filePath . '/' . $filename;
 	}
+
 }

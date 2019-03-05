@@ -65,3 +65,9 @@ services:
         arguments: ["@logger", "@ginco.configuration_manager", "@doctrine.orm.entity_manager", "@ginco.integration_service", "@ginco.metadata_reader", "@dlb.metadata_tps_reader"]
         tags:
           - { name: monolog.logger, channel: ginco }
+         
+    # Commande pour régénérer les dépots.
+    Ign\Bundle\DlbBundle\Command\DlbRegenerateCommand:
+        autowire: true
+        tags:
+            - { name: 'console.command' }

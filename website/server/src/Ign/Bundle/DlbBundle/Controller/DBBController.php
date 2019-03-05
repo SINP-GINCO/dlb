@@ -54,22 +54,23 @@ class DBBController extends GincoController {
 		$deeProcess = $this->get('ginco.dee_process');
 
 		// Create a line in the DEE table
-		$newDEE = $deeProcess->createDEELine($jdd, $this->getUser(), 'Dépôt Légal de données de Biodiversité');
+		$dee = $this->getDoctrine()->getRepository('IgnGincoBundle:RawData\DEE')->findOneByJdd($jdd) ;
+		if (!$dee) {
+			$dee = $deeProcess->createDEELine($jdd, $this->getUser(), 'Dépôt Légal de données de Biodiversité');
+		}
 
 		// Add information in jddField table
 		$jdd->setField('status', 'generating');
-		$now = new \DateTime();
-		$jdd->setField('publishedAt', $now->format('Y-m-d_H-i-s'));
 		$em->flush();
 
 		// Publish the message to RabbitMQ
 		$messageId = $this->get('old_sound_rabbit_mq.ginco_generic_producer')->publish('dbbProcess', [
-			'DEEId' => $newDEE->getId()
+			'DEEId' => $dee->getId()
 		]);
 		$message = $em->getRepository('IgnGincoBundle:Website\Message')->findOneById($messageId);
 
 		// Attach message id to the DEE (use it for the progress bar)
-		$newDEE->setMessage($message);
+		$dee->setMessage($message);
 		$em->flush();
 
 		return new JsonResponse($this->getStatus($jddId));
@@ -97,9 +98,12 @@ class DBBController extends GincoController {
 		$deeProcess = $this->get('ginco.dee_process');
 
 		// Create a line in the DEE table
-		$newDEE = $deeProcess->createDEELine($jdd, $this->getUser(), 'Dépôt Légal de données de Biodiversité - test');
+		$dee = $this->getDoctrine()->getRepository('IgnGincoBundle:RawData\DEE')->findOneByJdd($jdd) ;
+		if (!$dee) {
+			$dee = $deeProcess->createDEELine($jdd, $this->getUser(), 'Dépôt Légal de données de Biodiversité - test');
+		}
 
-		$dbbProcess->generateAndSendDBB($newDEE->getId());
+		$dbbProcess->generateAndSendDBB($dee);
 
 		return $this->redirect($this->generateUrl('integration_home'));
 	}
@@ -137,11 +141,13 @@ class DBBController extends GincoController {
 		}
 
 		// Create a line in the DEE table
-		$newDEE = $deeProcess->createDEELine($jdd, $this->getUser(), 'Dépôt Légal de données de Biodiversité - test');
+		$dee = $this->getDoctrine()->getRepository('IgnGincoBundle:RawData\DEE')->findOneByJdd($jdd) ;
+		if (!$dee) {
+			$dee = $deeProcess->createDEELine($jdd, $this->getUser(), 'Dépôt Légal de données de Biodiversité - test');
+		}
 
 		// Use DEE entity to generate dbb (attributes are the same)
-		$DEE = $em->getRepository('IgnGincoBundle:RawData\DEE')->findOneByJdd($jddId);
-		$this->get('dlb.dbb_generator')->generateDBB($DEE);
+		$this->get('dlb.dbb_generator')->generateDBB($dee);
 
 		return $this->redirect($this->generateUrl('integration_home'));
 	}
@@ -413,14 +419,14 @@ class DBBController extends GincoController {
 					'status' => 'unpublished'
 				);
 			} else {
-				$createdDateTime = \DateTime::createFromFormat('Y-m-d_H-i-s', $jdd->getField('publishedAt'));
+				$createdDateTime = $jdd->getDees()[0]->getCreatedAt();
 
 				$json['dbb'] = array(
 					'id' => $jdd->getId(),
 					'status' => $jdd->getField('status'),
 					'createdDate' => $createdDateTime->format('d/m/Y'),
 					'createdTime' => $createdDateTime->format('H\hi'),
-					'fullCreated' => $jdd->getField('publishedAt')
+					'fullCreated' => $createdDateTime->format('Y-m-d_H-i-s')
 				);
 
 				if ($jdd->getField('status') == 'generating') {
@@ -446,4 +452,5 @@ class DBBController extends GincoController {
 		}
 		return $json;
 	}
+    
 }

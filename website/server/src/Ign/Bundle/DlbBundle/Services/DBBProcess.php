@@ -102,87 +102,141 @@ class DBBProcess {
 	 *        	$DEEId
 	 * @param null $messageId        	
 	 */
-	public function generateAndSendDBB($DEEId, $messageId = null) {
-		$this->logger->info("GenerateAndSendDBB: " . implode(',', func_get_args()));
+	public function generateAndSendDBB(DEE $dee, $sendMail = true) {
 		
-		// Get all objects and variables
-		$DEE = $this->em->getRepository('IgnGincoBundle:RawData\DEE')->findOneById($DEEId);
-		$jdd = $DEE->getJdd();
+		$message = $dee->getMessage() ;
+		$messageId = $message ? $message->getId() : null ;
+		$this->logger->info("GenerateAndSendDBB: dee_id = {$dee->getId()}, message_id = $messageId");
 		
-		if ($DEE) {
-			// RabbitMQ Message if given
-			$message = ($messageId) ? $this->em->getRepository('IgnGincoBundle:Website\Message')->findOneById($messageId) : null;
-			
-			/* Publish valid submissions */
-			
-			// Get submissions successful in the jdd
-			$submissions = $jdd->getSuccessfulSubmissions();
-			$submissionsIds = array();
-			
-			foreach ($submissions as $submission) {
-				$submissionsIds[] = $submission->getId();
-				try {
-					$this->integration->validateDataSubmission($submission);
-				} catch (\Exception $e) {
-					throw new \Exception("Error during upload: " . $e->getMessage());
-				}
-			}
-			
-			// Add submissions in dee table as they are validated now
-			$DEE->setSubmissions($submissionsIds);
-			$this->em->flush();
-		
-			/* Generate DEE and send notification email to MNHN only */
-			$this->DEEProcess->generateAndSendDEE($DEEId, $messageId, false);
-			
-			/* Generate DBB CSV */
-			$csvFile = $this->DBBGenerator->generateDBB($DEE);
-			
-			/* Get metadatas */
-			$dbbPublicDirectory = $this->configuration->getConfig('dbbPublicDirectory');
-			$metadataId = $jdd->getField('metadataId');
-			$metadataCAId = $jdd->getField('metadataCAId');
-			
-			$jddMetadataFileDownloadURL = $this->configuration->getConfig('jddMetadataFileDownloadServiceURL');
-			$jddCAMetadataFileDownloadURL = str_replace("cadre/jdd", "cadre", $jddMetadataFileDownloadURL);
-			
-			$jddMetadataFile = $jddMetadataFileDownloadURL . $metadataId;
-			$caMetadataFile = $jddCAMetadataFileDownloadURL . $metadataCAId;
-			
-			$this->MetadataDownloader->saveXmlFile($jddMetadataFile, $dbbPublicDirectory . '/' . $jdd->getId() . '/' . $metadataId);
-			$this->MetadataDownloader->saveXmlFile($caMetadataFile, $dbbPublicDirectory . '/' . $jdd->getId() . '/' . $metadataCAId);
-			
-			/* Generate Certificate */
-			$certificateFile = $this->CertificateGenerator->generateCertificate($jdd);
-			
-			/* Zip files */
-			$fileNameDBB = $this->DBBGenerator->generateFilePathDBB($jdd);
-			$parentDir = dirname($fileNameDBB); // dbbPublicDirectory
-			$archiveName = $parentDir . '/dlb_' . basename($fileNameDBB, '.csv') . '.zip';
-			try {
-				chdir($parentDir);
-				system("zip -r $archiveName $csvFile $certificateFile $metadataCAId $metadataId");
-			} catch (\Exception $e) {
-				throw new \Exception("Could not create archive $archiveName:" . $e->getMessage());
-			}
-			
-			// Delete csv file
-			@unlink($csvFile);
-			
-			/* Send mail to user */
-			$this->sendDBBNotificationMail($DEE, $submissions);
-			
-			/* Send mail to MNHN */
-			$this->DEEProcess->sendDEENotificationMail($DEE, false);
+		$jdd = $dee->getJdd();
 
-			/* Add publication informations */
-			$now = new \DateTime();
-			$jdd->setField('publishedAt', $now->format('Y-m-d_H-i-s'));
-			$jdd->setField('dbbZipFilePath', $archiveName);
+		try {
+		
+			$this->generateAndSendDee($dee, $message) ;
+
+			// Generate DBB CSV
+			$csvFile = $this->DBBGenerator->generateDBB($dee);
+
+			// Save metadatas
+			$this->downloadMetadata($dee) ;
+
+			// Generate Certificate 
+			$this->CertificateGenerator->generateCertificate($jdd);
+
+			// Create archive and delete useless csv file.
+			$this->createDBBArchive($dee, $csvFile) ;
+			@unlink($csvFile);
+
+			/* Send mail to user */
+			if ($sendMail) {
+				$this->sendDBBNotificationMail($dee);
+			}
+
+			// Add publication informations
 			$jdd->setField('status', 'published');
-			$this->em->flush();
+			$this->em->flush() ;
+		
+			
+		} catch (\Exception $e) {
+			
+			$this->logger->error($e->getMessage()) ;
+			$message->setStatus(Message::STATUS_ERROR) ;
+			$jdd->setField('status', 'error') ;
+			$this->em->flush() ;
 		}
 	}
+	
+	
+	/**
+	 * Publie les soumissions associées au JDD, génère la DEE et envoie la notification au MNHN
+	 * @param DEE $dee
+	 * @throws \Exception
+	 */
+	private function generateAndSendDee(DEE $dee, Message $message = null) {
+		
+		$messageId = $message ? $message->getId() : null ;
+		
+		$this->logger->info("GenerateAndSendDEE: dee_id = {$dee->getId()}, message_id = $messageId");
+
+		$jdd = $dee->getJdd();
+
+		// Get submissions successful in the jdd and publish them
+		$submissions = $jdd->getSuccessfulSubmissions();
+		$submissionsIds = array();
+
+		foreach ($submissions as $submission) {
+			$submissionsIds[] = $submission->getId();
+			try {
+				$this->integration->validateDataSubmission($submission);
+			} catch (\Exception $e) {
+				throw new \Exception("Error during upload: " . $e->getMessage());
+			}
+		}
+
+		// Add submissions in dee table as they are validated now
+		$dee->setSubmissions($submissionsIds);
+		
+		$this->em->flush();
+
+		// Generate DEE and send notification email to MNHN only
+		$this->DEEProcess->generateAndSendDEE($dee->getId(), $messageId, false);
+	}
+	
+	
+	/**
+	 * Télécharge les fichiers de métadonnées et les stocke.
+	 * @param DEE $dee
+	 */
+	private function downloadMetadata(DEE $dee) {
+		
+		$jdd = $dee->getJdd() ;
+		
+		// Get metadatas
+		$dbbPublicDirectory = $this->configuration->getConfig('dbbPublicDirectory');
+		$metadataId = $jdd->getField('metadataId');
+		$metadataCAId = $jdd->getField('metadataCAId');
+
+		$jddMetadataFileDownloadURL = $this->configuration->getConfig('jddMetadataFileDownloadServiceURL');
+		$jddCAMetadataFileDownloadURL = str_replace("cadre/jdd", "cadre", $jddMetadataFileDownloadURL);
+
+		$jddMetadataFile = $jddMetadataFileDownloadURL . $metadataId;
+		$caMetadataFile = $jddCAMetadataFileDownloadURL . $metadataCAId;
+
+		$this->MetadataDownloader->saveXmlFile($jddMetadataFile, $dbbPublicDirectory . '/' . $jdd->getId() . '/' . $metadataId);
+		$this->MetadataDownloader->saveXmlFile($caMetadataFile, $dbbPublicDirectory . '/' . $jdd->getId() . '/' . $metadataCAId);
+	}
+	
+	
+	/**
+	 * Crée une archive zip avec la DBB, les métadonnées (CA et JDD), et le certificat de dépot.
+	 * @param DEE $dee
+	 * @param type $csvFile
+	 * @throws \Exception
+	 */
+	private function createDBBArchive(DEE $dee, $csvFile) {
+		
+		$jdd = $dee->getJdd() ;
+		
+		$certificateFile = basename($jdd->getField('certificateFilePath')) ;
+		$metadataId = $jdd->getField('metadataId') ;
+		$metadataCAId = $jdd->getField('metadataCAId') ;
+		
+		// Zip files
+		$fileNameDBB = $this->DBBGenerator->generateFilePathDBB($jdd, $dee);
+		$parentDir = dirname($fileNameDBB); // dbbPublicDirectory
+		$archiveName = $parentDir . '/dlb_' . basename($fileNameDBB, '.csv') . '.zip';
+		try {
+			chdir($parentDir);
+			system("zip -r $archiveName $csvFile $certificateFile $metadataCAId $metadataId");
+		} catch (\Exception $e) {
+			throw new \Exception("Could not create archive $archiveName:" . $e->getMessage());
+		}
+		
+		$jdd->setField('dbbZipFilePath', $archiveName);
+		$this->em->flush() ;
+	}
+	
+	
 
 	/**
 	 * Send notification email after creation of the DBB archive:
@@ -191,12 +245,13 @@ class DBBProcess {
 	 * @param DEE $DEE the DEE object
 	 * @param $submissions
 	 */
-	public function sendDBBNotificationMail(DEE $DEE, $submissions) {
+	private function sendDBBNotificationMail(DEE $DEE) {
+		
 		$jdd = $DEE->getJdd();
+		$submissions = $DEE->getJdd()->getSuccessfulSubmissions() ;
 		$user = $DEE->getUser();
 		
 		$submissionFilesNames = array();
-		$submissionRepo = $this->em->getRepository('IgnGincoBundle:RawData\Submission');
 		foreach ($submissions as $submission) {
 			foreach ($submission->getFiles() as $file) {
 				$this->logger->debug('fileName : ' . $file->getFileName());
@@ -239,7 +294,6 @@ class DBBProcess {
 
 			// Delete Jdd Fields created in the process of publication
 			$jdd->removeField('status');
-			$jdd->removeField('publishedAt');
 			$jdd->removeField('dbbZipFilePath');
 			$jdd->removeField('certificateFilePath');
 			$jdd->removeField('dbbFilePath');
@@ -259,4 +313,6 @@ class DBBProcess {
 			}
 		}
 	}
+
+	
 }

@@ -45,8 +45,14 @@ class CertificateGenerator {
 	 * @throws Exception
 	 */
 	public function generateCertificate(Jdd $jdd) {
+		
+		if ($jdd->getDees()->isEmpty()) {
+			return ;
+		}
+		$dee = $jdd->getDees()[0] ;
+		
 		$filePath = $this->configuration->getConfig('dbbPublicDirectory') . '/'. $jdd->getId() . '/';
-		$fileName = 'certificat-de-depot-legal-' . $jdd->getField('publishedAt') . '-' . $jdd->getField('metadataId') . '.pdf';
+		$fileName = 'certificat-de-depot-legal-' . $dee->getCreatedAt()->format('Y-m-d_H-i-s') . '-' . $jdd->getField('metadataId') . '.pdf';
 		
 		// The certificate is generated only once
 		if (!file_exists($fileName)) {
@@ -59,9 +65,6 @@ class CertificateGenerator {
 				'jdd' => $jdd,
 				'jddCAMetadataFileDownloadServiceURL' => $jddCAMetadataFileDownloadServiceURL,
 			));
-
-			// Output the html (for debugging)
-			// file_put_contents($filePath . "certificat" . date("H:i:s").  ".html", $html);
 
 			try {
 				$this->knp_snappy->generateFromHtml($html, $filePath . $fileName, array(
