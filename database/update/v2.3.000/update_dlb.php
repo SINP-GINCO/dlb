@@ -35,6 +35,7 @@ try {
 	/* patch code here */
 	// execCustSQLFile("$currentDir/xxx.sql", $config);
 	execCustSQLFile("$currentDir/add_status_fields.sql", $config);
+	execCustSQLFile("$sprintDir/add_standard.sql", $config);
 
 
 
