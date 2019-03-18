@@ -142,9 +142,7 @@ class JddController extends BaseController {
 			// Do we create a new Jdd or get an existing one ?
 			$createJdd = true;
 			$jddId = $form->get('jdd_id')->getData();
-			$jddWithSameMetadataId =$em->getRepository('IgnGincoBundle:RawData\Jdd')->findByField(array(
-				'metadataId' => $jddId
-			));
+			$jddWithSameMetadataId =$em->getRepository('IgnGincoBundle:RawData\Jdd')->findByMetadataId($jddId);
 			if (count($jddWithSameMetadataId) > 0) {
 				$createJdd = false;
 				$jddId = $jddWithSameMetadataId[0]->getId();
