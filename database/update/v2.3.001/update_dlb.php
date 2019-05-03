@@ -36,6 +36,8 @@ try {
 	// execCustSQLFile("$currentDir/xxx.sql", $config);
 	execCustSQLFile("$currentDir/fix_especes_sensibles.sql", $config);
 	execCustSQLFile("$currentDir/add_defaultvalue_fields.sql", $config);
+	execCustSQLFile("$currentDir/fix_ref_model.sql", $config);
+
 
 } catch (Exception $e) {
 	echo "$currentDir/update_dlb.php\n";
