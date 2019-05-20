@@ -65,6 +65,12 @@ services:
         arguments: ["@logger", "@ginco.configuration_manager", "@doctrine.orm.entity_manager", "@ginco.integration_service", "@ginco.metadata_reader", "@dlb.metadata_tps_reader"]
         tags:
           - { name: monolog.logger, channel: ginco }
+          
+    ginco.query_service:
+        class: Ign\Bundle\DlbBundle\Services\QueryService
+        arguments: ["@doctrine", "@ginco.generic_service" ,"@ginco.configuration_manager", "@logger", "%locale%", "RAW_DATA", "@ginco.manager.generic", "@ginco.repository.mapping.map"]
+        tags:
+          - { name: monolog.logger, channel: ginco }
          
     # Commande pour régénérer les dépots.
     Ign\Bundle\DlbBundle\Command\DlbRegenerateCommand:
