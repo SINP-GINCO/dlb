@@ -37,6 +37,7 @@ try {
 	execCustSQLFile("$currentDir/fix_especes_sensibles.sql", $config);
 	execCustSQLFile("$currentDir/add_defaultvalue_fields.sql", $config);
 	execCustSQLFile("$currentDir/fix_ref_model.sql", $config);
+	execCustSQLFile("$currentDir/add_defaultvalue_tablefield.sql", $config);
 
 
 } catch (Exception $e) {
