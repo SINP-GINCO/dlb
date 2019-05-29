@@ -64,14 +64,4 @@ Comment supprimer un jeu de données ?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Rendez vous sur la documentation à ce sujet :ref:`supprimer_jdd`
 
-2.4. Blocage technique
-----------------------
-
-Une erreur 500 apparaît lors de la création d’un cadre d’acquisition, que faire ?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Si une page indiquant « Erreur 500 » apparaît après avoir cliqué sur [Créer] en bas du formulaire de création d’un cadre d’acquisition sur l’application Métadonnées, le problème peut provenir du champ SIRET renseigné sur demarches-simplifiees.fr. Si le SIRET comporte plus de 14 caractères ou si des espaces ont été intégrés, une erreur 500 s’affiche sur l’application Métadonnées car le champ SIRET est limité à 14 caractères. 
-
-Pour résoudre ce problème, le champ SIRET doit être modifié sur le formulaire de votre dossier demarches-simplifiees.fr et comprendre 14 caractères sans espace. Puis rechargez la page de l’application Métadonnées.
-
-
+.. warning:: Il est conseillé de ne pas supprimer le jeu de données sur l'outil de Métadonnées si ce jeu de données a été importé dans la plateforme Dépôt légal de biodiversité. Cela risquerait de bloquer toutes actions sur la plateforme.

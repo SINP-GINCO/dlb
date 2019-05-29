@@ -54,6 +54,9 @@ Le processus de dépôt légal de données brutes de biodiversité se déroule e
 
   **5.** Transmission de l'url du certificat de dépôt légal dans l’outil demarches-simplifiees.fr pour finaliser le processus.
 
+.. tip:: Pour passer à la deuxième étape vous devez soumettre votre dossier sur l'outil demarches-simplifiees.fr. Votre dossier passera du statut "en brouillon" à "en construction". Celui-ci sera toujours modifiable si besoin.
+
+
 .. image:: ../../images/schema_processus.png
    :scale: 50%
 
@@ -72,25 +75,24 @@ Le compte INPN est utilisé pour se connecter simultanément sur :
 * La plateforme Ginco de Dépôt légal de biodiversité.
 
 
-Profils et droits sur la plateforme de Dépôt légal
--------------------------------------------------- 
+Profils et droits sur la plateforme de Dépôt légal de biodiversité
+------------------------------------------------------------------ 
 
-3 profils de visiteurs existent sur la plateforme :
+Différents profils de visiteurs existent sur la plateforme :
 
 **Le profil Pétitionnaire avec les permissions suivantes :**
 
-* Verser des données
+* Importer ses données
+* Publier ses données
+* Télécharger son certificat de dépôt légal de biodiversité
 * Visualiser les données régionales publiées
 * Exporter les données (au format CSV, GeoJson, kml...)
-* Editer les données 
-* Exporter les jeux de données au format DEE (dépôt légal de ses jeux de données)
-* Publier les données
+* Editer ses données 
 * Gérer ses requêtes privées
+
 
 **Le profil Grand public avec les permissions suivantes :**
 
 * Visualiser les données régionales publiées
 * Exporter les données (au format CSV, GeoJson, kml...)
 * Gérer ses requêtes privées
-
-**Le profil Administrateur qui a tous les droits.**

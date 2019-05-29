@@ -6,14 +6,14 @@ Etape 2 : Décrire les métadonnées du cadre d'acquisition et des jeux de donn�
 1. Présentation globale et règles fonctionnelles de l'application de gestion des métadonnées
 --------------------------------------------------------------------------------------------
 
-L’outil de gestion des métadonnées, à travers l’instauration d’un `standard de métadonnées SINP <http://standards-sinp.mnhn.fr/metadonnees-1-3-8/>`_, a pour objet de définir un **format commun de description des métadonnées attachées aux données naturalistes** en tenant compte des obligations de la directive INSPIRE et des formats de rapportage internationaux. Ce format de métadonnées spécifique est utilisé pour les échanges entre plateformes informatiques du SINP. 
+L’outil de gestion des métadonnées, à travers l’instauration d’un `standard de métadonnées SINP <http://standards-sinp.mnhn.fr/category/standards/metadonnees/>`_, a pour objet de définir un **format commun de description des métadonnées attachées aux données naturalistes** en tenant compte des obligations de la directive INSPIRE et des formats de rapportage internationaux. Ce format de métadonnées spécifique est utilisé pour les échanges entre plateformes informatiques du SINP. 
 
 L’application permet aux pétitionnaires de gérer des cadres d’acquisition de données et des jeux de données, à savoir : 
 
 * Renseigner des fiches de cadres d’acquisition et d’y associer un ou des jeux de données,
 * Modifier et supprimer ces fiches.
 
-.. warning:: Un fichier de données ne peut être déposé sur la plateforme de Dépôt légal de biodiversité sans avoir préalablement déclaré une fiche métadonnée du jeu de données. 
+.. warning:: Un fichier de données ne peut être déposé sur la plateforme de Dépôt légal de biodiversité que si un cadre d'acquisition et un jeu de données ont été décrits au préalable sur l'outil Métadonnées. 
 
 
 2. Concepts et définitions
@@ -55,7 +55,7 @@ Les critères déterminant le périmètre de constitution d’un jeu de données
 
 .. raw:: html
 
-   <video controls src="../../_static/processus_dbb_mtd.mp4" width=100% frameborder="0" allowfullscreen></video>
+   <video controls src="../../_static/processus_dbb_mtd.mp4" width=100% frameborder="0" allowfullscreen></video>  
    
 **1.** Allez sur l’application :mtd_url:`Métadonnées </cadre/dbb/recherche>` et connectez vous avec votre compte INPN.
 
@@ -63,7 +63,7 @@ Les critères déterminant le périmètre de constitution d’un jeu de données
 
 **3.** Complétez le formulaire si besoin et enregistrez le.
 
-.. note:: Le formulaire d’édition du cadre d’acquisition de l’étude est pré-rempli. Certains champs renseignés sur demarches-simplifiees.fr sont récupérés automatiquement par l'application Métadonnées. Vous avez néanmoins la possibilité d'ajouter ou supprimer des informations. Actuellement, les modifications apportées au cadre d’acquisition sur Métadonnées ne sont pas récupérées par demarches-simplifiees.fr. Cependant, cela n’impacte pas la suite du processus.
+.. note:: Le formulaire d’édition du cadre d’acquisition est pré-rempli. Certains champs renseignés sur demarches-simplifiees.fr sont récupérés automatiquement par l'application Métadonnées. Vous avez néanmoins la possibilité d'ajouter ou supprimer des informations. Actuellement, les modifications apportées au cadre d’acquisition sur Métadonnées ne sont pas récupérées par demarches-simplifiees.fr. Cependant, cela n’impacte pas la suite du processus.
 
 **4.** Ajoutez un jeu de données au cadre d’acquisition.
 
@@ -79,7 +79,7 @@ Les critères déterminant le périmètre de constitution d’un jeu de données
 
 .. note:: L’application Métadonnées, tout comme l'application GeoNature et Ginco possède leur propre système d’authentification, qui n’est actuellement pas relié à celui de demarches-simplifiees.fr. Il faut se créer un compte INPN pour se connecter à l’ensemble des applications permettant la saisie et le dépôt des données brutes de biodiversité.
 
-**1.** Accédez à l’application :mtd_url:`Métadonnées </cadre/dbb/recherche>` 
+**1.** Accédez à l’application :mtd_url:`Métadonnées </cadre/dbb/recherche>`. L'accès peut se faire à partir de la page racine du processus de dépôt légal de biodiversité https://depot-legal-biodiversite.naturefrance.fr/
 
 **2.** **Créez un compte INPN** s’il s’agit de votre première connexion ou **authentifiez-vous** à l’aide de l'identifiant personnel et mot de passe de votre compte INPN. 
 
@@ -91,9 +91,9 @@ L’application de métadonnées s'ouvre sur la page de recherche par numéro de
 
 .. image:: ../../images/metadonnees/page_accueil.png
 
-**3.** **Indiquer le numéro de votre dossier** enregistré sur demarches-simplifiees.fr. 
+**3.** **Indiquez le numéro de votre dossier** soumis sur demarches-simplifiees.fr. 
 
-Vous accédez ensuite à la page de création du cadre d'acquisition dans l'application Métadonnées. 
+Vous accédez ensuite à la page de création du cadre d'acquisition sur l'application Métadonnées. 
 
 
 5.2. Le cadre d'acquisition
@@ -105,11 +105,7 @@ Une fois connecté à l'application Métadonnées et indiqué le numéro de doss
 
 **1.** Le formulaire de création du cadre d’acquisition de l’étude est pré-rempli. Certains champs renseignés sur demarches-simplifiees.fr sont récupérés automatiquement par l'application Métadonnées. Vous avez néanmoins la possibilité d'ajouter ou supprimer des informations. Actuellement, les modifications apportées au cadre d’acquisition sur Métadonnées ne sont pas récupérées par demarches-simplifiees.fr. Néanmoins, cela n’impacte pas la suite du processus.
 
-Les informations obligatoires du formulaire doivent être renseignées :  
-
-   * Le libellé du cadre d’acquisition,  
-   * Le volet SINP,
-   * Le nom de l'organisme, le numéro de SIRET de l'organisme, le nom prénom et e-mail du contact principal, et ce pour le maître d’ouvrage, le maître d’œuvre et le financeur du projet.
+Les informations du formulaire marquées par une astérisque doivent être obligatoirement renseignées.   
 
    .. |bouton_ajouter| image:: ../../images/bouton_ajouter.png
                :width: 5 em
@@ -118,7 +114,7 @@ Les informations obligatoires du formulaire doivent être renseignées :
    
 **4.** Enregistrez le formulaire en cliquant sur [Créer].
 
-**Une fois le cadre d’acquisition édité, le pétitionnaire peut ajouter un jeu de donnée afin de poursuivre le processus de dépôt légal**.
+La page d'édition d'un cadre d'acquisition s'actualise. **Le pétitionnaire peut alors ajouter un jeu de donnée afin de poursuivre le processus de dépôt légal**.
 
 .. _modifier_CA:
 
@@ -158,16 +154,13 @@ Pour accéder aux fonctionnalités rattachées à la création et la gestion d�
 
 Création d'un jeu de données
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Vous pouvez accéder à la page de création d'un jeu de données à partir de la page d'édition d'un cadre d'acquisition ou bien :
 
-**1.** Cliquez sur **[Ajouter un jeu de données]** pour accéder à l’écran d’édition d’un jeu de données.
+**1.** Cliquez sur **[Ajouter un jeu de données]** pour accéder à l’écran de création d’un jeu de données.
 
 .. image:: ../../images/metadonnees/jdd_ajout.png
 
-**3.** Renseignez à minima les **informations obligatoires** du formulaire :  
-
-* Le libellé du jeu de données, 
-* Le ou les producteurs du jeu de données,
-* Le ou les fournisseurs du jeu de données,
+**3.** Renseignez à minima les **informations obligatoires** du formulaire.  
 
 **4.** Cliquez sur **[Enregistrer]**
 
@@ -198,6 +191,8 @@ Supprimer un jeu de données
 
 .. warning:: Le créateur de la fiche métadonnée du cadre d’acquisition est le seul à pouvoir supprimer le jeu de données.
 
+.. warning:: Veillez à ne pas supprimer un jeu de données pour lequel des données seraient versées sur la plateforme de Dépôt légal de biodiversité. Contactez l'assistance utilisateur en cas de besoin assistance.depobio@afbiodiversite.fr.
+
 **1.** A partir de la liste des jeux de données associés au cadre d'acquisition, cliquez sur le bouton **[Supprimer]** situé sur la ligne du jeu de données correspondant.
 
 .. image:: ../../images/metadonnees/jdd_icone_supprimer.png
@@ -211,7 +206,7 @@ Le jeu de données est supprimé.
 Verser dans GINCO
 ^^^^^^^^^^^^^^^^^
 
-Cette action permet d’**accéder directement à la plateforme de Dépôt légal** et d’utiliser le jeu de données sélectionné pour l’importer dans la plateforme de Dépôt légal de biodiversité.
+Cette action permet d’**accéder directement à la plateforme de Dépôt légal de biodiversité** et de verser des données pour le jeu de données sélectionné.
 
 Pour ce faire, à partir de la liste des jeux de données associés au cadre d'acquisition, cliquez sur le bouton **[Verser]** situé sur la ligne du jeu de données correspondant.
 

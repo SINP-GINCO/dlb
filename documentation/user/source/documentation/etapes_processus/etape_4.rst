@@ -16,7 +16,9 @@ Etape 4 : Verser les données sur la plateforme de Dépôt légal de biodiversit
    <video controls src="../../_static/processus_dbb_ginco.mp4" width=100% frameborder="0" allowfullscreen></video>
    
    
-**1.** Allez sur la plateforme de Dépôt légal de biodiversité, en cliquant via Métadonnées sur le lien « Verser dans Ginco » |icone_verser| ou directement via :dlb_url:`la plateforme Ginco <>`. 
+**1.** Allez sur la plateforme de Dépôt légal de biodiversité, en cliquant via Métadonnées sur le lien « Verser dans Ginco » ou sur |icone_verser|. 
+
+Vous pouvez également y accéder à partir de la page racine https://depot-legal-biodiversite.naturefrance.fr/ ou directement en cliquant sur le lien suivant de :dlb_url:`la plateforme Ginco <>`. 
 
 **2.** Sélectionnez le jeu de données à importer, puis choisissez le format de fichier à importer (CSV ou SHAPEFILE), le système de référence (SRID) utilisé, et validez.
 
@@ -30,27 +32,26 @@ Etape 4 : Verser les données sur la plateforme de Dépôt légal de biodiversit
 2. Présentation détaillée du processus de versement des données
 ----------------------------------------------------------------
 
-Une fois que le cadre d’acquisition du(des) jeu(x) de données et le(les) jeu(x) de données correspondant(s) au projet indiqué sur demarches-simplifiees.fr sont décrits, les données peuvent être versées dans la plateforme Ginco de Dépôt légal de biodiversité.
+Une fois que le cadre d’acquisition et le(les) jeu(x) de données correspondant(s) au projet déclaré sur demarches-simplifiees.fr sont décrits, les données peuvent être versées dans la plateforme Ginco de Dépôt légal de biodiversité.
 
-Pour y accéder, cliquez :dlb_url:`ici <>`.
-Une fois connecté avec votre identifiant INPN, plusieurs onglets sont visibles.
+Pour y accéder, cliquez :dlb_url:`ici <>`. Une fois connecté avec votre identifiant INPN, plusieurs onglets sont visibles.
 
 .. image:: ../../images/DLB_accueil_connexion.png
 
-2.1. Sélectionner et importer un jeu de données via l'identifiant du dossier de demarches-simplifiees.fr 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+2.1. Sélectionner et importer un jeu de données via votre numéro de dossier demarches-simplifiees.fr 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Sélectionner un jeu de données
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
-.. note:: Il est possible de passer cette étape en cliquant sur [Verser dans GINCO] sur l’application Métadonnées. Cette action permet d’accéder directement à la plateforme et d’utiliser le jeu de données sélectionné pour l’importer.
+.. note:: Il est possible de passer cette étape en cliquant sur l'icône [Verser dans GINCO] |icone_verser| via l’application Métadonnées. Le jeu de données est automatiquement sélectionné sur la plateforme GINCO.
 
 **1.** Cliquez sur [Verser des données] dans la barre de menu.
 
 .. image:: ../../images/DLDBB_creer_jdd.png
 
-**2.** Indiquez le numéro de dossier de demarches-simplifiees.fr et le jeu de données dans lequel vous souhaitez insérer votre fichier de données brutes. 
+**2.** Indiquez le numéro de dossier de demarches-simplifiees.fr et le jeu de données pour lequel vous souhaitez verser des données. 
 
-Si vous souhaitez créer une nouvelle fiche de métadonnée de jeu de données, un lien vers l’application de métadonnées de l’INPN vous est proposé.
+Si vous souhaitez créer une nouvelle fiche de métadonnées de jeu de données, un lien vers l’application de métadonnées de l’INPN vous est proposé.
 
 **3.** Validez le formulaire via le bouton [Verser des données].
 
@@ -60,20 +61,22 @@ Si vous souhaitez créer une nouvelle fiche de métadonnée de jeu de données, 
 Choix du format du fichier à importer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Une fois le choix du jeu de données à importer est fait, vous devez choisir le format sous lequel vous souhaitez l’importer. Deux formats de fichier sont possibles : csv ou shapefile.
+Vous devez ensuite choisir le format sous lequel vous souhaitez importer vos données. Deux formats de fichier sont possibles : csv ou shapefile.
+
+.. warning:: Les fichiers doivent peser moins de 150 Mo.
+
 
 **1.** Choisissez le format en cliquant sur l’onglet correspondant. 
 
 .. image:: ../../images/DLDBB_jdd_format.png
 
 **2.a.** Si vous choisissez de transmettre votre ou vos fichiers en format csv, sélectionnez le fichier, renseignez le système de référence (SRID) de vos données (code EPSG des géométries des observations), puis cliquez sur [Valider].
-Un encart d’informations succinctes situé plus bas présente les principaux systèmes de référence utilisés Les données seront automatiquement converties en WGS84 lors de l’import dans la plateforme
+Les principaux systèmes de référence pouvant être utilisés sont indiqués. Néanmoins, les données seront automatiquement converties en WGS84 lors de l’import dans la plateforme.
 
-.. warning:: Les fichiers doivent peser moins de 150 Mo.
 
-Vous pouvez télécharger un fichier d’exemple selon le format choisi, contenant dans le cas du CSV :
+Vous pouvez télécharger un modèle de fichier attendu, contenant dans le cas du CSV :
 
-* Une ligne d’en-tête avec les noms des champs définis dans la configuration du fichier d’import,
+* Une ligne d’en-tête avec l'intitulé des champs attendus,
 * Une ligne commentée indiquant leur caractère obligatoire (signalé par une étoile), et le format des dates.
 
 **2.b.** Si vous choisissez de transmettre votre ou vos fichiers en format shapefile, sélectionnez le fichier, puis cliquez sur [Valider].
@@ -101,10 +104,12 @@ Une fois le choix du format de fichier effectué, les informations nécessaires 
 
 **3.** Dans le cas où l'état du fichier importé est |etat_error|, un rapport d'erreur est disponible et accessible dans la colonne [Action] ; ce rapport d'erreur liste les erreurs rencontrées lors des différentes phases de contrôles et d’import, pour vous aider à corriger le fichier versé. 
 
+.. image:: ../../images/jdd_rapport_erreur.png
+
 .. |ajout_fichier| image:: ../../images/bouton_ajouter_fichier.png
                :width: 8 em
                
-Après avoir chargé ce premier fichier et **avant de procéder au dépôt définitif de vos données** il est possible d’ajouter d’autres fichiers à ce jeu de données via la page de gestion de vos jeux de données ainsi que la page de gestion de tous les jeux de données, en cliquant sur |ajout_fichier|
+Après avoir chargé ce premier fichier et **avant de procéder au dépôt définitif de vos données** il est possible d’ajouter d’autres fichiers à ce jeu de données. Pour ajouter un fichier cliquez sur |ajout_fichier| ou retournez sur la page "Verser des données".
 
 
 
@@ -245,6 +250,8 @@ Lorsque vous êtes authentifié sur la plateforme, cliquez dans la barre de menu
 
 Cette page de gestion des jeux de données liste l’ensemble de vos jeux de données ainsi que leurs actions associées.
 
+.. image:: ../../images/DLDBB_mes_jdd.png
+
 Un tableau regroupe les jeux de données existants en indiquant leur titre et leur identifiant de métadonnées attribué automatiquement par l'application. Au sein d’un jeu de données, ce tableau liste les fichiers de données qui ont été soumis à l’application. Pour chaque soumission, on visualise :
 
 * le nom du fichier
@@ -254,56 +261,61 @@ Un tableau regroupe les jeux de données existants en indiquant leur titre et le
 Actions réalisables sur un jeu de données
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Visualiser la page de détail d’un jeu de données**
-
-Il est possible de visualiser le détail d’un jeu de données en cliquant sur le titre du jeu de données.
-
-La page détaillant un jeu de données est composée de deux parties.
-
-**1.**	Des informations concernant la métadonnée associée au jeu de données. Il est notamment possible d’y télécharger la fiche de métadonnée.
-
-**2.**	Des informations concernant les versements effectuées dans le jeu de données.
-
-Un lien permet d’ajouter un nouveau fichier au jeu de données en cours de visualisation.
-
-Il est possible de mettre à jour la fiche de métadonnée et les informations la concernant via le bouton “Mettre à jour les métadonnées depuis l’INPN”.
-
-Enfin, si le jeu de données ne comporte aucun versement il est possible de le supprimer.
-
 **Ajouter un fichier au jeu de données**
 
 Pour chaque jeu de données importé il est possible de lui associer plusieurs fichiers. Pour cela cliquez sur |ajout_fichier| dans la colonne **[Fichiers]** du tableau.
-Vous serez alors redirigez vers la page d'ajout de fichier et de chargement des données.
+Vous serez alors redirigé vers la page de versement des données.
+
+**Supprimer un fichier**
+
+Les fichiers importés peuvent être supprimés tant que le dépôt du jeu de données n'a pas été réalisé.
+
+Pour supprimer un fichier cliquez sur la croix située à gauche du fichier. 
+
+.. image:: ../../images/DLDBB_supprimer_fichier.png
 
 
 **Supprimer un jeu de données**
 
 La suppression d'un jeu de données n’est possible que si le jeu de données n'a pas été déposé. 
 
-Pour supprimer un jeu de données il est nécessaire de supprimer tous les fichiers qui y ont été transférés puis de supprimer le jeu de données.
+Pour supprimer un jeu de données il est nécessaire de supprimer tous les fichiers qui y ont été transférés puis de supprimer le jeu de données en cliquant sur la croix située à gauche du numéro de dossier.
+
+.. image:: ../../images/DLDBB_supprimer_jdd.png
+
 
 **Télécharger un rapport**
  
-* **Le rapport d'erruer** est liste les erreurs rencontrées lors du transfère de fichier.
-* **Le rapport de sensibilité** est un fichier CSV listant les données sensibles du jeu de données (le calcul de la sensibilité fait partie des traitements réalisés par l’application lors de l’import). Ce rapport est téléchargeable seulement si le statut de la soumission est OK.
-* **Le rapport des identifiants SINP** (identifiant permanent) est un fichier CSV listant les identifiants SINP attribués aux données versés. L’attribution de l’identifiant SINP est réalisé par l’application lorsque le champ du fichier est vide à l’import. Ce rapport est téléchargeable seulement si le statut de la soumission est |etat_ok|.
+* **Le rapport d'erreur** liste les erreurs rencontrées lors de l'import de votre fichier CSV ou SHAPE.
+* **Le rapport de sensibilité** est un fichier CSV listant les données sensibles du jeu de données (le calcul de la sensibilité fait partie des traitements automatiques réalisés par l’application lors de l’import). Ce rapport est téléchargeable seulement si l'import est |etat_ok|.
+* **Le rapport des identifiants SINP** est un fichier CSV listant les identifiants permanents attribués automatiquement par l'application aux données versées. Cet identifiant est attribué automatiquement lorsque le fichier importé ne contient pas d'identifiant au format UUID. Ce rapport est téléchargeable seulement si le statut de la soumission est |etat_ok|.
 
 
 Procéder au Dépôt légal des jeux de données
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Lorsqu’un jeu de données a été créé dans la plateforme, et qu'au moins un fichier versés dans ce jeu est validé, le déposant peut procéder au dépôt légal du jeu de données. 
+Lorsqu’un jeu de données a été créé et qu'au moins un fichier est validé, l'utilisateur peut procéder au dépôt légal du jeu de données. 
 
-.. warning:: Le dépôt légal d’un jeu de données est définitif ! Une fois qu’un jeu de données a fait l’objet d’un dépôt légal, ce jeu est clos et le déposant ne peut pas annuler son action.
+.. tip:: Pour déposer le jeu de données, celui-ci doit contenir au moins un fichier avec des données, et aucun fichier ne doit contenir d'erreur.
 
 .. |depot_donnees| image:: ../../images/deposer_donnees.png
                :width: 2 em
                
 Pour procéder au dépôt légal d’un jeu de données, il faut cliquer sur le bouton “Déposer les données” dans la colonne “Dépôt légal” matérialisé par |depot_donnees|.
 
-Une fenêtre de confirmation valide le processus de dépôt légal. 
+.. image:: ../../images/DLDBB_deposer_jdd.png
 
-Après validation du dépôt légal, une barre de progression indique l’avancée du processus.
+.. warning:: Le dépôt légal d’un jeu de données est définitif ! Une fois qu’un jeu de données a fait l’objet d’un dépôt légal, ce jeu est clos et le déposant ne peut pas annuler son action.
 
 Quand le processus est terminé, plusieurs fichiers sont disponibles en téléchargement. 
+
+.. image:: ../../images/DLDBB_pj_depot.png
+
+
+**Visualiser la page de détail du dossier**
+
+Il est possible de visualiser l'ensemble des jeux de données rattachés à votre dossier. Pour accéder à cette page cliquez sur le numéro de dossier lorsque vous vous situez sur la page "Gérer mes jeux de données".
+
+.. image:: ../../images/DLDBB_detail_dossier.png
+
 

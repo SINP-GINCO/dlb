@@ -11,8 +11,6 @@ Où trouver un modèle de fichier CSV constitué des champs requis pour le tél�
 
 **En amont du processus de versement des données** :
 
-Accédez à l'outil de :mtd_url:`gestion de métadonnées INPN <>`. 
-
 Un modèle de fichier CSV au format attendu est téléchargeable sur le site http://www.naturefrance.fr/reglementation/depot-legal-de-donnees-brutes-de-biodiversite/ressource dans la partie intitulée "Standard technique".
 
 Il s’agit d’un fichier vide. La première ligne du fichier est composée de tous les champs du standard de dépôt légal de biodiversité. Un astérisque sur la deuxième ligne indique les champs obligatoires. Sur cette deuxième ligne sont indiqués également les formats attendus pour les types de champ DATE et HEURE. 
@@ -41,8 +39,6 @@ Pour plus d'information sur les exigences attendues sur le format des fichiers e
 
 Dans quel format de fichier peut-on importer des données dans la plateforme ? 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Accédez à la :dlb_url:`plateforme Ginco de Dépôt légal de biodiversité <>`.
 
 Les données doivent être importées à partir d’un fichier CSV ou Shapefile. 
 
