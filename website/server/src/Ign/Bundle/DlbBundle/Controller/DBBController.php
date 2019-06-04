@@ -195,12 +195,12 @@ class DBBController extends GincoController {
 	 *
 	 * @param
 	 *        	$jddId
-	 * @return BinaryFileResponse @Route("/dlb-download/{jddId}/download-dbb", name = "download_dbb", requirements={"jddId": "\d+"})
+	 * @return BinaryFileResponse @Route("/dlb-download/{jddId}/download-dbb", name = "download_dbb")
 	 */
 	public function downloadDbb($jddId) {
 		
 		$em = $this->get('doctrine.orm.entity_manager');
-		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
+		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneByMetadataId($jddId);
 		
 		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
 		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->isGranted('GENERATE_DEE', $jdd)) {
@@ -217,12 +217,12 @@ class DBBController extends GincoController {
 	 *
 	 * @param
 	 *        	$jddId
-	 * @return BinaryFileResponse @Route("/dlb-download/{jddId}/download-certificate", name = "download_certificate", requirements={"jddId": "\d+"})
+	 * @return BinaryFileResponse @Route("/dlb-download/{jddId}/download-certificate", name = "download_certificate")
 	 */
 	public function downloadCertificate($jddId) {
 				
 		$em = $this->get('doctrine.orm.entity_manager');
-		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
+		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneByMetadataId($jddId);
 		
 		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
 		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->isGranted('GENERATE_DEE', $jdd)) {
@@ -240,12 +240,12 @@ class DBBController extends GincoController {
 	 *
 	 * @param
 	 *        	$jddId
-	 * @return BinaryFileResponse @Route("/dlb-download/{jddId}/download-mtdca", name = "download_mtdca", requirements={"jddId": "\d+"})
+	 * @return BinaryFileResponse @Route("/dlb-download/{jddId}/download-mtdca", name = "download_mtdca")
 	 */
 	public function downloadMtdCA($jddId) {
 		
 		$em = $this->get('doctrine.orm.entity_manager');
-		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
+		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneByMetadataId($jddId);
 		
 		// Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
 		if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->isGranted('GENERATE_DEE', $jdd)) {
@@ -266,12 +266,12 @@ class DBBController extends GincoController {
 	 *
 	 * @param
 	 *        	$jddId
-	 * @return BinaryFileResponse @Route("/dlb-download/{jddId}/download-mtdjdd", name = "download_mtdjdd", requirements={"jddId": "\d+"})
+	 * @return BinaryFileResponse @Route("/dlb-download/{jddId}/download-mtdjdd", name = "download_mtdjdd")
 	 */
 	public function downloadMtdJdd($jddId) {
 	    
 	    $em = $this->get('doctrine.orm.entity_manager');
-	    $jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
+	    $jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneByMetadataId($jddId);
 	    
 	    // Checks rights as non authentificated user has VIEW_PUBLISHED_DATASETS permission
 	    if (!$this->getUser()->isAllowed('VIEW_PUBLISHED_DATASETS') && !$this->isGranted('GENERATE_DEE', $jdd)) {
@@ -291,12 +291,12 @@ class DBBController extends GincoController {
 	 *
 	 * @param DEE $DEE
 	 * @return BinaryFileResponse
-	 * @throws DEEException @Route("/dlb/{jddId}/download-dee-dlb", name = "download_dee_dlb", requirements={"jddId": "\d+"})
+	 * @throws DEEException @Route("/dlb/{jddId}/download-dee-dlb", name = "download_dee_dlb")
 	 */
 	public function downloadDEE($jddId) {
 		$em = $this->get('doctrine.orm.entity_manager');
-		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneById($jddId);
-		$DEE = $em->getRepository('IgnGincoBundle:RawData\DEE')->findOneByJdd($jddId);
+		$jdd = $em->getRepository('IgnGincoBundle:RawData\Jdd')->findOneByMetadataId($jddId);
+		$DEE = $em->getRepository('IgnGincoBundle:RawData\DEE')->findOneByJdd($jdd->getId());
 
 		// Check permissions on a per-jdd basis if necessary
 		if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {

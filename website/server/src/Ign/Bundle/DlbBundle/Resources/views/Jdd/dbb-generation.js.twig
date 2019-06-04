@@ -254,29 +254,29 @@ function updateDBBContent(jddId) {
     if (dbbStatus == 'published') {
         var reports = '';
 
-        var href = "{{ path('download_dbb', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
+        var href = "{{ path('download_dbb', {'jddId': '0'})}}".replace('0', dbbDiv.data('jdd-metadata-id'));
         // Link to download DBB CSV zipped
         reports += "<a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.CSV'|trans }}' href='" + href + "'> " +
                    "<span class='glyphicon glyphicon-leaf' aria-hidden='true'></span></a><br/>";
 
         // Link to download certificate
-        var href = "{{ path('download_certificate', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
+        var href = "{{ path('download_certificate', {'jddId': '0'})}}".replace('0', dbbDiv.data('jdd-metadata-id'));
         reports += "<a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.certificate'|trans }}' href='" + href + "'> " +
                 "<span class='glyphicon glyphicon-bookmark' aria-hidden='true'></span></a><br/>";
 
         // Link to download XML MTD CA
-        var href = "{{ path('download_mtdca', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
+        var href = "{{ path('download_mtdca', {'jddId': '0'})}}".replace('0', dbbDiv.data('jdd-metadata-id'));
         reports += "<a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.mtdca'|trans }}' href='" + href + "'> " +
                 "<span class='glyphicon glyphicon-unchecked' aria-hidden='true'></span></a><br/>";
 
         // Link to download XML MTD JDD
-        var href = "{{ path('download_mtdjdd', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
+        var href = "{{ path('download_mtdjdd', {'jddId': '0'})}}".replace('0', dbbDiv.data('jdd-metadata-id'));
         reports += "<a role='button' class='btn btn-xs btn-primary' title='{{ 'DBB.download.mtd'|trans }}' href='" + href + "'> " +
                 "<span class='glyphicon glyphicon-align-justify' aria-hidden='true'></span></a><br/>";
 
         // Link to download DEE zipped, but check for permissions before
         if ( permissionGenerateDBB  ) {
-        	var href = "{{ path('download_dee_dlb', {'jddId': '0'})}}".replace('0', dbbDiv.data('dbb-id'));
+        	var href = "{{ path('download_dee_dlb', {'jddId': '0'})}}".replace('0', dbbDiv.data('jdd-metadata-id'));
         	reports += "<a role='button' class='btn btn-xs btn-primary' title='{{ 'DEE.download'|trans }}' href='" + href + "'> " +
         	        "<span class='glyphicon glyphicon-tree-deciduous' aria-hidden='true'></span></a><br/>";
         }
