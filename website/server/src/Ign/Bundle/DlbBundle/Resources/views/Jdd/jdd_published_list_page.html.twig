@@ -127,7 +127,7 @@
                 {# DBB Column - Empty / filled by Ajax #}
                 {% set permToGenerateDEE = is_granted('GENERATE_DEE', jdd) %}
                 <td>
-                    <div class="dbb" data-jdd-id="{{ jdd.id }}" data-perm-generate="{{ permToGenerateDEE ? 1 : 0 }}">
+                    <div class="dbb" data-jdd-id="{{ jdd.id }}" data-jdd-metadata-id="{{ jdd.field('metadataId') }}" data-perm-generate="{{ permToGenerateDEE ? 1 : 0 }}">
                         <div class="dbb-state">
                             <div class="progress-label hidden"></div>
                             <div class="hidden">
@@ -143,7 +143,7 @@
                 </td>
                 {# Action to generate DEE; data-can-generate express the permission to generate and dowload DEE. See other reports is still possible #}
                  <td>
-                    <div class="dbb" data-jdd-id="{{ jdd.id }}" data-perm-generate="{{ permToGenerateDEE ? 1 : 0 }}">
+                    <div class="dbb" data-jdd-id="{{ jdd.id }}" data-jdd-metadata-id="{{ jdd.field('metadataId') }}" data-perm-generate="{{ permToGenerateDEE ? 1 : 0 }}">
                         <div class="dbb-actions text-center"></div>
                     </div>
                 </td>
