@@ -1,1 +1,3 @@
+id;name;description;schema_code;is_ref;status;created_at;standard
 model_01;Données brutes de biodiversité;Données brutes de biodiversité;RAW_DATA;TRUE;unpublished;;occtax
+model_1000;Occ_Habitat_DSR_1.0;Implémentation du standard "Occurences d'habitats" v1.0;RAW_DATA;TRUE;unpublished;;habitat

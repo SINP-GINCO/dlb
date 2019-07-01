@@ -34,7 +34,7 @@ $paramStr = implode(' ', array_slice($argv, 1));
 try {
 	/* patch code here */
 	// execCustSQLFile("$currentDir/xxx.sql", $config);
-
+	execCustSQLFile("$sprintDir/add_standard_habitat.sql", $config);
 
 } catch (Exception $e) {
 	echo "$currentDir/update_dlb.php\n";

@@ -1,1 +1,4 @@
-file_dbb;CSV;file_dbb;0;fichier de données brutes de biodiversité;fichier de données brutes de biodiversité
+format;file_extension;file_type;position;label;definition
+file_dbb;CSV;file_dbb;0;fichier de données brutes de biodiversité;fichier de données brutes de biodiversité
+file_station;CSV;file_station;0;dsr_exemple_station;fichier_dsr_exemple_station
+file_habitat;CSV;file_habitat;1;dsr_exemple_habitat;fichier_dsr_exemple_habitat

@@ -66,6 +66,7 @@ function writeInsertFromCSV($csvFilePath, $sqlFile, $db_con, $schema) {
 	
 	// insert command are written now
 	fwrite($sqlFile, "\n-- INSERTION IN TABLE " . $tableName . "\n");
+	$columns = implode(',', fgetcsv($csvFile, 0, ';')) ;
 	while (($fields = fgetcsv($csvFile, 0, ';')) !== false) {
 		// empty csv values are always translate to NULL
 		for ($i = 0; $i < count($fields); $i ++) {
@@ -79,7 +80,7 @@ function writeInsertFromCSV($csvFilePath, $sqlFile, $db_con, $schema) {
 			}
 		}
 		$values = implode(',', $fields);
-		fwrite($sqlFile, 'INSERT INTO ' . $tableName . ' VALUES (' . $values . ');' . "\n");
+		fwrite($sqlFile, "INSERT INTO $tableName($columns) VALUES ($values);" . "\n");
 	}
 	fclose($csvFile);
 }
