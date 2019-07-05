@@ -260,7 +260,7 @@ INSERT INTO data(data,unit,label,definition,comment) VALUES ('techniquecollecte'
 INSERT INTO data(data,unit,label,definition,comment) VALUES ('recouvrement','Decimal','recouvrement','Pourcentage de recouvrement de l''habitat par rapport à la station.',NULL);
 INSERT INTO data(data,unit,label,definition,comment) VALUES ('abondancehabitat','AbondanceHabitatValue','abondanceHabitat','Abondance relative de l''habitat par rapport à la station.',NULL);
 INSERT INTO data(data,unit,label,definition,comment) VALUES ('precisiontechnique','CharacterString','precisionTechnique','Précisions sur la technique de collecte quand techniqueCollecte prend la valeur 10.',NULL);
-INSERT INTO data(data,unit,label,definition,comment) VALUES ('releveespeces','CharacterString','relevesEspeces','Identifiant d''un regroupement au sein du standard Occurences de taxons du SINP.',NULL);
+INSERT INTO data(data,unit,label,definition,comment) VALUES ('releveespeces','CharacterString','releveEspeces','Identifiant d''un regroupement au sein du standard Occurences de taxons du SINP.',NULL);
 INSERT INTO data(data,unit,label,definition,comment) VALUES ('relevephyto','CharacterString','relevePhyto','Identifiant d''un relevé phytosociologique de l''extension relevés phytosociologiques du standard occurrences de taxons.',NULL);
 INSERT INTO data(data,unit,label,definition,comment) VALUES ('sensibilitehab','NiveauSensiValue','sensibiliteHab','Sensibilité de l''habitat selon le producteur.',NULL);
 INSERT INTO data(data,unit,label,definition,comment) VALUES ('echellenumerisation','CharacterString','echelleNumerisation','Echelle de carte à laquelle la numérisation de l''information géographique a été effectuée.',NULL);
@@ -568,7 +568,7 @@ INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VA
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('precisiontechnique','file_habitat','0',NULL,'precisionTechnique',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('preuvenumerique','file_habitat','0',NULL,'preuveNumerique',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('recouvrement','file_habitat','0',NULL,'recouvrement',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('releveespeces','file_habitat','0',NULL,'relevesEspeces',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('releveespeces','file_habitat','0',NULL,'releveEspeces',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('relevephyto','file_habitat','0',NULL,'relevePhyto',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('sensibilitehab','file_habitat','0',NULL,'sensibiliteHab',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('typedeterm','file_habitat','0',NULL,'typeDeterm',NULL);
