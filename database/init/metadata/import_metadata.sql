@@ -264,6 +264,7 @@ INSERT INTO data(data,unit,label,definition,comment) VALUES ('releveespeces','Ch
 INSERT INTO data(data,unit,label,definition,comment) VALUES ('relevephyto','CharacterString','relevePhyto','Identifiant d''un relevé phytosociologique de l''extension relevés phytosociologiques du standard occurrences de taxons.',NULL);
 INSERT INTO data(data,unit,label,definition,comment) VALUES ('sensibilitehab','NiveauSensiValue','sensibiliteHab','Sensibilité de l''habitat selon le producteur.',NULL);
 INSERT INTO data(data,unit,label,definition,comment) VALUES ('echellenumerisation','CharacterString','echelleNumerisation','Echelle de carte à laquelle la numérisation de l''information géographique a été effectuée.',NULL);
+INSERT INTO data(data,unit,label,definition,comment) VALUES ('clestation','CharacterString','cleStation','Identifiant dans la soumission faisant le lien entre station et habitat.',NULL);
 
 -- INSERTION IN TABLE mode
 INSERT INTO mode(unit,code,position,label,definition) VALUES ('PROVIDER_ID','1',1,'organisme A','organisme A');
@@ -566,45 +567,46 @@ INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VA
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('determinateur','file_habitat','0',NULL,'determinateur',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('identifiantorigine','file_habitat','0',NULL,'identifiantOrigine',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('precisiontechnique','file_habitat','0',NULL,'precisionTechnique',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('preuvenumerique','file_habitat','0',NULL,'preuveNumerique',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('preuvenumerique','file_habitat','0',NULL,'urlPreuve',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('recouvrement','file_habitat','0',NULL,'recouvrement',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('releveespeces','file_habitat','0',NULL,'releveEspeces',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('relevephyto','file_habitat','0',NULL,'relevePhyto',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('sensibilitehab','file_habitat','0',NULL,'sensibiliteHab',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('typedeterm','file_habitat','0',NULL,'typeDeterm',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('identifianthabsinp','file_habitat','1',NULL,'identifiantHabSINP',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('identifianthabsinp','file_habitat','0',NULL,'idHabSINP',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('nomcite','file_habitat','1',NULL,'nomCite',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('techniquecollecte','file_habitat','1',NULL,'techniqueCollecte',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('identifiantstasinp','file_habitat','1',NULL,'identifiantStaSINP',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('clestation','file_habitat','1',NULL,'cleStation',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('acidite','file_station','0',NULL,'acidite',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('altitudemax','file_station','0',NULL,'altitudeMax',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('altitudemin','file_station','0',NULL,'altitudeMin',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('altitudemoyenne','file_station','0',NULL,'altitudeMoyenne',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('commentaire','file_station','0',NULL,'commentaire',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('dateimprecise','file_station','0',NULL,'dateImprecise',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('echellenumerisation','file_station','0',NULL,'echelleNumerisation',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('estcomplexehabitats','file_station','0',NULL,'estComplexeHabitats',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('altitudemax','file_station','0',NULL,'altMax',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('altitudemin','file_station','0',NULL,'altMin',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('altitudemoyenne','file_station','0',NULL,'altMoy',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('commentaire','file_station','0',NULL,'comment',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('dateimprecise','file_station','0',NULL,'dateImprec',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('echellenumerisation','file_station','0',NULL,'echelleNum',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('estcomplexehabitats','file_station','0',NULL,'isComplex',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('exposition','file_station','0',NULL,'exposition',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('geologie','file_station','0',NULL,'geologie',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('geometrie','file_station','0',NULL,'geometrie',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('identifiantoriginestation','file_station','0',NULL,'identifiantOrigineStation',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('methodecalculsurface','file_station','0',NULL,'methodeCalculSurface',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('natureobjetgeo','file_station','0',NULL,'natureObjetGeo',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('geometrie','file_station','0',NULL,'wkt',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('identifiantoriginestation','file_station','0',NULL,'idOrigSta',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('methodecalculsurface','file_station','0',NULL,'methCalcSu',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('natureobjetgeo','file_station','0',NULL,'natObjGeo',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('nomstation','file_station','0',NULL,'nomStation',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('precisiongeometrie','file_station','0',NULL,'precisionGeometrie',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('profondeurmax','file_station','0',NULL,'profondeurMax',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('profondeurmin','file_station','0',NULL,'profondeurMin',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('profondeurmoyenne','file_station','0',NULL,'profondeurMoyenne',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('referencebiblio','file_station','0',NULL,'referenceBiblio',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('precisiongeometrie','file_station','0',NULL,'precisGeom',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('profondeurmax','file_station','0',NULL,'profMax',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('profondeurmin','file_station','0',NULL,'profMin',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('profondeurmoyenne','file_station','0',NULL,'profMoy',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('referencebiblio','file_station','0',NULL,'refBiblio',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('surface','file_station','0',NULL,'surface',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('typesol','file_station','0',NULL,'typeSol',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('usage','file_station','0',NULL,'usage',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('dspublique','file_station','1',NULL,'dSPublique',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('identifiantstasinp','file_station','1',NULL,'identifiantStaSINP',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('jddmetadonneedeeid','file_station','1',NULL,'jddMetadonneeDEEId',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('jourdatedebut','file_station','1','yyyy-MM-dd','jourDateDebut',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('jourdatefin','file_station','1','yyyy-MM-dd','jourDateFin',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('observateur','file_station','1',NULL,'observateur',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('identifiantstasinp','file_station','0',NULL,'idStaSINP',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('jddmetadonneedeeid','file_station','1',NULL,'idMTD',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('jourdatedebut','file_station','1','yyyy-MM-dd','dateDebut',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('jourdatefin','file_station','1','yyyy-MM-dd','dateFin',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('observateur','file_station','1',NULL,'observer',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('clestation','file_station','1',NULL,'cleStation',' ');
 
 -- INSERTION IN TABLE table_field
 INSERT INTO table_field VALUES ('SUBMISSION_ID','table_observation','submission_id','1','0','0','0',1,NULL,NULL);
@@ -919,6 +921,7 @@ INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) 
 INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) VALUES ('identifianthabsinp','file_habitat','identifianthabsinp','table_habitat','FILE');
 INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) VALUES ('nomcite','file_habitat','nomcite','table_habitat','FILE');
 INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) VALUES ('techniquecollecte','file_habitat','techniquecollecte','table_habitat','FILE');
+INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) VALUES ('clestation','file_habitat','clestation','table_habitat','FILE');
 INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) VALUES ('acidite','file_station','acidite','table_station','FILE');
 INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) VALUES ('altitudemax','file_station','altitudemax','table_station','FILE');
 INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) VALUES ('altitudemin','file_station','altitudemin','table_station','FILE');
@@ -948,6 +951,7 @@ INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) 
 INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) VALUES ('jourdatedebut','file_station','jourdatedebut','table_station','FILE');
 INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) VALUES ('jourdatefin','file_station','jourdatefin','table_station','FILE');
 INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) VALUES ('observateur','file_station','observateur','table_station','FILE');
+INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) VALUES ('clestation','file_station','clestation','table_station','FILE ');
 
 
 -- INSERTION IN TABLE checks
@@ -1116,7 +1120,7 @@ INSERT INTO dataset_forms(dataset_id,format) VALUES ('dataset_02','form_autres')
 -- INSERTION IN TABLE table_tree
 INSERT INTO table_tree(schema_code,child_table,parent_table,join_key,comment) VALUES ('RAW_DATA','table_observation',NULL,NULL,NULL);
 INSERT INTO table_tree(schema_code,child_table,parent_table,join_key,comment) VALUES ('RAW_DATA','table_station',NULL,NULL,NULL);
-INSERT INTO table_tree(schema_code,child_table,parent_table,join_key,comment) VALUES ('RAW_DATA','table_habitat','table_station','identifiantstasinp',NULL);
+INSERT INTO table_tree(schema_code,child_table,parent_table,join_key,comment) VALUES ('RAW_DATA','table_habitat','table_station','clestation,SUBMISSION_ID',NULL);
 
 
 -- INSERTION IN TABLE translation
