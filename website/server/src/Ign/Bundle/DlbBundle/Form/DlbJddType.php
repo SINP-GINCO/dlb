@@ -2,9 +2,10 @@
 namespace Ign\Bundle\DlbBundle\Form;
 
 use Doctrine\ORM\EntityRepository;
+
 use Ign\Bundle\GincoBundle\Entity\RawData\Jdd;
-use Ign\Bundle\GincoBundle\Entity\RawData\DEE;
-use Ign\Bundle\GincoBundle\Entity\Website\User;
+use Ign\Bundle\GincoBundle\Entity\Metadata\Model;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormEvents;
@@ -60,11 +61,13 @@ class DlbJddType extends AbstractType {
 			// Select Models which have an Import Dataset, ie a dataset with at least one FileFormat
 			'query_builder' => function (EntityRepository $er) {
 				return $er->createQueryBuilder('m')
-					->leftJoin('m.datasets', 'd')
-					->where('d.id IS NOT NULL')
-					->leftJoin('d.files', 'f')
-					->where('f.format IS NOT NULL')
-					->orderBy('m.name', 'ASC');
+						->leftJoin('m.datasets', 'd')
+						->where('d.id IS NOT NULL')
+						->leftJoin('d.files', 'f')
+						->where('f.format IS NOT NULL')
+						->andWhere("m.status = :status")
+						->setParameter('status', Model::PUBLISHED)
+						->orderBy('m.name', 'ASC');
 			},
 			'constraints' => array(
 				new NotBlank(array(
