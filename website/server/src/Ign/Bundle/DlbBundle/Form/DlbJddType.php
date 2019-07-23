@@ -101,9 +101,7 @@ class DlbJddType extends AbstractType {
 				'choice_attr' => function($val, $key, $index) {
 					// Adds a disabled state if the user can't add data on the jdd
 					$disabled = false;
-                    $jddWithSameMetadataId = $this->em->getRepository('IgnGincoBundle:RawData\Jdd')->findByField(array(
-						'metadataId' => $val
-					));
+                    $jddWithSameMetadataId = $this->em->getRepository('IgnGincoBundle:RawData\Jdd')->findByMetadataId($val) ;
 					
 					if (count($jddWithSameMetadataId) > 0) {
                         $jdd = $jddWithSameMetadataId[0];
