@@ -370,7 +370,9 @@ INSERT INTO file_format(format,file_extension,file_type,position,label,definitio
 INSERT INTO file_format(format,file_extension,file_type,position,label,definition) VALUES ('file_habitat','CSV','file_habitat',1,'dsr_exemple_habitat','fichier_dsr_exemple_habitat');
 
 -- INSERTION IN TABLE event_listener
-INSERT INTO event_listener(listener_id,classname) VALUES ('GincoChecksDSRService','fr.ifn.ogam.integration.business.ChecksDSRGincoService');
+INSERT INTO event_listener(listener_id,classname) VALUES ('ChecksOcctaxService','fr.ifn.ogam.integration.business.ChecksOcctaxService');
+INSERT INTO event_listener(listener_id,classname) VALUES ('ChecksStationService','fr.ifn.ogam.integration.business.ChecksStationService');
+INSERT INTO event_listener(listener_id,classname) VALUES ('ChecksHabitatService','fr.ifn.ogam.integration.business.ChecksHabitatService');
 INSERT INTO event_listener(listener_id,classname) VALUES ('JddDlbService','fr.ifn.ogam.integration.business.JddDlbService');
 INSERT INTO event_listener(listener_id,classname) VALUES ('GeoAssociationService','fr.ifn.ogam.integration.business.GeoAssociationService');
 
@@ -587,7 +589,7 @@ INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VA
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('estcomplexehabitats','file_station','0',NULL,'isComplex',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('exposition','file_station','0',NULL,'exposition',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('geologie','file_station','0',NULL,'geologie',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('geometrie','file_station','0',NULL,'wkt',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('geometrie','file_station','0',NULL,'WKT',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('identifiantoriginestation','file_station','0',NULL,'idOrigSta',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('methodecalculsurface','file_station','0',NULL,'methCalcSu',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('natureobjetgeo','file_station','0',NULL,'natObjGeo',NULL);
