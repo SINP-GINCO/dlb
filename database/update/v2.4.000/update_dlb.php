@@ -36,6 +36,7 @@ try {
 	// execCustSQLFile("$currentDir/xxx.sql", $config);
 	execCustSQLFile("$sprintDir/add_standard_habitat.sql", $config);
 	execCustSQLFile("$sprintDir/add_services.sql", $config);
+	execCustSQLFile("$sprintDir/add_checks.sql", $config);
 
 
 } catch (Exception $e) {
