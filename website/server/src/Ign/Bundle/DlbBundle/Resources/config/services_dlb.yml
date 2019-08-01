@@ -41,7 +41,7 @@ services:
     # Service doing the whole process of generating and sending the DBB files
     dlb.dbb_process:
         class: Ign\Bundle\DlbBundle\Services\DBBProcess
-        arguments: ["@doctrine.orm.entity_manager","@ginco.configuration_manager", "@ginco.integration_service", "@ginco.dee_process", "@ginco.dee_generator", "@dlb.dbb_generator", "@dlb.certificate_generator", "@dlb.metadata_dowloader", "@app.mail_manager","@router","@logger"]
+        arguments: ["@doctrine.orm.entity_manager","@ginco.configuration_manager", "@ginco.integration_service", "@ginco.dee_process","@dlb.dbb_generator", "@dlb.certificate_generator", "@dlb.metadata_dowloader", "@app.mail_manager","@router","@logger"]
         tags:
           - { name: monolog.logger, channel: ginco }
   

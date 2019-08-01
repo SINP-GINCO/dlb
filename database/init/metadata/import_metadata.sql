@@ -589,10 +589,10 @@ INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VA
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('estcomplexehabitats','file_station','0',NULL,'isComplex',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('exposition','file_station','0',NULL,'exposition',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('geologie','file_station','0',NULL,'geologie',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('geometrie','file_station','0',NULL,'WKT',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('geometrie','file_station','1',NULL,'WKT',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('identifiantoriginestation','file_station','0',NULL,'idOrigSta',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('methodecalculsurface','file_station','0',NULL,'methCalcSu',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('natureobjetgeo','file_station','0',NULL,'natObjGeo',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('natureobjetgeo','file_station','1',NULL,'natObjGeo',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('nomstation','file_station','0',NULL,'nomStation',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('precisiongeometrie','file_station','0',NULL,'precisGeom',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('profondeurmax','file_station','0',NULL,'profMax',NULL);
@@ -765,8 +765,8 @@ INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_ins
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('geologie','table_station','geologie','0','1','1','0',23,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('acidite','table_station','acidite','0','1','1','0',24,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('commentaire','table_station','commentaire','0','1','1','0',25,NULL,NULL);
-INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('geometrie','table_station','geometrie','1','1','1','0',26,NULL,NULL);
-INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('natureobjetgeo','table_station','natureobjetgeo','0','1','1','0',27,NULL,NULL);
+INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('geometrie','table_station','geometrie','1','1','1','1',26,NULL,NULL);
+INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('natureobjetgeo','table_station','natureobjetgeo','0','1','1','1',27,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('precisiongeometrie','table_station','precisiongeometrie','0','1','1','0',28,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('echellenumerisation','table_station','echellenumerisation','0','1','1','0',29,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('codecommune','table_station','codecommune','0','1','1','0',30,NULL,NULL);
@@ -1055,6 +1055,8 @@ INSERT INTO checks(check_id,step,name,label,description,statement,importance) VA
 INSERT INTO checks(check_id,step,name,label,description,statement,importance) VALUES (1211,'CONFORMITY','IDENTIFIANT_PERMANENT_NOT_UUID','L''identifiant permanent n''''est pas un UUID.','L’identifiant permanent doit être un UUID valide, ou sa valeur doit être vide.',NULL,'ERROR');
 INSERT INTO checks(check_id,step,name,label,description,statement,importance) VALUES (1212,'CONFORMITY','CDNOM_NOT_FOUND','cdNom non trouvé','Le cdNom n''''existe pas dans le référentiel TAXREF',NULL,'ERROR');
 INSERT INTO checks(check_id,step,name,label,description,statement,importance) VALUES (1213,'CONFORMITY','CDREF_NOT_FOUND','cdRef non trouvé','Le cdRef n''''existe pas dans le référentiel TAXREF',NULL,'ERROR');
+INSERT INTO checks(check_id,step,name,label,description,statement,importance) VALUES (1214,'CONFORMITY','CDHAB_EMPTY','cdHab est vide','cdHab ne doit pas être vide si nomCite est Inconnu ou Nom perdu',NULL,'ERROR');
+INSERT INTO checks(check_id,step,name,label,description,statement,importance) VALUES (1215,'CONFORMITY','PRECISION_TECHNIQUE_EMPTY','precisionTechnqiue est vide','precisionTechnique ne doit pas être vide si techniqueCollecte = 10',NULL,'ERROR');
 
 
 -- INSERTION IN TABLE dataset_fields

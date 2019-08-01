@@ -1,17 +1,20 @@
 <?php
 namespace Ign\Bundle\DlbBundle\Services;
 
-use Ign\Bundle\GincoBundle\Entity\RawData\DEE;
-use Ign\Bundle\GincoBundle\Entity\Website\Message;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Mapping as ORM;
-use Ign\Bundle\GincoBundle\Entity\RawData\Jdd;
-use Ign\Bundle\GincoBundle\Entity\Website\User;
-use Ign\Bundle\GincoBundle\Services\ConfigurationManager;
-use Ign\Bundle\GincoBundle\Services\MailManager;
 use Symfony\Bridge\Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
+use Doctrine\ORM\EntityManager;
+
+use Ign\Bundle\GincoBundle\Entity\RawData\Jdd;
+use Ign\Bundle\GincoBundle\Services\ConfigurationManager;
+use Ign\Bundle\GincoBundle\Services\MailManager;
+use Ign\Bundle\GincoBundle\Entity\RawData\DEE;
+use Ign\Bundle\GincoBundle\Entity\Website\Message;
+use Ign\Bundle\GincoBundle\Services\DEEGeneration\DEEGeneratorOcctax;
+use Ign\Bundle\GincoBundle\Services\DEEGeneration\DEEGeneratorHabitat;
+
+
 
 /**
  * Class DBBProcess
@@ -47,12 +50,6 @@ class DBBProcess {
 
 	/**
 	 *
-	 * @var DEEGenerator
-	 */
-	protected $DEEGenerator;
-
-	/**
-	 *
 	 * @var MailManager
 	 */
 	protected $mailManager;
@@ -81,12 +78,22 @@ class DBBProcess {
 	 * @param
 	 *        	$logger
 	 */
-	public function __construct($em, $configuration, $integration, $DEEProcess, $DEEGenerator, $DBBGenerator, $CertificateGenerator, $MetadataDownloader, $mailManager, $router, $logger) {
+	public function __construct(
+			$em, 
+			$configuration, 
+			$integration, 
+			$DEEProcess, 
+			$DBBGenerator, 
+			$CertificateGenerator, 
+			$MetadataDownloader, 
+			$mailManager, 
+			$router, 
+			$logger) 
+	{
 		$this->em = $em;
 		$this->configuration = $configuration;
 		$this->integration = $integration;
 		$this->DEEProcess = $DEEProcess;
-		$this->DEEGenerator = $DEEGenerator;
 		$this->DBBGenerator = $DBBGenerator;
 		$this->CertificateGenerator = $CertificateGenerator;
 		$this->MetadataDownloader = $MetadataDownloader;
