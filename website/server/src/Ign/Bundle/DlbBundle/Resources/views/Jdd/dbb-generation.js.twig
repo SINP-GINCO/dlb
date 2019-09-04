@@ -202,8 +202,10 @@ function updateDBBContent(jddId) {
         content.attr("data-full-date", dbbDiv.data('dbb-created-datetime'));
         content.html(dbbDiv.data('dbb-created-date') + "<br/>" + dbbDiv.data('dbb-created-time'));
         contentDiv.append(content);
-    }
-    else {
+    } else if (dbbStatus == 'error') {
+		contentDiv.show() ;
+		contentDiv.append("{{ 'DBB.status.error' | trans }}");
+	} else {
         contentDiv.show();
         content.html("{{ 'DBB.status.noDBB'|trans }}");
         contentDiv.append(content);
@@ -283,6 +285,12 @@ function updateDBBContent(jddId) {
         reports += "</ul></div>";
         actionsDiv.append(reports);
     }
+	
+	// Status in error
+	if (dbbStatus == 'error') {
+		var html = "<span class='glyphicon glyphicon-remove color-danger' aria-hidden='true' title='Erreur'></span><br/>" ;
+		actionsDiv.append(html);
+	}
 }
 
 /**

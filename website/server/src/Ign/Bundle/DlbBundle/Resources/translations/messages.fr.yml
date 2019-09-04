@@ -26,6 +26,7 @@ DBB:
     noDBB: Données non transmises.
     generating: Génération en cours...
     transmitted: Dépôt effectué
+    error: Une erreur est survenue. Merci de contacter l'assistance.
   download:
     CSV: Télécharger les données brutes de biodiversité
     certificate: Télécharger le certificat de conformité
