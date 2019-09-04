@@ -24,9 +24,17 @@ services:
         tags:
           - { name: monolog.logger, channel: ginco }
         
+    # Service generating DBB for occtax standard
+    dlb.dbb_generator_occtax:
+        class: Ign\Bundle\DlbBundle\Services\DBBGeneratorOcctax
+        arguments: ["@doctrine.orm.entity_manager","@ginco.configuration_manager", "@ginco.generic_service", "@ginco.query_service","@logger"]
+        tags:
+          - { name: monolog.logger, channel: ginco }
+          
+          
     # Service generating DBB
-    dlb.dbb_generator:
-        class: Ign\Bundle\DlbBundle\Services\DBBGenerator
+    dlb.dbb_generator_habitat:
+        class: Ign\Bundle\DlbBundle\Services\DBBGeneratorHabitat
         arguments: ["@doctrine.orm.entity_manager","@ginco.configuration_manager", "@ginco.generic_service", "@ginco.query_service","@logger"]
         tags:
           - { name: monolog.logger, channel: ginco }
@@ -41,7 +49,7 @@ services:
     # Service doing the whole process of generating and sending the DBB files
     dlb.dbb_process:
         class: Ign\Bundle\DlbBundle\Services\DBBProcess
-        arguments: ["@doctrine.orm.entity_manager","@ginco.configuration_manager", "@ginco.integration_service", "@ginco.dee_process","@dlb.dbb_generator", "@dlb.certificate_generator", "@dlb.metadata_dowloader", "@app.mail_manager","@router","@logger"]
+        arguments: ["@doctrine.orm.entity_manager","@ginco.configuration_manager", "@ginco.integration_service", "@ginco.dee_process","@dlb.dbb_generator_occtax", "@dlb.dbb_generator_habitat", "@dlb.certificate_generator", "@dlb.metadata_dowloader", "@app.mail_manager","@router","@logger"]
         tags:
           - { name: monolog.logger, channel: ginco }
   

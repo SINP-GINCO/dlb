@@ -2,17 +2,10 @@
 namespace Ign\Bundle\DlbBundle\Services;
 
 use Ign\Bundle\GincoBundle\Entity\RawData\DEE;
-use Ign\Bundle\GincoBundle\Entity\Website\Message;
 use Ign\Bundle\GincoBundle\Exception\DEEException;
 use Ign\Bundle\GincoBundle\Entity\Generic\QueryForm;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Mapping as ORM;
 use Ign\Bundle\GincoBundle\Entity\RawData\Jdd;
-use Ign\Bundle\GincoBundle\Services\ConfigurationManager;
-use Symfony\Bridge\Monolog\Logger;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Ign\Bundle\DlbBundle\Services\AbstractDBBGenerator;
 
 /**
  * Class DBBGenerator
@@ -22,39 +15,19 @@ use Symfony\Component\HttpFoundation\Response;
  *         
  * @author AMouget
  */
-class DBBGenerator {
+class DBBGeneratorOcctax extends AbstractDBBGenerator {
 
-	/**
-	 * DBBGenerator constructor.
-	 *
-	 * @param
-	 *        	$em
-	 * @param
-	 *        	$configuration
-	 * @param
-	 *        	$genericService
-	 * @param
-	 *        	$queryService
-	 * @param
-	 *        	$logger
-	 */
-	public function __construct($em, $configuration, $genericService, $queryService, $logger) {
-		$this->em = $em;
-		$this->configuration = $configuration;
-		$this->genericService = $genericService;
-		$this->queryService = $queryService;
-		$this->logger = $logger;
-	}
+	
 
 	/**
 	 * Create the CSV of the DBB for jdd with the id given.
 	 * Write it in file.
 	 *
 	 * @param DEE $DEE        	
-	 * @return bool
+	 * @return string[]
 	 * @throws DEEException
 	 */
-	public function generateDBB(DEE $DEE) {
+	public function generate(DEE $DEE) {
 		// Configure memory and time limit because the program asks a lot of resources
 		ini_set("memory_limit", $this->configuration->getConfig('memory_limit', '1024M'));
 		ini_set("max_execution_time", 0);
@@ -139,11 +112,11 @@ class DBBGenerator {
 		// -- Export results to a CSV file
 		if ($total != 0) {
 			
-			$fileNameDBB = $this->generateFilePathDBB($jdd,$DEE);
+			$fileNameDBB = $this->generateFileNameDBB($jdd,$DEE);
 			
 			$out = fopen($fileNameDBB, 'w');
 			if (!$out) {
-				throw new DEEException("Error: could not open (w) file: $fileName");
+				throw new DEEException("Error: could not open (w) file: $fileNameDBB");
 			}
 			fclose($out);
 			
@@ -341,28 +314,9 @@ class DBBGenerator {
 		$jdd->setField('dbbFilePath', $archiveName);
 		$this->em->flush();
 		
-		return $file;
+		return array($file);
 	}
 
-	/**
-	 * Create the filepath of the DBB csv file
-	 * @param Jdd $jdd  
-	 * @param DEE  $DEE  	
-	 * @return string
-	 */
-	public function generateFilePathDBB(Jdd $jdd, DEE $DEE) {
-		$regionCode = $this->configuration->getConfig('regionCode', 'REGION');
-		
-		$date = $DEE->getCreatedAt()->format('Y-m-d_H-i-s');
-		
-		$uuid = $jdd->getField('metadataId', $jdd->getId());
-		
-		$fileNameWithoutExtension = $regionCode . '_' . $date . '_' . $uuid;
-		$filePath = $this->configuration->getConfig('dbbPublicDirectory') . '/' . $jdd->getId();
-		@mkdir($filePath); // create the jdd dir
-		$filename = $fileNameWithoutExtension . '.csv';
-		
-		return $filePath . '/' . $filename;
-	}
+	
 
 }

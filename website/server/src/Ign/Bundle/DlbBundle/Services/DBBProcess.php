@@ -11,8 +11,8 @@ use Ign\Bundle\GincoBundle\Services\ConfigurationManager;
 use Ign\Bundle\GincoBundle\Services\MailManager;
 use Ign\Bundle\GincoBundle\Entity\RawData\DEE;
 use Ign\Bundle\GincoBundle\Entity\Website\Message;
-use Ign\Bundle\GincoBundle\Services\DEEGeneration\DEEGeneratorOcctax;
-use Ign\Bundle\GincoBundle\Services\DEEGeneration\DEEGeneratorHabitat;
+use Ign\Bundle\DlbBundle\Services\AbstractDBBGenerator;
+use Ign\Bundle\GincoBundle\Entity\Metadata\Standard;
 
 
 
@@ -65,6 +65,12 @@ class DBBProcess {
 	 * @var Logger
 	 */
 	protected $logger;
+	
+	/**
+	 *
+	 * @var AbstractDBBGenerator
+	 */
+	protected $dbbGenerator ;
 
 	/**
 	 * DEEProcess constructor.
@@ -83,7 +89,8 @@ class DBBProcess {
 			$configuration, 
 			$integration, 
 			$DEEProcess, 
-			$DBBGenerator, 
+			$DBBGeneratorOcctax,
+			$DBBGeneratorHabitat,
 			$CertificateGenerator, 
 			$MetadataDownloader, 
 			$mailManager, 
@@ -94,7 +101,8 @@ class DBBProcess {
 		$this->configuration = $configuration;
 		$this->integration = $integration;
 		$this->DEEProcess = $DEEProcess;
-		$this->DBBGenerator = $DBBGenerator;
+		$this->DBBGeneratorOcctax = $DBBGeneratorOcctax;
+		$this->DBBGeneratorHabitat = $DBBGeneratorHabitat;
 		$this->CertificateGenerator = $CertificateGenerator;
 		$this->MetadataDownloader = $MetadataDownloader;
 		$this->mailManager = $mailManager;
@@ -116,13 +124,20 @@ class DBBProcess {
 		$this->logger->info("GenerateAndSendDBB: dee_id = {$dee->getId()}, message_id = $messageId");
 		
 		$jdd = $dee->getJdd();
+		
+		$standardType = $jdd->getModel()->getStandard()->getName() ;
+		if (Standard::STANDARD_HABITAT == $standardType) {
+			$this->dbbGenerator = $this->DBBGeneratorHabitat ;
+		} else {
+			$this->dbbGenerator = $this->DBBGeneratorOcctax ;
+		}
 
 		try {
 		
 			$this->generateAndSendDee($dee, $message) ;
 
 			// Generate DBB CSV
-			$csvFile = $this->DBBGenerator->generateDBB($dee);
+			$csvFiles = $this->dbbGenerator->generate($dee);
 
 			// Save metadatas
 			$this->downloadMetadata($dee) ;
@@ -131,8 +146,10 @@ class DBBProcess {
 			$this->CertificateGenerator->generateCertificate($jdd);
 
 			// Create archive and delete useless csv file.
-			$this->createDBBArchive($dee, $csvFile) ;
-			@unlink($csvFile);
+			$this->createDBBArchive($dee, $csvFiles) ;
+			foreach ($csvFiles as $csvFile) {
+				@unlink($csvFile);
+			}
 
 			/* Send mail to user */
 			if ($sendMail) {
@@ -220,7 +237,7 @@ class DBBProcess {
 	 * @param type $csvFile
 	 * @throws \Exception
 	 */
-	private function createDBBArchive(DEE $dee, $csvFile) {
+	private function createDBBArchive(DEE $dee, $csvFiles) {
 		
 		$jdd = $dee->getJdd() ;
 		
@@ -229,12 +246,13 @@ class DBBProcess {
 		$metadataCAId = $jdd->getField('metadataCAId') ;
 		
 		// Zip files
-		$fileNameDBB = $this->DBBGenerator->generateFilePathDBB($jdd, $dee);
+		$fileNameDBB = $this->dbbGenerator->generateFileNameDBB($jdd, $dee);
 		$parentDir = dirname($fileNameDBB); // dbbPublicDirectory
 		$archiveName = $parentDir . '/dlb_' . basename($fileNameDBB, '.csv') . '.zip';
 		try {
 			chdir($parentDir);
-			system("zip -r $archiveName $csvFile $certificateFile $metadataCAId $metadataId");
+			$allFiles = implode(" ", $csvFiles) ;
+			system("zip -r $archiveName $allFiles $certificateFile $metadataCAId $metadataId");
 		} catch (\Exception $e) {
 			throw new \Exception("Could not create archive $archiveName:" . $e->getMessage());
 		}
