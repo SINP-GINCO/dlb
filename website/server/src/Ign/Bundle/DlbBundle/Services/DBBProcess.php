@@ -136,8 +136,8 @@ class DBBProcess {
 		
 			$this->generateAndSendDee($dee, $message) ;
 
-			// Generate DBB CSV
-			$csvFiles = $this->dbbGenerator->generate($dee);
+			// Generate DBB files
+			$files = $this->dbbGenerator->generate($dee);
 
 			// Save metadatas
 			$this->downloadMetadata($dee) ;
@@ -146,9 +146,9 @@ class DBBProcess {
 			$this->CertificateGenerator->generateCertificate($jdd);
 
 			// Create archive and delete useless csv file.
-			$this->createDBBArchive($dee, $csvFiles) ;
-			foreach ($csvFiles as $csvFile) {
-				@unlink($csvFile);
+			$this->createDBBArchive($dee, $files) ;
+			foreach ($files as $file) {
+				@unlink($file);
 			}
 
 			/* Send mail to user */

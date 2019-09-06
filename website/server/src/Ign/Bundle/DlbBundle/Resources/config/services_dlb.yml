@@ -27,7 +27,7 @@ services:
     # Service generating DBB for occtax standard
     dlb.dbb_generator_occtax:
         class: Ign\Bundle\DlbBundle\Services\DBBGeneratorOcctax
-        arguments: ["@doctrine.orm.entity_manager","@ginco.configuration_manager", "@ginco.generic_service", "@ginco.query_service","@logger"]
+        arguments: ["@doctrine.orm.entity_manager","@ginco.configuration_manager", "@ginco.generic_service", "@ginco.query_service","@logger", "@ginco.ogr2ogr"]
         tags:
           - { name: monolog.logger, channel: ginco }
           
@@ -35,7 +35,7 @@ services:
     # Service generating DBB
     dlb.dbb_generator_habitat:
         class: Ign\Bundle\DlbBundle\Services\DBBGeneratorHabitat
-        arguments: ["@doctrine.orm.entity_manager","@ginco.configuration_manager", "@ginco.generic_service", "@ginco.query_service","@logger"]
+        arguments: ["@doctrine.orm.entity_manager","@ginco.configuration_manager", "@ginco.generic_service", "@ginco.query_service","@logger", "@ginco.ogr2ogr"]
         tags:
           - { name: monolog.logger, channel: ginco }
 

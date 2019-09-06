@@ -130,27 +130,43 @@ class DBBGeneratorHabitat extends AbstractDBBGenerator {
 		$sqlStationPoints = $sqlStation . " AND st_geometrytype(st_multi(s.geometrie)) = 'ST_MultiPoint'" ;
 		$csvStationPoints = $this->generateFileNameDBB($jdd, $dee, "station_point_soh") ;
 		$this->generateCsv($sqlStationPoints, $csvStationPoints, $this->stationModel) ;
+		$shpStationPoints = dirname($csvStationPoints) . DIRECTORY_SEPARATOR . "shp_point_soh.shp" ;
+		$this->ogr2ogr->csv2shp($csvStationPoints, $shpStationPoints, 'EPSG:4326') ;
+		unlink($csvStationPoints) ;
 		
 		// Stations lignes
 		$sqlStationLignes = $sqlStation . " AND st_geometrytype(st_multi(s.geometrie)) = 'ST_MultiLineString'" ;
 		$csvStationLignes = $this->generateFileNameDBB($jdd, $dee, "station_ligne_soh") ;
 		$this->generateCsv($sqlStationLignes, $csvStationLignes, $this->stationModel) ;
+		$shpStationLignes = dirname($csvStationLignes) . DIRECTORY_SEPARATOR . "shp_ligne_soh.shp" ;
+		$this->ogr2ogr->csv2shp($csvStationLignes, $shpStationLignes, 'EPSG:4326') ;
+		unlink($csvStationLignes) ;
 		
 		// Stations polygones
 		$sqlStationPolygones = $sqlStation . " AND st_geometrytype(st_multi(s.geometrie)) = 'ST_MultiPolygon'" ;
 		$csvStationPolygones = $this->generateFileNameDBB($jdd, $dee, "station_polygone_soh") ;
 		$this->generateCsv($sqlStationPolygones, $csvStationPolygones, $this->stationModel) ;
+		$shpStationPolygones = dirname($csvStationPolygones) . DIRECTORY_SEPARATOR . "shp_polygone_soh.shp" ;
+		$this->ogr2ogr->csv2shp($csvStationPolygones, $shpStationPolygones, 'EPSG:4326') ;
+		unlink($csvStationPolygones) ;
 		
 		
 		// Create an archive of the csv (zip)
 		$files = array(
-			$csvHabitat,
-			$csvStationPoints,
-			$csvStationLignes,
-			$csvStationPolygones
+			$csvHabitat,	
 		);
 		
 		$parentDir = dirname($csvHabitat); // dbbPublicDirectory
+		
+		$entries = scandir($parentDir) ;
+		foreach ($entries as $entry) {
+			$fileName = basename(pathinfo($entry, PATHINFO_FILENAME)) ;
+			if (in_array($fileName, ['shp_point_soh', 'shp_ligne_soh', 'shp_polygone_soh'])) {
+				$files[] = $entry ;
+			}
+		}
+		
+		
 		$baseFiles = implode(" ", array_map(function($f) { return basename($f) ; } , $files)) ; //basename($fileNameDBB); // fichier.csv
 		$archiveName = $parentDir . '/' . basename($this->generateFileNameDBB($jdd, $dee), '.csv') . '.zip';
 		try {

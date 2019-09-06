@@ -9,6 +9,7 @@ use Ign\Bundle\GincoBundle\Entity\RawData\DEE;
 use Ign\Bundle\GincoBundle\Services\GenericService;
 use Ign\Bundle\DlbBundle\Services\QueryService;
 use Ign\Bundle\GincoBundle\Entity\RawData\Jdd;
+use Ign\Bundle\GincoBundle\Services\Ogr2ogr;
 
 use Psr\Log\LoggerInterface;
 
@@ -53,6 +54,12 @@ abstract class AbstractDBBGenerator {
 	 * @var LoggerInterface
 	 */
 	protected $logger ;
+	
+	/**
+	 *
+	 * @var Ogr2ogr
+	 */
+	protected $ogr2ogr ;
 
 
 	/**
@@ -69,12 +76,13 @@ abstract class AbstractDBBGenerator {
 	 * @param
 	 *        	$logger
 	 */
-	public function __construct($em, $configuration, $genericService, $queryService, $logger) {
+	public function __construct($em, $configuration, $genericService, $queryService, $logger, $ogr2ogr) {
 		$this->em = $em;
 		$this->configuration = $configuration;
 		$this->genericService = $genericService;
 		$this->queryService = $queryService;
 		$this->logger = $logger;
+		$this->ogr2ogr = $ogr2ogr;
 	}
 	
 	
