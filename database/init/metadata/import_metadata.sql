@@ -740,6 +740,7 @@ INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_ins
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('PROVIDER_ID','table_habitat','provider_id','0','0','0','1',17,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('USER_LOGIN','table_habitat','user_login','0','0','0','1',18,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('clestation','table_habitat','clestation','0','1','1','1',19,NULL,NULL);
+INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('tpsid','table_habitat','tpsid','1','0','1','1',20,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('identifiantstasinp','table_station','identifiantstasinp','1','0','0','1',1,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('jddmetadonneedeeid','table_station','jddmetadonneedeeid','0','1','1','1',2,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('dspublique','table_station','dspublique','0','1','1','1',3,NULL,NULL);
@@ -784,6 +785,7 @@ INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_ins
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('PROVIDER_ID','table_station','provider_id','0','0','0','1',42,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('USER_LOGIN','table_station','user_login','0','0','0','1',43,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('clestation','table_station','clestation','0','1','1','1',44,NULL,NULL);
+INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('tpsid','table_station','tpsid','1','0','1','1',45,NULL,NULL);
 
 -- Fill the parent table
 INSERT INTO field (data, format, type)
