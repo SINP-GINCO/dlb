@@ -88,7 +88,11 @@ Certificat de dépôt pour le jeu de données de biodiversité : {{ jdd.field('t
             <p>Modèle de données :</p>
         </div>
         <div class="col-md-8">
-            <p>Standard de fichier Dépôt de données brutes de biodiversité V.1</p>
+            {% if jdd.model.standard.name == 'occtax' %}
+                <p>Standard de fichier Dépôt de données brutes de biodiversité V.1</p>
+            {% else %}
+                <p>Occurrence d’habitat v.1.0</p>
+            {% endif %}
         </div>
     </div>
     <div class="row">
