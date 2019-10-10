@@ -768,7 +768,7 @@ INSERT INTO table_field ("data",format,column_name,is_calculated,is_editable,is_
     ('PROVIDER_ID','table_station','provider_id','0','0','0','1',42),
     ('USER_LOGIN','table_station','user_login','0','0','0','1',43),
     ('clestation','table_station','clestation','0','1','1','1',44),
-    ('tpsid','table_habitat','tpsid','1','0','1','1',45)
+    ('tpsid','table_station','tpsid','1','0','1','1',45)
 ;
 
 
