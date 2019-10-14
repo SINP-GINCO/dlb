@@ -118,6 +118,7 @@ INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('TypeDeterminationV
 INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('TechniqueCollecteValue','STRING','DYNAMIC','Techniques de collecte de l''observation','Techniques de collecte de l''observation');
 INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('AbondanceHabitatValue','CODE','DYNAMIC','Coefficients de Braun-Blanquet et Pavillard','Coefficients de Braun-Blanquet et Pavillard');
 INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('NiveauSensiValue','CODE','DYNAMIC','Niveau de sensiblité des habitats','Niveau de sensiblité des habitats');
+INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('HabitatInteretCommunautaireValue','CODE','DYNAMIC','Indication si l''habitat est d''interêt communautaire','Indication si l''habitat est d''interêt communautaire');
 
 -- INSERTION IN TABLE data
 INSERT INTO data(data,unit,label,definition,comment,can_have_default) VALUES ('PROVIDER_ID','PROVIDER_ID','Organisme du compte GINCO','Organisme du compte utilisateur GINCO qui a importé la donnée dans GINCO',NULL,true);
@@ -265,6 +266,8 @@ INSERT INTO data(data,unit,label,definition,comment,can_have_default) VALUES ('r
 INSERT INTO data(data,unit,label,definition,comment,can_have_default) VALUES ('sensibilitehab','NiveauSensiValue','sensibiliteHab','Sensibilité de l''habitat selon le producteur.',NULL,true);
 INSERT INTO data(data,unit,label,definition,comment,can_have_default) VALUES ('echellenumerisation','CharacterString','echelleNumerisation','Echelle de carte à laquelle la numérisation de l''information géographique a été effectuée.',NULL,true);
 INSERT INTO data(data,unit,label,definition,comment,can_have_default) VALUES ('clestation','CharacterString','cleStation','Identifiant dans la soumission faisant le lien entre station et habitat.',NULL,true);
+INSERT INTO data(data,unit,label,definition,comment,can_have_default) VALUES ('habitatinteretcommunautaire','HabitatInteretCommunautaireValue','habitatInteretCommunautaire','Indique si l''habitat est d''intérêt communautaire.',NULL,true);
+INSERT INTO data(data,unit,label,definition,comment,can_have_default) VALUES ('cdhabinteretcommunautaire','CodeHabRefValue','cdHabInteretCommunautaire','Code d''habitat d''intérêt communautaire.',NULL,true);
 
 -- INSERTION IN TABLE mode
 INSERT INTO mode(unit,code,position,label,definition) VALUES ('PROVIDER_ID','1',1,'organisme A','organisme A');
@@ -327,6 +330,7 @@ INSERT INTO dynamode(unit,sql) VALUES ('TypeDeterminationValue','SELECT code, la
 INSERT INTO dynamode(unit,sql) VALUES ('TechniqueCollecteValue','SELECT code, label || '' ('' || code || '')'' as label, definition, ''''::text as position FROM referentiels.techniquecollectevalue ORDER BY code');
 INSERT INTO dynamode(unit,sql) VALUES ('AbondanceHabitatValue','SELECT code, label || '' ('' || code || '')'' as label, definition, ''''::text as position FROM referentiels.abondancehabitatvalue ORDER BY code');
 INSERT INTO dynamode(unit,sql) VALUES ('NiveauSensiValue','SELECT code, label || '' ('' || code || '')'' as label, definition, ''''::text as position FROM referentiels.niveausensivalue ORDER BY code');
+INSERT INTO dynamode(unit,sql) VALUES ('HabitatInteretCommunautaireValue','SELECT code, label || '' ('' || code || '')'' as label, definition, ''''::text as position FROM referentiels.habitatinteretcommunautairevalue ORDER BY code');
 
 -- INSERTION IN TABLE form_format
 INSERT INTO form_format(format,label,definition,position,is_opened) VALUES ('form_observation','Observation','Groupement des champs d''observation',1,'1');
@@ -579,6 +583,8 @@ INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VA
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('nomcite','file_habitat','1',NULL,'nomCite',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('techniquecollecte','file_habitat','1',NULL,'techniqueCollecte',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('clestation','file_habitat','1',NULL,'cleStation',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('habitatinteretcommunautaire','file_habitat','0',NULL,'habitatInteretCommunautaire',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('cdhabinteretcommunautaire','file_habitat','0',NULL,'cdHabInteretCommunautaire',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('acidite','file_station','0',NULL,'acidite',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('altitudemax','file_station','0',NULL,'altMax',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('altitudemin','file_station','0',NULL,'altMin',NULL);
@@ -741,6 +747,8 @@ INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_ins
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('USER_LOGIN','table_habitat','user_login','0','0','0','1',18,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('clestation','table_habitat','clestation','0','1','1','1',19,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('tpsid','table_habitat','tpsid','1','0','1','1',20,NULL,NULL);
+INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('habitatinteretcommunautaire','table_habitat','habitatinteretcommunautaire','0','1','1','0',21,NULL,NULL);
+INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('cdhabinteretcommunautaire','table_habitat','cdhabinteretcommunautaire','0','1','1','0',22,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('identifiantstasinp','table_station','identifiantstasinp','1','0','0','1',1,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('jddmetadonneedeeid','table_station','jddmetadonneedeeid','0','1','1','1',2,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('dspublique','table_station','dspublique','0','1','1','1',3,NULL,NULL);
