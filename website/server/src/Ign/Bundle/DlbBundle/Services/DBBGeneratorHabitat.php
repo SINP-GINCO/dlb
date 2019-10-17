@@ -59,7 +59,7 @@ class DBBGeneratorHabitat extends AbstractDBBGenerator {
 		"surface"					=> "SURFACE",
 		"typesol"					=> "TYPESOL",
 		"usage"						=> "USAGE",
-		"st_astext(geometrie)"		=> "WKT"
+		"geometrie"                 => "WKT"
  	);
 	
 	private $maskedData = array(
@@ -120,43 +120,37 @@ class DBBGeneratorHabitat extends AbstractDBBGenerator {
 		$csvHabitat = $this->generateFileNameDBB($jdd, $dee, "Habitat_soh_1_0") ;
 		$this->generateCsv($sqlHabitat, $csvHabitat, array_merge(["identifiantstasinp" => "idStaSINP"], $this->habitatModel)) ;
 		
+        $parentDir = dirname($csvHabitat); // dbbPublicDirectory
+        
 		// Requête stations base
-		$sqlStation = "SELECT " ;
-		$sqlStation .= implode(", ", array_keys($this->stationModel)) ;
+        $sqlStation = "SELECT " ;
+		$fields = array() ;
+        foreach ($this->stationModel as $column => $label) {
+            $fields[] = "s.$column AS $label" ;
+        }
+        $sqlStation .= implode(", ", $fields) ;
 		$sqlStation .= " FROM {$tableStation->getTableName()} s " ;
 		$sqlStation .= " WHERE s.submission_id IN (" . implode(",", $dee->getSubmissions()) . ") " ;
 		
 		// Stations points
 		$sqlStationPoints = $sqlStation . " AND st_geometrytype(st_multi(s.geometrie)) = 'ST_MultiPoint'" ;
-		$csvStationPoints = $this->generateFileNameDBB($jdd, $dee, "station_point_soh") ;
-		$this->generateCsv($sqlStationPoints, $csvStationPoints, $this->stationModel) ;
-		$shpStationPoints = dirname($csvStationPoints) . DIRECTORY_SEPARATOR . "shp_point_soh.shp" ;
-		$this->ogr2ogr->csv2shp($csvStationPoints, $shpStationPoints, 'EPSG:4326') ;
-		unlink($csvStationPoints) ;
+		$shpStationPoints = $parentDir . DIRECTORY_SEPARATOR . "shp_point_soh.shp" ;
+		$this->ogr2ogr->pg2shp($sqlStationPoints, $shpStationPoints, 'EPSG:4326') ;
 		
 		// Stations lignes
 		$sqlStationLignes = $sqlStation . " AND st_geometrytype(st_multi(s.geometrie)) = 'ST_MultiLineString'" ;
-		$csvStationLignes = $this->generateFileNameDBB($jdd, $dee, "station_ligne_soh") ;
-		$this->generateCsv($sqlStationLignes, $csvStationLignes, $this->stationModel) ;
-		$shpStationLignes = dirname($csvStationLignes) . DIRECTORY_SEPARATOR . "shp_ligne_soh.shp" ;
-		$this->ogr2ogr->csv2shp($csvStationLignes, $shpStationLignes, 'EPSG:4326') ;
-		unlink($csvStationLignes) ;
+		$shpStationLignes = $parentDir . DIRECTORY_SEPARATOR . "shp_ligne_soh.shp" ;
+		$this->ogr2ogr->pg2shp($sqlStationLignes, $shpStationLignes, 'EPSG:4326') ;
 		
 		// Stations polygones
 		$sqlStationPolygones = $sqlStation . " AND st_geometrytype(st_multi(s.geometrie)) = 'ST_MultiPolygon'" ;
-		$csvStationPolygones = $this->generateFileNameDBB($jdd, $dee, "station_polygone_soh") ;
-		$this->generateCsv($sqlStationPolygones, $csvStationPolygones, $this->stationModel) ;
-		$shpStationPolygones = dirname($csvStationPolygones) . DIRECTORY_SEPARATOR . "shp_polygone_soh.shp" ;
-		$this->ogr2ogr->csv2shp($csvStationPolygones, $shpStationPolygones, 'EPSG:4326') ;
-		unlink($csvStationPolygones) ;
-		
+		$shpStationPolygones = $parentDir . DIRECTORY_SEPARATOR . "shp_polygone_soh.shp" ;
+		$this->ogr2ogr->pg2shp($sqlStationPolygones, $shpStationPolygones, 'EPSG:4326') ;
 		
 		// Create an archive of the csv (zip)
 		$files = array(
 			$csvHabitat,	
 		);
-		
-		$parentDir = dirname($csvHabitat); // dbbPublicDirectory
 		
 		$entries = scandir($parentDir) ;
 		foreach ($entries as $entry) {
