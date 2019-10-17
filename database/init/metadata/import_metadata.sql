@@ -111,8 +111,8 @@ INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('USER_LOGIN','STRIN
 INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('ComplexeHabitatValue','CODE','DYNAMIC','Type de complexe d''habitats','Type de complexe d''habitats');
 INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('ExpositionValue','CODE','DYNAMIC','Point cardinal dominant pour l''exposition du terrain','Point cardinal dominant pour l''exposition du terrain');
 INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('MethodeCalculSurfaceValue','CODE','DYNAMIC','Type de détermination d''une surface','Type de détermination d''une surface');
-INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('TypeSolValue','ARRAY','DYNAMIC','Type de sol observé','Type de sol observé');
-INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('GeologieValue','ARRAY','DYNAMIC','Type de géologie de la zone','Type de géologie de la zone');
+INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('TypeSolValue','CODE','DYNAMIC','Type de sol observé','Type de sol observé');
+INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('GeologieValue','CODE','DYNAMIC','Type de géologie de la zone','Type de géologie de la zone');
 INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('AciditeValue','CODE','DYNAMIC','Acidité du sol','Acidité du sol');
 INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('TypeDeterminationValue','CODE','DYNAMIC','Type de détermination','Type de détermination');
 INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('TechniqueCollecteValue','STRING','DYNAMIC','Techniques de collecte de l''observation','Techniques de collecte de l''observation');
@@ -997,6 +997,8 @@ INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) 
 INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) VALUES ('nomcite','file_habitat','nomcite','table_habitat','FILE');
 INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) VALUES ('techniquecollecte','file_habitat','techniquecollecte','table_habitat','FILE');
 INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) VALUES ('clestation','file_habitat','clestation','table_habitat','FILE');
+INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) VALUES ('habitatinteretcommunautaire','file_habitat','habitatinteretcommunautaire','table_habitat','FILE');
+INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) VALUES ('cdhabinteretcommunautaire','file_habitat','cdhabinteretcommunautaire','table_habitat','FILE');
 INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) VALUES ('acidite','file_station','acidite','table_station','FILE');
 INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) VALUES ('altitudemax','file_station','altitudemax','table_station','FILE');
 INSERT INTO field_mapping(src_data,src_format,dst_data,dst_format,mapping_type) VALUES ('altitudemin','file_station','altitudemin','table_station','FILE');
@@ -1067,6 +1069,7 @@ INSERT INTO checks(check_id,step,name,label,description,statement,importance) VA
 INSERT INTO checks(check_id,step,name,label,description,statement,importance) VALUES (1213,'CONFORMITY','CDREF_NOT_FOUND','cdRef non trouvé','Le cdRef n''''existe pas dans le référentiel TAXREF',NULL,'ERROR');
 INSERT INTO checks(check_id,step,name,label,description,statement,importance) VALUES (1214,'CONFORMITY','CDHAB_EMPTY','cdHab est vide','cdHab ne doit pas être vide si nomCite est Inconnu ou Nom perdu',NULL,'ERROR');
 INSERT INTO checks(check_id,step,name,label,description,statement,importance) VALUES (1215,'CONFORMITY','PRECISION_TECHNIQUE_EMPTY','precisionTechnqiue est vide','precisionTechnique ne doit pas être vide si techniqueCollecte = 10',NULL,'ERROR');
+INSERT INTO checks(check_id,step,name,label,description,statement,importance) VALUES (1216,'CONFORMITY','CDHAB_INTERET_COMMUNAUTAIRE_EMPTY','cdHabInteretCommunautaire est vide','cdHabInteretCommunautaire ne doit pas être vide si habitatInteretCommunautaire est égal à 1 ou 3',NULL,'ERROR');
 
 
 -- INSERTION IN TABLE dataset_fields
