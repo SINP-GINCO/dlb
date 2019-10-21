@@ -610,7 +610,7 @@ INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VA
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('usage','file_station','0',NULL,'usage',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('dspublique','file_station','1',NULL,'dSPublique',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('identifiantstasinp','file_station','0',NULL,'idStaSINP',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('jddmetadonneedeeid','file_station','1',NULL,'idMTD',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('jddmetadonneedeeid','file_station','0',NULL,'idMTD',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('jourdatedebut','file_station','1','yyyy-MM-dd','dateDebut',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('jourdatefin','file_station','1','yyyy-MM-dd','dateFin',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('observateur','file_station','1',NULL,'observer',NULL);
@@ -750,7 +750,7 @@ INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_ins
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('habitatinteretcommunautaire','table_habitat','habitatinteretcommunautaire','0','1','1','0',21,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('cdhabinteretcommunautaire','table_habitat','cdhabinteretcommunautaire','0','1','1','0',22,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('identifiantstasinp','table_station','identifiantstasinp','1','0','0','1',1,NULL,NULL);
-INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('jddmetadonneedeeid','table_station','jddmetadonneedeeid','0','1','1','1',2,NULL,NULL);
+INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('jddmetadonneedeeid','table_station','jddmetadonneedeeid','1','0','0','1',2,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('dspublique','table_station','dspublique','0','1','1','1',3,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('referencebiblio','table_station','referencebiblio','0','1','1','0',4,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('identifiantoriginestation','table_station','identifiantoriginestation','0','1','1','0',5,NULL,NULL);
@@ -1070,6 +1070,7 @@ INSERT INTO checks(check_id,step,name,label,description,statement,importance) VA
 INSERT INTO checks(check_id,step,name,label,description,statement,importance) VALUES (1214,'CONFORMITY','CDHAB_EMPTY','cdHab est vide','cdHab ne doit pas être vide si nomCite est Inconnu ou Nom perdu',NULL,'ERROR');
 INSERT INTO checks(check_id,step,name,label,description,statement,importance) VALUES (1215,'CONFORMITY','PRECISION_TECHNIQUE_EMPTY','precisionTechnqiue est vide','precisionTechnique ne doit pas être vide si techniqueCollecte = 10',NULL,'ERROR');
 INSERT INTO checks(check_id,step,name,label,description,statement,importance) VALUES (1216,'CONFORMITY','CDHAB_INTERET_COMMUNAUTAIRE_EMPTY','cdHabInteretCommunautaire est vide','cdHabInteretCommunautaire ne doit pas être vide si habitatInteretCommunautaire est égal à 1 ou 3',NULL,'ERROR');
+INSERT INTO checks(check_id,step,name,label,description,statement,importance) VALUES (1217,'CONFORMITY','IDENTIFIANT_PERMANENT_NOT_UNIQUE','L''identifiant permanent fourni existe déjà','L''identifiant permanent fourni existe déjà',NULL,'ERROR');
 
 
 -- INSERTION IN TABLE dataset_fields
