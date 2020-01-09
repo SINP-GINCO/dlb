@@ -126,7 +126,11 @@ class DBBGeneratorHabitat extends AbstractDBBGenerator {
         $sqlStation = "SELECT " ;
 		$fields = array() ;
         foreach ($this->stationModel as $column => $label) {
-            $fields[] = "s.$column AS $label" ;
+            if ("typesol" == $column || "geologie" == $column) {
+                $fields[] = "array_to_string(s.$column, ',') AS $label" ;
+            } else {
+                $fields[] = "s.$column AS $label" ;
+            }
         }
         $sqlStation .= implode(", ", $fields) ;
 		$sqlStation .= " FROM {$tableStation->getTableName()} s " ;
