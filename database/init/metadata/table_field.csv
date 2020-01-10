@@ -176,3 +176,4 @@ PROVIDER_ID;table_station;provider_id;0;0;0;1;42;;
 USER_LOGIN;table_station;user_login;0;0;0;1;43;;
 clestation;table_station;clestation;0;1;1;1;44;;
 tpsid;table_station;tpsid;1;0;1;1;45;;
+typesolalternatif;table_station;typesolalternatif;0;1;1;0;46;;
