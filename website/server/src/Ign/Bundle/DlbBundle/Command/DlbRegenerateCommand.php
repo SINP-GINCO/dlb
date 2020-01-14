@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Ign\Bundle\GincoBundle\Entity\RawData\DEE;
 use Ign\Bundle\GincoBundle\Entity\RawData\Jdd;
 use Ign\Bundle\DlbBundle\Services\DBBProcess;
+use Ign\Bundle\GincoBundle\Entity\RawData\Submission;
 
 /**
  * Description of DlbRegenerateCommand
@@ -106,7 +107,15 @@ class DlbRegenerateCommand extends Command {
 			// Régénération du dépot, sans notification de l'utilisateur.
 			$output->writeln("") ;
 			$output->writeln("Régénération DEE {$dee->getId()}, pour le JDD {$dee->getJdd()->getId()}.") ;
-			$this->dbbProcess->generateAndSendDBB($dee, false) ;
+            
+			$validatedSubmissions = $dee->getJdd()->getValidatedSubmissions() ;
+            foreach ($validatedSubmissions as $validatedSubmission) {
+                $validatedSubmission->setStep(Submission::STEP_CHECKED) ;
+                $validatedSubmission->setStatus(Submission::STATUS_OK) ;
+            }
+            $this->entityManager->flush() ;
+            $this->dbbProcess->generateAndSendDBB($dee, false) ;
+                        
 			$output->writeln("Terminé") ;
 		}
 	}
