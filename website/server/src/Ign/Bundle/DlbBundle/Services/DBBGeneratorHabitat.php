@@ -84,15 +84,6 @@ class DBBGeneratorHabitat extends AbstractDBBGenerator {
 		
 		// Get the jdd and the data model
 		$jdd = $dee->getJdd();
-
-		$submissions = $jdd->getSuccessfulSubmissions();
-		$submissionsIds = array();
-		foreach ($submissions as $submission) {
-			$this->logger->debug('submission : ' . $submission->getId());
-			$submissionsIds[] = $submission->getId();
-		}
-		$dee->setSubmissions($submissionsIds);
-		$this->em->flush();
 		
 		$model = $jdd->getModel();
 		

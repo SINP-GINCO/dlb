@@ -22,7 +22,7 @@ use Ign\Bundle\GincoBundle\Entity\RawData\Submission;
 class DlbRegenerateCommand extends Command {
 	
 	
-	protected static $defaultName = 'dlb:regenerate' ;
+	protected static $defaultName = 'dlb:regenerate:dbb' ;
 
 
 	/**
@@ -55,7 +55,7 @@ class DlbRegenerateCommand extends Command {
 	 */
 	public function configure() {
 		$this
-			->setDescription('Régénère le dépot des jeux de données sans effectuer de dépublication.')
+			->setDescription('Régénère les fichiers de données brutes de biodiversité.')
 			->addOption('start', null, InputOption::VALUE_REQUIRED, 'Date de début au format YYYY-MM-DD.')
 			->addOption('end', null, InputOption::VALUE_REQUIRED, 'Date de fin au format YYYY-MM-DD.')
 		;
@@ -106,15 +106,14 @@ class DlbRegenerateCommand extends Command {
 		foreach ($dees as $dee) {
 			// Régénération du dépot, sans notification de l'utilisateur.
 			$output->writeln("") ;
-			$output->writeln("Régénération DEE {$dee->getId()}, pour le JDD {$dee->getJdd()->getId()}.") ;
+			$output->writeln("Régénération DBB {$dee->getId()}, pour le JDD {$dee->getJdd()->getId()}.") ;
             
-			$validatedSubmissions = $dee->getJdd()->getValidatedSubmissions() ;
-            foreach ($validatedSubmissions as $validatedSubmission) {
-                $validatedSubmission->setStep(Submission::STEP_CHECKED) ;
-                $validatedSubmission->setStatus(Submission::STATUS_OK) ;
-            }
-            $this->entityManager->flush() ;
-            $this->dbbProcess->generateAndSendDBB($dee, false) ;
+            $files = $this->dbbProcess->getDbbGenerator($dee)->generate($dee) ;
+            // Create archive and delete useless csv file.
+			$this->dbbProcess->createDBBArchive($dee, $files) ;
+			foreach ($files as $file) {
+				@unlink($file);
+			}
                         
 			$output->writeln("Terminé") ;
 		}

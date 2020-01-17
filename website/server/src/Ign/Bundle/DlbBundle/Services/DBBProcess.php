@@ -124,20 +124,13 @@ class DBBProcess {
 		$this->logger->info("GenerateAndSendDBB: dee_id = {$dee->getId()}, message_id = $messageId");
 		
 		$jdd = $dee->getJdd();
-		
-		$standardType = $jdd->getModel()->getStandard()->getName() ;
-		if (Standard::STANDARD_HABITAT == $standardType) {
-			$this->dbbGenerator = $this->DBBGeneratorHabitat ;
-		} else {
-			$this->dbbGenerator = $this->DBBGeneratorOcctax ;
-		}
 
 		try {
 		
 			$this->generateAndSendDee($dee, $message) ;
 
 			// Generate DBB files
-			$files = $this->dbbGenerator->generate($dee);
+			$files = $this->getDbbGenerator($dee)->generate($dee);
 
 			// Save metadatas
 			$this->downloadMetadata($dee) ;
@@ -170,6 +163,27 @@ class DBBProcess {
 		}
 	}
 	
+    
+    /**
+     * Retourne un DBB generator adapté au standard du jeu de données.
+     * @param DEE $dee
+     * @return AbstractDBBGenerator
+     */
+    public function getDbbGenerator(DEE $dee) : AbstractDBBGenerator {
+        
+        $jdd = $dee->getJdd() ;
+        $standardType = $jdd->getModel()->getStandard()->getName() ;
+        $dbbGenerator = null ;
+		if (Standard::STANDARD_HABITAT == $standardType) {
+			$dbbGenerator = $this->DBBGeneratorHabitat ;
+		} else {
+			$dbbGenerator = $this->DBBGeneratorOcctax ;
+		}
+        
+        return $dbbGenerator ;
+    }
+    
+    
 	
 	/**
 	 * Publie les soumissions associées au JDD, génère la DEE et envoie la notification au MNHN
@@ -186,21 +200,13 @@ class DBBProcess {
 
 		// Get submissions successful in the jdd and publish them
 		$submissions = $jdd->getSuccessfulSubmissions();
-		$submissionsIds = array();
-
 		foreach ($submissions as $submission) {
-			$submissionsIds[] = $submission->getId();
 			try {
 				$this->integration->validateDataSubmission($submission);
 			} catch (\Exception $e) {
 				throw new \Exception("Error during upload: " . $e->getMessage());
 			}
 		}
-
-		// Add submissions in dee table as they are validated now
-		$dee->setSubmissions($submissionsIds);
-		
-		$this->em->flush();
 
 		// Generate DEE and send notification email to MNHN only
 		$this->DEEProcess->generateAndSendDEE($dee->getId(), $messageId, false);
@@ -237,7 +243,7 @@ class DBBProcess {
 	 * @param type $csvFile
 	 * @throws \Exception
 	 */
-	private function createDBBArchive(DEE $dee, $csvFiles) {
+	public function createDBBArchive(DEE $dee, $csvFiles) {
 		
 		$jdd = $dee->getJdd() ;
 		
@@ -246,7 +252,7 @@ class DBBProcess {
 		$metadataCAId = $jdd->getField('metadataCAId') ;
 		
 		// Zip files
-		$fileNameDBB = $this->dbbGenerator->generateFileNameDBB($jdd, $dee);
+		$fileNameDBB = $this->getDbbGenerator($dee)->generateFileNameDBB($jdd, $dee);
 		$parentDir = dirname($fileNameDBB); // dbbPublicDirectory
 		$archiveName = $parentDir . '/dlb_' . basename($fileNameDBB, '.csv') . '.zip';
 		try {

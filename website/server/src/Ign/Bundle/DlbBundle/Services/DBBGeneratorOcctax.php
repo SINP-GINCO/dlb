@@ -38,14 +38,7 @@ class DBBGeneratorOcctax extends AbstractDBBGenerator {
 		// Get the jdd and the data model
 		$jdd = $DEE->getJdd();
 
-		$submissions = $jdd->getSuccessfulSubmissions();
-		$submissionsIds = array();
-		foreach ($submissions as $submission) {
-			$this->logger->debug('submission : ' . $submission->getId());
-			$submissionsIds[] = $submission->getId();
-		}
-		$DEE->setSubmissions($submissionsIds);
-		$this->em->flush();
+		$submissionsIds = implode(',', $DEE->getSubmissions()) ;
 		
 		$model = $jdd->getModel();
 		
