@@ -85,3 +85,9 @@ services:
         autowire: true
         tags:
             - { name: 'console.command' }
+            
+    # Commande pour débloquer les dépôts
+    Ign\Bundle\DlbBundle\Command\DlbUnfreezeCommand:
+        autowire: true
+        tags:
+            - { name: 'console.command' }
