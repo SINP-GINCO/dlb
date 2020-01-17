@@ -312,32 +312,41 @@ class DBBProcess {
 	public function unpublishJdd(Jdd $jdd) {
 		if ($jdd->hasField('status') && $jdd->getField('status') == 'published') {
 
-			// Delete files created for DBB process
-			@unlink($jdd->getField('dbbZipFilePath'));
-			@unlink($jdd->getField('certificateFilePath'));
-			@unlink($jdd->getField('dbbFilePath'));
-
-			// Delete Jdd Fields created in the process of publication
-			$jdd->removeField('status');
-			$jdd->removeField('dbbZipFilePath');
-			$jdd->removeField('certificateFilePath');
-			$jdd->removeField('dbbFilePath');
-
-			$this->em->persist($jdd);
-			$this->em->flush();
+			$this->unfreezeJdd($jdd) ;
 
 			// Delete DEE (in table, and file)
 			$deeRepo = $this->em->getRepository('IgnGincoBundle:RawData\DEE');
 			$lastDEE = $deeRepo->findLastVersionByJdd($jdd);
 			$this->DEEProcess->deleteDEELineAndFiles($lastDEE->getId());
-
-			// Unpublish all submissions for this jdd
-			$submissions = $jdd->getValidatedSubmissions();
-			foreach ($submissions as $submission) {
-				$this->integration->invalidateDataSubmission($submission);
-			}
 		}
 	}
+    
+    /**
+     * Unfreeze jdd, ie remove status field and invalidate submissions, so DEE can be re-calculated without changing the date of the certicate.
+     * @param Jdd $jdd
+     */
+    public function unfreezeJdd(Jdd $jdd) {
+        
+        // Delete files created for DBB process
+        @unlink($jdd->getField('dbbZipFilePath'));
+        @unlink($jdd->getField('certificateFilePath'));
+        @unlink($jdd->getField('dbbFilePath'));
+
+        // Delete Jdd Fields created in the process of publication
+        $jdd->removeField('status');
+        $jdd->removeField('dbbZipFilePath');
+        $jdd->removeField('certificateFilePath');
+        $jdd->removeField('dbbFilePath');
+
+        $this->em->persist($jdd);
+        $this->em->flush();
+
+        // Unpublish all submissions for this jdd
+        $submissions = $jdd->getValidatedSubmissions();
+        foreach ($submissions as $submission) {
+            $this->integration->invalidateDataSubmission($submission);
+        }
+    }
 
 	
 }
