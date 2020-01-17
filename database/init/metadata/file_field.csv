@@ -20,7 +20,7 @@ geometrie;file_dbb;0;;WKT;
 heuredatedebut;file_dbb;0;HH:mm;heureDebut;
 heuredatefin;file_dbb;0;HH:mm;heureFin;
 identifiantorigine;file_dbb;0;;idOrigine;
-identifiantpermanent;file_dbb;1;;permId;
+identifiantpermanent;file_dbb;0;;permId;
 identifiantregroupementpermanent;file_dbb;0;;permIdGrp;
 jddsourceid;file_dbb;0;;jddSourId;
 jourdatedebut;file_dbb;1;dd/MM/yyyy;dateDebut;
