@@ -52,6 +52,7 @@ $CLIParams = implode(' ', array_slice($argv, 1));
 try {
 
 	//system("php $sprintDir/XXXX.php $CLIParams", $returnCode1);
+	system("php $sprintDir/change_sensibility.php $CLIParams", $returnCode1);
 	
 
 } catch (Exception $e) {
