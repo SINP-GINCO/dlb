@@ -111,8 +111,8 @@ INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('USER_LOGIN','STRIN
 INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('ComplexeHabitatValue','CODE','DYNAMIC','Type de complexe d''habitats','Type de complexe d''habitats');
 INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('ExpositionValue','CODE','DYNAMIC','Point cardinal dominant pour l''exposition du terrain','Point cardinal dominant pour l''exposition du terrain');
 INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('MethodeCalculSurfaceValue','CODE','DYNAMIC','Type de détermination d''une surface','Type de détermination d''une surface');
-INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('TypeSolValue','CODE','DYNAMIC','Type de sol observé','Type de sol observé');
-INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('GeologieValue','CODE','DYNAMIC','Type de géologie de la zone','Type de géologie de la zone');
+INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('TypeSolValue','ARRAY','DYNAMIC','Type de sol observé','Type de sol observé');
+INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('GeologieValue','ARRAY','DYNAMIC','Type de géologie de la zone','Type de géologie de la zone');
 INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('AciditeValue','CODE','DYNAMIC','Acidité du sol','Acidité du sol');
 INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('TypeDeterminationValue','CODE','DYNAMIC','Type de détermination','Type de détermination');
 INSERT INTO unit(unit,type,subtype,label,definition) VALUES ('TechniqueCollecteValue','STRING','DYNAMIC','Techniques de collecte de l''observation','Techniques de collecte de l''observation');
@@ -268,6 +268,7 @@ INSERT INTO data(data,unit,label,definition,comment,can_have_default) VALUES ('e
 INSERT INTO data(data,unit,label,definition,comment,can_have_default) VALUES ('clestation','CharacterString','cleStation','Identifiant dans la soumission faisant le lien entre station et habitat.',NULL,true);
 INSERT INTO data(data,unit,label,definition,comment,can_have_default) VALUES ('habitatinteretcommunautaire','HabitatInteretCommunautaireValue','habitatInteretCommunautaire','Indique si l''habitat est d''intérêt communautaire.',NULL,true);
 INSERT INTO data(data,unit,label,definition,comment,can_have_default) VALUES ('cdhabinteretcommunautaire','CodeHabRefValue','cdHabInteretCommunautaire','Code d''habitat d''intérêt communautaire.',NULL,true);
+INSERT INTO data(data,unit,label,definition,comment,can_have_default) VALUES ('typesolalternatif','CharacterString','typeSolAlternatif','Type de sol alternatif.',NULL,true);
 
 -- INSERTION IN TABLE mode
 INSERT INTO mode(unit,code,position,label,definition) VALUES ('PROVIDER_ID','1',1,'organisme A','organisme A');
@@ -528,7 +529,7 @@ INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VA
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('heuredatedebut','file_dbb','0','HH:mm','heureDebut',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('heuredatefin','file_dbb','0','HH:mm','heureFin',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('identifiantorigine','file_dbb','0',NULL,'idOrigine',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('identifiantpermanent','file_dbb','1',NULL,'permId',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('identifiantpermanent','file_dbb','0',NULL,'permId',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('identifiantregroupementpermanent','file_dbb','0',NULL,'permIdGrp',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('jddsourceid','file_dbb','0',NULL,'jddSourId',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('jourdatedebut','file_dbb','1','dd/MM/yyyy','dateDebut',NULL);
@@ -614,7 +615,8 @@ INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VA
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('jourdatedebut','file_station','1','yyyy-MM-dd','dateDebut',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('jourdatefin','file_station','1','yyyy-MM-dd','dateFin',NULL);
 INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('observateur','file_station','1',NULL,'observer',NULL);
-INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('clestation','file_station','1',NULL,'cleStation',' ');
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('clestation','file_station','1',NULL,'cleStation',NULL);
+INSERT INTO file_field(data,format,is_mandatory,mask,label_csv,default_value) VALUES ('typesolalternatif','file_station','0',NULL,'typeSolAlt',NULL);
 
 -- INSERTION IN TABLE table_field
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('SUBMISSION_ID','table_observation','submission_id','1','0','0','0',1,NULL,NULL);
@@ -768,7 +770,7 @@ INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_ins
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('profondeurmax','table_station','profondeurmax','0','1','1','0',17,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('profondeurmoyenne','table_station','profondeurmoyenne','0','1','1','0',18,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('surface','table_station','surface','0','1','1','0',19,NULL,NULL);
-INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('methodecalculsurface','table_station','methodecalculsurface','1','1','1','1',20,NULL,NULL);
+INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('methodecalculsurface','table_station','methodecalculsurface','1','1','1','0',20,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('usage','table_station','usage','0','1','1','0',21,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('typesol','table_station','typesol','0','1','1','0',22,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('geologie','table_station','geologie','0','1','1','0',23,NULL,NULL);
@@ -794,6 +796,7 @@ INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_ins
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('USER_LOGIN','table_station','user_login','0','0','0','1',43,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('clestation','table_station','clestation','0','1','1','1',44,NULL,NULL);
 INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('tpsid','table_station','tpsid','1','0','1','1',45,NULL,NULL);
+INSERT INTO table_field(data,format,column_name,is_calculated,is_editable,is_insertable,is_mandatory,position,comment,default_value) VALUES ('typesolalternatif','table_station','typesolalternatif','0','1','1','0',46,NULL,NULL);
 
 -- Fill the parent table
 INSERT INTO field (data, format, type)
@@ -1071,6 +1074,8 @@ INSERT INTO checks(check_id,step,name,label,description,statement,importance) VA
 INSERT INTO checks(check_id,step,name,label,description,statement,importance) VALUES (1215,'CONFORMITY','PRECISION_TECHNIQUE_EMPTY','precisionTechnqiue est vide','precisionTechnique ne doit pas être vide si techniqueCollecte = 10',NULL,'ERROR');
 INSERT INTO checks(check_id,step,name,label,description,statement,importance) VALUES (1216,'CONFORMITY','CDHAB_INTERET_COMMUNAUTAIRE_EMPTY','cdHabInteretCommunautaire est vide','cdHabInteretCommunautaire ne doit pas être vide si habitatInteretCommunautaire est égal à 1 ou 3',NULL,'ERROR');
 INSERT INTO checks(check_id,step,name,label,description,statement,importance) VALUES (1217,'CONFORMITY','IDENTIFIANT_PERMANENT_NOT_UNIQUE','L''identifiant permanent fourni existe déjà','L''identifiant permanent fourni existe déjà',NULL,'ERROR');
+INSERT INTO checks(check_id,step,name,label,description,statement,importance) VALUES (1218,'CONFORMITY','CLE_STATION_NOT_FOUND','La clé station fournie pour les habitats n''existe pas','La clé station fournie pour les habitats n''existe pas',NULL,'ERROR');
+INSERT INTO checks(check_id,step,name,label,description,statement,importance) VALUES (1219,'CONFORMITY','HABITAT_INTERET_COMMUNAUTAIRE_EMPTY','habitatInteretCommunautaire est vide','habitatInteretCommunautaire est vide',NULL,'ERROR');
 
 
 -- INSERTION IN TABLE dataset_fields
