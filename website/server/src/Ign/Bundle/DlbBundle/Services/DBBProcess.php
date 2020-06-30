@@ -200,13 +200,18 @@ class DBBProcess {
 
 		// Get submissions successful in the jdd and publish them
 		$submissions = $jdd->getSuccessfulSubmissions();
+        $submissionIds = [] ;
 		foreach ($submissions as $submission) {
 			try {
+                $submissionIds[] = $submission->getId() ;
 				$this->integration->validateDataSubmission($submission);
 			} catch (\Exception $e) {
 				throw new \Exception("Error during upload: " . $e->getMessage());
 			}
 		}
+        
+        $dee->setSubmissions($submissionIds) ;
+        $this->em->flush() ;
 
 		// Generate DEE and send notification email to MNHN only
 		$this->DEEProcess->generateAndSendDEE($dee->getId(), $messageId, false);
