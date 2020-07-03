@@ -34,6 +34,7 @@ $paramStr = implode(' ', array_slice($argv, 1));
 try {
 	/* patch code here */
 	// execCustSQLFile("$currentDir/xxx.sql", $config);
+	execCustSQLFile("$currentDir/sensitive_automatic.sql", $config);
 	execCustSQLFile("$currentDir/especesensible.sql", $config);
 	execCustSQLFile("$currentDir/especesensiblelistes.sql", $config);
 

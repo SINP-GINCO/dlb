@@ -71,8 +71,8 @@ $sql = "CREATE OR REPLACE FUNCTION raw_data.sensitive_update(
         FROM referentiels.especesensible
         LEFT JOIN referentiels.especesensiblelistes ON especesensiblelistes.cd_sl = especesensible.cd_sl
         WHERE 
-            (CD_NOM = cdNom
-            OR CD_NOM = cdRef
+            (CD_NOM = cdNomCalcule
+            OR CD_NOM = cdRefCalcule
             OR CD_NOM = ANY (
                 WITH RECURSIVE node_list( code, parent_code, lb_name, vernacular_name) AS (
                     SELECT code, parent_code, lb_name, vernacular_name
