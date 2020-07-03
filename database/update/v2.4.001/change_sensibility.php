@@ -26,8 +26,8 @@ $pdo->exec("CREATE TYPE sensible_type AS (
 
 // Création de la fonction de calcul de la sensibilité. 
 $sql = "CREATE OR REPLACE FUNCTION raw_data.sensitive_update(
-        cdnom VARCHAR, 
-        cdref VARCHAR, 
+        cdnomcalcule VARCHAR, 
+        cdrefcalcule VARCHAR, 
         codedepartementcalcule _VARCHAR, 
         jourdatefin DATE, 
         occstatutbiologique VARCHAR, 
@@ -77,7 +77,7 @@ $sql = "CREATE OR REPLACE FUNCTION raw_data.sensitive_update(
                 WITH RECURSIVE node_list( code, parent_code, lb_name, vernacular_name) AS (
                     SELECT code, parent_code, lb_name, vernacular_name
                     FROM metadata.mode_taxref
-                    WHERE code = cdnom
+                    WHERE code = cdnomcalcule
             
                     UNION ALL
             
@@ -161,7 +161,7 @@ foreach ($items as $item) {
         $sql = "CREATE TABLE tmp_sensitive_update AS
             SELECT 
                 $primaryKey, 
-                sensitive_update(cdnom, cdref, codedepartementcalcule, jourdatefin, occstatutbiologique, sensiniveau) 
+                sensitive_update(cdnomcalcule, cdrefcalcule, codedepartementcalcule, jourdatefin, occstatutbiologique, sensiniveau) 
             FROM raw_data.$tableName
         ";
         $pdo->exec($sql) ;
