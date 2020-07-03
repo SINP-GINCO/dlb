@@ -50,7 +50,7 @@ $BODY$
 			WITH RECURSIVE node_list( code, parent_code, lb_name, vernacular_name) AS (
 				SELECT code, parent_code, lb_name, vernacular_name
 				FROM metadata.mode_taxref
-				WHERE code = NEW.cdnom
+				WHERE code = NEW.cdNomCalcule
 		
 				UNION ALL
 		
