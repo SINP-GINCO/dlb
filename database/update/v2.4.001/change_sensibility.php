@@ -157,6 +157,10 @@ foreach ($items as $item) {
 
         $pdo->beginTransaction() ;
 
+        // Modification du type de la colonne sensireferentiel
+        $sql = "ALTER TABLE raw_data.$tableName ALTER COLUMN sensireferentiel TYPE VARCHAR" ;
+        $pdo->exec($sql) ;
+
         // Création table contenant les nouvelles sensibilités. 
         $sql = "CREATE TABLE tmp_sensitive_update AS
             SELECT 
