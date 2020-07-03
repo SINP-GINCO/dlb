@@ -268,13 +268,13 @@ $BODY$
 	FROM referentiels.especesensible
 	LEFT JOIN referentiels.especesensiblelistes ON especesensiblelistes.cd_sl = especesensible.cd_sl
 	WHERE 
-		(CD_NOM = NEW.cdNom
-		OR CD_NOM = NEW.cdRef
+		(CD_NOM = NEW.cdNomCalcule
+		OR CD_NOM = NEW.cdRefCalcule
 		OR CD_NOM = ANY (
 			WITH RECURSIVE node_list( code, parent_code, lb_name, vernacular_name) AS (
 				SELECT code, parent_code, lb_name, vernacular_name
 				FROM metadata.mode_taxref
-				WHERE code = NEW.cdnom
+				WHERE code = NEW.cdNomCalcule
 		
 				UNION ALL
 		
