@@ -21329,6 +21329,12 @@ D4	14038	77338	\N	2	Emplacement des nids et traces de montée/descente particuli
 --
 
 SELECT pg_catalog.setval('referentiels.especesensible_id_seq', 21289, true);
+
+-- Départements entre 01 et 09 et 974
+UPDATE referentiels.especesensible e SET cd_dept = lpad(cd_dept, 2, '0') WHERE char_length(cd_dept) = 1;
+UPDATE referentiels.especesensible e SET cd_dept = '974' WHERE cd_dept = 'D4';
+
+
 --
 -- TOC entry 4201 (class 0 OID 0)
 -- Dependencies: 223
