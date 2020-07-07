@@ -33,12 +33,10 @@ class DBBGeneratorOcctax extends AbstractDBBGenerator {
 		ini_set("max_execution_time", 0);
 		
 		// Get validated (published) submissions in the jdd, stored in the DEE line
-		//$submissionsIds = $DEE->getSubmissions();
+		$submissionsIds = $DEE->getSubmissions();
 		
 		// Get the jdd and the data model
 		$jdd = $DEE->getJdd();
-
-		$submissionsIds = implode(',', $DEE->getSubmissions()) ;
 		
 		$model = $jdd->getModel();
 		
